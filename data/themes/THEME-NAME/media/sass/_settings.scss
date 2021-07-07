@@ -1,0 +1,71 @@
+@charset "UTF-8";
+// --------------------------------------------------
+// 設定
+// --------------------------------------------------
+
+// レスポンシブサイトかどうかの設定 - true/false
+$responsive: true;
+
+// ヘッダー固定かどうかの設定 - true/false
+$header-fixed-pc: false;
+$header-fixed-sp: false;
+
+// pcのヘッダーの高さ(必須)
+$header-height-pc: 100px;
+
+// スマホのヘッダーの高さ(必須)
+$header-height-sp: 60px;
+
+// LightCMS導入サイトかどうかの設定 - true/false
+$light-cms: true;
+
+// LightCMS使用時に設定 - CMSエディタ内幅指定
+$light-cms-column-width: 690px;
+
+// プレークポイント
+$screen-tb: 768px;
+$screen-sp: 480px;
+
+$screen-pc-min: ($screen-tb + 1) !default;
+$screen-tb-min: ($screen-sp + 1) !default;
+
+// 基本値の設定（全ページ共通）
+$base-font: "ヒラギノ角ゴシック ProN", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", "游ゴシック体", "Yu Gothic", YuGothic, sans-serif;
+$base-font-color: #333;
+$base-link-color: #0000ee;
+$link-underline: true !default;
+
+// 基本値の設定（全ページ共通）
+$base-font-size: 16px;
+$base-font-size-tb: 14px;
+$base-line-height: 2;
+$base-letter-spacing: 0.06em;
+
+// --------------------------------------------------
+// グリッドシステム設定
+// --------------------------------------------------
+
+// コンテナ両サイドの余白
+$gutter-pc: 20px !default;
+$gutter-tb: 30px !default;
+$gutter-sp: $gutter-tb !default;
+
+// グリッドシステムカラムのそれぞれの間の余白
+$grid-gutter-width-pc: 20px !default;
+$grid-gutter-width-tb: 10px !default;
+$grid-gutter-width-sp: $grid-gutter-width-tb !default;
+
+// コンテナ(.container)サイズ
+$container-pc: (1000px + $grid-gutter-width-pc) !default;
+$container-tb: auto !default;
+$container-sp: auto !default;
+
+// 一列のカラム数
+$grid-columns: 12 !default;
+
+// --------------------------------------------------
+// 色設定
+// --------------------------------------------------
+
+// エラー、警告色
+$warn-color: #FF0000;

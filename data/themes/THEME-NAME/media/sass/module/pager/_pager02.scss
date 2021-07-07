@@ -1,0 +1,43 @@
+@mixin pager02 {
+  font-size: 0;
+  text-align: center;
+  li {
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 22px;
+    margin: 0 2px;
+    a {
+      color: #CC6686;
+      display: block;
+      text-decoration: none;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    &.next {
+      margin-left: 4px;
+    }
+    &.prev {
+      margin-right: 4px;
+    }
+    &:not(.prev):not(.next) {
+      background-color: #CC6686;
+      border: 1px solid #CB6686;
+      color: #FFF;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      width: 20px;
+      a {
+        background-color: #FFF;
+        color: #CC6686;
+        &:hover {
+          background-color: #CC6686;
+          color: #FFF;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

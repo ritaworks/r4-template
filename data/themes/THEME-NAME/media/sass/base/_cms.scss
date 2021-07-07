@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+// LightCMS用（管理画面の幅を設定。基本的には.l-pageと同じ幅を全て指定する。）
+@if $light-cms {
+  #tinymce {
+    width: $light-cms-column-width;
+    padding-top: 0;
+  }
+  // #centerColumn {
+  //   width: $light-cms-column-width;
+  //   padding-top: 0;
+  // }
+  // #leftColumn {
+  //   width: $light-cms-column-width;
+  //   padding-top: 0;
+  // }
+  // #rightColumn {
+  //   width: $light-cms-column-width;
+  //   padding-top: 0;
+  // }
+  .error {
+    color: $warn-color;
+  }
+}

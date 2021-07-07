@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "ローカル用パスをサーバー用パスに書き換えます。"
+
+BASEDIR="${0%/*}"
+
+find $BASEDIR -name '*.html' -type f -exec sed -i "" "s#\"data/#\"/data/#g" {} \;
+
+read -p "完了しました。スクリプトを終了するには[RETURN]キーを押して下さい。"

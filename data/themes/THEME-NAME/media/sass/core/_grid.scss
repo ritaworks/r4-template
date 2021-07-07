@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+@import 'mixins/grid-system';
+
+//
+// グリッドシステム
+// --------------------------------------------------
+
+
+// コンテナ幅
+//
+// 設定された幅のコンテナを生成
+
+.container {
+  @include container-fixed;
+  width: $container-pc;
+
+  @if $responsive {
+    @media only screen and (max-width: $screen-tb) {
+      width: $container-tb;
+    }
+    @media only screen and (max-width: $screen-sp) {
+      width: $container-sp;
+    }
+  }
+}
+
+
+// フルイドコンテナ
+//
+// 横幅100%のコンテナを生成
+
+.container-fluid {
+  @include container-fixed;
+}
+
+
+// Rowクラス
+//
+// グリッドカラム用のラッパークラスを生成
+
+.row {
+  @include make-row;
+}
+
+
+// カラム
+//
+// カラムクラス生成
+@include make-grid-columns;
+@include make-grid(null);
+
+@if $responsive {
+  @include make-responsive-grid-columns;
+
+  // タブレット用グリッド
+  @media only screen and (max-width: $screen-tb) {
+    @include make-grid(-tb);
+  }
+
+  // スマホ用グリッド
+  @media only screen and (max-width: $screen-sp) {
+    @include make-grid(-sp);
+  }
+}
