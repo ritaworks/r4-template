@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+// グリッドフレームワーク
+//
+// "grid-columns"で指定された数だけカラムクラスを生成する
+
+@mixin make-grid-columns($i: 1, $list: ".col#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .col#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    // 空div時に崩れるのを防ぐ為
+    min-height: 1px;
+    padding-left:  ceil(($grid-gutter-width-pc / 2));
+    padding-right: floor(($grid-gutter-width-pc / 2));
+    @media only screen and (max-width: $screen-tb) {
+      padding-left:  ceil(($grid-gutter-width-tb / 2));
+      padding-right: floor(($grid-gutter-width-tb / 2));
+    }
+    @media only screen and (max-width: $screen-sp) {
+      padding-left:  ceil(($grid-gutter-width-sp / 2));
+      padding-right: floor(($grid-gutter-width-sp / 2));
+    }
+  }
+}
+@mixin make-responsive-grid-columns($i: 1, $list: ".col#{$i}-tb, .col#{$i}-sp") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .col#{$i}-tb, .col#{$i}-sp";
+  }
+  #{$list} {
+    position: relative;
+    // 空div時に崩れるのを防ぐ為
+    min-height: 1px;
+    padding-left:  ceil(($grid-gutter-width-pc / 2));
+    padding-right: floor(($grid-gutter-width-pc / 2));
+    @media only screen and (max-width: $screen-tb) {
+      padding-left:  ceil(($grid-gutter-width-tb / 2));
+      padding-right: floor(($grid-gutter-width-tb / 2));
+    }
+    @media only screen and (max-width: $screen-sp) {
+      padding-left:  ceil(($grid-gutter-width-sp / 2));
+      padding-right: floor(($grid-gutter-width-sp / 2));
+    }
+  }
+}
+
+
+@mixin float-grid-columns($class, $i: 1, $list: ".col#{$i}#{$class}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .col#{$i}#{$class}";
+  }
+  #{$list} {
+    float: left;
+  }
+}
+
+
+@mixin calc-grid-column($index, $class, $type) {
+  @if ($type == width) and ($index > 0) {
+    .col#{$index}#{$class} {
+      width: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == push) and ($index > 0) {
+    .col#{$index}-push#{$class} {
+      left: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == push) and ($index == 0) {
+    .col0-push#{$class} {
+      left: auto;
+    }
+  }
+  @if ($type == pull) and ($index > 0) {
+    .col#{$index}-pull#{$class} {
+      right: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == pull) and ($index == 0) {
+    .col0-pull#{$class} {
+      right: auto;
+    }
+  }
+  @if ($type == offset) {
+    .col#{$index}-offset#{$class} {
+      margin-left: percentage(($index / $grid-columns));
+    }
+  }
+}
+
+@mixin loop-grid-columns($columns, $class, $type) {
+  @for $i from 0 through $columns {
+    @include calc-grid-column($i, $class, $type);
+  }
+}
+
+
+// 特定のクラス用をカラムクラスに変化させるmixin
+@mixin make-grid($class) {
+  @include float-grid-columns($class);
+  @include loop-grid-columns($grid-columns, $class, width);
+  @include loop-grid-columns($grid-columns, $class, pull);
+  @include loop-grid-columns($grid-columns, $class, push);
+  @include loop-grid-columns($grid-columns, $class, offset);
+}
+
+// グリッドシステム
+//
+// グリッドを生成用mixin
+
+// 中央揃えのコンテナを生成
+@mixin container-fixed() {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left:  floor(($gutter-pc / 2));
+  padding-right: ceil(($gutter-pc / 2));
+  @include clearfix;
+  @media only screen and (max-width: $screen-tb) {
+    padding-left: floor(($gutter-tb / 2));
+    padding-right: ceil(($gutter-tb / 2));
+  }
+  @media only screen and (max-width: $screen-sp) {
+    padding-left: floor(($gutter-sp / 2));
+    padding-right: ceil(($gutter-sp / 2));
+  }
+}
+
+// カラムのラッパーを生成
+@mixin make-row() {
+  margin-left:  ceil(($grid-gutter-width-pc / -2));
+  margin-right: floor(($grid-gutter-width-pc / -2));
+  @include clearfix;
+  @media only screen and (max-width: $screen-tb) {
+    margin-left:  ceil(($grid-gutter-width-tb / -2));
+    margin-right: floor(($grid-gutter-width-tb / -2));
+  }
+  @media only screen and (max-width: $screen-sp) {
+    margin-left:  ceil(($grid-gutter-width-sp / -2));
+    margin-right: floor(($grid-gutter-width-sp / -2));
+  }
+}
+
+// PC用カラムの生成
+@mixin make-pc-column($columns) {
+  position: relative;
+  float: left;
+  width: percentage(($columns / $grid-columns));
+  min-height: 1px;
+  padding-left:  ($gutter-pc / 2);
+  padding-right: ($gutter-pc / 2);
+  @media only screen and (max-width: $screen-tb) {
+    padding-left: floor(($gutter-tb / 2));
+    padding-right: ceil(($gutter-tb / 2));
+  }
+  @media only screen and (max-width: $screen-sp) {
+    padding-left: floor(($gutter-sp / 2));
+    padding-right: ceil(($gutter-sp / 2));
+  }
+}
+@mixin make-pc-column-offset($columns) {
+  margin-left: percentage(($columns / $grid-columns));
+}
+@mixin make-pc-column-push($columns) {
+  left: percentage(($columns / $grid-columns));
+}
+@mixin make-pc-column-pull($columns) {
+  right: percentage(($columns / $grid-columns));
+}
+
+// タブレット用カラムの生成
+@mixin make-tb-column($columns) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  ($gutter-pc / 2);
+  padding-right: ($gutter-pc / 2);
+  @media only screen and (max-width: $screen-tb) {
+    padding-left: floor(($gutter-tb / 2));
+    padding-right: ceil(($gutter-tb / 2));
+  }
+  @media only screen and (max-width: $screen-sp) {
+    padding-left: floor(($gutter-sp / 2));
+    padding-right: ceil(($gutter-sp / 2));
+  }
+
+  @media only screen and (min-width: $screen-tb-min) {
+    float: left;
+    width: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-tb-column-offset($columns) {
+  @media only screen and (min-width: $screen-tb-min) {
+    margin-left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-tb-column-push($columns) {
+  @media only screen and (min-width: $screen-tb-min) {
+    left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-tb-column-pull($columns) {
+  @media only screen and (min-width: $screen-tb-min) {
+    right: percentage(($columns / $grid-columns));
+  }
+}
+
+// スマートフォン用カラムの生成
+@mixin make-sp-column($columns) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  ($gutter-pc / 2);
+  padding-right: ($gutter-pc / 2);
+  @media only screen and (max-width: $screen-tb) {
+    padding-left: floor(($gutter-tb / 2));
+    padding-right: ceil(($gutter-tb / 2));
+  }
+  @media only screen and (max-width: $screen-sp) {
+    padding-left: floor(($gutter-sp / 2));
+    padding-right: ceil(($gutter-sp / 2));
+  }
+
+  @media only screen and (min-width: $screen-sp-min) {
+    float: left;
+    width: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-sp-column-offset($columns) {
+  @media only screen and (min-width: $screen-sp-min) {
+    margin-left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-sp-column-push($columns) {
+  @media only screen and (min-width: $screen-sp-min) {
+    left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-sp-column-pull($columns) {
+  @media only screen and (min-width: $screen-sp-min) {
+    right: percentage(($columns / $grid-columns));
+  }
+}

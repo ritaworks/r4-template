@@ -1,0 +1,36 @@
+@charset 'UTF-8';
+
+body {
+  color: $base-font-color;
+  font-size: $base-font-size;
+  font-family: $base-font;
+}
+
+
+p,
+a,
+dt,
+dd,
+li,
+th,
+td {
+  line-height: $base-line-height;
+}
+
+
+a {
+  @include link;
+
+  color: $base-link-color;
+  &:hover {
+    color: $base-link-color;
+  }
+}
+
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
+    body {
+      font-size: $base-font-size-tb;
+    }
+  }
+}

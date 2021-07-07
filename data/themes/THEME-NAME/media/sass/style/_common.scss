@@ -1,0 +1,150 @@
+@charset "UTF-8";
+// --------------------------------------------------
+// Headings
+// --------------------------------------------------
+h3 {
+  &.top {
+  // トップページ用
+
+  }
+  &:not(.top) {
+  // サブページ用
+
+  }
+}
+h4 {
+  &.top {
+    // トップページ用
+
+  }
+  &:not(.top) {
+    // サブページ用
+
+  }
+}
+h5 {
+  &.top {
+    // トップページ用
+
+  }
+  &:not(.top) {
+    // サブページ用
+
+  }
+}
+
+// --------------------------------------------------
+// Table
+// --------------------------------------------------
+.overflow-table {
+  overflow-x: auto;
+}
+
+.nodrop-table {
+  tr {
+    th,
+    td {
+      @media only screen and (max-width: $screen-tb) {
+        display: table-cell;
+        width: auto !important;
+      }
+    }
+    th {
+      @media only screen and (max-width: $screen-tb) {
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Common
+// --------------------------------------------------
+//全体ホバー
+.hover-all {
+  position: relative;
+  >a {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9;
+  }
+}
+
+//電話番号
+a[href^="tel:"] {
+  text-decoration: none;
+  color: $base-font-color;
+  @media only screen and (min-width: $screen-pc-min) {
+    pointer-events: none;
+  }
+}
+
+//CMS-PDFアイコン設定
+.pdf_icon {
+  vertical-align: middle;
+  height: 16px;
+  padding: 0 5px;
+}
+
+//youtubeの自動レスポンシブ対応
+.youtube-wrap {
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0px;
+  position: relative;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// --------------------------------------------------
+// slide-menu
+// --------------------------------------------------
+body {
+  width: 100%;
+  &.open {
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+  }
+  @if $header-fixed-pc {
+    padding-top: $header-height-pc;
+  }
+  @media only screen and (max-width: $screen-tb) {
+    @if $header-fixed-sp {
+      position: relative;
+      padding-top: $header-height-sp;
+    }
+    @else {
+      padding-top: 0;
+    }
+  }
+}
+
+.slide-menu {
+  position: fixed;
+  padding-top: $header-height-sp;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  z-index: 9998;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: left 0.3s;
+  @media only screen and (min-width: $screen-pc-min) {
+    display: none;
+  }
+  body.open & {
+    left: 0;
+  }
+}

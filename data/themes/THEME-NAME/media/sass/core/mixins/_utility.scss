@@ -1,0 +1,172 @@
+@charset "UTF-8";
+
+$spacer:(
+  mt:margin-top,
+  mr:margin-right,
+  mb:margin-bottom,
+  ml:margin-left,
+  pt:padding-top,
+  pr:padding-right,
+  pb:padding-bottom,
+  pl:padding-left,
+);
+$align: left, right, center;
+
+// クリアフィックスクラス
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+//余白クラス作成
+@mixin spaceloop($sufix: "") {
+  $i: 0;
+  @while $i <= 200 {
+    @each $class, $style in $spacer {
+      .#{$class}#{$i}#{$sufix} {
+        #{$style}: #{$i}px !important;
+      }
+    }
+    @if $i >= 20 {
+      $i: $i + 5;
+    }
+    @else {
+      $i: $i + 1;
+    }
+  }
+}
+
+// 行揃え指定クラス作成
+@mixin textalign($sufix: "") {
+  @each $value in $align {
+    .#{$value}-text#{$sufix} {
+      text-align: #{$value} !important;
+    }
+  }
+}
+
+// フォントサイズクラスの生成
+@mixin fontsize($sufix: "") {
+  @for $i from 8 through 40 {
+    .f#{$i}px#{$sufix} {
+      font-size: #{$i}px !important;
+    }
+  }
+}
+
+// フォントウェイトクラスの生成
+@mixin fontweight {
+  @for $i from 1 through 9 {
+    .fw#{$i * 100} {
+      font-weight: #{$i * 100} !important;
+    }
+  }
+}
+
+// グラデーション生成
+@mixin gradient($start-color, $end-color, $orientation)
+{
+  background: $start-color;
+  @if $orientation == vertical
+  {
+    // 線形: 縦
+    background: -moz-linear-gradient(top,  $start-color 0%, $end-color 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$start-color), color-stop(100%,$end-color));
+    background: -webkit-linear-gradient(top,  $start-color 0%,$end-color 100%);
+    background: -o-linear-gradient(top,  $start-color 0%,$end-color 100%);
+    background: -ms-linear-gradient(top,  $start-color 0%,$end-color 100%);
+    background: linear-gradient(to bottom,  $start-color 0%,$end-color 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start-color', endColorstr='$end-color',GradientType=0 );
+  }
+  @else if $orientation == horizontal
+  {
+    // 線形: 横
+    background: -moz-linear-gradient(left,  $start-color 0%, $end-color 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,$start-color), color-stop(100%,$end-color));
+    background: -webkit-linear-gradient(left,  $start-color 0%,$end-color 100%);
+    background: -o-linear-gradient(left,  $start-color 0%,$end-color 100%);
+    background: -ms-linear-gradient(left,  $start-color 0%,$end-color 100%);
+    background: linear-gradient(to right,  $start-color 0%,$end-color 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start-color', endColorstr='$end-color',GradientType=1 );
+  }
+  @else
+  {
+    // 円形
+    background: -moz-radial-gradient(center, ellipse cover,  $start-color 0%, $end-color 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,$start-color), color-stop(100%,$end-color));
+    background: -webkit-radial-gradient(center, ellipse cover,  $start-color 0%,$end-color 100%);
+    background: -o-radial-gradient(center, ellipse cover,  $start-color 0%,$end-color 100%);
+    background: -ms-radial-gradient(center, ellipse cover,  $start-color 0%,$end-color 100%);
+    background: radial-gradient(ellipse at center,  $start-color 0%,$end-color 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start-color', endColorstr='$end-color',GradientType=1 );
+  }
+}
+
+// リンクテキストの下線切り替え
+@mixin link() {
+  @if $link-underline {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  @else {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// lineheightクラスの生成
+@mixin lineheight($sufix: "") {
+  $i: 10;
+  @while $i <= 30 {
+    .lh#{$i}#{$sufix} {
+      line-height: #{$i * 0.1} !important;
+    }
+    $i: $i + 1;
+  }
+}
+
+// letterspacingクラスの生成
+@mixin letterspacing($sufix: "") {
+  $i: 0;
+  @while $i <= 100 {
+    .ls#{$i}#{$sufix} {
+      letter-spacing: #{$i * 0.001}em !important;
+    }
+    $i: $i + 1;
+  }
+}
+
+//flex関係
+@mixin f-direction($value: row) {
+  flex-direction: $value;
+}
+
+@mixin f-wrap($value: wrap) {
+  flex-wrap: $value;
+}
+
+@mixin j-content($value: flex-start) {
+  justify-content: $value;
+}
+
+@mixin a-items($value: stretch) {
+  align-items: $value;
+}
+
+@mixin flex($f-direction: row, $f-wrap: wrap, $j-content: flex-start, $a-items: stretch) {
+  @include f-direction($f-direction);
+  @include f-wrap($f-wrap);
+  @include j-content($j-content);
+  @include a-items($a-items);
+  display: flex;
+}

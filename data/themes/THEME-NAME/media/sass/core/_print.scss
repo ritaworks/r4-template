@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+@media print {
+  .tb,
+  .sp {
+    display: none !important;
+  }
+  .l-container {
+    overflow: visible !important;
+  }
+  header {
+    position: inherit !important;
+  }
+}

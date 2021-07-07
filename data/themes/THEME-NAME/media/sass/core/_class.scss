@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+$flex-direction: (
+  fd--row: row,
+  fd--column: column
+);
+$flex-wrap: (
+  fw--nowrap: nowrap,
+  fw--wrap: wrap
+);
+$justify-content: (
+  jc--start: flex-start,
+  jc--end: flex-end,
+  jc--center: center,
+  jc--between: space-between,
+  jc--around: space-around,
+  jc--evenly: space-evenly
+);
+$align-items: (
+  ai--start: flex-start,
+  ai--end: flex-end,
+  ai--center: center,
+);
+
+// 余白クラスの生成
+@include spaceloop();
+
+// 行揃え指定クラス
+@include textalign();
+
+// フォントサイズクラス作成
+@include fontsize();
+
+// lineheightのクラス
+@include lineheight();
+
+// letterspacingのクラス
+@include letterspacing();
+
+// font-weightのクラス
+@include fontweight();
+
+// クリアフィックス
+.clearfix {
+  @include clearfix;
+}
+
+// ポジションクラス
+.absolute {
+  position: absolute !important;
+}
+.relative {
+  position: relative !important;
+}
+.static {
+  position: static !important;
+}
+
+// pタグ同士の間の余白用クラス
+.mt1em {
+  margin-top: 1em;
+}
+.mb1em {
+  margin-bottom: 1em;
+}
+
+// 画像用幅設定クラス
+.mw100 {
+  max-width: 100%;
+  height: auto;
+}
+.w100 {
+  width: 100% !important;
+}
+
+// 画像のフェード用クラス
+.fade {
+  transition: opacity 0.2s;
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+// フロートクラス
+.left-box{
+  float: left !important;
+}
+.right-box{
+  float: right !important;
+}
+.center-box{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+//フロートクラス（forSp)
+.left-sp {
+  float: left !important;
+}
+
+.right-sp {
+  float: right !important;
+}
+
+// フォント太さクラス
+.normal {
+  font-weight: normal;
+}
+.bold {
+  font-weight: bold;
+}
+
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
+    // 行揃え指定クラス
+    @include textalign(-tb);
+
+    // タブレット用余白クラスの生成
+    @include spaceloop(-tb);
+
+    // タブレット用フォントサイズクラスの生成
+    @include fontsize(-tb);
+
+    // タブレット用lineheightのクラス
+    @include lineheight(-tb);
+
+    // タブレット用letterspacingのクラス
+    @include letterspacing(-tb);
+  }
+
+  @media only screen and (max-width: $screen-sp) {
+    // 行揃え指定クラス
+    @include textalign(-sp);
+
+    // スマホ用余白クラスの生成
+    @include spaceloop(-sp);
+
+    // スマホ用フォントサイズクラスの生成
+    @include fontsize(-sp);
+
+    // スマホ用lineheightのクラス
+    @include lineheight(-sp);
+
+    // スマホ用letterspacingのクラス
+    @include letterspacing(-sp);
+  }
+
+  // デバイスごとのディスプレイ指定クラス
+  .pc {
+    @media only screen and (max-width: $screen-tb) {
+        display: none !important;
+    }
+  }
+  .pctb {
+    @media only screen and (max-width: $screen-sp) {
+        display: none !important;
+    }
+  }
+  .tb {
+    @media only screen and (min-width: $screen-pc-min) {
+      display: none !important;
+    }
+  }
+  .sp {
+    @media only screen and (min-width: $screen-tb-min) {
+      display: none !important;
+    }
+  }
+}
+
+//フレックス
+.flex {
+  @include flex;
+}
+@each $class, $value in $flex-direction {
+  .#{$class} {
+    @include f-direction($value);
+  }
+}
+@each $class, $value in $flex-wrap {
+  .#{$class} {
+    @include f-wrap($value);
+  }
+}
+@each $class, $value in $justify-content {
+  .#{$class} {
+    @include j-content($value);
+  }
+}
+@each $class, $value in $align-items {
+  .#{$class} {
+    @include a-items($value);
+  }
+}
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
+    @each $class, $value in $flex-direction {
+      .#{$class}-tb {
+        @include f-direction($value);
+      }
+    }
+    @each $class, $value in $flex-wrap {
+      .#{$class}-tb {
+        @include f-wrap($value);
+      }
+    }
+    @each $class, $value in $justify-content {
+      .#{$class}-tb {
+        @include j-content($value);
+      }
+    }
+    @each $class, $value in $align-items {
+      .#{$class}-tb {
+        @include a-items($value);
+      }
+    }
+  }
+  @media only screen and (max-width: $screen-sp) {
+    @each $class, $value in $flex-direction {
+      .#{$class}-sp {
+        @include f-direction($value);
+      }
+    }
+    @each $class, $value in $flex-wrap {
+      .#{$class}-sp {
+        @include f-wrap($value);
+      }
+    }
+    @each $class, $value in $justify-content {
+      .#{$class}-sp {
+        @include j-content($value);
+      }
+    }
+    @each $class, $value in $align-items {
+      .#{$class}-sp {
+        @include a-items($value);
+      }
+    }
+  }
+}
