@@ -105,6 +105,42 @@ a[href^="tel:"] {
   }
 }
 
+//複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
+.news-detail {
+  h4 {
+    // 見出しのスタイル
+  }
+  .news-detail-free {
+    // 自由文のスタイル
+  }
+  .news-detail-image {
+    // 画像のスタイル
+    text-align: center;
+    margin: 10px auto;
+    >img {
+      max-width: 100%;
+      height: auto;
+      width: auto;
+    }
+  }
+  .news-detail-pdf {
+    // pdfのスタイル
+  }
+  >*:empty {
+    display: none;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    font-size: 0;
+    background: none;
+    border: none;
+    &:before,
+    &:after {
+      display: none;
+    }
+  }
+}
+
 // --------------------------------------------------
 // slide-menu
 // --------------------------------------------------
