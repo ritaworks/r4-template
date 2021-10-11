@@ -1,42 +1,50 @@
 @charset "UTF-8";
+
 // --------------------------------------------------
 // Headings
 // --------------------------------------------------
 h2 {
   &.top {
-  // トップページ用
-
-  }
-  &:not(.top) {
-  // サブページ用
-
-  }
-}
-h3 {
-  &.top {
-  // トップページ用
-
-  }
-  &:not(.top) {
-  // サブページ用
-
-  }
-}
-h4 {
-  &.top {
     // トップページ用
 
   }
+
   &:not(.top) {
     // サブページ用
 
   }
 }
+
+h3 {
+  &.top {
+    // トップページ用
+
+  }
+
+  &:not(.top) {
+    // サブページ用
+
+  }
+}
+
+h4 {
+  &.top {
+    // トップページ用
+
+  }
+
+  &:not(.top) {
+    // サブページ用
+
+  }
+}
+
 h5 {
   &.top {
     // トップページ用
 
   }
+
   &:not(.top) {
     // サブページ用
     font-weight: bold;
@@ -54,6 +62,7 @@ h5 {
 
 .nodrop-table {
   tr {
+
     th,
     td {
       @media only screen and (max-width: $screen-tb) {
@@ -61,6 +70,7 @@ h5 {
         width: auto !important;
       }
     }
+
     th {
       @media only screen and (max-width: $screen-tb) {
         white-space: nowrap;
@@ -75,6 +85,7 @@ h5 {
 //全体ホバー
 .hover-all {
   position: relative;
+
   >a {
     position: absolute;
     display: block;
@@ -90,16 +101,10 @@ h5 {
 a[href^="tel:"] {
   text-decoration: none;
   color: $base-font-color;
+
   @media only screen and (min-width: $screen-pc-min) {
     pointer-events: none;
   }
-}
-
-//CMS-PDFアイコン設定
-.pdf_icon {
-  vertical-align: middle;
-  height: 16px;
-  padding: 0 5px;
 }
 
 //youtubeの自動レスポンシブ対応
@@ -108,6 +113,7 @@ a[href^="tel:"] {
   padding-bottom: 56.25%;
   height: 0px;
   position: relative;
+
   iframe {
     position: absolute;
     top: 0;
@@ -117,27 +123,59 @@ a[href^="tel:"] {
   }
 }
 
-//複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
+// --------------------------------------------------
+// お知らせ関連
+// 複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
+// --------------------------------------------------
+//お知らせ一覧にPDFアイコンを表示する
+.news-list {
+  a[href$=".pdf"] {
+    &:after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background: url(../img/pdf.png) no-repeat center / contain;
+      margin-left: 5px;
+    }
+  }
+}
+
+//お知らせ詳細のレイアウト
 .news-detail {
   h4 {
     // 見出しのスタイル
   }
+
   .news-detail-free {
     // 自由文のスタイル
   }
+
   .news-detail-image {
     // 画像のスタイル
     text-align: center;
     margin: 10px auto;
+
     >img {
       max-width: 100%;
       height: auto;
       width: auto;
     }
   }
-  .news-detail-pdf {
-    // pdfのスタイル
+
+  .news-details-pdf {
+    a[href$=".pdf"] {
+      vertical-align: middle;
+
+      &:after {
+        content: "";
+        width: 16px;
+        height: 16px;
+        background: url(../img/pdf.png) no-repeat center / contain;
+        margin-left: 5px;
+      }
+    }
   }
+
   >*:empty {
     display: none;
     padding: 0;
@@ -146,6 +184,7 @@ a[href^="tel:"] {
     font-size: 0;
     background: none;
     border: none;
+
     &:before,
     &:after {
       display: none;
@@ -158,19 +197,23 @@ a[href^="tel:"] {
 // --------------------------------------------------
 body {
   width: 100%;
+
   &.open {
     position: fixed;
     height: 100%;
     overflow: hidden;
   }
+
   @if $header-fixed-pc {
     padding-top: $header-height-pc;
   }
+
   @media only screen and (max-width: $screen-tb) {
     @if $header-fixed-sp {
       position: relative;
       padding-top: $header-height-sp;
     }
+
     @else {
       padding-top: 0;
     }
@@ -189,9 +232,11 @@ body {
   box-sizing: border-box;
   background-color: #fff;
   transition: left 0.3s;
+
   @media only screen and (min-width: $screen-pc-min) {
     display: none;
   }
+
   body.open & {
     left: 0;
   }
