@@ -114,6 +114,7 @@ $.fn.textNodeText = function () {
   return result;
 };
 //httpが含まれる場合にwordbreakを付与
+//修正しました。
 $(function () {
   $("*").each(function () {
     var http = $(this).textNodeText();
