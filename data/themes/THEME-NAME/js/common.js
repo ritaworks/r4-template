@@ -104,25 +104,27 @@ new ViewportExtra(375)
 
 //httpが含まれる場合にwordbreakを付与するjs
 //直下のテキストのみを取得するプラグイン
-$.fn.textNodeText = function() {
+$.fn.textNodeText = function () {
   var result = "";
-  $(this).contents().each(function() {
+  $(this).contents().each(function () {
     if (this.nodeType === 3 && this.data) {
-      result += jQuery.trim( $(this).text() );
+      result += jQuery.trim($(this).text());
     }
   });
   return result;
 };
 //httpが含まれる場合にwordbreakを付与
-$("*").each(function () {
-  var http = $(this).textNodeText();
-  if (http.match(/http/)) {
-    $(this).css("word-break", "break-all");
-  }
+$(function () {
+  $("*").each(function () {
+    var http = $(this).textNodeText();
+    if (http.match(/http/)) {
+      $(this).css("word-break", "break-all");
+    }
+  });
 });
 
 //youtubeの自動レスポンシブ対応
 //iframeタグの親要素に、divタグが追加される
-$(function(){
-	$('iframe[src*="youtube"]').wrap('<div class="youtube-wrap"></div>');
+$(function () {
+  $('iframe[src*="youtube"]').wrap('<div class="youtube-wrap"></div>');
 });
