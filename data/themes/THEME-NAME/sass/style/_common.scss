@@ -123,6 +123,34 @@ a[href^="tel:"] {
   }
 }
 
+// オブジェクトフィット
+.ofi {
+  >img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    font-family: 'object-fit: cover; object-position: center;';
+  }
+  &.-top {
+    object-position: top;
+    font-family: 'object-fit: cover; object-position: top;';
+  }
+  &.-bottom {
+    object-position: bottom;
+    font-family: 'object-fit: cover; object-position: bottom;';
+  }
+  &.-left {
+    object-position: left;
+    font-family: 'object-fit: cover; object-position: left;';
+  }
+  &.-right {
+    object-position: right;
+    font-family: 'object-fit: cover; object-position: right;';
+  }
+}
+
+//複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
 // --------------------------------------------------
 // お知らせ関連
 // 複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
@@ -142,30 +170,34 @@ a[href^="tel:"] {
 
 //お知らせ詳細のレイアウト
 .news-detail {
-  h4 {
+  h3 {
     // 見出しのスタイル
+    margin-top: 40px;
   }
-
+  h4 {
+    // 見出し(小)のスタイル
+    margin-top: 30px;
+  }
   .news-detail-free {
     // 自由文のスタイル
+    margin: 0 0 40px;
+    p {
+      margin-bottom: 20px;
+    }
   }
-
   .news-detail-image {
     // 画像のスタイル
     text-align: center;
     margin: 10px auto;
-
     >img {
       max-width: 100%;
       height: auto;
       width: auto;
     }
   }
-
   .news-details-pdf {
     a[href$=".pdf"] {
       vertical-align: middle;
-
       &:after {
         content: "";
         width: 16px;
@@ -175,7 +207,6 @@ a[href^="tel:"] {
       }
     }
   }
-
   >*:empty {
     display: none;
     padding: 0;
@@ -184,7 +215,6 @@ a[href^="tel:"] {
     font-size: 0;
     background: none;
     border: none;
-
     &:before,
     &:after {
       display: none;

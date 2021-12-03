@@ -1,0 +1,376 @@
+@charset "UTF-8";
+
+// --------------------------------------------------
+// Setting（true or false）
+// wiki→http://new-cms-wiki.113110.website/coding-parts/calendar.html
+// --------------------------------------------------
+// 日付に背景を付ける場合
+$calendar-bg: false;
+// 日付をホバーして詳細を表示する
+$calendar-hover: false;
+// タイトルを表示する（ページ中央の場合のみ）
+$calendar-title: false;
+// 土日色付け
+$calendar-weekend: false;
+// 月曜始まり（※土日色付けありの場合）
+$calendar-monday: false;
+// 月移動ボタン上側設置
+$calendar-btntop: false;
+
+// --------------------------------------------------
+// Style
+// --------------------------------------------------
+.blog-calendar {
+  width: 100%;
+  color: $base-font-color;
+  text-align: center;
+  table-layout: fixed;
+  position: relative;
+
+  caption,
+  td,
+  th {
+    line-height: 1;
+    text-align: center;
+  }
+
+  ////////////
+  // ◯年◯月  //
+  ////////////
+  caption {
+    font: {
+      size: 18px;
+      weight: bold;
+    }
+    padding: 5px 0 15px 0;
+  }
+
+  //////////
+  // 曜日  //
+  //////////
+  thead th {
+    font: {
+      size: 14px;
+      weight: bold;
+    }
+    border: {
+      top: 1px solid $primary;
+      bottom: 1px solid $primary;
+    }
+    padding: 10px 0;
+    @if $calendar-weekend {
+      @if $calendar-monday {
+        &:nth-child(6) {
+          color: #2c7fc6;
+        }
+        &:nth-child(7) {
+          color: #c62c2c;
+        }
+      } @else {
+        &:nth-child(7) {
+          color: #2c7fc6;
+        }
+        &:nth-child(1) {
+          color: #c62c2c;
+        }
+      }
+    }
+  }
+
+  //////////
+  // 日付  //
+  //////////
+  tbody {
+    tr:first-child td {
+      padding-top: 13px;
+    }
+    td {
+      > a {
+        display: inline-block;
+        font-size: $base-font-size;
+        color: $base-font-color;
+        text-decoration: underline;
+        &:hover {
+          color: $primary;
+          text-decoration: none;
+        }
+        &[href="#"] {
+          color: $base-font-color;
+          text-decoration: none;
+          pointer-events: none;
+        }
+      }
+      @if $calendar-bg {
+        padding: 6px 0;
+        > a {
+          width: 30px;
+          color: #fff;
+          line-height: 30px;
+          text-decoration: none;
+          border-radius: 50%;
+          background: $primary;
+          &[href="#"] {
+            color: $base-font-color;
+            background: #f5f5f5;
+          }
+          &:hover {
+            color: #fff;
+          }
+        }
+        @if $calendar-weekend {
+          @if $calendar-monday {
+            &:nth-child(6) > a[href="#"] {
+              background: rgba(#2c7fc6, 0.3);
+            }
+            &:nth-child(7) > a[href="#"] {
+              background: rgba(#c62c2c, 0.3);
+            }
+          } @else {
+            &:nth-child(7) > a[href="#"] {
+              background: rgba(#2c7fc6, 0.3);
+            }
+            &:nth-child(1) > a[href="#"] {
+              background: rgba(#c62c2c, 0.3);
+            }
+          }
+        }
+      } @else {
+        @if $calendar-weekend {
+          @if $calendar-monday {
+            &:nth-child(6) > a {
+              color: #2c7fc6;
+            }
+            &:nth-child(7) > a {
+              color: #c62c2c;
+            }
+          } @else {
+            &:nth-child(7) > a {
+              color: #2c7fc6;
+            }
+            &:nth-child(1) > a {
+              color: #c62c2c;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /////////////////
+  // 選択月の変更  //
+  /////////////////
+  tfoot td {
+    @if $calendar-btntop {
+      &#blog-calendar-prev,
+      &#blog-calendar-next {
+        position: absolute;
+        top: -2px;
+        z-index: 1;
+        >a {
+          @extend .fade;
+          display: inline-block;
+          height: 34px;
+          width: 34px;
+          font-size: 0;
+          vertical-align: top;
+          text-decoration: none;
+          border: 1px solid #ddd;
+          border-radius: 50%;
+          background: $primary;
+          position: relative;
+          &::after {
+            content: "";
+            font: {
+              size: 20px;
+              family: $f-fa;
+              weight: 900;
+            }
+            height: 34px;
+            width: 32px;
+            line-height: 34px;
+            text-align: center;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+          transition: .3s;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+      &#blog-calendar-prev {
+        left: 0;
+        >a:after {
+          content: "\f104";
+        }
+      }
+      &#blog-calendar-next {
+        right: 0;
+        >a:after {
+          content: "\f105";
+        }
+      }
+    } @else {
+      padding-top: 15px;
+      &#blog-calendar-prev {
+        text-align: left;
+      }
+      &#blog-calendar-next {
+        text-align: right;
+      }
+      a {
+        font-size: 14px;
+        color: $base-font-color;
+        letter-spacing: 0;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  ////////////////////
+  // ホバーで詳細表示  //
+  ////////////////////
+  .has-list {
+    position: relative;
+
+    @if $calendar-title {
+      .item {
+        max-height: 55px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      .blog {
+        &-card {
+          @extend .hover-all;
+          &:hover {
+            .blog-title {
+              text-decoration: underline;
+            }
+          }
+          a[href="#"] {
+            pointer-events: none;
+            & + .blog-date + .blog-thumb + .blog-info {
+              .blog-title {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+        &-thumb,
+        &-date {
+          display: none;
+        }
+        &-title {
+          overflow: hidden;
+          font: {
+            size: 14px;
+            weight: bold;
+          }
+          color: $base-font-color;
+          line-height: 1.5;
+          text-align: center;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          @media only screen and(max-width: $screen-tb) {
+            white-space: inherit;
+          }
+        }
+      }
+    } @else {
+      @if $calendar-hover {
+        &:hover {
+          .blog-list {
+            display: block;
+          }
+        }
+      }
+      .blog {
+        &-card {
+          @extend .hover-all;
+          @extend .fade;
+          @include flex;
+        }
+        &-list {
+          display: none;
+          width: 600px;
+          background: #fff;
+          box-shadow: 0 0 20px rgba(#000, 0.1);
+          position: absolute;
+          z-index: 50;
+          right: 0;
+          padding: 10px;
+          .item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            &:first-child {
+              padding-top: 0;
+            }
+            &:last-child {
+              border-bottom: none;
+              padding-bottom: 0;
+            }
+          }
+        }
+        &-thumb {
+          width: 150px;
+          margin-right: 20px;
+        }
+        &-date {
+          @include flex($a-items: center, $j-content: center);
+          min-height: 100px;
+          width: 80px;
+          line-height: 1;
+          text-align: center;
+          background: #f2f2f2;
+          margin-right: 20px;
+          .date {
+            font: {
+              size: 20px;
+              weight: bold;
+            }
+            line-height: 1;
+            letter-spacing: 0;
+          }
+          .day {
+            font-size: 14px;
+          }
+          @if $calendar-weekend {
+            &.-blue {
+              background: rgba(#2c7fc6, 0.1);
+              .date {
+                color: #2c7fc6;
+              }
+            }
+            &.-red {
+              background: rgba(#c62c2c, 0.1);
+              .date {
+                color: #c62c2c;
+              }
+            }
+          }
+        }
+        &-info {
+          width: calc(100% - 270px);
+          text-align: left;
+          padding-top: 10px;
+        }
+        &-title {
+          font: {
+            size: 16px;
+            weight: bold;
+          }
+          color: $base-font-color;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}
