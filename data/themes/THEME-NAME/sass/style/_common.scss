@@ -105,6 +105,33 @@ a[href^="tel:"] {
   }
 }
 
+// オブジェクトフィット
+.ofi {
+  >img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    font-family: 'object-fit: cover; object-position: center;';
+  }
+  &.-top {
+    object-position: top;
+    font-family: 'object-fit: cover; object-position: top;';
+  }
+  &.-bottom {
+    object-position: bottom;
+    font-family: 'object-fit: cover; object-position: bottom;';
+  }
+  &.-left {
+    object-position: left;
+    font-family: 'object-fit: cover; object-position: left;';
+  }
+  &.-right {
+    object-position: right;
+    font-family: 'object-fit: cover; object-position: right;';
+  }
+}
+
 //複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
 .news-detail {
   h4 {
