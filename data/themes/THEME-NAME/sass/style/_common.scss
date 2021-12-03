@@ -134,11 +134,20 @@ a[href^="tel:"] {
 
 //複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
 .news-detail {
-  h4 {
+  h3 {
     // 見出しのスタイル
+    margin-top: 40px;
+  }
+  h4 {
+    // 見出し(小)のスタイル
+    margin-top: 30px;
   }
   .news-detail-free {
     // 自由文のスタイル
+    margin: 0 0 40px;
+    p {
+      margin-bottom: 20px;
+    }
   }
   .news-detail-image {
     // 画像のスタイル
