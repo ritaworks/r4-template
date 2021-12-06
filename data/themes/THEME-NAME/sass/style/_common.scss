@@ -114,7 +114,7 @@ a[href^="tel:"] {
   height: 0px;
   position: relative;
 
-  iframe {
+  >iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -132,19 +132,19 @@ a[href^="tel:"] {
     object-position: center;
     font-family: 'object-fit: cover; object-position: center;';
   }
-  &.-top {
+  &.-top >img {
     object-position: top;
     font-family: 'object-fit: cover; object-position: top;';
   }
-  &.-bottom {
+  &.-bottom >img {
     object-position: bottom;
     font-family: 'object-fit: cover; object-position: bottom;';
   }
-  &.-left {
+  &.-left >img {
     object-position: left;
     font-family: 'object-fit: cover; object-position: left;';
   }
-  &.-right {
+  &.-right >img {
     object-position: right;
     font-family: 'object-fit: cover; object-position: right;';
   }
@@ -221,6 +221,12 @@ a[href^="tel:"] {
     }
   }
 }
+
+// --------------------------------------------------
+// 追加分ここから
+// --------------------------------------------------
+
+
 
 // --------------------------------------------------
 // slide-menu
