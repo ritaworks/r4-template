@@ -3,9 +3,9 @@
 // Container
 // --------------------------------------------------
 .l-container {
+  overflow: hidden;
   @media only screen and (min-width: $screen-pc-min) {
     min-width: $container-pc;
-    overflow: hidden;
   }
 }
 
@@ -53,12 +53,19 @@ header {
 // Page
 // --------------------------------------------------
 .l-page {
+  float: left;
+  width: 700px;
 }
 
 // --------------------------------------------------
 // Side
 // --------------------------------------------------
 .l-side {
+  float: right;
+  width: 260px;
+  @media only screen and (max-width: $screen-tb) {
+    display: none;
+  }
 }
 
 // --------------------------------------------------

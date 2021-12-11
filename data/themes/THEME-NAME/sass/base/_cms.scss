@@ -9,28 +9,4 @@
   .error {
     color: $warn-color;
   }
-
-  // エディタで自動付与されるクラス
-  .cms-ullist,
-  .cms-ollist {
-    >li {
-      text-indent: -12px;
-      margin-left: 24px;
-      &:before {
-        content: "●";
-        min-width: 12px;
-        color: #ddd;
-      }
-    }
-  }
-  .cms-ollist {
-    counter-reset: section;
-    >li {
-      counter-increment: section;
-      &:before {
-        content: counter(section) ".";
-        color: $primary;
-      }
-    }
-  }
 }
