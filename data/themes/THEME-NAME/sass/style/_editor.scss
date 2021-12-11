@@ -2,11 +2,28 @@
 // CMS内エディタ用クラス
 
 .button01 {
-  /**/
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  font-weight: bold;
+  color: $primary;
+  text: {
+    align: center;
+    decoration: none;
+  }
+  border: 1px solid $primary;
+  border-radius: 4px;
+  background: #fff;
+  padding: 5px 20px;
+  transition: all 0.3s;
+  &:hover {
+    color: #fff;
+    background: $primary;
+  }
 }
 
 .button02 {
-  /**/
+  // @extend .button01; //色違いの場合のみ
 }
 
 .table01 {
