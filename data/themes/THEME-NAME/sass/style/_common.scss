@@ -10,7 +10,7 @@
 
 
 // --------------------------------------------------
-// Headingsïï
+// Headings
 // --------------------------------------------------
 h2 {
   &.top {
@@ -274,12 +274,12 @@ a[href^="tel:"] {
       display: none;
     }
   }
+}
 
-  blockquote {
-    border-left: 5px solid #ddd;
-    padding: 5px 0 5px 30px;
-    margin: 0;
-  }
+blockquote {
+  border-left: 5px solid #ddd;
+  padding: 5px 0 5px 30px;
+  margin: 0;
 }
 
 // 矢印が必要な場合は.iconを編集してください。
