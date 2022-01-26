@@ -5,6 +5,9 @@
   #tinymce {
     width: $light-cms-column-width;
     padding-top: 0;
+    &.article-free {
+      margin-bottom: 20px;
+    }
   }
   .error {
     color: $warn-color;
