@@ -56,30 +56,6 @@ h5 {
 }
 
 // --------------------------------------------------
-// Table
-// --------------------------------------------------
-.overflow-table {
-  overflow-x: auto;
-}
-
-.nodrop-table {
-  tr {
-    th,
-    td {
-      @media only screen and (max-width: $screen-tb) {
-        display: table-cell;
-        width: auto !important;
-      }
-    }
-    th {
-      @media only screen and (max-width: $screen-tb) {
-        white-space: nowrap;
-      }
-    }
-  }
-}
-
-// --------------------------------------------------
 // Common
 // --------------------------------------------------
 //全体ホバー
@@ -97,15 +73,6 @@ h5 {
   }
 }
 
-//電話番号
-a[href^="tel:"] {
-  color: $base-font-color;
-  text-decoration: none;
-  @media only screen and (min-width: $screen-pc-min) {
-    pointer-events: none;
-  }
-}
-
 //youtubeの自動レスポンシブ対応
 .youtube-wrap {
   height: 0;
@@ -118,25 +85,6 @@ a[href^="tel:"] {
     position: absolute;
     top: 0;
     left: 0;
-  }
-}
-
-// .img-coverの親要素に高さと横幅が指定されている必要がある。
-.img-cover {
-  display: block;
-  overflow: hidden;
-  position: relative;
-  img {
-    min-height: 1000%;
-    width: 100%;
-    min-width: 1000%;
-    position: absolute;
-    top: -10000%;
-    right: -10000%;
-    left: -10000%;
-    bottom: -10000%;
-    transform: scale(0.1);
-    margin: auto auto;
   }
 }
 
@@ -165,62 +113,32 @@ a[href^="tel:"] {
     object-position: right;
     font-family: "object-fit: cover; object-position: right;";
   }
-}
-
-.cms-ullist,
-.dot-list {
-  > li {
-    text-indent: -12px;
-    margin-left: 24px;
-    &:before {
-      content: "●";
-      min-width: 12px;
-      color: #ddd;
+  // [1]縦横の比率を変えたくない場合に使用する。
+  // [2]padding-top: 100%;（親要素に対する縦の比率）を指定する。
+  &.-ratio {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    >img {
+      min-height: 100%;
+      width: 100%;
+      min-width: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      margin: auto auto;
     }
   }
 }
 
-.cms-ollist,
-.num-list {
-  counter-reset: section;
-  > li {
-    text-indent: -12px;
-    counter-increment: section;
-    margin-left: 24px;
-    &:before {
-      content: counter(section) ".";
-      min-width: 12px;
-      color: $primary;
-    }
-  }
-}
 
 //複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
 // --------------------------------------------------
-// お知らせ関連
+// お知らせ詳細
 // 複数お知らせ・ブログがある場合は複製して、親のクラス名を変更する。
 // --------------------------------------------------
-// お知らせ一覧にPDFアイコンを表示する
-// @extend で対応してください。
-.news-link-event {
-  a {
-    &[href$=".pdf"] {
-      &:after {
-        content: "";
-        height: 16px;
-        width: 16px;
-        background: url(../img/pdf.png) no-repeat center / contain;
-        margin-left: 5px;
-      }
-    }
-    &[href="#"] {
-      color: $base-font-color;
-      text-decoration: none;
-      pointer-events: none;
-    }
-  }
-}
-
 // お知らせ詳細のレイアウト
 // h1:キービジュアル
 // h2:ページタイトル
@@ -277,12 +195,6 @@ a[href^="tel:"] {
   }
 }
 
-blockquote {
-  border-left: 5px solid #ddd;
-  padding: 5px 0 5px 30px;
-  margin: 0;
-}
-
 // 矢印が必要な場合は.iconを編集してください。
 .pagination {
   text-align: center;
@@ -304,8 +216,7 @@ blockquote {
     margin: 0 5px 10px;
     transition: all 0.3s;
 
-    &.icon,
-    &.hidden-xs {
+    &.icon {
       display: none;
     }
   }
@@ -317,50 +228,3 @@ blockquote {
   }
 }
 
-// --------------------------------------------------
-// slide-menu
-// --------------------------------------------------
-body {
-  width: 100%;
-
-  &.open {
-    height: 100%;
-    overflow: hidden;
-    position: fixed;
-  }
-
-  @if $header-fixed-pc {
-    padding-top: $header-height-pc;
-  }
-
-  @media only screen and (max-width: $screen-tb) {
-    @if $header-fixed-sp {
-      position: relative;
-      padding-top: $header-height-sp;
-    } @else {
-      padding-top: 0;
-    }
-  }
-}
-
-.slide-menu {
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  overflow: scroll;
-  background-color: #fff;
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 100%;
-  padding-top: $header-height-sp;
-  transition: left 0.3s;
-
-  @media only screen and (min-width: $screen-pc-min) {
-    display: none;
-  }
-
-  body.open & {
-    left: 0;
-  }
-}

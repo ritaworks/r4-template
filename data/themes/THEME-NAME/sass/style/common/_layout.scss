@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+// --------------------------------------------------
+// Container
+// --------------------------------------------------
+.l-container {
+  overflow: hidden;
+  @media only screen and (min-width: $screen-pc-min) {
+    min-width: $container-pc;
+  }
+}
+
+// --------------------------------------------------
+// Body
+// --------------------------------------------------
+body {
+  width: 100%;
+
+  &.open {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+  }
+
+  @if $header-fixed-pc {
+    padding-top: $header-height-pc;
+  }
+
+  @media only screen and (max-width: $screen-tb) {
+    @if $header-fixed-sp {
+      position: relative;
+      padding-top: $header-height-sp;
+    } @else {
+      padding-top: 0;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Header
+// --------------------------------------------------
+header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  @if $header-fixed-pc {
+    position: fixed;
+  }
+  @else {
+    position: relative;
+  }
+  @media only screen and (max-width: $screen-tb) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    @if $header-fixed-sp {
+      position: fixed;
+    }
+    @else {
+      position: relative;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Grobal-navigation
+// --------------------------------------------------
+.g-nav {
+}
+
+// --------------------------------------------------
+// slide-menu
+// --------------------------------------------------
+.slide-menu {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  background-color: #fff;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 100%;
+  padding-top: $header-height-sp;
+  transition: left 0.3s;
+
+  @media only screen and (min-width: $screen-pc-min) {
+    display: none;
+  }
+
+  body.open & {
+    left: 0;
+  }
+}
+
+// --------------------------------------------------
+// Key-visual
+// --------------------------------------------------
+.key-visual {
+}
+
+// --------------------------------------------------
+// Main
+// --------------------------------------------------
+.l-main {
+  @include clearfix;
+}
+
+// --------------------------------------------------
+// Page
+// --------------------------------------------------
+.l-page {
+  float: left;
+  width: 700px;
+}
+
+// --------------------------------------------------
+// Side
+// --------------------------------------------------
+.l-side {
+  float: right;
+  width: 260px;
+  @media only screen and (max-width: $screen-tb) {
+    display: none;
+  }
+}
+
+// Sideの中身
+.side-ttl {
+}
+
+
+// --------------------------------------------------
+// Footer
+// --------------------------------------------------
+footer {
+}

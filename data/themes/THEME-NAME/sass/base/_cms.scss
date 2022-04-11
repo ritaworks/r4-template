@@ -12,4 +12,9 @@
   .error {
     color: $warn-color;
   }
+  blockquote {
+    border-left: 5px solid #ddd;
+    padding: 5px 0 5px 30px;
+    margin: 0;
+  }
 }
