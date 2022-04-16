@@ -58,6 +58,22 @@ h5 {
 // --------------------------------------------------
 // Common
 // --------------------------------------------------
+// タグの色指定
+.tag {
+  display: inline-block;
+  font: {
+    size: 12px;
+    weight: bold;
+  }
+  color: #fff;
+  line-height: 1.5;
+  padding: 0 5px;
+  background: $primary;
+  &.-info {
+    background: $secondary;
+  }
+}
+
 //全体ホバー
 .hover-all {
   position: relative;

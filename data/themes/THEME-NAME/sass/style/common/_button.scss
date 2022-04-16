@@ -29,3 +29,46 @@
 // --------------------------------------------------
 // その他：基本的に.button01/.button02にサブクラスで指定する
 // --------------------------------------------------
+.btn-list {
+  @include flex($f-wrap:nowrap);
+
+  li {
+    width: 32%;
+    margin: 0 2% 15px 0;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    @media only screen and (max-width: $screen-tb) {
+      width: 49%;
+      margin: 0 2% 15px 0;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+    }
+
+    @media only screen and (max-width: $screen-sp) {
+      width: 100%;
+      margin: 0 0 10px 0;
+    }
+
+    a {
+      @include flex($a-items:center,$j-content:center);
+      @extend .button01;
+      max-width: 100%;
+      height: 100%;
+
+      &[href^="#"] {
+        &:before {
+          content: "\f107";
+        }
+      }
+
+      &[href*="#tab"] {
+        &:before {
+          content: "\f105";
+        }
+      }
+    }
+  }
+}
