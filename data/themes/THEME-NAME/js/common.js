@@ -90,20 +90,18 @@ $(function () {
 });
 
 // アンカーリンク付きのページ遷移をするとき：ヘッダーが固定分調整するjs
-$(function () {
-  $(document).on('ready', function () {
-    if (location.hash != "") {
-      let pos = $(location.hash).offset().top;
-      if (PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH) {
-        pos -= $('header').innerHeight();
-        $("html, body").animate({
-          scrollTop: pos
-        }, 1, "swing");
-      } else {
-        return false;
-      }
+$(window).on('load', function () {
+  if (location.hash != "") {
+    let pos = $(location.hash).offset().top;
+    if (PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH) {
+      pos -= $('header').innerHeight();
+      $("html, body").animate({
+        scrollTop: pos
+      }, 1, "swing");
+    } else {
+      return false;
     }
-  });
+  }
 });
 
 // 2. rollover（_offと末尾についた画像をオンマウスで_onとついた画像に切り替える）
