@@ -7,9 +7,7 @@ body {
   font-weight: $base-font-weight;
 }
 
-
 p,
-a,
 dt,
 dd,
 li,
@@ -17,7 +15,6 @@ th,
 td {
   line-height: $base-line-height;
 }
-
 
 a {
   @include link;
