@@ -35,6 +35,7 @@ $(function () {
     menu_btn.removeClass('active');
     body.removeClass('open');
     body.removeAttr('style');
+    $(window).scrollTop(top);
     menu_open = false;
   }
 
@@ -59,7 +60,6 @@ $(function () {
     }
     if (body.hasClass('open')) {
       slidemenuClose();
-      $(window).scrollTop(top);
     } else {
       slidemenuOpen();
       body.css({
@@ -71,7 +71,6 @@ $(function () {
   // PC時overlayを設置する場合
   // $("#overlay").on("click", function () {
   //   slidemenuClose();
-  //   $(window).scrollTop(top);
   // });
 });
 
