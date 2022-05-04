@@ -86,14 +86,31 @@ $(function () {
     scrollPosition(0);
     return false;
   });
+
+  // 1.5秒で表示消す
+  if ($(window).innerWidth() < SP_WIDTH) {
+    var scrollStopEvent = new $.Event("scrollstop");
+    var delay = 1500;
+    var timer;
+    function scrollStopEventTrigger() {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(function () {
+        top_btn.fadeOut();
+        $(window).trigger(scrollStopEvent)
+      }, delay);
+    }
+    $(window).on("scroll", scrollStopEventTrigger);
+    $("body").on("touchmove", scrollStopEventTrigger);
+  };
 });
 
 // アンカーリンク付きのページ遷移をするとき：ヘッダーが固定分調整するjs
 $(window).on('load', function () {
   if (location.hash != "") {
-    let pos = $(location.hash).offset().top;
     if (PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH) {
-      pos -= $('header').innerHeight();
+      let pos = $(location.hash).offset().top - $('header').innerHeight();
       $("html, body").animate({
         scrollTop: pos
       }, 1, "swing");
