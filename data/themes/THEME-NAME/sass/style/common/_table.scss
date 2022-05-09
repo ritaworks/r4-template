@@ -1,0 +1,38 @@
+@charset "UTF-8";
+// CMS内エディタ用クラス
+
+.table01 {
+  width: 100%;
+}
+
+.table02 {
+  width: 100%;
+}
+
+
+
+
+
+// --------------------------------------------------
+// その他
+// --------------------------------------------------
+.overflow-table {
+  overflow-x: auto;
+}
+
+.nodrop-table {
+  tr {
+    th,
+    td {
+      @media only screen and (max-width: $screen-tb) {
+        display: table-cell;
+        width: auto !important;
+      }
+    }
+    th {
+      @media only screen and (max-width: $screen-tb) {
+        white-space: nowrap;
+      }
+    }
+  }
+}

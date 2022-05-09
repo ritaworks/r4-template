@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+// --------------------------------------------------
+// Container
+// --------------------------------------------------
+.l-container {
+  overflow: hidden; //stickyを使う場合は要注意
+  @media only screen and (min-width: $screen-pc-min) {
+    min-width: $container-pc;
+  }
+}
+
+// 幅を指定するパターン
+// 1.「.center-box」を使用
+// <div class="center-box" style="max-width:800px"></div>
+// 2.「.container.-w800」などサブクラス使用
+// .container {
+//   &.-w800 {
+//     width: calc(800px + #{$gutter-pc});
+//     @media only screen and (max-width: $screen-tb) {
+//       width: auto;
+//     }
+//   }
+// }
+
+// --------------------------------------------------
+// Body
+// --------------------------------------------------
+body {
+  width: 100%;
+
+  &.open {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+  }
+
+  @if $header-fixed-pc {
+    padding-top: $header-height-pc;
+  }
+
+  @media only screen and (max-width: $screen-tb) {
+    @if $header-fixed-sp {
+      position: relative;
+      padding-top: $header-height-sp;
+    } @else {
+      padding-top: 0;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Header
+// --------------------------------------------------
+header {
+  width: 100%;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  @if $header-fixed-pc {
+    position: fixed;
+  } @else {
+    position: relative;
+  }
+  @media only screen and (max-width: $screen-tb) {
+    width: 100%;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    @if $header-fixed-sp {
+      position: fixed;
+    } @else {
+      position: relative;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Grobal-navigation
+// http://parts-template2.light-cms.com/navigation/index.html
+// --------------------------------------------------
+.g-nav {
+}
+
+// --------------------------------------------------
+// Slide-menu
+// --------------------------------------------------
+.slide-menu {
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  background-color: #fff;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 100%;
+  padding-top: $header-height-sp;
+  transition: left 0.3s;
+
+  @media only screen and (min-width: $screen-pc-min) {
+    display: none;
+    // PCで全画面表示する場合
+    // left: 0;
+    // transition: all 0.3s;
+    // visibility: hidden;
+    // opacity: 0;
+    // body.open & {
+    //   visibility: visible;
+    //   opacity: 1;
+    // }
+  }
+
+  body.open & {
+    left: 0;
+  }
+}
+
+// PCでスライドメニュー
+// #overlay {
+//   height: 100vh;
+//   width: 100%;
+//   visibility: hidden;
+//   background: rgba(0, 0, 0, 0.5);
+//   position: fixed;
+//   z-index: 9996;
+//   top: 0;
+//   left: 0;
+//   opacity: 0;
+//   transition: all 0.3s ease;
+//   body.open & {
+//     visibility: visible;
+//     opacity: 1;
+//   }
+// }
+
+// --------------------------------------------------
+// Key-visual
+// --------------------------------------------------
+.key-visual {
+}
+
+// --------------------------------------------------
+// Main
+// --------------------------------------------------
+.l-main {
+  @include clearfix;
+}
+
+// --------------------------------------------------
+// Page
+// --------------------------------------------------
+.l-page {
+  float: left;
+  width: 700px;
+  @media only screen and (max-width: $screen-tb) {
+    float: none;
+    width: 100%;
+  }
+}
+
+// --------------------------------------------------
+// Side
+// --------------------------------------------------
+.l-side {
+  float: right;
+  width: 260px;
+  @media only screen and (max-width: $screen-tb) {
+    display: none;
+  }
+}
+
+// Sideの中身
+.side-ttl {
+}
+
+// --------------------------------------------------
+// Footer
+// --------------------------------------------------
+footer {
+}

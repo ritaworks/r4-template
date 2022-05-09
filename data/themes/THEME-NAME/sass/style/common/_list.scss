@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+// --------------------------------------------------
+// お知らせ
+// リストタイプ：http://parts-template2.light-cms.com/news/index.html
+// カードタイプ：http://parts-template2.light-cms.com/card/index.html#card1
+// --------------------------------------------------
+// お知らせ一覧にPDFアイコンを表示する
+// @extend で対応してください。
+.news-link-event01 {
+  // aタグがテキストの場合
+  a {
+    &[href$=".pdf"] {
+      &:after {
+        content: "";
+        height: 16px;
+        width: 16px;
+        background: url(../img/pdf.png) no-repeat center / contain;
+        margin-left: 5px;
+      }
+    }
+    &[href="#"] {
+      color: $base-font-color;
+      text-decoration: none;
+      pointer-events: none;
+    }
+  }
+}
+.news-link-event02 {
+  // カードタイプ（.hover-all）の場合
+  // デザインによって.txt-wrap/.ttlのクラス名変更必要
+  pointer-events: none;
+  a {
+    pointer-events: all;
+    &[href="#"] {
+      pointer-events: none;
+    }
+    &[href$=".pdf"] {
+      +.txt-wrap {
+        .ttl {
+          &:after {
+            content: "";
+            height: 16px;
+            width: 16px;
+            background: url(../img/pdf.png) no-repeat center / contain;
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// お知らせリスト（ここから）
+// --------------------------------------------------
+
+
+
+
+
+
+// --------------------------------------------------
+// デフォルト（CMS内エディタ用クラス）
+// --------------------------------------------------
+
+// リストの中の擬似要素にまでtext-indentが継承される問題！！！
+// text-indentを使わない OR before,afterにデフォルト(_core)でtext-indent:0;にする
+
+.cms-ullist,
+.dot-list {
+  >li {
+    padding-left: 20px;
+    position: relative;
+
+    &:before {
+      content: "●";
+      color: $primary;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+.cms-ollist,
+.num-list {
+  counter-reset: section;
+
+  >li {
+    padding-left: 20px;
+    position: relative;
+    counter-increment: section;
+
+    &:before {
+      content: counter(section) ".";
+      color: $primary;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}

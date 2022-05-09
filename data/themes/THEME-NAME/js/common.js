@@ -35,6 +35,7 @@ $(function () {
     menu_btn.removeClass('active');
     body.removeClass('open');
     body.removeAttr('style');
+    $(window).scrollTop(top);
     menu_open = false;
   }
 
@@ -59,7 +60,6 @@ $(function () {
     }
     if (body.hasClass('open')) {
       slidemenuClose();
-      $(window).scrollTop(top);
     } else {
       slidemenuOpen();
       body.css({
@@ -71,7 +71,6 @@ $(function () {
   // PC時overlayを設置する場合
   // $("#overlay").on("click", function () {
   //   slidemenuClose();
-  //   $(window).scrollTop(top);
   // });
 });
 
@@ -87,23 +86,38 @@ $(function () {
     scrollPosition(0);
     return false;
   });
+
+  // 1.5秒で表示消す
+  if ($(window).innerWidth() < SP_WIDTH) {
+    var scrollStopEvent = new $.Event("scrollstop");
+    var delay = 1500;
+    var timer;
+    function scrollStopEventTrigger() {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(function () {
+        top_btn.fadeOut();
+        $(window).trigger(scrollStopEvent)
+      }, delay);
+    }
+    $(window).on("scroll", scrollStopEventTrigger);
+    $("body").on("touchmove", scrollStopEventTrigger);
+  };
 });
 
 // アンカーリンク付きのページ遷移をするとき：ヘッダーが固定分調整するjs
-$(function () {
-  $(document).on('ready', function () {
-    if (location.hash != "") {
-      let pos = $(location.hash).offset().top;
-      if (PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH) {
-        pos -= $('header').innerHeight();
-        $("html, body").animate({
-          scrollTop: pos
-        }, 1, "swing");
-      } else {
-        return false;
-      }
+$(window).on('load', function () {
+  if (location.hash != "") {
+    if (PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH) {
+      let pos = $(location.hash).offset().top - $('header').innerHeight();
+      $("html, body").animate({
+        scrollTop: pos
+      }, 1, "swing");
+    } else {
+      return false;
     }
-  });
+  }
 });
 
 // 2. rollover（_offと末尾についた画像をオンマウスで_onとついた画像に切り替える）

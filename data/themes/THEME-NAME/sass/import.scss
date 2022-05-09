@@ -14,6 +14,14 @@
 @import 'base/base';
 @import 'base/cms';
 
-// @import 'style/calendar';
-@import 'style/common';
+// @import 'style/plugin/calendar';
+
+// @import 'style/common/animation';
+@import 'style/common/button';
+@import 'style/common/table';
+@import 'style/common/color';
+@import 'style/common/list';
+@import 'style/common/layout';
+@import 'style/common/common';
+
 @import 'style/style';
