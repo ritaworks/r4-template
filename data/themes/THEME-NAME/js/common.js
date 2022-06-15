@@ -35,7 +35,10 @@ $(function () {
     menu_btn.removeClass('active');
     body.removeClass('open');
     body.removeAttr('style');
-    $(window).scrollTop(top);
+    if (top != 0) {
+      // ページ内スクロールのため
+      $(window).scrollTop(top);
+    }
     menu_open = false;
   }
 
@@ -43,7 +46,12 @@ $(function () {
   $('a[href*="#"]').on('click', function (e) {
     let current = location.pathname;
     let full_current = location.origin + current;
-    let link = $(this).attr('href').split('#')[0];
+    let link = '';
+    if ($('body').hasClass('top')) {
+      link = $(this).attr('href').split('#')[0] + '/index.html';
+    } else {
+      link = $(this).attr('href').split('#')[0];
+    }
     if (current === link || full_current === link || link == "") {
       e.preventDefault();
       slidemenuClose();
