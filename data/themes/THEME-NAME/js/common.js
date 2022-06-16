@@ -38,6 +38,7 @@ $(function () {
     if (top != 0) {
       // ページ内スクロールのため
       $(window).scrollTop(top);
+      top = 0; //リセット
     }
     menu_open = false;
   }
@@ -46,12 +47,26 @@ $(function () {
   $('a[href*="#"]').on('click', function (e) {
     let current = location.pathname;
     let full_current = location.origin + current;
-    let link = '';
-    if ($('body').hasClass('top')) {
-      link = $(this).attr('href').split('#')[0] + '/index.html';
-    } else {
-      link = $(this).attr('href').split('#')[0];
+    let link = $(this).attr('href').split('#')[0];
+    // トップページ及びカテゴリトップの場合は、すべてindex.htmlありとして判定する
+    // aタグは@link()#00 or #00で指定すること（aaa.html#00は動きません）
+    if (link != '') {
+      if (link.indexOf('.html') == -1) {
+        if (link.slice(-1) == '/') {
+          link += 'index.html';
+        } else {
+          link += '/index.html';
+        }
+      }
+      if (full_current.indexOf('.html') == -1) {
+        if (full_current.slice(-1) == '/') {
+          full_current += 'index.html';
+        } else {
+          full_current += '/index.html';
+        }
+      }
     }
+
     if (current === link || full_current === link || link == "") {
       e.preventDefault();
       slidemenuClose();
