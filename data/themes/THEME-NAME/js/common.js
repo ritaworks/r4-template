@@ -125,7 +125,6 @@ $(function () {
       }, delay);
     }
     $(window).on("scroll", scrollStopEventTrigger);
-    $("body").on("touchmove", scrollStopEventTrigger);
   };
 });
 
