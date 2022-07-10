@@ -68,10 +68,15 @@ $(function () {
     }
 
     if (current === link || full_current === link || link == "") {
-      e.preventDefault();
-      slidemenuClose();
-      let position = $(this.hash).length > 0 ? $(this.hash).offset().top : 0;
-      scrollPosition(position);
+      if ($(this).attr('data-href')) {
+        // tabjsとの競合回避
+        return false;
+      } else {
+        e.preventDefault();
+        slidemenuClose();
+        let position = $(this.hash).length > 0 ? $(this.hash).offset().top : 0;
+        scrollPosition(position);
+      }
     }
   });
 
