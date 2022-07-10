@@ -13,11 +13,11 @@
     var defs = {
       position: 0,       // タブよりposition分上にスクロールする
       scroll_target: '', // 読み込み時毎度特定の場所へスクロールする（※ページャーなど）
-      reload_actie: ['.pagination', '.blog-calendar', '.archive-list'], // パラメータ付与でリロードを行う場合の親クラス
+      reload_actie: [], // パラメータ付与でリロードを行う場合の親クラス
       PC_WIDTH: 769,     // PCのブレイクポイント
       SP_WIDTH: 768,     // TB以下のブレイクポイント
-      PC_FIXED: 0,       // PCのヘッダー高さ（固定分）
-      SP_FIXED: 0        // TB以下のヘッダー高さ（固定分）
+      PC_FIXED: 'header',// PCのヘッダー高さ要素
+      SP_FIXED: 'header' // TB以下のヘッダー高さ要素
     };
     var config = $.extend({}, defs, params);
     var tab_link = this;
@@ -28,9 +28,9 @@
     let tabdesu = false;
     let speed = 500;
     if(window.matchMedia( "(min-width: " + config.PC_WIDTH + "px)" ).matches) {
-      headerFixed = config.PC_FIXED;
+      headerFixed = $(config.PC_FIXED).innerHeight();
     } else if(window.matchMedia( "(max-width: " + config.SP_WIDTH + "px)" ).matches) {
-      headerFixed = config.SP_FIXED;
+      headerFixed = $(config.SP_FIXED).innerHeight();
     }
 
     // 1.function設定
@@ -81,7 +81,10 @@
               scroll_action('#' + tabHash[exist_num], tabdesu, loading);
             }
           } else if (config.scroll_target && $(config.scroll_target).length) {
-            scroll_action(config.scroll_target, tabdesu, loading);
+            if (tabHash) {
+              tabdesu = false;
+              scroll_action(config.scroll_target, tabdesu, loading);
+            }
           } else {
             // 無効なハッシュ || 有効なクラスが指定されていない場合
             $('html, body').css('opacity', 1);
@@ -149,59 +152,80 @@
     // $('a[href*="#"], a[data-href *= "#"]').on("click", function (e) {
     // hrefを含むと、common.jsと競合してしまい、スクロール後に一時スクロールできなくなる。
     $('a[data-href *= "#"]').on("click", function (e) {
+      let result = "";
       let reload_num = 0;
       for (var i = 0; config.reload_actie.length > i; i++) {
         if ($(config.reload_actie[i]).find($(this)).length) {
           reload_num += 1;
         }
-        if (reload_num < 1 && config.reload_actie.length == i + 1) {
-          //// common.js同様に処理を止める（ここから）////
-          let current = location.pathname;
-          let full_current = location.origin + current;
-          let link = "";
-          if ($(this).attr('href')) {
-            link = $(this).attr('href').split('#')[0];
-          }
-          // トップページ及びカテゴリトップの場合は、すべてindex.htmlありとして判定する
-          // aタグは@link()#00 or #00で指定すること（aaa.html#00は動きません）
-          if (link != '') {
-            if (link.indexOf('.html') == -1) {
-              if (link.slice(-1) == '/') {
-                link += 'index.html';
-              } else {
-                link += '/index.html';
-              }
-            }
-            if (full_current.indexOf('.html') == -1) {
-              if (full_current.slice(-1) == '/') {
-                full_current += 'index.html';
-              } else {
-                full_current += '/index.html';
-              }
-            }
-          }
-          // このページ内のことであればイベントを止める
-          if (current === link || full_current === link || link == "") {
-            e.preventDefault();
-            //// common.js同様に処理を止める（ここまで） ////
+      }
+      if (reload_num < 1) {
+        // $('a[href*="#"]')処理は不要だが、別ページと同じidが設定されていると動いてしまうので処理追加
+        //// common.js同様に処理を止める（ここから）////
+        result = thisPage();
+        // このページ内のことであればイベントを止める
+        if (result) {
+          e.preventDefault();
+          //// common.js同様に処理を止める（ここまで） ////
 
-            //// 本来の処理（タブ切り替え＋スクロール）（ここから） ////
-            if ($(this).attr('data-href')) {
-              tabHash = $(this).attr('data-href').split('#')[1].split('_');
-            } else {
-              tabHash = $(this).attr('href').split('#')[1].split('_');
-            }
-            if ($(this).closest(tab_link).find(this).length) {
-              // 3-1.タブそのものをクリックした場合（スクロール不要）
-              tab_check($(this), tabHash, 0);
-            } else {
-              // 3-2.本来のタブ以外からタブ切り替えやタブタブ内部へのスクロールしたい場合
-              hash_directories(tabHash, false);
-            }
-            //// 本来の処理（タブ切り替え＋スクロール）（ここまで） ////
-
+          //// 本来の処理（タブ切り替え＋スクロール）（ここから） ////
+          if ($(this).attr('data-href')) {
+            tabHash = $(this).attr('data-href').split('#')[1].split('_');
+          } else {
+            tabHash = $(this).attr('href').split('#')[1].split('_');
           }
-        };
+          if ($(this).closest(tab_link).find(this).length) {
+            // 3-1.タブそのものをクリックした場合（スクロール不要）
+            tab_check($(this), tabHash, 0);
+          } else {
+            // 3-2.本来のタブ以外からタブ切り替えやタブタブ内部へのスクロールしたい場合
+            hash_directories(tabHash, false);
+          }
+          //// 本来の処理（タブ切り替え＋スクロール）（ここまで） ////
+
+        }
+      } else {
+        if ($(this).attr('href')) {
+          result = thisPage();
+          // このページ内のことであればリロードさせる
+          if (result) {
+            // リロードをさせるために?も設定する
+            location.href = location.origin + location.pathname + '?' + $(this).attr('data-href').split('#')[1] + '#' + $(this).attr('data-href').split('#')[1];
+          } else {
+            location.href = $(this).attr('href');
+          }
+        } else {
+          // リロードをさせるために"?"も設定する
+          location.href = location.origin + location.pathname + '?' + $(this).attr('data-href').split('#')[1] + '#' + $(this).attr('data-href').split('#')[1];
+        }
+      }
+
+      function thisPage() {
+        let current = location.pathname;
+        let full_current = location.origin + current;
+        let link = "";
+        if ($(this).attr('href')) {
+          link = $(this).attr('href').split('#')[0];
+        }
+        // トップページ及びカテゴリトップの場合は、すべてindex.htmlありとして判定する
+        // aタグは@link()#00 or #00で指定すること（aaa.html#00は動きません）
+        if (link != '') {
+          if (link.indexOf('.html') == -1) {
+            if (link.slice(-1) == '/') {
+              link += 'index.html';
+            } else {
+              link += '/index.html';
+            }
+          }
+          if (full_current.indexOf('.html') == -1) {
+            if (full_current.slice(-1) == '/') {
+              full_current += 'index.html';
+            } else {
+              full_current += '/index.html';
+            }
+          }
+        }
+        return Boolean(current === link || full_current === link || link == "");
       }
     })
 
