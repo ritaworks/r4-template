@@ -81,8 +81,10 @@
               scroll_action('#' + tabHash[exist_num], tabdesu, loading);
             }
           } else if (config.scroll_target && $(config.scroll_target).length) {
-            tabdesu = false;
-            scroll_action(config.scroll_target, tabdesu, loading);
+            if (tabHash) {
+              tabdesu = false;
+              scroll_action(config.scroll_target, tabdesu, loading);
+            }
           } else {
             // 無効なハッシュ || 有効なクラスが指定されていない場合
             $('html, body').css('opacity', 1);
