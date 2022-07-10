@@ -13,7 +13,7 @@
     var defs = {
       position: 0,       // タブよりposition分上にスクロールする
       scroll_target: '', // 読み込み時毎度特定の場所へスクロールする（※ページャーなど）
-      reload_actie: ['.pagination', '.blog-calendar', '.archive-list'], // パラメータ付与でリロードを行う場合の親クラス
+      reload_actie: [], // パラメータ付与でリロードを行う場合の親クラス
       PC_WIDTH: 769,     // PCのブレイクポイント
       SP_WIDTH: 768,     // TB以下のブレイクポイント
       PC_FIXED: 'header',// PCのヘッダー高さ要素
