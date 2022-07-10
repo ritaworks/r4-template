@@ -16,8 +16,8 @@
       reload_actie: ['.pagination', '.blog-calendar', '.archive-list'], // パラメータ付与でリロードを行う場合の親クラス
       PC_WIDTH: 769,     // PCのブレイクポイント
       SP_WIDTH: 768,     // TB以下のブレイクポイント
-      PC_FIXED: 0,       // PCのヘッダー高さ（固定分）
-      SP_FIXED: 0        // TB以下のヘッダー高さ（固定分）
+      PC_FIXED: 'header',// PCのヘッダー高さ要素
+      SP_FIXED: 'header' // TB以下のヘッダー高さ要素
     };
     var config = $.extend({}, defs, params);
     var tab_link = this;
@@ -28,9 +28,9 @@
     let tabdesu = false;
     let speed = 500;
     if(window.matchMedia( "(min-width: " + config.PC_WIDTH + "px)" ).matches) {
-      headerFixed = config.PC_FIXED;
+      headerFixed = $(config.PC_FIXED).innerHeight();
     } else if(window.matchMedia( "(max-width: " + config.SP_WIDTH + "px)" ).matches) {
-      headerFixed = config.SP_FIXED;
+      headerFixed = $(config.SP_FIXED).innerHeight();
     }
 
     // 1.function設定
