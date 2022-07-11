@@ -14,10 +14,11 @@
       position: 0,       // タブよりposition分上にスクロールする
       scroll_target: '', // 読み込み時毎度特定の場所へスクロールする（※ページャーなど）
       reload_actie: [], // パラメータ付与でリロードを行う場合の親クラス
-      PC_WIDTH: 769,     // PCのブレイクポイント
-      SP_WIDTH: 768,     // TB以下のブレイクポイント
-      PC_FIXED: 'header',// PCのヘッダー高さ要素
-      SP_FIXED: 'header' // TB以下のヘッダー高さ要素
+      SP_WIDTH: 769,    // ブレイクポイント
+      PC_FIXED: false,  // PCのヘッダー固定
+      SP_FIXED: false,  // TB以下のヘッダー固定
+      PC_FIXED_ELE: 'header', // PCのヘッダー高さ要素
+      SP_FIXED_ELE: 'header' // TB以下のヘッダー高さ要素
     };
     var config = $.extend({}, defs, params);
     var tab_link = this;
@@ -27,10 +28,10 @@
     var offset = 0;
     let tabdesu = false;
     let speed = 500;
-    if(window.matchMedia( "(min-width: " + config.PC_WIDTH + "px)" ).matches) {
-      headerFixed = $(config.PC_FIXED).innerHeight();
-    } else if(window.matchMedia( "(max-width: " + config.SP_WIDTH + "px)" ).matches) {
-      headerFixed = $(config.SP_FIXED).innerHeight();
+    if(window.matchMedia( "(min-width: " + config.SP_WIDTH + "px)" ).matches && config.PC_FIXED) {
+      headerFixed = $(config.PC_FIXED_ELE).innerHeight();
+    } else if(window.matchMedia( "(max-width: " + config.SP_WIDTH + "px)" ).matches && config.SP_FIXED) {
+      headerFixed = $(config.SP_FIXED_ELE).innerHeight();
     }
 
     // 1.function設定
