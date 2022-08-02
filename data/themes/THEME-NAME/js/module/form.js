@@ -15,6 +15,8 @@
     - form/jquery.ui.datepicker-ja.min.js
   4. 合計金額計算
     - form/jquery.sum.js
+  5. コピペ禁止
+    - form.js
 
 ■ 絞り込み機能
   1. form/jquery.resultStay.js
@@ -35,6 +37,7 @@
       //form_xxxxxx  ex) ['inq01', 'inq02']
       address: [],
       tel: [],
+      nopaste: [],
     };
     // データ上書き
     var config = $.extend({}, defs, params);
@@ -91,6 +94,18 @@
         tel_name = '[name="form_' + config.tel[i] + '"]';
         form.find(tel_name).blur(function () {
           $(this).val(main($(this).val()));
+        });
+      }
+    }
+
+    ////////////
+    // コピペ禁止
+    ////////////
+    if (config.nopaste.length > 0) {
+      for (let i = 0; config.nopaste.length > i; i++) {
+        nopaste_content = 'input[name="form_' + config.nopaste[i] + '"]';
+        $(nopaste_content).on('paste', function (e) {
+          e.preventDefault();
         });
       }
     }
