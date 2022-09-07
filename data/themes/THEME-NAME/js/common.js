@@ -135,7 +135,7 @@ $(function () {
 
 // アンカーリンク付きのページ遷移をするとき：ヘッダーが固定分調整するjs
 $(window).on('load', function () {
-  if (location.hash != "") {
+  if (location.hash != "" && $(location.hash).length > 0) {
     if (PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH) {
       let pos = $(location.hash).offset().top - $('header').innerHeight();
       $("html, body").animate({

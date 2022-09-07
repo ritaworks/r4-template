@@ -235,6 +235,11 @@ h5 {
     &.icon {
       display: none;
     }
+
+    &[href="#"] {
+      cursor: default;
+      pointer-events: none;
+    }
   }
 
   a:hover,
