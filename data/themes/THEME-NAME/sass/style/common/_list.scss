@@ -81,6 +81,22 @@
       top: 0;
     }
   }
+
+  &[style="list-style-type: circle;"],
+  &[style="list-style-type: square;"] {
+    >li {
+      list-style-type: inherit;
+      text-indent: 0;
+
+      &::before {
+        content: none;
+      }
+
+      &::marker {
+        color: #7c7eba;
+      }
+    }
+  }
 }
 
 .cms-ollist,
@@ -98,6 +114,25 @@
       position: absolute;
       left: 0;
       top: 0;
+    }
+  }
+
+  &[style="list-style-type: lower-alpha;"],
+  &[style="list-style-type: lower-roman;"],
+  &[style="list-style-type: upper-alpha;"],
+  &[style="list-style-type: upper-roman;"] {
+    >li {
+      list-style-type: inherit;
+      text-indent: 0;
+      margin-left: 0;
+
+      &::before {
+        content: none;
+      }
+
+      &::marker {
+        color: #7c7eba;
+      }
     }
   }
 }
