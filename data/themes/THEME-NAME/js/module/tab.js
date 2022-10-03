@@ -58,7 +58,7 @@
       // 1-2.表示が整って（タブ切り替えが終わって）からスクロールの処理を行う
       if (loading) {
         // 1-2-1.読み込み時の場合
-        $(window).on("load", function () {
+        // $(window).on("load", function () { // Androidでの不具合のため
           // 1-2-1-1.タブ切り替えできていない箇所の対応
           tab_link.each(function () {
             list_target = $(this);
@@ -90,7 +90,7 @@
             // 無効なハッシュ || 有効なクラスが指定されていない場合
             $('html, body').css('opacity', 1);
           }
-        });
+        // });
       } else {
         // 1-2-2.クリック時の処理（※内部リンクがない場合はスクロールしない）
         if (exist_num > -1) {
