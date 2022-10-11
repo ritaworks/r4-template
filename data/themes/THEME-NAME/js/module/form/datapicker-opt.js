@@ -69,7 +69,7 @@
           {'day': 2,'class': 'day-tuesday'},
           {'day': 3,'class': 'day-wednesday'},
           {'day': 4,'class': 'day-thursday'},
-          {'day': 5,'class': 'day-saturday'},
+          {'day': 5,'class': 'day-friday'},
           {'day': 6,'class': 'day-saturday'},
           {'day': 'holiday','class': 'day-holiday'} //休み登録日
         ]
