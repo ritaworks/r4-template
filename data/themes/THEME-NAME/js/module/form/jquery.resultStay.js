@@ -1,13 +1,21 @@
-
+/*
+  UPDATE 2022.10.12
+  ver 1.1
+  2022.5.13 CREATED
+  2022.10.12 UPDATED checkboxParent追加
+*/
 (function ($) {
   $.fn.resultStay = function (params) {
     var defs = {
       type: ['radio', 'checkbox', 'text', 'select'], //ボタン(['radio','checkbox','text','selectbox'])
+      checkboxParent: [] //checkboxの親要素
     };
     // データ上書き
     var config = $.extend({}, defs, params);
     var form = this;
     var type_setting = config.type;
+    var checkbox_setting = config.checkboxParent;
+    var checkbox_value = [];
 
     //パラメータ取得
     let arg = new Object;
@@ -54,6 +62,46 @@
           }
         }
       });
+    }
+
+    if (type_setting.includes('checkbox')) {
+      function valueSetting(i) {
+        let num01 = 0;
+        $('input[name = "' + checkbox_setting[i].slice(1) + '"]').val('');
+        for (let num02 = 0; checkbox_value[checkbox_setting[i].slice(1)].length > num02; num02++) {
+          if (checkbox_value[checkbox_setting[i].slice(1)][num02]) {
+            if (num01 > 0) {
+              $('input[name = "' + checkbox_setting[i].slice(1) + '"]').val($('input[name = "' + checkbox_setting[i].slice(1) + '"]').val() + ',');
+            }
+            $('input[name = "' + checkbox_setting[i].slice(1) + '"]').val($('input[name = "' + checkbox_setting[i].slice(1) + '"]').val() + checkbox_value[checkbox_setting[i].slice(1)][num02]);
+            num01++;
+          }
+        }
+      }
+
+      for (let i = 0; checkbox_setting.length > i; i++) {
+        if ($(checkbox_setting[i]).length > 0) {
+          // 読み込み時
+          checkbox_value[checkbox_setting[i].slice(1)] = [];
+          $(checkbox_setting[i]).append('<input id="" name="' + checkbox_setting[i].slice(1) + '" type="radio" value="" hidden checked>')
+          $(checkbox_setting[i]).find('input[type="checkbox"]').each(function () {
+            if ($(this).prop('checked')) {
+              checkbox_value[checkbox_setting[i].slice(1)].push($(this).attr('name'));
+            }
+          })
+          valueSetting(i);
+
+          // チェックボックスクリック時
+          $(checkbox_setting[i]).find('input[type="checkbox"]').change(function (e) {
+            if (e.target.checked) {
+              checkbox_value[checkbox_setting[i].slice(1)].push($(e.target).attr('name'));
+            } else {
+              delete checkbox_value[checkbox_setting[i].slice(1)][$.inArray($(e.target).attr('name'), checkbox_value[checkbox_setting[i].slice(1)])];
+            }
+            valueSetting(i);
+          });
+        }
+      }
     }
 
   };
