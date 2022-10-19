@@ -1,8 +1,9 @@
 /*
   UPDATE 2022.10.12
-  ver 1.1
-  2022.5.13 CREATED
-  2022.10.12 UPDATED checkboxParent追加
+  ver 1.2
+  1.0 2022.5.13 CREATED
+  1.1 2022.10.12 UPDATED checkboxParent追加
+  1.2 2022.10.19 UPDATED モーダルへの対応: checkboxOutput追加, text追加
 */
 (function ($) {
   $.fn.resultStay = function (params) {
@@ -10,6 +11,7 @@
       type: ['radio', 'checkbox', 'text', 'select'], //ボタン(['radio','checkbox','text','selectbox'])
       checkboxValue: 'value', //value,name,id
       checkboxParent: [], //checkboxの親要素
+      checkboxOutput: [], //checkした項目を一括表示する欄※parentと並べること
     };
     // データ上書き
     var config = $.extend({}, defs, params);
@@ -18,6 +20,8 @@
     var checkbox_setting = {
       value: config.checkboxValue,
       parent: config.checkboxParent,
+      output: config.checkboxOutput,
+      text: [],
     };
 
     //パラメータ取得
@@ -104,6 +108,12 @@
                 }
               }
               $('input[name = "' + input_name + '"]').val(arg[input_name]);
+              if (checkbox_setting.output[i]) {
+                checkbox_setting.text[i] = $(checkbox_setting.output[i]).text();
+                $(checkbox_setting.output[i]).text(arg[input_name]);
+              } else {
+                checkbox_setting.text[i] = '';
+              }
             }
 
             // クリック時
@@ -119,14 +129,23 @@
                 delete checkbox_value[input_name][$.inArray($(e.target).attr(checkbox_setting.value), checkbox_value[input_name])];
               }
               let num01 = 0;
+              let newVal = '';
               $('input[name = "' + input_name + '"]').val('');
               for (let num02 = 0; checkbox_value[input_name].length > num02; num02++) {
-                if (checkbox_value[input_name][num02]) {
+                if (checkbox_value[input_name][num02]) { //emptyを除く
                   if (num01 > 0) {
-                    $('input[name = "' + input_name + '"]').val($('input[name = "' + input_name + '"]').val() + ',');
+                    newVal += ',';
                   }
-                  $('input[name = "' + input_name + '"]').val($('input[name = "' + input_name + '"]').val() + checkbox_value[input_name][num02]);
+                  newVal += checkbox_value[input_name][num02];
                   num01++;
+                }
+              }
+              $('input[name = "' + input_name + '"]').val(newVal);
+              if (checkbox_setting.output[i]) {
+                if (newVal) {
+                  $(checkbox_setting.output[i]).text(newVal);
+                } else {
+                  $(checkbox_setting.output[i]).text(checkbox_setting.text[i]);
                 }
               }
             });
