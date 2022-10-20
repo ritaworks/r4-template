@@ -1,9 +1,10 @@
 /*
-  UPDATE 2022.10.12
-  ver 1.2
+  UPDATE 2022.10.20
+  ver 1.3
   1.0 2022.5.13 CREATED
   1.1 2022.10.12 UPDATED checkboxParent追加
   1.2 2022.10.19 UPDATED モーダルへの対応: checkboxOutput追加, text追加
+  1.3 2022.10.20 UPDATED タグ複数軸へ対応
 */
 (function ($) {
   $.fn.resultStay = function (params) {
@@ -12,6 +13,7 @@
       checkboxValue: 'value', //value,name,id
       checkboxParent: [], //checkboxの親要素
       checkboxOutput: [], //checkした項目を一括表示する欄※parentと並べること
+      checkboxTag: [], //タグ使用時の複数軸対応 ※全てcheckboxであること
     };
     // データ上書き
     var config = $.extend({}, defs, params);
@@ -22,6 +24,7 @@
       parent: config.checkboxParent,
       output: config.checkboxOutput,
       text: [],
+      tag: config.checkboxTag,
     };
 
     //パラメータ取得
@@ -78,8 +81,48 @@
 
     // checkbox（ここから）
     if (type_setting.includes('checkbox')) {
-      var checkbox_value = [];
+      // checkbox用function
+      function checkStep(arg, input_name, loading, i, j) {
+        let textVal = '';
+        let double = false;
+        for (k = 0; arg.length > k; k++) {
+          if ($($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"][' + checkbox_setting.value + '="' + arg[k] + '"]').length > 0) {
+            if (loading) {
+              // checkbox_value,checked
+              $($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"][' + checkbox_setting.value + '="' + arg[k] + '"]').prop('checked', true);
+              checkbox_value[input_name].push(arg[k]);
+            }
+            if (double) {
+              textVal += ',';
+            } else {
+              double = true;
+            }
+            if (checkbox_setting.tag[i]) {
+              if ($($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"][' + checkbox_setting.value + '="' + arg[k] + '"]').attr('data-name')) {
+                textVal += $($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"][' + checkbox_setting.value + '="' + arg[k] + '"]').attr('data-name');
+              } else {
+                textVal += $($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"][' + checkbox_setting.value + '="' + arg[k] + '"]').val();
+              }
+            } else {
+              textVal += arg[k];
+            }
+          }
+        }
+        if (checkbox_setting.output[i]) {
+          if (loading) {
+            checkbox_setting.text[i] = $(checkbox_setting.output[i]).text();
+          }
+          if (textVal) {
+            $(checkbox_setting.output[i]).text(textVal);
+          } else {
+            $(checkbox_setting.output[i]).text(checkbox_setting.text[i]);
+          }
+        } else {
+          checkbox_setting.text[i] = '';
+        }
+      }
 
+      var checkbox_value = [];
       for (let i = 0; checkbox_setting.parent.length > i; i++) {
         let input_name = "";
         // parentごとのループ
@@ -88,7 +131,9 @@
           // 同じparentが複数存在する場合のループ
           for (let j = 0; $(checkbox_setting.parent[i]).length > j; j++) {
             // 読み込み時
-            if ($($(checkbox_setting.parent[i])[j]).attr('data-search')) {
+            if (checkbox_setting.tag[i]) {
+              input_name = 'tags';
+            } else if ($($(checkbox_setting.parent[i])[j]).attr('data-search')) {
               input_name = $($(checkbox_setting.parent[i])[j]).attr('data-search');
             } else {
               input_name = checkbox_setting.parent[i].slice(1);
@@ -100,25 +145,19 @@
               form.append('<input id="" name="' + input_name + '" type="hidden" value="" checked>')
             }
             if (arg[input_name]) {
-              let pair02 = arg[input_name].split(','); //パラメータをそれぞれ取得
-              for (k = 0; pair02.length > k; k++) {
-                if ($($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"][' + checkbox_setting.value + '="' + pair02[k] + '"]').length > 0) {
-                  $($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"][' + checkbox_setting.value + '="' + pair02[k] + '"]').prop('checked', true);
-                  checkbox_value[input_name].push(pair02[k]);
-                }
-              }
+              // val設置
               $('input[name = "' + input_name + '"]').val(arg[input_name]);
-              if (checkbox_setting.output[i]) {
-                checkbox_setting.text[i] = $(checkbox_setting.output[i]).text();
-                $(checkbox_setting.output[i]).text(arg[input_name]);
-              } else {
-                checkbox_setting.text[i] = '';
-              }
+
+              // checkbox_value,checked,text
+              checkStep(arg[input_name].split(','), input_name, true, i, j);
             }
 
             // クリック時
             $($(checkbox_setting.parent[i])[j]).find('input[type="checkbox"]').change(function (e) {
-              if ($($(checkbox_setting.parent[i])[j]).attr('data-search')) {
+              // checkbox_value,checked
+              if (checkbox_setting.tag[i]) {
+                input_name = 'tags';
+              } else if ($($(checkbox_setting.parent[i])[j]).attr('data-search')) {
                 input_name = $($(checkbox_setting.parent[i])[j]).attr('data-search');
               } else {
                 input_name = checkbox_setting.parent[i].slice(1);
@@ -128,26 +167,25 @@
               } else {
                 delete checkbox_value[input_name][$.inArray($(e.target).attr(checkbox_setting.value), checkbox_value[input_name])];
               }
-              let num01 = 0;
+
+              // val設置
+              let double = false;
               let newVal = '';
               $('input[name = "' + input_name + '"]').val('');
               for (let num02 = 0; checkbox_value[input_name].length > num02; num02++) {
                 if (checkbox_value[input_name][num02]) { //emptyを除く
-                  if (num01 > 0) {
+                  if (double) {
                     newVal += ',';
+                  } else {
+                    double = true;
                   }
                   newVal += checkbox_value[input_name][num02];
-                  num01++;
                 }
               }
               $('input[name = "' + input_name + '"]').val(newVal);
-              if (checkbox_setting.output[i]) {
-                if (newVal) {
-                  $(checkbox_setting.output[i]).text(newVal);
-                } else {
-                  $(checkbox_setting.output[i]).text(checkbox_setting.text[i]);
-                }
-              }
+
+              // text
+              checkStep(checkbox_value[input_name], input_name, false, i, j);
             });
           }
         }
