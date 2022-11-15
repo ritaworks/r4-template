@@ -27,6 +27,7 @@ body {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+  text-align: justify;
 }
 
 main,
@@ -245,7 +246,7 @@ td,
 th {
   text-align: left;
   vertical-align: top;
-  font-feature-settings:palt;
+  font-feature-settings: "palt";
 }
 
 ol {
@@ -302,8 +303,7 @@ li,
 form,
 p {
   text-align: inherit;
-  font-feature-settings:palt;
-  text-align:justyfy;
+  font-feature-settings: "palt";
 }
 h1,
 h2,
