@@ -8,6 +8,13 @@
     &.article-free p {
       margin-bottom: 20px;
     }
+    .slide-menu {
+      padding-top: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
   .error {
     color: $warn-color;
