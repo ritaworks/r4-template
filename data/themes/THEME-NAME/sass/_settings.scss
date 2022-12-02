@@ -10,6 +10,9 @@ $responsive: true;
 $header-fixed-pc: false;
 $header-fixed-sp: false;
 
+// コンテナ幅
+$container-width: 1000px;
+
 // pcのヘッダーの高さ(必須)
 $header-height-pc: 100px;
 
@@ -20,7 +23,7 @@ $header-height-sp: 60px;
 $light-cms: true;
 
 // CMS使用時に設定 - CMSエディタ内幅指定
-$light-cms-column-width: 690px;
+$light-cms-column-width: $container-width;
 
 // プレークポイント
 $screen-tb: 768px;
@@ -57,7 +60,7 @@ $grid-gutter-width-tb: 10px !default;
 $grid-gutter-width-sp: $grid-gutter-width-tb !default;
 
 // コンテナ(.container)サイズ
-$container-pc: (1000px + $grid-gutter-width-pc) !default;
+$container-pc: ($container-width + $grid-gutter-width-pc) !default;
 $container-tb: auto !default;
 $container-sp: auto !default;
 
