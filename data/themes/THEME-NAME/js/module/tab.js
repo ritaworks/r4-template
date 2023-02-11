@@ -6,17 +6,19 @@
   2.タブの中へのリンク
     #tab01_01, #tab01_02, #tab01_tab02_01
 */
+
+// 更新　全体的に a[data-href → [data-href
 (function ($) {
-  $.fn.tab = function(params) {
+  $.fn.tab = function (params) {
 
     // 0.セッティング
     var defs = {
-      position: 0,       // タブよりposition分上にスクロールする
+      position: 0, // タブよりposition分上にスクロールする
       scroll_target: '', // 読み込み時毎度特定の場所へスクロールする（※ページャーなど）
       reload_actie: [], // パラメータ付与でリロードを行う場合の親クラス
-      SP_WIDTH: 769,    // ブレイクポイント
-      PC_FIXED: false,  // PCのヘッダー固定
-      SP_FIXED: false,  // TB以下のヘッダー固定
+      SP_WIDTH: 769, // ブレイクポイント
+      PC_FIXED: false, // PCのヘッダー固定
+      SP_FIXED: false, // TB以下のヘッダー固定
       PC_FIXED_ELE: 'header', // PCのヘッダー高さ要素
       SP_FIXED_ELE: 'header' // TB以下のヘッダー高さ要素
     };
@@ -28,9 +30,9 @@
     var offset = 0;
     let tabdesu = false;
     let speed = 500;
-    if(window.matchMedia( "(min-width: " + config.SP_WIDTH + "px)" ).matches && config.PC_FIXED) {
+    if (window.matchMedia("(min-width: " + config.SP_WIDTH + "px)").matches && config.PC_FIXED) {
       headerFixed = $(config.PC_FIXED_ELE).innerHeight();
-    } else if(window.matchMedia( "(max-width: " + config.SP_WIDTH + "px)" ).matches && config.SP_FIXED) {
+    } else if (window.matchMedia("(max-width: " + config.SP_WIDTH + "px)").matches && config.SP_FIXED) {
       headerFixed = $(config.SP_FIXED_ELE).innerHeight();
     }
 
@@ -40,10 +42,10 @@
       let exist_num = -1;
       // 1-1.タブ切り替えを実行する
       for (var i = 0; tabHash.length > i; i++) {
-        if ($('a[data-href="#' + tabHash[i] + '"]').length > 0) {
+        if ($('[data-href="#' + tabHash[i] + '"]').length > 0) {
           // 1-1-1.タブ切り替え
-          tab_check($('a[data-href="#' + tabHash[i] + '"]'), tabHash, i);
-          if ($('a[data-href="#' + tabHash[i] + '"]').closest(tab_link).find($('a[data-href="#' + tabHash[i] + '"]')).length) {
+          tab_check($('[data-href="#' + tabHash[i] + '"]'), tabHash, i);
+          if ($('[data-href="#' + tabHash[i] + '"]').closest(tab_link).find($('[data-href="#' + tabHash[i] + '"]')).length) {
             tabdesu = true;
           } else {
             tabdesu = false;
@@ -59,69 +61,96 @@
       if (loading) {
         // 1-2-1.読み込み時の場合
         // $(window).on("load", function () { // Androidでの不具合のため
-          // 1-2-1-1.タブ切り替えできていない箇所の対応
-          tab_link.each(function () {
-            list_target = $(this);
-            list_target.find('a').css("cursor", "pointer");
-            if (list_target.find('a[data-href="#' + tabHash[0] + '"]').length < 1) {
-              if (list_target.find('.current').length < 1) {
-                list_target.find('a').each(function () {
-                  $($(this).attr('data-href')).css("display", "none");
-                });
-                tab_target = list_target.children().first().find('a');
-                tab_target.addClass('current');
-                $(tab_target.attr('data-href')).css('display', 'block');
+        // 1-2-1-1.タブ切り替えできていない箇所の対応
+        tab_link.each(function () {
+          list_target = $(this);
+          list_target.find('a').css("cursor", "pointer");
+          if (list_target.find('[data-href="#' + tabHash[0] + '"]').length < 1) {
+            if (list_target.find('.current').length < 1) {
+              list_target.find('a,option').each(function () {
+                // 追加（optionのvalue追加）
+                $(this).val($(this).attr('data-href'));
+                $($(this).attr('data-href')).css("display", "none");
+              });
+              tab_target = list_target.first().find('a,option');
+              $(tab_target[0]).addClass('current');
+              $(tab_target.attr('data-href')).css('display', 'block');
+              if (tab_target.attr('data-href') == '#all') {
+                tab_target.each(function () {
+                  $($(this).attr('data-href')).css('display', 'block');
+                })
               }
             }
-          });
-          // 1-2-1-2.読み込み完了後にスクロール
-          if ($(config.scroll_target).length < 1 && exist_num > -1) {
-            if (tabdesu) {
-              scroll_action('a[data-href="#' + tabHash[exist_num] + '"]', tabdesu, loading);
-            } else {
-              scroll_action('#' + tabHash[exist_num], tabdesu, loading);
-            }
-          } else if (config.scroll_target && $(config.scroll_target).length) {
-            if (tabHash) {
-              tabdesu = false;
-              scroll_action(config.scroll_target, tabdesu, loading);
-            }
-          } else {
-            // 無効なハッシュ || 有効なクラスが指定されていない場合
-            $('html, body').css('opacity', 1);
           }
+        });
+        // 1-2-1-2.読み込み完了後にスクロール
+        if ($(config.scroll_target).length < 1 && exist_num > -1) {
+          if (tabdesu) {
+            scroll_action('[data-href="#' + tabHash[exist_num] + '"]', tabdesu, loading);
+          } else {
+            scroll_action('#' + tabHash[exist_num], tabdesu, loading);
+          }
+        } else if (config.scroll_target && $(config.scroll_target).length) {
+          if (tabHash) {
+            tabdesu = false;
+            scroll_action(config.scroll_target, tabdesu, loading);
+          }
+        } else {
+          // 無効なハッシュ || 有効なクラスが指定されていない場合
+          $('html, body').css('opacity', 1);
+        }
         // });
       } else {
         // 1-2-2.クリック時の処理（※内部リンクがない場合はスクロールしない）
         if (exist_num > -1) {
           if (tabdesu) {
-            scroll_action('a[data-href="#' + tabHash[exist_num] + '"]', tabdesu, loading);
+            scroll_action('[data-href="#' + tabHash[exist_num] + '"]', tabdesu, loading);
           } else {
             scroll_action('#' + tabHash[exist_num], tabdesu, loading);
           }
         }
       }
     }
+
     function tab_check(target, tabHash, i) {
       // タブ切り替え
       if (target.closest(tab_link).find(target).length) {
-        target.closest(tab_link).find('a').each(function () {
-          $($(this).attr('data-href')).css("display", "none");
+        // 更新 a → [data-href]
+        target.closest(tab_link).find('[data-href]').each(function () {
+          // 追加
+          if ($(target).data().href == '#all') {
+            $(this).val($(this).attr('data-href'));
+            $($(this).attr('data-href')).css("display", "block");
+          } else {
+            $(this).val($(this).attr('data-href'));
+            $($(this).attr('data-href')).css("display", "none");
+          }
         });
         $('#' + tabHash[i]).css("display", "block");
-        target.closest(tab_link).find('a').removeClass('current');
+        target.closest(tab_link).find('[data-href]').removeClass('current');
         target.addClass('current');
+
+        // 追加select設定
+        target.closest(tab_link).val(target.val());
+
         tabdesu = true;
       }
     }
+
     function scroll_action(target, tabdesu, loading) {
-      // タブ内部へのリンク
-      if (tabdesu) {
-        // リンク先がタブ切り替えの場合
-        offset = $(target).closest(tab_link).offset().top;
+      // タブ内部へのリン
+      // 更新
+      if (target != '#all') {
+        if (tabdesu) {
+          // リンク先がタブ切り替えの場合
+          offset = $(target).closest(tab_link).offset().top;
+        } else {
+          // リンク先がタブ切り替え以外の場合
+          offset = $(target).offset().top;
+        }
       } else {
-        // リンク先がタブ切り替え以外の場合
-        offset = $(target).offset().top;
+        // 追加
+        offset = $($('[data-href="' + target + '"]').next().data().href).offset().top;
       }
       if (offset) {
         let scroll_position = offset - params_position - headerFixed;
@@ -152,7 +181,10 @@
     // 3.クリック時の処理
     // $('a[href*="#"], a[data-href *= "#"]').on("click", function (e) {
     // hrefを含むと、common.jsと競合してしまい、スクロール後に一時スクロールできなくなる。
-    $('a[data-href *= "#"]').on("click", function (e) {
+    //更新 slectのchangeを追加
+    $('a[data-href *= "#"],select').on("click change", function (e) {
+      // 追加（selectのclick時は動かないように）
+      if (e.currentTarget.tagName == 'SELECT' && e.type == 'click') return false;
       let result = "";
       let reload_num = 0;
       for (var i = 0; config.reload_actie.length > i; i++) {
@@ -172,6 +204,9 @@
           //// 本来の処理（タブ切り替え＋スクロール）（ここから） ////
           if ($(this).attr('data-href')) {
             tabHash = $(this).attr('data-href').split('#')[1].split('_');
+          } else if ($(this).val()) {
+            // selectの場合
+            tabHash = $(this).val().split('#')[1].split('_');
           } else {
             tabHash = $(this).attr('href').split('#')[1].split('_');
           }
