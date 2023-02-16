@@ -204,10 +204,12 @@
           //// 本来の処理（タブ切り替え＋スクロール）（ここから） ////
           if ($(this).attr('data-href')) {
             tabHash = $(this).attr('data-href').split('#')[1].split('_');
-          } else if ($(this).val()) {
+          } else if ($(this).val().includes('#')) {
             // selectの場合
             tabHash = $(this).val().split('#')[1].split('_');
           } else {
+            // 普通のselectが動かないようにする
+            if ($(this).prop("tagName") == 'SELECT') return false;
             tabHash = $(this).attr('href').split('#')[1].split('_');
           }
           if ($(this).closest(tab_link).find(this).length) {
