@@ -1,5 +1,9 @@
 /*
-  UPDATE 2022.07.05
+  UPDATE 2023.02.15
+  1.sectionタグにも動くようにしました。
+    selectタグに#allすることで全てのタブが表示するようになりました。
+
+  UPDATE 2022.02.05
   想定している内容
   1.タブ
     #tab01, #tab02, #tab03
@@ -152,6 +156,7 @@
         // 追加
         offset = $($('[data-href="' + target + '"]').next().data().href).offset().top;
       }
+
       if (offset) {
         let scroll_position = offset - params_position - headerFixed;
         if (loading) {
@@ -165,6 +170,8 @@
             scrollTop: scroll_position
           }, speed);
         }
+      } else {
+        $('html, body').css('opacity', 1);
       }
     }
 
