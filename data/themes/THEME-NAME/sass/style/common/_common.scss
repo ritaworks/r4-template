@@ -111,23 +111,18 @@ h5 {
     width: 100%;
     object-fit: cover;
     object-position: center;
-    font-family: "object-fit: cover; object-position: center;";
   }
   &.-top > img {
     object-position: top;
-    font-family: "object-fit: cover; object-position: top;";
   }
   &.-bottom > img {
     object-position: bottom;
-    font-family: "object-fit: cover; object-position: bottom;";
   }
   &.-left > img {
     object-position: left;
-    font-family: "object-fit: cover; object-position: left;";
   }
   &.-right > img {
     object-position: right;
-    font-family: "object-fit: cover; object-position: right;";
   }
   // [1]縦横の比率を変えたくない場合に使用する。
   // [2]padding-top: 100%;（親要素に対する縦の比率）を指定する。
