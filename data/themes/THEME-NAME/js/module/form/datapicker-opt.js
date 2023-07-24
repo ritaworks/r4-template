@@ -33,16 +33,16 @@
       settings = $.extend(true, {}, {
         disableHoliday: {
           // 毎年決まった休み（祝日：振替あり[substitute]）
-          '01': [{'day': '01','name': '元日', 'substitute': 'false'}, {'day': '02','name': '三が日', 'substitute': 'flase'}, {'day': '03','name': '三が日', 'substitute': 'flase'}, {'day': '2/1','name': '成人の日'}],
-          '02': [{'day': '11','name': '建国記念日'}, {'day': '23','name': '天皇誕生日'}],
-          '03': [{'day': 'spring equinox','name': '春分の日'}],
-          '04': [{'day': '29','name': '昭和の日'}],
-          '05': [{'day': '03','name': '憲法記念日'}, {'day': '04','name': 'みどりの日'}, {'day': '05','name': 'こどもの日'}],
-          '07': [{'day': '3/1','name': '海の日','not': '2020'}],
-          '08': [{'day': '11','name': '山の日'}],
-          '09': [{'day': '3/1','name': '敬老の日'}, {'day': 'autumnal equinox','name': '秋分の日'}],
-          '10': [{'day': '2/1', 'name': 'スポーツの日'}],
-          '11': [{'day': '03', 'name': '文化の日' }, {'day': '23', 'name': '勤労感謝の日'}],
+          '01': [{ 'day': '01', 'name': '元日', 'substitute': 'false' }, { 'day': '02', 'name': '三が日', 'substitute': 'flase' }, { 'day': '03', 'name': '三が日', 'substitute': 'flase' }, { 'day': '2/1', 'name': '成人の日' }],
+          '02': [{ 'day': '11', 'name': '建国記念日' }, { 'day': '23', 'name': '天皇誕生日' }],
+          '03': [{ 'day': 'spring equinox', 'name': '春分の日' }],
+          '04': [{ 'day': '29', 'name': '昭和の日' }],
+          '05': [{ 'day': '03', 'name': '憲法記念日' }, { 'day': '04', 'name': 'みどりの日' }, { 'day': '05', 'name': 'こどもの日' }],
+          '07': [{ 'day': '3/1', 'name': '海の日', 'not': '2020' }],
+          '08': [{ 'day': '11', 'name': '山の日' }],
+          '09': [{ 'day': '3/1', 'name': '敬老の日' }, { 'day': 'autumnal equinox', 'name': '秋分の日' }],
+          '10': [{ 'day': '2/1', 'name': 'スポーツの日' }],
+          '11': [{ 'day': '03', 'name': '文化の日' }, { 'day': '23', 'name': '勤労感謝の日' }],
           '12': []
         },
         disableWeek: [
@@ -57,21 +57,21 @@
         ],
         disableDates: {
           // 年によって変わるもの（振替なし）
-          '201509': [{'day': '22','name': '国民の休日'}],
-          '202609': [{'day': '10','name': '国民の休日'}],
-          '203209': [{'day': '21','name': '国民の休日'}],
-          '203709': [{'day': '22','name': '国民の休日'}]
+          '201509': [{ 'day': '22', 'name': '国民の休日' }],
+          '202609': [{ 'day': '10', 'name': '国民の休日' }],
+          '203209': [{ 'day': '21', 'name': '国民の休日' }],
+          '203709': [{ 'day': '22', 'name': '国民の休日' }]
         },
         //曜日、祝祭日のCSSスタイルクラス（曜日や日付で色をつけたい場合）
         'css': [
-          {'day': 0,'class': 'day-sunday'},
-          {'day': 1,'class': 'day-monday'},
-          {'day': 2,'class': 'day-tuesday'},
-          {'day': 3,'class': 'day-wednesday'},
-          {'day': 4,'class': 'day-thursday'},
-          {'day': 5,'class': 'day-friday'},
-          {'day': 6,'class': 'day-saturday'},
-          {'day': 'holiday','class': 'day-holiday'} //休み登録日
+          { 'day': 0, 'class': 'day-sunday' },
+          { 'day': 1, 'class': 'day-monday' },
+          { 'day': 2, 'class': 'day-tuesday' },
+          { 'day': 3, 'class': 'day-wednesday' },
+          { 'day': 4, 'class': 'day-thursday' },
+          { 'day': 5, 'class': 'day-friday' },
+          { 'day': 6, 'class': 'day-saturday' },
+          { 'day': 'holiday', 'class': 'day-holiday' } //休み登録日
         ]
       }, options);
 
@@ -259,38 +259,23 @@
   var holidaysList = function (Y, M, d, val, substitutes) {
     d = null;
     // not最優先
-    if (!val['not'] && parseInt(val['not']) !== Y) {
-      //祝祭日の日にち
-      if (isFinite(val['day'])) {
-        //日付固定
-        d = val['day'];
-      } else if (val['day'] == "spring equinox") {
-        //春分の日
-        d = parseInt(20.69115 + (Y - 2000) * 0.2421904 - parseInt((Y - 2000) / 4));
-      } else if (val['day'] == "autumnal equinox") {
-        //秋分の日
-        d = parseInt(23.09 + (Y - 2000) * 0.2421904 - parseInt((Y - 2000) / 4));
-      } else if (val['day'].match(/\//) && (val.day.match(/\>/) || val.day.match(/\</))) {
-        if (val.day.match(/\>/)) {
-          //特定年以降
-          dayyear = val['day'].split('>');
-          if (Y >= dayyear[1]) {
-            d = padzero(dayyear[0]);
-          }
-        } else if (val.day.match(/\</)) {
-          //特定年以前
-          dayyear = val['day'].split('<');
-          if (Y <= dayyear[1]) {
-            d = padzero(dayyear[0]);
-          }
-        }
-        if (d) {
-          d = padzero(nthday(Y, M, dayyear[0]));
-        }
-      } else if (val['day'].match(/\//)) {
-        //ハッピーマンデー
-        d = padzero(nthday(Y, M, val['day']));
-      } else if (val.day.match(/\>/)) {
+    if (val['not']) {
+      if (parseInt(val['not']) == Y) {
+        return false;
+      }
+    }
+    //祝祭日の日にち
+    if (isFinite(val['day'])) {
+      //日付固定
+      d = val['day'];
+    } else if (val['day'] == "spring equinox") {
+      //春分の日
+      d = parseInt(20.69115 + (Y - 2000) * 0.2421904 - parseInt((Y - 2000) / 4));
+    } else if (val['day'] == "autumnal equinox") {
+      //秋分の日
+      d = parseInt(23.09 + (Y - 2000) * 0.2421904 - parseInt((Y - 2000) / 4));
+    } else if (val['day'].match(/\//) && (val.day.match(/\>/) || val.day.match(/\</))) {
+      if (val.day.match(/\>/)) {
         //特定年以降
         dayyear = val['day'].split('>');
         if (Y >= dayyear[1]) {
@@ -302,6 +287,24 @@
         if (Y <= dayyear[1]) {
           d = padzero(dayyear[0]);
         }
+      }
+      if (d) {
+        d = padzero(nthday(Y, M, dayyear[0]));
+      }
+    } else if (val['day'].match(/\//)) {
+      //ハッピーマンデー
+      d = padzero(nthday(Y, M, val['day']));
+    } else if (val.day.match(/\>/)) {
+      //特定年以降
+      dayyear = val['day'].split('>');
+      if (Y >= dayyear[1]) {
+        d = padzero(dayyear[0]);
+      }
+    } else if (val.day.match(/\</)) {
+      //特定年以前
+      dayyear = val['day'].split('<');
+      if (Y <= dayyear[1]) {
+        d = padzero(dayyear[0]);
       }
     }
 
