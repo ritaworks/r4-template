@@ -122,7 +122,6 @@
         } else {
           checkbox_setting.text[i] = '';
         }
-        console.log(checkbox_setting.submit);
         if (checkbox_setting.submit) {
           $(form).submit();
         }
