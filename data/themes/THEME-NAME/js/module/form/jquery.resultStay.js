@@ -14,6 +14,7 @@
       checkboxParent: [], //checkboxの親要素
       checkboxOutput: [], //checkした項目を一括表示する欄※parentと並べること
       checkboxTag: [], //タグ使用時の複数軸対応 ※全てcheckboxであること
+      autoSubmit: false
     };
     // データ上書き
     var config = $.extend({}, defs, params);
@@ -25,6 +26,7 @@
       output: config.checkboxOutput,
       text: [],
       tag: config.checkboxTag,
+      submit: config.autoSubmit,
     };
 
     //パラメータ取得
@@ -119,6 +121,9 @@
           }
         } else {
           checkbox_setting.text[i] = '';
+        }
+        if (checkbox_setting.submit) {
+          $(form).submit();
         }
       }
 
