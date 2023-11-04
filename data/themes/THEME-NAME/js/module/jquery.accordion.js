@@ -207,5 +207,6 @@
     }
 
     pcHideEvent($(this));
+    // resize中止
   }
 })(jQuery);
