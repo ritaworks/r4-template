@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import 'mixins/grid-system';
+@use "../global" as g;
 
 //
 // グリッドシステム
@@ -12,15 +12,15 @@
 // 設定された幅のコンテナを生成
 
 .container {
-  @include container-fixed;
-  width: $container-pc;
+  @include g.container-fixed;
+  width: g.$container-pc;
 
-  @if $responsive {
-    @media only screen and (max-width: $screen-tb) {
-      width: $container-tb;
+  @if g.$responsive {
+    @media only screen and (max-width: g.$screen-tb) {
+      width: g.$container-tb;
     }
-    @media only screen and (max-width: $screen-sp) {
-      width: $container-sp;
+    @media only screen and (max-width: g.$screen-sp) {
+      width: g.$container-sp;
     }
   }
 }
@@ -31,7 +31,7 @@
 // 横幅100%のコンテナを生成
 
 .container-fluid {
-  @include container-fixed;
+  @include g.container-fixed;
 }
 
 
@@ -40,26 +40,26 @@
 // グリッドカラム用のラッパークラスを生成
 
 .row {
-  @include make-row;
+  @include g.make-row;
 }
 
 
 // カラム
 //
 // カラムクラス生成
-@include make-grid-columns;
-@include make-grid(null);
+@include g.make-grid-columns;
+@include g.make-grid(null);
 
-@if $responsive {
-  @include make-responsive-grid-columns;
+@if g.$responsive {
+  @include g.make-responsive-grid-columns;
 
   // タブレット用グリッド
-  @media only screen and (max-width: $screen-tb) {
-    @include make-grid(-tb);
+  @media only screen and (max-width: g.$screen-tb) {
+    @include g.make-grid(-tb);
   }
 
   // スマホ用グリッド
-  @media only screen and (max-width: $screen-sp) {
-    @include make-grid(-sp);
+  @media only screen and (max-width: g.$screen-sp) {
+    @include g.make-grid(-sp);
   }
 }

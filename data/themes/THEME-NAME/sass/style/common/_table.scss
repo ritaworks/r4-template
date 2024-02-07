@@ -1,8 +1,11 @@
 @charset "UTF-8";
 // CMS内エディタ用クラス
 
+@use "../../global" as g;
+
 .table01 {
   width: 100%;
+  color: #fff;
 }
 
 .table02 {
@@ -24,13 +27,13 @@
   tr {
     th,
     td {
-      @media only screen and (max-width: $screen-tb) {
+      @media only screen and (max-width: g.$screen-tb) {
         display: table-cell;
         width: auto !important;
       }
     }
     th {
-      @media only screen and (max-width: $screen-tb) {
+      @media only screen and (max-width: g.$screen-tb) {
         white-space: nowrap;
       }
     }

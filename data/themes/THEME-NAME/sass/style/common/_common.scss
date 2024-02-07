@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@use "../../global" as g;
+
 // --------------------------------------------------
 // 追加分ここから
 // --------------------------------------------------
@@ -50,7 +52,7 @@ h5 {
   &:not(.top) {
     // サブページ用
     font-weight: bold;
-    color: $primary;
+    color: g.$primary;
     margin-bottom: 10px;
   }
 }
@@ -68,9 +70,9 @@ h5 {
   color: #fff;
   line-height: 1.5;
   padding: 0 5px;
-  background: $primary;
+  background: g.$primary;
   &.-info {
-    background: $secondary;
+    background: g.$secondary;
   }
 }
 
@@ -218,11 +220,11 @@ h5 {
       size: 20px;
       weight: bold;
     }
-    color: $primary;
+    color: g.$primary;
     line-height: 48px;
     text-align: center;
     text-decoration: none;
-    border: 1px solid $primary;
+    border: 1px solid g.$primary;
     background: #fff;
     margin: 0 5px 10px;
     transition: all 0.3s;
@@ -240,7 +242,6 @@ h5 {
   a:hover,
   .active {
     color: #fff;
-    background: $primary;
+    background: g.$primary;
   }
 }
-

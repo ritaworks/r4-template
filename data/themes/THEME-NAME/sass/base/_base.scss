@@ -1,10 +1,12 @@
 @charset 'UTF-8';
 
+@use "../global" as g;
+
 body {
-  color: $base-font-color;
-  font-size: $base-font-size;
-  font-family: $base-font;
-  font-weight: $base-font-weight;
+  color: g.$base-font-color;
+  font-size: g.$base-font-size;
+  font-family: g.$base-font;
+  font-weight: g.$base-font-weight;
 }
 
 p,
@@ -13,30 +15,30 @@ dd,
 li,
 th,
 td {
-  line-height: $base-line-height;
+  line-height: g.$base-line-height;
 }
 
 a {
-  @include link;
+  @include g.link;
 
-  color: $base-link-color;
+  color: g.$base-link-color;
   &:hover {
-    color: $base-link-color;
+    color: g.$base-link-color;
   }
   //電話番号
   &[href^="tel:"] {
-    color: $base-font-color;
+    color: g.$base-font-color;
     text-decoration: none;
-    @media only screen and (min-width: $screen-pc-min) {
+    @media only screen and (min-width: g.$screen-pc-min) {
       pointer-events: none;
     }
   }
 }
 
-@if $responsive {
-  @media only screen and (max-width: $screen-tb) {
+@if g.$responsive {
+  @media only screen and (max-width: g.$screen-tb) {
     body {
-      font-size: $base-font-size-tb;
+      font-size: g.$base-font-size-tb;
     }
   }
 }

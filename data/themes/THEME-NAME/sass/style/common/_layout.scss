@@ -1,12 +1,15 @@
 @charset "UTF-8";
 
+@use "../../global" as g;
+//@use "common" as *;
+
 // --------------------------------------------------
 // Container
 // --------------------------------------------------
 .l-container {
   overflow: hidden; //stickyを使う場合は要注意
-  @media only screen and (min-width: $screen-pc-min) {
-    min-width: $container-pc;
+  @media only screen and (min-width: g.$screen-pc-min) {
+    min-width: g.$container-pc;
   }
 }
 
@@ -16,8 +19,8 @@
 // 2.「.container.-w800」などサブクラス使用
 // .container {
 //   &.-w800 {
-//     width: calc(800px + #{$gutter-pc});
-//     @media only screen and (max-width: $screen-tb) {
+//     width: calc(800px + #{g.$gutter-pc});
+//     @media only screen and (max-width: g.$screen-tb) {
 //       width: auto;
 //     }
 //   }
@@ -35,14 +38,14 @@ body {
     position: fixed;
   }
 
-  @if $header-fixed-pc {
-    padding-top: $header-height-pc;
+  @if g.$header-fixed-pc {
+    padding-top: g.$header-height-pc;
   }
 
-  @media only screen and (max-width: $screen-tb) {
-    @if $header-fixed-sp {
+  @media only screen and (max-width: g.$screen-tb) {
+    @if g.$header-fixed-sp {
       position: relative;
-      padding-top: $header-height-sp;
+      padding-top: g.$header-height-sp;
     } @else {
       padding-top: 0;
     }
@@ -57,17 +60,17 @@ header {
   z-index: 9999;
   top: 0;
   left: 0;
-  @if $header-fixed-pc {
+  @if g.$header-fixed-pc {
     position: fixed;
   } @else {
     position: relative;
   }
-  @media only screen and (max-width: $screen-tb) {
+  @media only screen and (max-width: g.$screen-tb) {
     width: 100%;
     z-index: 9999;
     top: 0;
     left: 0;
-    @if $header-fixed-sp {
+    @if g.$header-fixed-sp {
       position: fixed;
     } @else {
       position: relative;
@@ -94,10 +97,10 @@ header {
   z-index: 9998;
   top: 0;
   left: 100%;
-  padding-top: $header-height-sp;
+  padding-top: g.$header-height-sp;
   transition: left 0.3s;
 
-  @media only screen and (min-width: $screen-pc-min) {
+  @media only screen and (min-width: g.$screen-pc-min) {
     display: none;
     // PCで全画面表示する場合
     // left: 0;
@@ -143,7 +146,7 @@ header {
 // Main
 // --------------------------------------------------
 .l-main {
-  @include clearfix;
+  @include g.clearfix;
 }
 
 // --------------------------------------------------
@@ -152,7 +155,7 @@ header {
 .l-page {
   float: left;
   width: 700px;
-  @media only screen and (max-width: $screen-tb) {
+  @media only screen and (max-width: g.$screen-tb) {
     float: none;
     width: 100%;
   }
@@ -164,7 +167,7 @@ header {
 .l-side {
   float: right;
   width: 260px;
-  @media only screen and (max-width: $screen-tb) {
+  @media only screen and (max-width: g.$screen-tb) {
     display: none;
   }
 }

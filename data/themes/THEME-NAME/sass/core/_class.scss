@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@use "../global" as g;
+
 $flex-direction: (
   fd--row: row,
   fd--column: column
@@ -23,26 +25,26 @@ $align-items: (
 );
 
 // 余白クラスの生成
-@include spaceloop();
+@include g.spaceloop();
 
 // 行揃え指定クラス
-@include textalign();
+@include g.textalign();
 
 // フォントサイズクラス作成
-@include fontsize();
+@include g.fontsize();
 
 // lineheightのクラス
-@include lineheight();
+@include g.lineheight();
 
 // letterspacingのクラス
-@include letterspacing();
+@include g.letterspacing();
 
 // font-weightのクラス
-@include fontweight();
+@include g.fontweight();
 
 // クリアフィックス
 .clearfix {
-  @include clearfix;
+  @include g.clearfix;
 }
 
 // ポジションクラス
@@ -113,59 +115,59 @@ $align-items: (
   font-weight: bold;
 }
 
-@if $responsive {
-  @media only screen and (max-width: $screen-tb) {
+@if g.$responsive {
+  @media only screen and (max-width: g.$screen-tb) {
     // 行揃え指定クラス
-    @include textalign(-tb);
+    @include g.textalign(-tb);
 
     // タブレット用余白クラスの生成
-    @include spaceloop(-tb);
+    @include g.spaceloop(-tb);
 
     // タブレット用フォントサイズクラスの生成
-    @include fontsize(-tb);
+    @include g.fontsize(-tb);
 
     // タブレット用lineheightのクラス
-    @include lineheight(-tb);
+    @include g.lineheight(-tb);
 
     // タブレット用letterspacingのクラス
-    @include letterspacing(-tb);
+    @include g.letterspacing(-tb);
   }
 
-  @media only screen and (max-width: $screen-sp) {
+  @media only screen and (max-width: g.$screen-sp) {
     // 行揃え指定クラス
-    @include textalign(-sp);
+    @include g.textalign(-sp);
 
     // スマホ用余白クラスの生成
-    @include spaceloop(-sp);
+    @include g.spaceloop(-sp);
 
     // スマホ用フォントサイズクラスの生成
-    @include fontsize(-sp);
+    @include g.fontsize(-sp);
 
     // スマホ用lineheightのクラス
-    @include lineheight(-sp);
+    @include g.lineheight(-sp);
 
     // スマホ用letterspacingのクラス
-    @include letterspacing(-sp);
+    @include g.letterspacing(-sp);
   }
 
   // デバイスごとのディスプレイ指定クラス
   .pc {
-    @media only screen and (max-width: $screen-tb) {
+    @media only screen and (max-width: g.$screen-tb) {
         display: none !important;
     }
   }
   .pctb {
-    @media only screen and (max-width: $screen-sp) {
+    @media only screen and (max-width: g.$screen-sp) {
         display: none !important;
     }
   }
   .tb {
-    @media only screen and (min-width: $screen-pc-min) {
+    @media only screen and (min-width: g.$screen-pc-min) {
       display: none !important;
     }
   }
   .sp {
-    @media only screen and (min-width: $screen-tb-min) {
+    @media only screen and (min-width: g.$screen-tb-min) {
       display: none !important;
     }
   }
@@ -173,70 +175,70 @@ $align-items: (
 
 //フレックス
 .flex {
-  @include flex;
+  @include g.flex;
 }
 @each $class, $value in $flex-direction {
   .#{$class} {
-    @include f-direction($value);
+    @include g.f-direction($value);
   }
 }
 @each $class, $value in $flex-wrap {
   .#{$class} {
-    @include f-wrap($value);
+    @include g.f-wrap($value);
   }
 }
 @each $class, $value in $justify-content {
   .#{$class} {
-    @include j-content($value);
+    @include g.j-content($value);
   }
 }
 @each $class, $value in $align-items {
   .#{$class} {
-    @include a-items($value);
+    @include g.a-items($value);
   }
 }
-@if $responsive {
-  @media only screen and (max-width: $screen-tb) {
+@if g.$responsive {
+  @media only screen and (max-width: g.$screen-tb) {
     @each $class, $value in $flex-direction {
       .#{$class}-tb {
-        @include f-direction($value);
+        @include g.f-direction($value);
       }
     }
     @each $class, $value in $flex-wrap {
       .#{$class}-tb {
-        @include f-wrap($value);
+        @include g.f-wrap($value);
       }
     }
     @each $class, $value in $justify-content {
       .#{$class}-tb {
-        @include j-content($value);
+        @include g.j-content($value);
       }
     }
     @each $class, $value in $align-items {
       .#{$class}-tb {
-        @include a-items($value);
+        @include g.a-items($value);
       }
     }
   }
-  @media only screen and (max-width: $screen-sp) {
+  @media only screen and (max-width: g.$screen-sp) {
     @each $class, $value in $flex-direction {
       .#{$class}-sp {
-        @include f-direction($value);
+        @include g.f-direction($value);
       }
     }
     @each $class, $value in $flex-wrap {
       .#{$class}-sp {
-        @include f-wrap($value);
+        @include g.f-wrap($value);
       }
     }
     @each $class, $value in $justify-content {
       .#{$class}-sp {
-        @include j-content($value);
+        @include g.j-content($value);
       }
     }
     @each $class, $value in $align-items {
       .#{$class}-sp {
-        @include a-items($value);
+        @include g.a-items($value);
       }
     }
   }
