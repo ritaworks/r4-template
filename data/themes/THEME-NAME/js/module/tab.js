@@ -1,4 +1,7 @@
 /*
+  UPDATE 2024.02.07
+  1.タブのdata-hrefの内容が同じタブにcurrentがつくように調整しました。
+
   UPDATE 2023.02.15
   1.sectionタグにも動くようにしました。
     selectタグに#allすることで全てのタブが表示するようになりました。
@@ -131,8 +134,13 @@
           }
         });
         $('#' + tabHash[i]).css("display", "block");
-        target.closest(tab_link).find('[data-href]').removeClass('current');
-        target.addClass('current');
+
+        tab_link.find('a').each(function () {
+          $(this).removeClass('current');
+          if ($(this).attr('data-href') == target.attr('data-href')) {
+            $(this).addClass('current');
+          }
+        });
 
         // 追加select設定
         target.closest(tab_link).val(target.val());
