@@ -1,4 +1,4 @@
-# r2-template
+# r4-template
 
 ## 設計思想
 メンテナンス性を高める
