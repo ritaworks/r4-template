@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@use "../setting" as s;
+
 $spacer:(
   mt:margin-top,
   mr:margin-right,
@@ -110,7 +112,7 @@ $align: left, right, center;
 
 // リンクテキストの下線切り替え
 @mixin link() {
-  @if $link-underline {
+  @if s.$link-underline {
     text-decoration: underline;
     &:hover {
       text-decoration: none;

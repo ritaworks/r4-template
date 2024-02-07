@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+@use "../../global" as g;
+@use "common";
+@use "list";
+@use "button";
+@use "table";
+
 // --------------------------------------------------
 // 病院指標のスタイル
 // --------------------------------------------------
@@ -23,13 +29,13 @@
 
   .div-title {
     @extend h4;
-    @include flex(row, nowrap, space-between, center);
+    @include g.flex(row, nowrap, space-between, center);
     column-gap: 10px;
     row-gap: 20px;
 
-    @media only screen and (max-width: $screen-tb) {
-      @include f-direction(column);
-      @include f-wrap(wrap);
+    @media only screen and (max-width: g.$screen-tb) {
+      @include g.f-direction(column);
+      @include g.f-wrap(wrap);
       row-gap: 10px;
     }
   }

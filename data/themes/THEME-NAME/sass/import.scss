@@ -1,28 +1,5 @@
 @charset "UTF-8";
 
-@import 'settings';
-@import 'core/core';
-@import 'core/mixins/utility';
-@import 'style/variable';
-@import 'core/class';
-
-@import 'core/grid';
-@import 'core/float';
-@import 'core/print';
-
-@import 'base/base';
-@import 'base/cms';
-
-// @import 'style/plugin/calendar';
-
-// @import 'style/common/animation';
-// @import 'style/common/dpc';
-@import 'style/common/button';
-@import 'style/common/table';
-@import 'style/common/color';
-@import 'style/common/list';
-@import 'style/common/layout';
-@import 'style/common/common';
-@import 'style/common/form';
-
-@import 'style/style';
+@use 'base';
+@use 'core';
+@use 'style';
