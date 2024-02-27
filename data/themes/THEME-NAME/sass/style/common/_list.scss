@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@use "../../global" as g;
+@use "../../global" as *;
 
 // --------------------------------------------------
 // お知らせ
@@ -10,6 +10,7 @@
 // お知らせ一覧にPDFアイコンを表示する
 // @extend で対応してください。
 .news-link-event01 {
+
   // aタグがテキストの場合
   a {
     &[href$=".pdf"] {
@@ -21,22 +22,27 @@
         margin-left: 5px;
       }
     }
+
     &[href="#"] {
-      color:g.$base-font-color;
+      color: $base-font-color;
       text-decoration: none;
       pointer-events: none;
     }
   }
 }
+
 .news-link-event02 {
   // カードタイプ（.hover-all）の場合
   // デザインによって.txt-wrap/.ttlのクラス名変更必要
   pointer-events: none;
+
   a {
     pointer-events: all;
+
     &[href="#"] {
       pointer-events: none;
     }
+
     &[href$=".pdf"] {
       +.txt-wrap {
         .ttl {
@@ -77,7 +83,7 @@
 
     &:before {
       content: "●";
-      color: g.$primary;
+      color: $primary;
       position: absolute;
       left: 0;
       top: 0;
@@ -112,7 +118,7 @@
 
     &:before {
       content: counter(section) ".";
-      color: g.$primary;
+      color: $primary;
       position: absolute;
       left: 0;
       top: 0;

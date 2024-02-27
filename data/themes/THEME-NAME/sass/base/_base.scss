@@ -1,12 +1,12 @@
 @charset 'UTF-8';
 
-@use "../global" as g;
+@use "../global" as *;
 
 body {
-  color: g.$base-font-color;
-  font-size: g.$base-font-size;
-  font-family: g.$base-font;
-  font-weight: g.$base-font-weight;
+  color: $base-font-color;
+  font-size: $base-font-size;
+  font-family: $base-font;
+  font-weight: $base-font-weight;
 }
 
 p,
@@ -15,30 +15,33 @@ dd,
 li,
 th,
 td {
-  line-height: g.$base-line-height;
+  line-height: $base-line-height;
 }
 
 a {
-  @include g.link;
+  @include link;
 
-  color: g.$base-link-color;
+  color: $base-link-color;
+
   &:hover {
-    color: g.$base-link-color;
+    color: $base-link-color;
   }
+
   //電話番号
   &[href^="tel:"] {
-    color: g.$base-font-color;
+    color: $base-font-color;
     text-decoration: none;
-    @media only screen and (min-width: g.$screen-pc-min) {
+
+    @media only screen and (min-width: $screen-pc-min) {
       pointer-events: none;
     }
   }
 }
 
-@if g.$responsive {
-  @media only screen and (max-width: g.$screen-tb) {
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
     body {
-      font-size: g.$base-font-size-tb;
+      font-size: $base-font-size-tb;
     }
   }
 }

@@ -1,15 +1,18 @@
 @charset "UTF-8";
 
-//@use "../global" as g;
+//@use "../global" as *;
 
 @media print {
+
   .tb,
   .sp {
     display: none !important;
   }
+
   .l-container {
     overflow: visible !important;
   }
+
   header {
     position: inherit !important;
   }

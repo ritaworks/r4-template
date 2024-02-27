@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@use "../../global" as g;
+@use "../../global" as *;
 //@use "common" as *;
 
 // --------------------------------------------------
@@ -8,8 +8,9 @@
 // --------------------------------------------------
 .l-container {
   overflow: hidden; //stickyを使う場合は要注意
-  @media only screen and (min-width: g.$screen-pc-min) {
-    min-width: g.$container-pc;
+
+  @media only screen and (min-width: $screen-pc-min) {
+    min-width: $container-pc;
   }
 }
 
@@ -19,8 +20,8 @@
 // 2.「.container.-w800」などサブクラス使用
 // .container {
 //   &.-w800 {
-//     width: calc(800px + #{g.$gutter-pc});
-//     @media only screen and (max-width: g.$screen-tb) {
+//     width: calc(800px + #{$gutter-pc});
+//     @media only screen and (max-width: $screen-tb) {
 //       width: auto;
 //     }
 //   }
@@ -38,15 +39,17 @@ body {
     position: fixed;
   }
 
-  @if g.$header-fixed-pc {
-    padding-top: g.$header-height-pc;
+  @if $header-fixed-pc {
+    padding-top: $header-height-pc;
   }
 
-  @media only screen and (max-width: g.$screen-tb) {
-    @if g.$header-fixed-sp {
+  @media only screen and (max-width: $screen-tb) {
+    @if $header-fixed-sp {
       position: relative;
-      padding-top: g.$header-height-sp;
-    } @else {
+      padding-top: $header-height-sp;
+    }
+
+    @else {
       padding-top: 0;
     }
   }
@@ -60,19 +63,26 @@ header {
   z-index: 9999;
   top: 0;
   left: 0;
-  @if g.$header-fixed-pc {
+
+  @if $header-fixed-pc {
     position: fixed;
-  } @else {
+  }
+
+  @else {
     position: relative;
   }
-  @media only screen and (max-width: g.$screen-tb) {
+
+  @media only screen and (max-width: $screen-tb) {
     width: 100%;
     z-index: 9999;
     top: 0;
     left: 0;
-    @if g.$header-fixed-sp {
+
+    @if $header-fixed-sp {
       position: fixed;
-    } @else {
+    }
+
+    @else {
       position: relative;
     }
   }
@@ -82,8 +92,7 @@ header {
 // Grobal-navigation
 // http://parts-template2.light-cms.com/navigation/index.html
 // --------------------------------------------------
-.g-nav {
-}
+.g-nav {}
 
 // --------------------------------------------------
 // Slide-menu
@@ -97,10 +106,10 @@ header {
   z-index: 9998;
   top: 0;
   left: 100%;
-  padding-top: g.$header-height-sp;
+  padding-top: $header-height-sp;
   transition: left 0.3s;
 
-  @media only screen and (min-width: g.$screen-pc-min) {
+  @media only screen and (min-width: $screen-pc-min) {
     display: none;
     // PCで全画面表示する場合
     // left: 0;
@@ -139,14 +148,13 @@ header {
 // --------------------------------------------------
 // Key-visual
 // --------------------------------------------------
-.key-visual {
-}
+.key-visual {}
 
 // --------------------------------------------------
 // Main
 // --------------------------------------------------
 .l-main {
-  @include g.clearfix;
+  @include clearfix;
 }
 
 // --------------------------------------------------
@@ -155,7 +163,8 @@ header {
 .l-page {
   float: left;
   width: 700px;
-  @media only screen and (max-width: g.$screen-tb) {
+
+  @media only screen and (max-width: $screen-tb) {
     float: none;
     width: 100%;
   }
@@ -167,17 +176,16 @@ header {
 .l-side {
   float: right;
   width: 260px;
-  @media only screen and (max-width: g.$screen-tb) {
+
+  @media only screen and (max-width: $screen-tb) {
     display: none;
   }
 }
 
 // Sideの中身
-.side-ttl {
-}
+.side-ttl {}
 
 // --------------------------------------------------
 // Footer
 // --------------------------------------------------
-footer {
-}
+footer {}

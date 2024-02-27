@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@use "../global" as g;
+@use "../global" as *;
 
 $flex-direction: (
   fd--row: row,
@@ -25,35 +25,37 @@ $align-items: (
 );
 
 // 余白クラスの生成
-@include g.spaceloop();
+@include spaceloop();
 
 // 行揃え指定クラス
-@include g.textalign();
+@include textalign();
 
 // フォントサイズクラス作成
-@include g.fontsize();
+@include fontsize();
 
 // lineheightのクラス
-@include g.lineheight();
+@include lineheight();
 
 // letterspacingのクラス
-@include g.letterspacing();
+@include letterspacing();
 
 // font-weightのクラス
-@include g.fontweight();
+@include fontweight();
 
 // クリアフィックス
 .clearfix {
-  @include g.clearfix;
+  @include clearfix;
 }
 
 // ポジションクラス
 .absolute {
   position: absolute !important;
 }
+
 .relative {
   position: relative !important;
 }
+
 .static {
   position: static !important;
 }
@@ -62,6 +64,7 @@ $align-items: (
 .mt1em {
   margin-top: 1em;
 }
+
 .mb1em {
   margin-bottom: 1em;
 }
@@ -71,6 +74,7 @@ $align-items: (
   max-width: 100%;
   height: auto;
 }
+
 .w100 {
   width: 100% !important;
 }
@@ -81,19 +85,22 @@ $align-items: (
   opacity: 1;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+
   &:hover {
     opacity: 0.7;
   }
 }
 
 // フロートクラス
-.left-box{
+.left-box {
   float: left !important;
 }
-.right-box{
+
+.right-box {
   float: right !important;
 }
-.center-box{
+
+.center-box {
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -111,63 +118,67 @@ $align-items: (
 .normal {
   font-weight: normal;
 }
+
 .bold {
   font-weight: bold;
 }
 
-@if g.$responsive {
-  @media only screen and (max-width: g.$screen-tb) {
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
     // 行揃え指定クラス
-    @include g.textalign(-tb);
+    @include textalign(-tb);
 
     // タブレット用余白クラスの生成
-    @include g.spaceloop(-tb);
+    @include spaceloop(-tb);
 
     // タブレット用フォントサイズクラスの生成
-    @include g.fontsize(-tb);
+    @include fontsize(-tb);
 
     // タブレット用lineheightのクラス
-    @include g.lineheight(-tb);
+    @include lineheight(-tb);
 
     // タブレット用letterspacingのクラス
-    @include g.letterspacing(-tb);
+    @include letterspacing(-tb);
   }
 
-  @media only screen and (max-width: g.$screen-sp) {
+  @media only screen and (max-width: $screen-sp) {
     // 行揃え指定クラス
-    @include g.textalign(-sp);
+    @include textalign(-sp);
 
     // スマホ用余白クラスの生成
-    @include g.spaceloop(-sp);
+    @include spaceloop(-sp);
 
     // スマホ用フォントサイズクラスの生成
-    @include g.fontsize(-sp);
+    @include fontsize(-sp);
 
     // スマホ用lineheightのクラス
-    @include g.lineheight(-sp);
+    @include lineheight(-sp);
 
     // スマホ用letterspacingのクラス
-    @include g.letterspacing(-sp);
+    @include letterspacing(-sp);
   }
 
   // デバイスごとのディスプレイ指定クラス
   .pc {
-    @media only screen and (max-width: g.$screen-tb) {
-        display: none !important;
-    }
-  }
-  .pctb {
-    @media only screen and (max-width: g.$screen-sp) {
-        display: none !important;
-    }
-  }
-  .tb {
-    @media only screen and (min-width: g.$screen-pc-min) {
+    @media only screen and (max-width: $screen-tb) {
       display: none !important;
     }
   }
+
+  .pctb {
+    @media only screen and (max-width: $screen-sp) {
+      display: none !important;
+    }
+  }
+
+  .tb {
+    @media only screen and (min-width: $screen-pc-min) {
+      display: none !important;
+    }
+  }
+
   .sp {
-    @media only screen and (min-width: g.$screen-tb-min) {
+    @media only screen and (min-width: $screen-tb-min) {
       display: none !important;
     }
   }
@@ -175,71 +186,107 @@ $align-items: (
 
 //フレックス
 .flex {
-  @include g.flex;
+  @include flex;
 }
+
 @each $class, $value in $flex-direction {
   .#{$class} {
-    @include g.f-direction($value);
+    @include f-direction($value);
   }
 }
+
 @each $class, $value in $flex-wrap {
   .#{$class} {
-    @include g.f-wrap($value);
+    @include f-wrap($value);
   }
 }
+
 @each $class, $value in $justify-content {
   .#{$class} {
-    @include g.j-content($value);
+    @include j-content($value);
   }
 }
+
 @each $class, $value in $align-items {
   .#{$class} {
-    @include g.a-items($value);
+    @include a-items($value);
   }
 }
-@if g.$responsive {
-  @media only screen and (max-width: g.$screen-tb) {
+
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
     @each $class, $value in $flex-direction {
       .#{$class}-tb {
-        @include g.f-direction($value);
+        @include f-direction($value);
       }
     }
+
     @each $class, $value in $flex-wrap {
       .#{$class}-tb {
-        @include g.f-wrap($value);
+        @include f-wrap($value);
       }
     }
+
     @each $class, $value in $justify-content {
       .#{$class}-tb {
-        @include g.j-content($value);
+        @include j-content($value);
       }
     }
+
     @each $class, $value in $align-items {
       .#{$class}-tb {
-        @include g.a-items($value);
+        @include a-items($value);
       }
     }
   }
-  @media only screen and (max-width: g.$screen-sp) {
+
+  @media only screen and (max-width: $screen-sp) {
     @each $class, $value in $flex-direction {
       .#{$class}-sp {
-        @include g.f-direction($value);
+        @include f-direction($value);
       }
     }
+
     @each $class, $value in $flex-wrap {
       .#{$class}-sp {
-        @include g.f-wrap($value);
+        @include f-wrap($value);
       }
     }
+
     @each $class, $value in $justify-content {
       .#{$class}-sp {
-        @include g.j-content($value);
+        @include j-content($value);
       }
     }
+
     @each $class, $value in $align-items {
       .#{$class}-sp {
-        @include g.a-items($value);
+        @include a-items($value);
       }
     }
+  }
+}
+
+@include owl();
+
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
+    @include owl(-tb);
+  }
+
+  @media only screen and (max-width: $screen-sp) {
+    @include owl(-sp);
+  }
+}
+
+@include row-owl();
+
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
+    @include row-owl(-tb);
+  }
+
+  @media only screen and (max-width: $screen-sp) {
+    @include row-owl(-sp);
   }
 }

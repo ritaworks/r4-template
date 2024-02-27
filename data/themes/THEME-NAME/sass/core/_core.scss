@@ -1,4 +1,4 @@
-@use "../global" as g;
+@use "../global" as *;
 
 *,
 ::before,
@@ -9,7 +9,7 @@
 * {
   font-size: inherit;
   line-height: inherit;
-  letter-spacing: g.$base-letter-spacing;
+  letter-spacing: $base-letter-spacing;
 }
 
 ::before,
@@ -24,6 +24,7 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
 body {
   background: #fff;
   margin: 0;
@@ -117,7 +118,7 @@ select {
   font: inherit;
   margin: 0;
   padding: 0 20px 0 5px;
-  line-height:1;
+  line-height: 1;
 }
 
 button,
@@ -144,20 +145,20 @@ input {
 
 input:focus,
 textarea:focus {
-  outline:none;
+  outline: none;
 }
 
 input[type="button"],
 input[type="submit"] {
   background-color: transparent;
-  border:none;
+  border: none;
 }
 
 button {
   overflow: visible;
   background-color: transparent;
-  border-radius:0;
-  border:none;
+  border-radius: 0;
+  border: none;
 }
 
 button,
@@ -286,6 +287,7 @@ address {
   margin: 0;
   padding: 0;
 }
+
 input,
 textarea,
 table,
@@ -295,6 +297,7 @@ tfoot,
 address {
   text-align: left;
 }
+
 div,
 dl,
 dt,
@@ -307,6 +310,7 @@ p {
   text-align: inherit;
   font-feature-settings: "palt";
 }
+
 h1,
 h2,
 h3,

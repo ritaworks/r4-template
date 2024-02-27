@@ -1,42 +1,122 @@
-@use "../global" as g;
+@use "../global" as *;
 
-@if g.$responsive {
-  @media only screen and (max-width: g.$screen-tb) {
-  .float > .left-box{float:none!important;width:100% !important;}
-  .float > .right-box{float:none!important;width:100% !important;}
-  .float > [class^="mr"],.float > [class*=" mr"]{margin-right:0!important;}
-  .float > [class^="ml"],.float > [class*=" ml"]{margin-left:0!important;}
-  .float-r > [class^="mb"],.float-r > [class*=" mb"]{margin-bottom:0!important;}
+@if $responsive {
+  @media only screen and (max-width: $screen-tb) {
+    .float>.left-box {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float>.right-box {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float>[class^="mr"],
+    .float>[class*=" mr"] {
+      margin-right: 0 !important;
+    }
+
+    .float>[class^="ml"],
+    .float>[class*=" ml"] {
+      margin-left: 0 !important;
+    }
+
+    .float-r>[class^="mb"],
+    .float-r>[class*=" mb"] {
+      margin-bottom: 0 !important;
+    }
   }
-  @media only screen and (min-width: g.$screen-pc-min) {
-  .float-r > .left-box{float:none!important;width:100% !important;}
-  .float-r > .right-box{float:none!important;width:100% !important;}
-  .float-r > [class^="mr"],.float-r > [class*=" mr"]{margin-right:0!important;}
-  .float-r > [class^="ml"],.float-r > [class*=" ml"]{margin-left:0!important;}
-  .float > [class^="mb"],.float > [class*=" mb"]{margin-bottom:0!important;}
+
+  @media only screen and (min-width: $screen-pc-min) {
+    .float-r>.left-box {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float-r>.right-box {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float-r>[class^="mr"],
+    .float-r>[class*=" mr"] {
+      margin-right: 0 !important;
+    }
+
+    .float-r>[class^="ml"],
+    .float-r>[class*=" ml"] {
+      margin-left: 0 !important;
+    }
+
+    .float>[class^="mb"],
+    .float>[class*=" mb"] {
+      margin-bottom: 0 !important;
+    }
   }
 }
+
 .float {
-  @include g.clearfix;
+  @include clearfix;
 }
+
 .float-r {
-  @include g.clearfix;
+  @include clearfix;
 }
 
 //sp時のみ落ちるverのfloatクラス
-@if g.$responsive {
-  @media only screen and (max-width: g.$screen-sp) {
-  .float > .left-sp{float:none!important;width:100% !important;}
-  .float > .right-sp{float:none!important;width:100% !important;}
-  .float > [class^="mr"],.float > [class*=" mr"]{margin-right:0!important;}
-  .float > [class^="ml"],.float > [class*=" ml"]{margin-left:0!important;}
-  .float-r > [class^="mb"],.float-r > [class*=" mb"]{margin-bottom:0!important;}
+@if $responsive {
+  @media only screen and (max-width: $screen-sp) {
+    .float>.left-sp {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float>.right-sp {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float>[class^="mr"],
+    .float>[class*=" mr"] {
+      margin-right: 0 !important;
+    }
+
+    .float>[class^="ml"],
+    .float>[class*=" ml"] {
+      margin-left: 0 !important;
+    }
+
+    .float-r>[class^="mb"],
+    .float-r>[class*=" mb"] {
+      margin-bottom: 0 !important;
+    }
   }
-  @media only screen and (min-width: g.$screen-pc-min) {
-  .float-r > .left-sp{float:none!important;width:100% !important;}
-  .float-r > .right-sp{float:none!important;width:100% !important;}
-  .float-r > [class^="mr"],.float-r > [class*=" mr"]{margin-right:0!important;}
-  .float-r > [class^="ml"],.float-r > [class*=" ml"]{margin-left:0!important;}
-  .float > [class^="mb"],.float > [class*=" mb"]{margin-bottom:0!important;}
+
+  @media only screen and (min-width: $screen-pc-min) {
+    .float-r>.left-sp {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float-r>.right-sp {
+      float: none !important;
+      width: 100% !important;
+    }
+
+    .float-r>[class^="mr"],
+    .float-r>[class*=" mr"] {
+      margin-right: 0 !important;
+    }
+
+    .float-r>[class^="ml"],
+    .float-r>[class*=" ml"] {
+      margin-left: 0 !important;
+    }
+
+    .float>[class^="mb"],
+    .float>[class*=" mb"] {
+      margin-bottom: 0 !important;
+    }
   }
 }
