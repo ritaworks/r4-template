@@ -1,7 +1,7 @@
 // --------------------------------------------------
 // Setting
 // --------------------------------------------------
-@use "../../global" as g;
+@use "../../global" as *;
 
 // 1.checkbox, radio の枠の色とチェックマーク色を調整したい場合
 // 非セレクト時の線の色
@@ -80,8 +80,8 @@ $form_active_checkbox_mark: #fff;
     p,
     div {
       &:not(.text, .item, .ui, .icheck-material-blue) {
-        line-height: g.$base-line-height;
-        letter-spacing: g.$base-letter-spacing;
+        line-height: $base-line-height;
+        letter-spacing: $base-letter-spacing;
       }
     }
 
@@ -92,16 +92,16 @@ $form_active_checkbox_mark: #fff;
     }
 
     a {
-      color: g.$base-link-color;
+      color: $base-link-color;
       text-decoration: underline;
 
       &:hover {
         text-decoration: none;
-        color: g.$base-link-color;
+        color: $base-link-color;
       }
 
       &[href^="tel:"] {
-        color: g.$base-font-color;
+        color: $base-font-color;
         text-decoration: none;
       }
     }
