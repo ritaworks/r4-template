@@ -121,7 +121,7 @@
 
     function tab_check(target, tabHash, i) {
       // タブ切り替え
-      if (target.closest(tab_link).find(target).length) {
+      if (target.closest(tab_link).find(target).length || $(target).prop("tagName") == "SELECT") {
         // 更新 a → [data-href]
         target.closest(tab_link).find('[data-href]').each(function () {
           // 追加
@@ -197,13 +197,17 @@
     // $('a[href*="#"], a[data-href *= "#"]').on("click", function (e) {
     // hrefを含むと、common.jsと競合してしまい、スクロール後に一時スクロールできなくなる。
     //更新 slectのchangeを追加
-    $('a[data-href *= "#"],select').on("click change", function (e) {
-      // 追加（selectのclick時は動かないように）
-      if (e.currentTarget.tagName == 'SELECT' && e.type == 'click') return false;
+    $(this).on("change",function(e){
+      clickEvent(e,$(this));
+    });
+    $($(this).find('a')).on("click", function (e) {
+      clickEvent(e,$(this));
+    });
+    function clickEvent(e,tag){
       let result = "";
       let reload_num = 0;
       for (var i = 0; config.reload_actie.length > i; i++) {
-        if ($(config.reload_actie[i]).find($(this)).length) {
+        if ($(config.reload_actie[i]).find($(tag)).length) {
           reload_num += 1;
         }
       }
@@ -215,21 +219,22 @@
         if (result) {
           e.preventDefault();
           //// common.js同様に処理を止める（ここまで） ////
-
           //// 本来の処理（タブ切り替え＋スクロール）（ここから） ////
-          if ($(this).attr('data-href')) {
-            tabHash = $(this).attr('data-href').split('#')[1].split('_');
-          } else if ($(this).val().includes('#')) {
+          if ($(tag).attr('data-href')) {
+            tabHash = $(tag).attr('data-href').split('#')[1].split('_');
+          } else if ($(tag).val().includes('#')) {
             // selectの場合
-            tabHash = $(this).val().split('#')[1].split('_');
+            tabHash = $(tag).val().split('#')[1].split('_');
           } else {
             // 普通のselectが動かないようにする
-            if ($(this).prop("tagName") == 'SELECT') return false;
-            tabHash = $(this).attr('href').split('#')[1].split('_');
+            if ($(tag).prop("tagName") == 'SELECT') return false;
+            tabHash = $(tag).attr('href').split('#')[1].split('_');
           }
-          if ($(this).closest(tab_link).find(this).length) {
+          if($(tag).prop("tagName") == "SELECT"){
+            tab_check($(tag), tabHash, 0);
+          } else if ($(tag).closest(tab_link).find(tag).length) {
             // 3-1.タブそのものをクリックした場合（スクロール不要）
-            tab_check($(this), tabHash, 0);
+            tab_check($(tag), tabHash, 0);
           } else {
             // 3-2.本来のタブ以外からタブ切り替えやタブタブ内部へのスクロールしたい場合
             hash_directories(tabHash, false);
@@ -238,21 +243,20 @@
 
         }
       } else {
-        if ($(this).attr('href')) {
+        if ($(tag).attr('href')) {
           result = thisPage();
           // このページ内のことであればリロードさせる
           if (result) {
             // リロードをさせるために?も設定する
-            location.href = location.origin + location.pathname + '?' + $(this).attr('data-href').split('#')[1] + '#' + $(this).attr('data-href').split('#')[1];
+            location.href = location.origin + location.pathname + '?' + $(tag).attr('data-href').split('#')[1] + '#' + $(tag).attr('data-href').split('#')[1];
           } else {
-            location.href = $(this).attr('href');
+            location.href = $(tag).attr('href');
           }
         } else {
           // リロードをさせるために"?"も設定する
-          location.href = location.origin + location.pathname + '?' + $(this).attr('data-href').split('#')[1] + '#' + $(this).attr('data-href').split('#')[1];
+          location.href = location.origin + location.pathname + '?' + $(tag).attr('data-href').split('#')[1] + '#' + $(tag).attr('data-href').split('#')[1];
         }
       }
-
       function thisPage() {
         let current = location.pathname;
         let full_current = location.origin + current;
@@ -280,7 +284,7 @@
         }
         return Boolean(current === link || full_current === link || link == "");
       }
-    })
+    }
 
     return tab_link;
   };
