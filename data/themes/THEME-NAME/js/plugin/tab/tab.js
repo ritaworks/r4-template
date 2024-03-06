@@ -200,7 +200,7 @@
     $(this).on("change",function(e){
       clickEvent(e,$(this));
     });
-    $($(this).find('a')).on("click", function (e) {
+    $($(this).find('a[data-href *= "#"]')).on("click", function (e) {
       clickEvent(e,$(this));
     });
     function clickEvent(e,tag){
