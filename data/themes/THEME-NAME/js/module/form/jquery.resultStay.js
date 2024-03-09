@@ -14,7 +14,6 @@
       checkboxParent: [], //checkboxの親要素
       checkboxOutput: [], //checkした項目を一括表示する欄※parentと並べること
       checkboxTag: [], //タグ使用時の複数軸対応 ※全てcheckboxであること
-      radioTag: [],
       autoSubmit: false
     };
     // データ上書き
@@ -43,18 +42,16 @@
     }
 
     // radio, text, select(ここから)
-
     function loadingCheck(type, selecter) {
       selecter.each(function () {
         let target_name = $(this).prop('name');
-        let s_name = '[name="' + target_name + '"]';
+        s_name = '[name="' + target_name + '"]';
         //nameが照合できた場合（検索対象の場合）
         if (arg[target_name]) {
           switch (type) {
             case 'radio':
               if (arg[target_name] == $(this).val()) {
                 $(this).prop('checked', true);
-                $(form).submit();
               }
               break;
             case 'text':
@@ -63,28 +60,22 @@
               break;
           }
         }
-      });
+      })
     }
 
-    for (let i = 0; i < type_setting.length; i++) {
+    for (let i = 0; type_setting.length > i; i++) {
       switch (type_setting[i]) {
         case 'radio':
         case 'text':
           target_selector = form.find('input[type="' + type_setting[i] + '"]');
           loadingCheck(type_setting[i], target_selector);
-          if (config.type[i] === 'radio') {
-            target_selector.click(function() {
-              if (config.autoSubmit) {
-                form.submit();
-              }
-            });
-          }
           break;
         case 'select':
           target_selector = form.find(type_setting[i]);
           loadingCheck(type_setting[i], target_selector);
           break;
         case 'checkbox':
+          // 読み込み時処理に含める
           break;
       }
     }
@@ -131,12 +122,9 @@
         } else {
           checkbox_setting.text[i] = '';
         }
-        if (!loading) {
-          if (checkbox_setting.submit) {
-            $(form).submit();
-          }
+        if (checkbox_setting.submit) {
+          $(form).submit();
         }
-     
       }
 
       var checkbox_value = [];
