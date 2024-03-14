@@ -24,19 +24,23 @@
 }
 
 .nodrop-table {
-  tr {
 
-    th,
-    td {
-      @media only screen and (max-width: $screen-tb) {
-        display: table-cell;
-        width: auto !important;
+  tbody,
+  thead {
+    tr {
+
+      th,
+      td {
+        @media only screen and (max-width: $screen-tb) {
+          display: table-cell;
+          width: auto !important;
+        }
       }
-    }
 
-    th {
-      @media only screen and (max-width: $screen-tb) {
-        white-space: nowrap;
+      th {
+        @media only screen and (max-width: $screen-tb) {
+          white-space: nowrap;
+        }
       }
     }
   }
