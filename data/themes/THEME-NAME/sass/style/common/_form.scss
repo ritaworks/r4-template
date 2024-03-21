@@ -106,5 +106,12 @@ $form_active_checkbox_mark: #fff;
         text-decoration: none;
       }
     }
+
+    // カレンダーのトライアングルのアイコンを消す
+    .popup.calendar {
+      &:before {
+        display: none;
+      }
+    }
   }
 }

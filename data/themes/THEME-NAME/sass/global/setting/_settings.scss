@@ -60,7 +60,7 @@ $grid-gutter-width-tb: 10px !default;
 $grid-gutter-width-sp: $grid-gutter-width-tb !default;
 
 // コンテナ(.container)サイズ
-$container-pc: ($container-width + $grid-gutter-width-pc) !default;
+$container-pc: ($container-width + $gutter-pc) !default;
 $container-tb: auto !default;
 $container-sp: auto !default;
 
