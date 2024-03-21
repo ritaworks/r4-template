@@ -4,11 +4,14 @@
 
 $flex-direction: (
   fd--row: row,
-  fd--column: column
+  fd--column: column,
+  fd--rowreverse: row-reverse,
+  fd--columnreverse: column-reverse,
 );
 $flex-wrap: (
   fw--nowrap: nowrap,
-  fw--wrap: wrap
+  fw--wrap: wrap,
+  fw--wrapreverse: wrap-reverse,
 );
 $justify-content: (
   jc--start: flex-start,
@@ -16,12 +19,14 @@ $justify-content: (
   jc--center: center,
   jc--between: space-between,
   jc--around: space-around,
-  jc--evenly: space-evenly
+  jc--evenly: space-evenly,
+  jc--stretch: stretch,
 );
 $align-items: (
   ai--start: flex-start,
   ai--end: flex-end,
   ai--center: center,
+  ai--stretch: stretch,
 );
 
 // 余白クラスの生成
