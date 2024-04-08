@@ -42,10 +42,11 @@
     }
 
     // radio, text, select(ここから)
+
     function loadingCheck(type, selecter) {
       selecter.each(function () {
         let target_name = $(this).prop('name');
-        s_name = '[name="' + target_name + '"]';
+        let s_name = '[name="' + target_name + '"]';
         //nameが照合できた場合（検索対象の場合）
         if (arg[target_name]) {
           switch (type) {
@@ -60,22 +61,39 @@
               break;
           }
         }
-      })
+      });
     }
 
-    for (let i = 0; type_setting.length > i; i++) {
+    for (let i = 0; i < type_setting.length; i++) {
       switch (type_setting[i]) {
         case 'radio':
-        case 'text':
           target_selector = form.find('input[type="' + type_setting[i] + '"]');
           loadingCheck(type_setting[i], target_selector);
+          target_selector.click(function () {
+            if (config.autoSubmit && arg[$(this).prop('name')] != $(this).val()) {
+              form.submit();
+            }
+          });
           break;
         case 'select':
           target_selector = form.find(type_setting[i]);
           loadingCheck(type_setting[i], target_selector);
+          target_selector.change(function () {
+            if (config.autoSubmit) {
+              form.submit();
+            }
+          });
+          break;
+        case 'text':
+          target_selector = form.find('input[type="' + type_setting[i] + '"]');
+          loadingCheck(type_setting[i], target_selector);
+          target_selector.keypress(function(e) {
+            if(e.keyCode === 13) {
+              form.submit();
+            }
+          });
           break;
         case 'checkbox':
-          // 読み込み時処理に含める
           break;
       }
     }
@@ -122,9 +140,12 @@
         } else {
           checkbox_setting.text[i] = '';
         }
-        if (checkbox_setting.submit) {
-          $(form).submit();
+        if (!loading) {
+          if (checkbox_setting.submit) {
+            $(form).submit();
+          }
         }
+
       }
 
       var checkbox_value = [];
