@@ -30,9 +30,10 @@ a {
   //電話番号
   &[href^="tel:"] {
     color: $base-font-color;
-    text-decoration: none;
+    text-decoration: underline;
 
     @media only screen and (min-width: $screen-pc-min) {
+      text-decoration: none;
       pointer-events: none;
     }
   }
