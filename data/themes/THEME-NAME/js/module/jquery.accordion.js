@@ -25,6 +25,7 @@
       btnHeight: true, // parentAccordionがtrueの場合動きます、buttonの高さを入れるか入れないか
       parentHeight_PC: 100, // parentAccordionがtrueの場合動きます、親要素高さの指定
       parentHeight_SP: 100,
+      openIndex:[],
     }
 
     // 横幅のresize時にも反応できるようにするためのもの
@@ -205,6 +206,28 @@
         }
       }
     }
+
+    // 自動に何番目のアイテムを開くかのイベント 0からスタート
+    function openSpecifiedAccordion() {
+      for(let i =0;i<s.openIndex.length;i++){
+        var item = $(targetTag[s.openIndex[i]]);
+        if (!item.hasClass('active')) {
+          item.addClass('active');
+          item.next().css('display','block');
+        }
+      }
+    }
+
+    openSpecifiedAccordion();
+
+    // 自動に何番目のアイテムを開くかのイベント
+    //タグに data-autoopen="true"追加が必要
+    $(targetTag).each(function(){
+      if($(this).data('autoopen')){
+        $(this).addClass('active');
+        $(this).next().css('display','block');
+      }
+    });
 
     pcHideEvent($(this));
     // resize中止

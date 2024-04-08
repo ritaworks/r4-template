@@ -1,20 +1,3 @@
-/*
-  UPDATE 2024.02.07
-  1.タブのdata-hrefの内容が同じタブにcurrentがつくように調整しました。
-
-  UPDATE 2023.02.15
-  1.sectionタグにも動くようにしました。
-    selectタグに#allすることで全てのタブが表示するようになりました。
-
-  UPDATE 2022.02.05
-  想定している内容
-  1.タブ
-    #tab01, #tab02, #tab03
-  2.タブの中へのリンク
-    #tab01_01, #tab01_02, #tab01_tab02_01
-*/
-
-// 更新　全体的に a[data-href → [data-href
 (function ($) {
   $.fn.tab = function (params) {
 
@@ -285,6 +268,13 @@
         return Boolean(current === link || full_current === link || link == "");
       }
     }
+
+    // タブ項目が一つの場合自動に削除
+    $(tab_link).each(function(){
+      if($(this).children().length <= 1){
+        $(this).remove();
+      }
+    });
 
     return tab_link;
   };
