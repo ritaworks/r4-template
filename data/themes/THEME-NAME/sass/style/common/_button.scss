@@ -32,6 +32,60 @@
 }
 
 .file-icon {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1.5;
+  color: $base-font-color;
+  padding-left: 20px;
+  transition: 0.3s;
+
+  &:before {
+    font: {
+      weight: 900;
+      family: $f-fa;
+    }
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  &[href$=".pdf"] {
+    &:before {
+      content: "\f1c1";
+      color: #ef0d00;
+    }
+
+    &:hover {
+      color: #ef0d00;
+    }
+  }
+
+  &[href$=".xls"],
+  &[href$=".xlsx"],
+  &[href$=".xlsm"] {
+    &:before {
+      content: "\f1c3";
+      color: #238049;
+    }
+
+    &:hover {
+      color: #238049;
+    }
+  }
+
+  &[href$=".doc"],
+  &[href$=".docx"] {
+    &:before {
+      content: "\f1c2";
+      color: #1b50b0;
+    }
+
+    &:hover {
+      color: #1b50b0;
+    }
+  }
 }
 
 // --------------------------------------------------
