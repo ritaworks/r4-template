@@ -10,7 +10,6 @@
 // お知らせ一覧にPDFアイコンを表示する
 // @extend で対応してください。
 .news-link-event01 {
-
   // aタグがテキストの場合
   a {
     &[href$=".pdf"] {
@@ -44,7 +43,7 @@
     }
 
     &[href$=".pdf"] {
-      +.txt-wrap {
+      + .txt-wrap {
         .ttl {
           &:after {
             content: "";
@@ -63,11 +62,6 @@
 // お知らせリスト（ここから）
 // --------------------------------------------------
 
-
-
-
-
-
 // --------------------------------------------------
 // デフォルト（CMS内エディタ用クラス）
 // --------------------------------------------------
@@ -77,7 +71,7 @@
 
 .cms-ullist,
 .dot-list {
-  >li {
+  > li {
     padding-left: 20px;
     position: relative;
 
@@ -92,7 +86,7 @@
 
   &[style="list-style-type: circle;"],
   &[style="list-style-type: square;"] {
-    >li {
+    > li {
       list-style-type: inherit;
       text-indent: 0;
 
@@ -111,7 +105,7 @@
 .num-list {
   counter-reset: section;
 
-  >li {
+  > li {
     padding-left: 20px;
     position: relative;
     counter-increment: section;
@@ -129,7 +123,7 @@
   &[style="list-style-type: lower-roman;"],
   &[style="list-style-type: upper-alpha;"],
   &[style="list-style-type: upper-roman;"] {
-    >li {
+    > li {
       list-style-type: inherit;
       text-indent: 0;
       margin-left: 0;
@@ -141,6 +135,16 @@
       &::marker {
         color: #7c7eba;
       }
+    }
+  }
+}
+
+.asterisk-list {
+  @extend .dot-list;
+
+  > li {
+    &:before {
+      content: "※";
     }
   }
 }
