@@ -186,6 +186,19 @@
     $($(this).find('a[data-href *= "#"]')).on("click", function (e) {
       clickEvent(e,$(this));
     });
+
+    $('a[href *= "#"').on("click", function (e) {
+      var atag = $(this);
+      if($(this).data('href') && atag.prop('href').split('#')[0] == location.origin + location.pathname){
+        var hrefs = $(this).data('href');
+        $(tab_link).each(function(i,t){
+          if($(t).find('a[data-href="'+hrefs+'"]').length != 0){
+            clickEvent(e,atag);
+          }
+        });
+      }
+    });
+    
     function clickEvent(e,tag){
       let result = "";
       let reload_num = 0;

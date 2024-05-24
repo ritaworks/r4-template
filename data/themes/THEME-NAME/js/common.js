@@ -70,6 +70,7 @@ $(function () {
     if (current === link || full_current === link || link == "") {
       if ($(this).attr('data-href')) {
         // tabjsとの競合回避
+        slidemenuClose();
         return false;
       } else {
         e.preventDefault();

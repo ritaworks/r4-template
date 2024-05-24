@@ -39,7 +39,7 @@
       if (e.hasClass('active')) {
         e.removeClass('active');
         e.next().slideToggle();
-        e.next().addClass('check');
+        e.next().removeClass('check');
       } else {
         if (s['otherClose']) {
           $(targetTag).each(function (i, t) {
