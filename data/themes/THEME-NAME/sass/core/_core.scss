@@ -30,7 +30,11 @@ body {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
-  text-align: justify;
+  text-align: left;
+
+  &.-justify {
+    text-align: justify;
+  }
 }
 
 main,

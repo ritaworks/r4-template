@@ -53,16 +53,8 @@ $align-items: (
 }
 
 // ポジションクラス
-.absolute {
-  position: absolute !important;
-}
-
 .relative {
   position: relative !important;
-}
-
-.static {
-  position: static !important;
 }
 
 // pタグ同士の間の余白用クラス
@@ -74,10 +66,9 @@ $align-items: (
   margin-bottom: 1em;
 }
 
-// 画像用幅設定クラス
+// 幅設定クラス
 .mw100 {
-  max-width: 100%;
-  height: auto;
+  max-width: 100% !important;
 }
 
 .w100 {

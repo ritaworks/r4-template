@@ -3,20 +3,19 @@
 @use "../setting" as *;
 
 $spacer: (
-  mt:margin-top,
-  mr:margin-right,
-  mb:margin-bottom,
-  ml:margin-left,
-  pt:padding-top,
-  pr:padding-right,
-  pb:padding-bottom,
-  pl:padding-left,
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
 );
 $align: left, right, center;
 
 // クリアフィックスクラス
 @mixin clearfix() {
-
   &:before,
   &:after {
     content: " ";
@@ -41,9 +40,7 @@ $align: left, right, center;
 
     @if $i >=20 {
       $i: $i + 5;
-    }
-
-    @else {
+    } @else {
       $i: $i + 1;
     }
   }
@@ -76,44 +73,6 @@ $align: left, right, center;
   }
 }
 
-// グラデーション生成
-@mixin gradient($start-color, $end-color, $orientation) {
-  background: $start-color;
-
-  @if $orientation ==vertical {
-    // 線形: 縦
-    background: -moz-linear-gradient(top, $start-color 0%, $end-color 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $start-color), color-stop(100%, $end-color));
-    background: -webkit-linear-gradient(top, $start-color 0%, $end-color 100%);
-    background: -o-linear-gradient(top, $start-color 0%, $end-color 100%);
-    background: -ms-linear-gradient(top, $start-color 0%, $end-color 100%);
-    background: linear-gradient(to bottom, $start-color 0%, $end-color 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$start-color', endColorstr='$end-color', GradientType=0);
-  }
-
-  @else if $orientation ==horizontal {
-    // 線形: 横
-    background: -moz-linear-gradient(left, $start-color 0%, $end-color 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, $start-color), color-stop(100%, $end-color));
-    background: -webkit-linear-gradient(left, $start-color 0%, $end-color 100%);
-    background: -o-linear-gradient(left, $start-color 0%, $end-color 100%);
-    background: -ms-linear-gradient(left, $start-color 0%, $end-color 100%);
-    background: linear-gradient(to right, $start-color 0%, $end-color 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$start-color', endColorstr='$end-color', GradientType=1);
-  }
-
-  @else {
-    // 円形
-    background: -moz-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $start-color), color-stop(100%, $end-color));
-    background: -webkit-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
-    background: -o-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
-    background: -ms-radial-gradient(center, ellipse cover, $start-color 0%, $end-color 100%);
-    background: radial-gradient(ellipse at center, $start-color 0%, $end-color 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$start-color', endColorstr='$end-color', GradientType=1);
-  }
-}
-
 // リンクテキストの下線切り替え
 @mixin link() {
   @if $link-underline {
@@ -122,9 +81,7 @@ $align: left, right, center;
     &:hover {
       text-decoration: none;
     }
-  }
-
-  @else {
+  } @else {
     text-decoration: none;
 
     &:hover {
@@ -190,7 +147,7 @@ $align: left, right, center;
 
   @while $i <=100 {
     .owl#{$i}#{$sufix} {
-      >*+* {
+      > * + * {
         margin-top: #{$i}px;
       }
     }
@@ -204,7 +161,7 @@ $align: left, right, center;
 
   @while $i <=100 {
     .row-owl#{$i}#{$sufix} {
-      >*+* {
+      > * + * {
         margin-left: #{$i}px;
       }
     }
