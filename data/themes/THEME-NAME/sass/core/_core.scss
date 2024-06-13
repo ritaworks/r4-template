@@ -112,8 +112,10 @@ hr {
   height: 0;
 }
 
-*:not(input):not(select):not(button):not(textarea):not(label):focus {
-  outline: none;
+*:focus {
+  outline: $focus-color !important;
+  outline-style: solid !important;
+  outline-width: 2px !important;
 }
 
 select {

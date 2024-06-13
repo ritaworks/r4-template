@@ -54,16 +54,17 @@
         // 1-2-1-1.タブ切り替えできていない箇所の対応
         tab_link.each(function () {
           list_target = $(this);
-          list_target.find('a').css("cursor", "pointer");
+          list_target.find('a').css("cursor", "pointer").attr('aria-selected', 'false').attr('role', 'tab').attr('tabindex','-1');
           if (list_target.find('[data-href="#' + tabHash[0] + '"]').length < 1) {
             if (list_target.find('.current').length < 1) {
               list_target.find('a,option').each(function () {
                 // 追加（optionのvalue追加）
                 $(this).val($(this).attr('data-href'));
-                $($(this).attr('data-href')).css("display", "none");
+                $($(this).attr('data-href')).css("display", "none").attr('role', 'tabpanel');
+                $(this).ariaSelected = false;
               });
               tab_target = list_target.first().find('a,option');
-              $(tab_target[0]).addClass('current');
+              $(tab_target[0]).addClass('current').attr('aria-selected', 'true').attr('tabindex','0');
               $(tab_target.attr('data-href')).css('display', 'block');
               if (tab_target.attr('data-href') == '#all') {
                 tab_target.each(function () {
@@ -119,9 +120,9 @@
         $('#' + tabHash[i]).css("display", "block");
 
         tab_link.find('a').each(function () {
-          $(this).removeClass('current');
+          $(this).removeClass('current').attr('aria-selected', 'false').attr('tabindex','-1');
           if ($(this).attr('data-href') == target.attr('data-href')) {
-            $(this).addClass('current');
+            $(this).addClass('current').attr('aria-selected', 'true').attr('tabindex','0');
           }
         });
 
@@ -281,6 +282,24 @@
         return Boolean(current === link || full_current === link || link == "");
       }
     }
+
+    $(document).keydown(function(event) {
+      var firstCheck = true;
+      $(tab_link).find('a').each(function(i,t){
+        if(firstCheck){
+          if($(t).is(':focus')){
+            firstCheck = false;
+            if(event.key == 'ArrowRight' || event.key =='ArrowDown'){
+              $(t).parent().next().children('a').focus();
+              $(t).parent().next().children('a').trigger('click');
+            }else if(event.key == 'ArrowUp' || event.key =='ArrowLeft'){
+              $(t).parent().prev().children('a').focus();
+              $(t).parent().prev().children('a').trigger('click');
+            }
+          }
+        }
+      })
+    });
 
     // タブ項目が一つの場合自動に削除
     $(tab_link).each(function(){

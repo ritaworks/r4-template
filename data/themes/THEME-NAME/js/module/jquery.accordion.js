@@ -58,8 +58,8 @@
 
     // accordionボタンにマウスポイントのCSSを追加
     function pointEvent(e) {
-      e.css('cursor', 'pointer');
-      e.next().css('display', 'none');
+      e.css('cursor', 'pointer').attr('tabindex','0').attr('role', 'tab');
+      e.next().css('display', 'none').attr('role', 'tabpanel');
     }
 
     // accordionで開かれるボックスのposition設定
@@ -230,6 +230,30 @@
     });
 
     pcHideEvent($(this));
+
+    $(document).keydown(function(event) {
+      var firstCheck = true;
+      for(let i = 0;i< targetTag.length;i++){
+        // console.log($(targetTag)[i]);
+        if(firstCheck){
+          if($($(targetTag)[i]).is(':focus')){
+            if(event.key == 'Enter'){
+              accordionEvent($($(targetTag)[i]));
+            }else if(event.key == 'ArrowRight' || event.key =='ArrowDown'){
+              firstCheck = false;
+              if($(targetTag)[i+1]){
+                $(targetTag)[i+1].focus();
+              }
+            }else if(event.key == 'ArrowUp' || event.key =='ArrowLeft'){
+              firstCheck = false;
+              if($(targetTag)[i-1]){
+                $(targetTag)[i-1].focus();
+              }
+            }
+          }
+        }
+      }
+    });
     // resize中止
   }
 })(jQuery);
