@@ -16,7 +16,7 @@ function scrollPosition(position) {
 $(function () {
   let body = $(document.body);
   let menu_open = false;
-  let menu_btn = $('.slidemenu-btn');
+  let menu_btn = $('.slidemenu-btn').attr('tabindex', '0');
   // let menu_img = $(".slidemenu-btn").find('img'); // 画像のスライドメニューボタン
   // let menu_txt = $(".slidemenu-btn").find('.ttl'); // テキストのスライドメニューボタン
 
@@ -83,7 +83,8 @@ $(function () {
 
   // スライドメニューの開閉
   let top = 0;
-  menu_btn.on('click', function () {
+
+  function slidemenubtnEvent(){
     if (!menu_open) {
       top = $(window).scrollTop();
     }
@@ -96,7 +97,20 @@ $(function () {
         'top': -top
       });
     }
+  }
+
+  menu_btn.on('click', function () {
+    slidemenubtnEvent();
   });
+
+  $(document).keydown(function(event) {
+    if(event.key == 'Enter'){
+      if($(menu_btn).is(':focus')){
+        slidemenubtnEvent();
+      }
+    }
+  });
+
   // PC時overlayを設置する場合
   // $("#overlay").on("click", function () {
   //   slidemenuClose();
