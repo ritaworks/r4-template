@@ -3,7 +3,6 @@
 //@use "../global" as *;
 
 @media print {
-
   .tb,
   .sp {
     display: none !important;
@@ -15,5 +14,9 @@
 
   header {
     position: inherit !important;
+  }
+
+  .key-visual.top {
+    max-height: 600px !important;
   }
 }
