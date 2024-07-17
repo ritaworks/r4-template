@@ -29,7 +29,7 @@
     }
 
     // 横幅のresize時にも反応できるようにするためのもの
-    var oneChange = [0, 1];
+    // var oneChange = [0, 1];
     var targetTag = $(this);
 
     s = $.extend({}, s, option);
@@ -102,8 +102,8 @@
         }
       } else if (s['size'] == 'tb') {
         if ($(window).width() <= s['SP_WIDTH']) {
-          oneChange[0]++;
-          oneChange[1]--;
+          // oneChange[0]++;
+          // oneChange[1]--;
           $(this).parent().height(s['parentHeight_SP']);
           $(this).parent().css('overflow', 'hidden');
           $(this).css('cursor', 'pointer');
@@ -126,8 +126,8 @@
       } else if (s['size'] == 'tb') {
         if ($(window).width() <= s['SP_WIDTH']) {
           pointEvent($(this));
-          oneChange[0]++;
-          oneChange[1]--;
+          // oneChange[0]++;
+          // oneChange[1]--;
 
           if (s['position'] == 'absolute') {
             positionEvent($(this));
