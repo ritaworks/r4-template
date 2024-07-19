@@ -118,6 +118,11 @@ hr {
   outline-width: 2px !important;
 }
 
+input[type=checkbox]:focus+label {
+  text-decoration: underline;
+  text-decoration-color: $primary;
+}
+
 select {
   height: 30px;
   color: inherit;
