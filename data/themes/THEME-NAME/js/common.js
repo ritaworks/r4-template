@@ -144,7 +144,9 @@ $(function () {
         $(window).trigger(scrollStopEvent)
       }, delay);
     }
-    $(window).on("scroll", scrollStopEventTrigger);
+    $(window).on("scroll", function(){
+      scrollStopEventTrigger();
+    });
   };
 });
 
