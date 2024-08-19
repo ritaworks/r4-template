@@ -53,7 +53,7 @@
           tabdesu = false;
         }else if ($('[data-href="#' + hashCheck + '"]')){
           // 1-1-3.splitで分けない時にタブ切り替えチェック
-          tab_check($('[data-href="#' + hashCheck + '"]'), hashCheck, 0);
+          tab_check($('[data-href="#' + hashCheck + '"]'), [hashCheck], 0);
           if ($('[data-href="#' + hashCheck + '"]').closest(tab_link).find($('[data-href="#' + hashCheck + '"]')).length) {
             tabdesu = true;
           } else {
