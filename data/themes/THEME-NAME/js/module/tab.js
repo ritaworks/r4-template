@@ -31,7 +31,13 @@
       // exist_numでページ内に対象の要素があるかチェックする
       let exist_num = -1;
       // 1-1.タブ切り替えを実行する
+      var hashCheck = '';
       for (var i = 0; tabHash.length > i; i++) {
+        if(i == 0){
+          hashCheck += tabHash[i]; 
+        }else{
+          hashCheck += '_'+tabHash[i]; 
+        }
         if ($('[data-href="#' + tabHash[i] + '"]').length > 0) {
           // 1-1-1.タブ切り替え
           tab_check($('[data-href="#' + tabHash[i] + '"]'), tabHash, i);
@@ -45,6 +51,14 @@
           // 1-1-2.ページ内リンク
           exist_num = i;
           tabdesu = false;
+        }else if ($('[data-href="#' + hashCheck + '"]')){
+          // 1-1-3.splitで分けない時にタブ切り替えチェック
+          tab_check($('[data-href="#' + hashCheck + '"]'), hashCheck, 0);
+          if ($('[data-href="#' + hashCheck + '"]').closest(tab_link).find($('[data-href="#' + hashCheck + '"]')).length) {
+            tabdesu = true;
+          } else {
+            tabdesu = false;
+          }
         }
       }
       // 1-2.表示が整って（タブ切り替えが終わって）からスクロールの処理を行う
@@ -173,7 +187,7 @@
       // タブ指定がある場合は、その部分までスクロールするので、表示は消す
       $('html, body').css('opacity', 0);
     } else {
-      tabHash = '';
+      tabHash = [];
     }
     hash_directories(tabHash, true);
 
@@ -190,17 +204,17 @@
 
     $('a[href *= "#"').on("click", function (e) {
       var atag = $(this);
-      if($(this).data('href') && atag.prop('href').split('#')[0] == location.origin + location.pathname){
+      if ($(this).data('href') && atag.prop('href').split('#')[0] == location.origin + location.pathname) {
         var hrefs = $(this).data('href');
-        $(tab_link).each(function(i,t){
-          if($(t).find('a[data-href="'+hrefs+'"]').length != 0){
-            clickEvent(e,atag);
+        $(tab_link).each(function (i, t) {
+          if ($(t).find('a[data-href="' + hrefs + '"]').length != 0) {
+            clickEvent(e, atag);
           }
         });
       }
     });
     
-    function clickEvent(e,tag){
+    function clickEvent(e, tag) {
       let result = "";
       let reload_num = 0;
       for (var i = 0; config.reload_actie.length > i; i++) {
@@ -227,7 +241,7 @@
             if ($(tag).prop("tagName") == 'SELECT') return false;
             tabHash = $(tag).attr('href').split('#')[1].split('_');
           }
-          if($(tag).prop("tagName") == "SELECT"){
+          if ($(tag).prop("tagName") == "SELECT") {
             tab_check($(tag), tabHash, 0);
           } else if ($(tag).closest(tab_link).find(tag).length) {
             // 3-1.タブそのものをクリックした場合（スクロール不要）
@@ -254,6 +268,7 @@
           location.href = location.origin + location.pathname + '?' + $(tag).attr('data-href').split('#')[1] + '#' + $(tag).attr('data-href').split('#')[1];
         }
       }
+
       function thisPage() {
         let current = location.pathname;
         let full_current = location.origin + current;
@@ -283,16 +298,16 @@
       }
     }
 
-    $(document).keydown(function(event) {
+    $(document).keydown(function (event) {
       var firstCheck = true;
-      $(tab_link).find('a').each(function(i,t){
-        if(firstCheck){
-          if($(t).is(':focus')){
+      $(tab_link).find('a').each(function (i, t) {
+        if (firstCheck) {
+          if ($(t).is(':focus')) {
             firstCheck = false;
-            if(event.key == 'ArrowRight' || event.key =='ArrowDown'){
+            if (event.key == 'ArrowRight' || event.key == 'ArrowDown') {
               $(t).parent().next().children('a').focus();
               $(t).parent().next().children('a').trigger('click');
-            }else if(event.key == 'ArrowUp' || event.key =='ArrowLeft'){
+            } else if (event.key == 'ArrowUp' || event.key == 'ArrowLeft') {
               $(t).parent().prev().children('a').focus();
               $(t).parent().prev().children('a').trigger('click');
             }
@@ -302,8 +317,8 @@
     });
 
     // タブ項目が一つの場合自動に削除
-    $(tab_link).each(function(){
-      if($(this).children().length <= 1){
+    $(tab_link).each(function () {
+      if ($(this).children().length <= 1) {
         $(this).remove();
       }
     });
