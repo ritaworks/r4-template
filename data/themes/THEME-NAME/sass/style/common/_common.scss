@@ -22,24 +22,17 @@
 
   .anchor-link {
     @include flex();
-    margin-bottom: -15px;
+    gap: 15px 30px;
     padding: 30px 40px;
 
     & > li {
-      margin-right: 30px;
-      margin-bottom: 15px;
-
-      &:last-child {
-        margin-right: 0;
-      }
-
       & > a {
         display: block;
         position: relative;
         text-decoration: none;
         color: $base-font-color;
-        transition: all 0.3s;
         padding-left: 22px;
+        transition: all 0.3s;
 
         &:before {
           content: "\f107";
@@ -68,17 +61,11 @@
     }
 
     .anchor-link {
-      margin-bottom: 0;
       padding: 20px 20px 15px;
+      gap: 5px 0;
 
       & > li {
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 5px;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
       }
     }
   }
