@@ -10,7 +10,9 @@
       PC_FIXED: false, // PCのヘッダー固定
       SP_FIXED: false, // TB以下のヘッダー固定
       PC_FIXED_ELE: 'header', // PCのヘッダー高さ要素
-      SP_FIXED_ELE: 'header' // TB以下のヘッダー高さ要素
+      SP_FIXED_ELE: 'header', // TB以下のヘッダー高さ要素
+      isScrollable: false,
+      scrollGap: 0,
     };
     var config = $.extend({}, defs, params);
     var tab_link = this;
@@ -322,6 +324,39 @@
         $(this).remove();
       }
     });
+
+    function tabScrollCheck(isScrollable) {
+      if(isScrollable){
+        tab_link.each(function(){
+          var tab_tag = $(this);
+          var totalLiWidth = 0;
+          var tabContainerWidth = tab_tag.width();
+          tab_tag.find('li').each(function() {
+            totalLiWidth += tab_tag.outerWidth(true) + config.scrollGap;
+          });
+          if (totalLiWidth - config.scrollGap > tabContainerWidth) {
+            tab_tag.addClass('show'); // 'show' クラスを追加
+            tab_tag.on('touchmove, scroll',function(){
+              // var $this = $(this);
+              var isAtStart = tab_tag.scrollLeft() === 0;
+      
+              // スクロール位置に基づいて 'show' クラスを切り替え
+              if (isAtStart) {
+                tab_tag.addClass('-arrow');
+              } else {
+                tab_tag.removeClass('-arrow');
+              }
+    
+            });
+          } else {
+            tab_tag.removeClass('show'); // 'show' クラスを削除
+          }
+        });
+      }
+    }
+    
+    // 初期設定として isScrollable のデフォルト値で初期化
+    tabScrollCheck(config.isScrollable);
 
     return tab_link;
   };
