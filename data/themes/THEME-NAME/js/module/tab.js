@@ -335,7 +335,7 @@
             totalLiWidth += tab_tag.outerWidth(true) + config.scrollGap;
           });
           if (totalLiWidth - config.scrollGap > tabContainerWidth) {
-            tab_tag.addClass('show'); // 'show' クラスを追加
+            tab_tag.addClass('-arrow'); // 'show' クラスを追加
             tab_tag.on('touchmove, scroll',function(){
               // var $this = $(this);
               var isAtStart = tab_tag.scrollLeft() === 0;
@@ -349,7 +349,7 @@
     
             });
           } else {
-            tab_tag.removeClass('show'); // 'show' クラスを削除
+            tab_tag.removeClass('-arrow'); // 'show' クラスを削除
           }
         });
       }
