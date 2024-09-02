@@ -112,7 +112,7 @@ hr {
   height: 0;
 }
 
-*:focus {
+*:focus-visible {
   outline: $focus-color !important;
   outline-style: solid !important;
   outline-width: 2px !important;
