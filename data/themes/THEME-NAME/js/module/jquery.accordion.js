@@ -1,5 +1,7 @@
 // option
 
+// v2024.11.15
+
 // size: pc(初期値) tb
 // SP_WIDTH: 768(初期値)
 // aTagAutoClose: false(初期値) true
@@ -25,13 +27,23 @@
       btnHeight: true, // parentAccordionがtrueの場合動きます、buttonの高さを入れるか入れないか
       parentHeight_PC: 100, // parentAccordionがtrueの場合動きます、親要素高さの指定
       parentHeight_SP: 100,
-      openIndex:[],
+      openIndex: [],
+      PC_FIXED: false, // PCのヘッダー固定
+      SP_FIXED: false, // TB以下のヘッダー固定
+      PC_FIXED_ELE: 'header', // PCのヘッダー高さ要素
+      SP_FIXED_ELE: 'header', // TB以下のヘッダー高さ要素
     }
 
     // 横幅のresize時にも反応できるようにするためのもの
     var targetTag = $(this);
-
     s = $.extend({}, s, option);
+
+    if (location.hash != "" && $(location.hash).length > 0) {
+      if (s.PC_FIXED && $(window).innerWidth() >= s.SP_WIDTH || s.SP_FIXED && $(window).innerWidth() < s.SP_WIDTH) {
+        console.log('acc:start')
+        $('html, body').css('opacity', 0);
+      }
+    }
 
     // accordionの動きを動きを入れてくれるイベント（slideToggle）
     function accordionEvent(e) {
@@ -57,7 +69,7 @@
 
     // accordionボタンにマウスポイントのCSSを追加
     function pointEvent(e) {
-      e.css('cursor', 'pointer').attr('tabindex','0').attr('role', 'tab');
+      e.css('cursor', 'pointer').attr('tabindex', '0').attr('role', 'tab');
       e.next().css('display', 'none').attr('role', 'tabpanel');
     }
 
@@ -204,11 +216,11 @@
 
     // 自動に何番目のアイテムを開くかのイベント 0からスタート
     function openSpecifiedAccordion() {
-      for(let i =0;i<s.openIndex.length;i++){
+      for (let i = 0; i < s.openIndex.length; i++) {
         var item = $(targetTag[s.openIndex[i]]);
         if (!item.hasClass('active')) {
           item.addClass('active');
-          item.next().css('display','block');
+          item.next().css('display', 'block');
         }
       }
     }
@@ -217,32 +229,32 @@
 
     // 自動に何番目のアイテムを開くかのイベント
     //タグに data-autoopen="true"追加が必要
-    $(targetTag).each(function(){
-      if($(this).data('autoopen')){
+    $(targetTag).each(function () {
+      if ($(this).data('autoopen')) {
         $(this).addClass('active');
-        $(this).next().css('display','block');
+        $(this).next().css('display', 'block');
       }
     });
 
     pcHideEvent($(this));
 
-    $(document).keydown(function(event) {
+    $(document).keydown(function (event) {
       var firstCheck = true;
-      for(let i = 0;i< targetTag.length;i++){
+      for (let i = 0; i < targetTag.length; i++) {
         // console.log($(targetTag)[i]);
-        if(firstCheck){
-          if($($(targetTag)[i]).is(':focus')){
-            if(event.key == 'Enter'){
+        if (firstCheck) {
+          if ($($(targetTag)[i]).is(':focus')) {
+            if (event.key == 'Enter') {
               accordionEvent($($(targetTag)[i]));
-            }else if(event.key == 'ArrowRight' || event.key =='ArrowDown'){
+            } else if (event.key == 'ArrowRight' || event.key == 'ArrowDown') {
               firstCheck = false;
-              if($(targetTag)[i+1]){
-                $(targetTag)[i+1].focus();
+              if ($(targetTag)[i + 1]) {
+                $(targetTag)[i + 1].focus();
               }
-            }else if(event.key == 'ArrowUp' || event.key =='ArrowLeft'){
+            } else if (event.key == 'ArrowUp' || event.key == 'ArrowLeft') {
               firstCheck = false;
-              if($(targetTag)[i-1]){
-                $(targetTag)[i-1].focus();
+              if ($(targetTag)[i - 1]) {
+                $(targetTag)[i - 1].focus();
               }
             }
           }
@@ -250,5 +262,19 @@
       }
     });
     // resize中止
+
+    if (location.hash != "" && $(location.hash).length > 0) {
+      let pos = 0;
+      if (s.PC_FIXED && $(window).innerWidth() >= s.SP_WIDTH) {
+        pos = $(location.hash).offset().top - $(s.PC_FIXED_ELE).innerHeight();
+      } else if (s.SP_FIXED && $(window).innerWidth() < s.SP_WIDTH) {
+        pos = $(location.hash).offset().top - $(s.SP_FIXED_ELE).innerHeight();
+      }
+      $("html, body").animate({
+        scrollTop: pos
+      }, 1, "swing");
+      $('html, body').css('opacity', 1);
+      console.log('acc:end')
+    }
   }
 })(jQuery);
