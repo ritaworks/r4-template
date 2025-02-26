@@ -87,6 +87,24 @@ $align-items: (
   }
 }
 
+// 画像の角丸用クラス
+@for $i from 1 through 15 {
+  $size: $i * 2;
+  .bdrs#{$size} {
+    overflow: hidden;
+    border-radius: #{$size}px;
+  }
+}
+
+// 画像のtb時幅設定クラス
+@for $i from 8 through 12 {
+  $size: $i * 50;
+  .img-tb#{$size} {
+    max-width: #{$size}px;
+    margin: 0 auto;
+  }
+}
+
 // フロートクラス
 .left-box {
   float: left !important;

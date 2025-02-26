@@ -71,6 +71,72 @@
   }
 }
 
+.breadcrumb-wrap {
+  ul.breadcrumb {
+    font-size: 0;
+    margin: auto;
+    > li {
+      display: inline-block;
+      font-size: 14px;
+      &:first-child {
+        &:before {
+          content: none;
+        }
+      }
+      &:before {
+        content: "/";
+        margin: 0 9px;
+      }
+      > a {
+        display: inline-block;
+        color: $primary;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    ul.breadcrumb {
+      @include flex;
+      width: 100%;
+      > li {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.box01 {
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 30px;
+  padding: 45px 50px;
+  @media only screen and (max-width: $screen-tb) {
+    padding: 20px;
+  }
+}
+
+.box02 {
+  background: #fff;
+  border: 1px solid $primary;
+  border-radius: 30px;
+  padding: 45px 50px;
+  @media only screen and (max-width: $screen-tb) {
+    padding: 20px;
+  }
+}
+
+.box03 {
+  background: $primary;
+  border: 1px solid $primary;
+  border-radius: 30px;
+  padding: 45px 50px;
+  @media only screen and (max-width: $screen-tb) {
+    padding: 20px;
+  }
+}
+
 // --------------------------------------------------
 // Headings
 // --------------------------------------------------
@@ -260,13 +326,15 @@ h5 {
   .news-detail-pdf {
     a[href$=".pdf"] {
       vertical-align: middle;
-
+      position: relative;
+      padding-left: 20px;
       &:after {
-        content: "";
-        height: 16px;
-        width: 16px;
-        background: url(../img/pdf.png) no-repeat center / contain;
-        margin-left: 5px;
+        content: "\f1c1";
+        font: 900 16px $f-fa;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #ef0d00;
       }
     }
   }
