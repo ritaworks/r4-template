@@ -5,15 +5,84 @@
 
 .table01 {
   width: 100%;
+
+  th,
+  td {
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 30px;
+  }
+
+  thead {
+    th {
+      font-weight: 500;
+      color: #fff;
+      background: $primary;
+    }
+  }
+
+  tbody {
+    th {
+      background: $primary;
+    }
+  }
+
+  @media only screen and (max-width: $screen-tb) {
+    &:not(.nodrop-table) {
+      th,
+      td {
+        display: block;
+        width: 100% !important;
+      }
+    }
+  }
+
+  &.-middle {
+    th,
+    td {
+      vertical-align: middle;
+    }
+  }
 }
 
 .table02 {
   width: 100%;
+
+  tr {
+    border-top: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+  }
+
+  th,
+  td {
+    padding: 20px;
+  }
+
+  @media only screen and (max-width: $screen-tb) {
+    th,
+    td {
+      line-height: 1.5;
+      display: block;
+      width: 100% !important;
+      padding: 20px;
+    }
+
+    th {
+      padding-bottom: 3px;
+    }
+
+    td {
+      padding-top: 3px;
+    }
+  }
+
+  &.-middle {
+    th,
+    td {
+      vertical-align: middle;
+    }
+  }
 }
-
-
-
-
 
 // --------------------------------------------------
 // その他
@@ -23,11 +92,9 @@
 }
 
 .nodrop-table {
-
   tbody,
   thead {
     tr {
-
       th,
       td {
         @media only screen and (max-width: $screen-tb) {
