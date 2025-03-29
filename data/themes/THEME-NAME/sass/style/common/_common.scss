@@ -98,7 +98,7 @@
   }
   @media only screen and (max-width: $screen-tb) {
     ul.breadcrumb {
-      @include flex;
+      text-align: left;
       width: 100%;
       > li {
         font-size: 12px;
@@ -112,29 +112,21 @@
   border: 1px solid #d0d0d0;
   border-radius: 30px;
   padding: 45px 50px;
+
   @media only screen and (max-width: $screen-tb) {
     padding: 20px;
   }
 }
 
 .box02 {
-  background: #fff;
+  @extend .box01;
   border: 1px solid $primary;
-  border-radius: 30px;
-  padding: 45px 50px;
-  @media only screen and (max-width: $screen-tb) {
-    padding: 20px;
-  }
 }
 
 .box03 {
+  @extend .box01;
   background: $primary;
   border: 1px solid $primary;
-  border-radius: 30px;
-  padding: 45px 50px;
-  @media only screen and (max-width: $screen-tb) {
-    padding: 20px;
-  }
 }
 
 // --------------------------------------------------
@@ -329,12 +321,12 @@ h5 {
       position: relative;
       padding-left: 20px;
       &:after {
-        content: "\f1c1";
+        content: $icon-pdf;
         font: 900 16px $f-fa;
         position: absolute;
         top: 0;
         left: 0;
-        color: #ef0d00;
+        color: $color-pdf;
       }
     }
   }

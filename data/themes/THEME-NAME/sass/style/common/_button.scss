@@ -52,12 +52,12 @@
 
   &[href$=".pdf"] {
     &:before {
-      content: "\f1c1";
-      color: #ef0d00;
+      content: $icon-pdf;
+      color: $color-pdf;
     }
 
     &:hover {
-      color: #ef0d00;
+      color: $color-pdf;
     }
   }
 
@@ -65,24 +65,24 @@
   &[href$=".xlsx"],
   &[href$=".xlsm"] {
     &:before {
-      content: "\f1c3";
-      color: #238049;
+      content: $icon-xls;
+      color: $color-xls;
     }
 
     &:hover {
-      color: #238049;
+      color: $color-xls;
     }
   }
 
   &[href$=".doc"],
   &[href$=".docx"] {
     &:before {
-      content: "\f1c2";
-      color: #1b50b0;
+      content: $icon-doc;
+      color: $color-doc;
     }
 
     &:hover {
-      color: #1b50b0;
+      color: $color-doc;
     }
   }
 }

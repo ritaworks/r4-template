@@ -105,27 +105,23 @@ $align-items: (
   }
 }
 
-// フロートクラス
-.left-box {
-  float: left !important;
+// flex時gap設定クラス
+@for $i from 1 through 50 {
+  .gap#{$i} {
+    gap: #{$i}px;
+  }
 }
-
-.right-box {
-  float: right !important;
+@media only screen and (max-width: $screen-tb) {
+  @for $i from 1 through 50 {
+    .gap#{$i}-tb {
+      gap: #{$i}px;
+    }
+  }
 }
 
 .center-box {
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-//フロートクラス（forSp)
-.left-sp {
-  float: left !important;
-}
-
-.right-sp {
-  float: right !important;
 }
 
 // フォント太さクラス
@@ -200,7 +196,21 @@ $align-items: (
 
 //フレックス
 .flex {
-  @include flex;
+  @include flex(row, wrap, space-between, flex-start);
+
+  &.-center {
+    align-items: center;
+  }
+
+  &.-reverse {
+    flex-direction: row-reverse;
+  }
+
+  @media only screen and (max-width: $screen-tb) {
+    .flex-item {
+      width: 100% !important;
+    }
+  }
 }
 
 @each $class, $value in $flex-direction {

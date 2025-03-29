@@ -16,12 +16,12 @@
       position: relative;
       padding-left: 20px;
       &:after {
-        content: "\f1c1";
+        content: $icon-pdf;
         font: 900 16px $f-fa;
         position: absolute;
         top: 0;
         left: 0;
-        color: #ef0d00;
+        color: $color-pdf;
       }
     }
 
@@ -51,12 +51,12 @@
           position: relative;
           padding-left: 20px;
           &:after {
-            content: "\f1c1";
+            content: $icon-pdf;
             font: 900 16px $f-fa;
             position: absolute;
             top: 0;
             left: 0;
-            color: #ef0d00;
+            color: $color-pdf;
           }
         }
       }

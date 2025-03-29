@@ -16,7 +16,11 @@
     position: inherit !important;
   }
 
-  .key-visual.top {
+  .key-visual.-top {
     max-height: 600px !important;
+  }
+
+  body {
+    padding-top: 0 !important;
   }
 }

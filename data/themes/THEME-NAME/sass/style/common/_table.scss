@@ -15,7 +15,7 @@
 
   thead {
     th {
-      font-weight: 500;
+      font-weight: bold;
       color: #fff;
       background: $primary;
     }
@@ -23,7 +23,7 @@
 
   tbody {
     th {
-      background: $primary;
+      font-weight: bold;
     }
   }
 
@@ -59,20 +59,22 @@
   }
 
   @media only screen and (max-width: $screen-tb) {
-    th,
-    td {
-      line-height: 1.5;
-      display: block;
-      width: 100% !important;
-      padding: 20px;
-    }
+    &:not(.nodrop-table) {
+      th,
+      td {
+        line-height: 1.5;
+        display: block;
+        width: 100% !important;
+        padding: 20px;
+      }
 
-    th {
-      padding-bottom: 3px;
-    }
+      th {
+        padding-bottom: 3px;
+      }
 
-    td {
-      padding-top: 3px;
+      td {
+        padding-top: 3px;
+      }
     }
   }
 
