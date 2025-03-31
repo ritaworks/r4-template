@@ -119,6 +119,14 @@ $align-items: (
   }
 }
 
+.left-box {
+  float: left !important;
+}
+
+.right-box {
+  float: right !important;
+}
+
 .center-box {
   margin-left: auto !important;
   margin-right: auto !important;
