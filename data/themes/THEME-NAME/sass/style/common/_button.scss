@@ -3,7 +3,7 @@
 
 @use "../../global" as *;
 
-.button01 {
+@mixin button01 {
   display: inline-block;
   width: 100%;
   max-width: 300px;
@@ -27,8 +27,16 @@
   }
 }
 
-.button02 {
+.button01 {
+  @include button01;
+}
+
+@mixin button02 {
   // @extend .button01; //色違いの場合のみ
+}
+
+.button02 {
+  @include button02;
 }
 
 .file-icon {
