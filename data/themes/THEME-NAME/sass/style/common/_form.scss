@@ -21,6 +21,17 @@ $form_active_checkbox_mark: #fff;
 @mixin form_required {
 }
 
+// 4.ボタンのスタイル
+@mixin form_button {
+  &.button01 {
+    @include button.button01;
+  }
+
+  &.button02 {
+    @include button.button02;
+  }
+}
+
 // --------------------------------------------------
 // Style
 // --------------------------------------------------
@@ -89,6 +100,12 @@ $form_active_checkbox_mark: #fff;
         line-height: $base-line-height;
         letter-spacing: $base-letter-spacing;
       }
+    }
+
+    // ボタン
+    button,
+    a {
+      @include form_button;
     }
 
     a {
