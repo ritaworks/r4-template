@@ -87,7 +87,38 @@ $align-items: (
   }
 }
 
-// フロートクラス
+// 画像の角丸用クラス
+@for $i from 1 through 15 {
+  $size: $i * 2;
+  .bdrs#{$size} {
+    overflow: hidden;
+    border-radius: #{$size}px;
+  }
+}
+
+// 画像のtb時幅設定クラス
+@for $i from 8 through 12 {
+  $size: $i * 50;
+  .img-tb#{$size} {
+    max-width: #{$size}px;
+    margin: 0 auto;
+  }
+}
+
+// flex時gap設定クラス
+@for $i from 1 through 50 {
+  .gap#{$i} {
+    gap: #{$i}px;
+  }
+}
+@media only screen and (max-width: $screen-tb) {
+  @for $i from 1 through 50 {
+    .gap#{$i}-tb {
+      gap: #{$i}px;
+    }
+  }
+}
+
 .left-box {
   float: left !important;
 }
@@ -99,15 +130,6 @@ $align-items: (
 .center-box {
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-//フロートクラス（forSp)
-.left-sp {
-  float: left !important;
-}
-
-.right-sp {
-  float: right !important;
 }
 
 // フォント太さクラス
@@ -182,7 +204,21 @@ $align-items: (
 
 //フレックス
 .flex {
-  @include flex;
+  @include flex(row, wrap, space-between, flex-start);
+
+  &.-center {
+    align-items: center;
+  }
+
+  &.-reverse {
+    flex-direction: row-reverse;
+  }
+
+  @media only screen and (max-width: $screen-tb) {
+    .flex-item {
+      width: 100% !important;
+    }
+  }
 }
 
 @each $class, $value in $flex-direction {

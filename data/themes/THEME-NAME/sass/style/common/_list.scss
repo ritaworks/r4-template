@@ -13,12 +13,15 @@
   // aタグがテキストの場合
   a {
     &[href$=".pdf"] {
+      position: relative;
+      padding-left: 20px;
       &:after {
-        content: "";
-        height: 16px;
-        width: 16px;
-        background: url(../img/pdf.png) no-repeat center / contain;
-        margin-left: 5px;
+        content: $icon-pdf;
+        font: 900 16px $f-fa;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $color-pdf;
       }
     }
 
@@ -45,12 +48,15 @@
     &[href$=".pdf"] {
       + .txt-wrap {
         .ttl {
+          position: relative;
+          padding-left: 20px;
           &:after {
-            content: "";
-            height: 16px;
-            width: 16px;
-            background: url(../img/pdf.png) no-repeat center / contain;
-            margin-left: 5px;
+            content: $icon-pdf;
+            font: 900 16px $f-fa;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: $color-pdf;
           }
         }
       }

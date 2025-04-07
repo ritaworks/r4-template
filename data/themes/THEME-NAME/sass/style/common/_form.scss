@@ -14,19 +14,21 @@ $form_active_border_color: #2196f3;
 $form_active_checkbox_mark: #fff;
 
 // 2.項目名のスタイル
-@mixin form_title {}
+@mixin form_title {
+}
 
 // 3.「必須」のスタイル
-@mixin form_required {}
+@mixin form_required {
+}
 
 // 4.ボタンのスタイル
 @mixin form_button {
   &.button01 {
-    @extend .button01;
+    @include button.button01;
   }
 
   &.button02 {
-    @extend .button02;
+    @include button.button02;
   }
 }
 
@@ -35,15 +37,14 @@ $form_active_checkbox_mark: #fff;
 // --------------------------------------------------
 .l-main {
   .ui.form.inputForm {
-
     // 項目名・必須マーク
     .input_preview {
-      >.input_labels {
-        >.input_label {
+      > .input_labels {
+        > .input_label {
           @include form_title;
         }
 
-        >.input_required {
+        > .input_required {
           @include form_required;
         }
       }
@@ -51,14 +52,14 @@ $form_active_checkbox_mark: #fff;
 
     // 選択チェック：checkbox, radio
     .icheck-material-blue {
-      >input:first-child {
+      > input:first-child {
         background-color: $form_active_background_color;
 
-        +label::before {
+        + label::before {
           border-color: $form_default_border_color;
         }
 
-        &:checked+label {
+        &:checked + label {
           &:before {
             border-color: $form_active_border_color;
             background-color: $form_active_background_color;
@@ -73,8 +74,23 @@ $form_active_checkbox_mark: #fff;
         }
       }
 
-      >input[type="radio"]:first-child:checked+label::after {
+      > input[type="radio"]:first-child:checked + label::after {
         background-color: $form_active_background_color;
+      }
+    }
+
+    // ドロップダウン
+    .ui.selection.dropdown {
+      font-size: $base-font-size;
+      @media only screen and (max-width: $screen-tb) {
+        font-size: $base-font-size-tb;
+      }
+      .menu {
+        max-height: 70vh;
+        > .item {
+          font-size: 1em;
+          padding: 0.78571429em 1.14285714em !important;
+        }
       }
     }
 
