@@ -32,7 +32,7 @@
 }
 
 @mixin button02 {
-  // @include .button01; //色違いの場合のみ
+  // @include button01; //色違いの場合のみ
 }
 
 .button02 {
