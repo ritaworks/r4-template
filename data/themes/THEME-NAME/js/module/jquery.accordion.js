@@ -39,7 +39,7 @@
     s = $.extend({}, s, option);
 
     if (location.hash != "" && $(location.hash).length > 0) {
-      if (s.PC_FIXED && $(window).innerWidth() >= s.SP_WIDTH || s.SP_FIXED && $(window).innerWidth() < s.SP_WIDTH) {
+      if (s.PC_FIXED && $(window).innerWidth() > s.SP_WIDTH || s.SP_FIXED && $(window).innerWidth() <= s.SP_WIDTH) {
         console.log('acc:start')
         $('html, body').css('opacity', 0);
       }
@@ -264,17 +264,19 @@
     // resize中止
 
     if (location.hash != "" && $(location.hash).length > 0) {
-      let pos = 0;
-      if (s.PC_FIXED && $(window).innerWidth() >= s.SP_WIDTH) {
-        pos = $(location.hash).offset().top - $(s.PC_FIXED_ELE).innerHeight();
-      } else if (s.SP_FIXED && $(window).innerWidth() < s.SP_WIDTH) {
-        pos = $(location.hash).offset().top - $(s.SP_FIXED_ELE).innerHeight();
+      if (s.PC_FIXED && $(window).innerWidth() > s.SP_WIDTH || s.SP_FIXED && $(window).innerWidth() <= s.SP_WIDTH) {
+        let pos = $(location.hash).offset().top;
+        if (s.PC_FIXED && $(window).innerWidth() >= s.SP_WIDTH) {
+          pos -= $(s.PC_FIXED_ELE).innerHeight();
+        } else if (s.SP_FIXED && $(window).innerWidth() < s.SP_WIDTH) {
+          pos -= $(s.SP_FIXED_ELE).innerHeight();
+        }
+        $("html, body").animate({
+          scrollTop: pos
+        }, 1, "swing");
+        $('html, body').css('opacity', 1);
+        console.log('acc:end')
       }
-      $("html, body").animate({
-        scrollTop: pos
-      }, 1, "swing");
-      $('html, body').css('opacity', 1);
-      console.log('acc:end')
     }
   }
 })(jQuery);
