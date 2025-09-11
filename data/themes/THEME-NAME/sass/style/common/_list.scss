@@ -46,18 +46,22 @@
     }
 
     &[href$=".pdf"] {
-      + .txt-wrap {
-        .ttl {
-          position: relative;
-          padding-left: 20px;
-          &:after {
-            content: $icon-pdf;
-            font: 900 16px $f-fa;
-            position: absolute;
-            top: 0;
-            left: 0;
-            color: $color-pdf;
-          }
+      ~.ttl {
+        position: relative;
+        padding-left: 20px;
+        &:after {
+          content: $icon-pdf;
+          font: 900 16px $f-fa;
+          position: absolute;
+          top: 0;
+          left: 0;
+          color: $color-pdf;
+        }
+      }
+
+      &:hover {
+        ~.ttl {
+          text-decoration: underline;
         }
       }
     }
@@ -77,7 +81,7 @@
 
 .cms-ullist,
 .dot-list {
-  > li {
+  >li {
     padding-left: 20px;
     position: relative;
 
@@ -92,7 +96,7 @@
 
   &[style="list-style-type: circle;"],
   &[style="list-style-type: square;"] {
-    > li {
+    >li {
       list-style-type: inherit;
       text-indent: 0;
 
@@ -111,7 +115,7 @@
 .num-list {
   counter-reset: section;
 
-  > li {
+  >li {
     padding-left: 20px;
     position: relative;
     counter-increment: section;
@@ -129,7 +133,7 @@
   &[style="list-style-type: lower-roman;"],
   &[style="list-style-type: upper-alpha;"],
   &[style="list-style-type: upper-roman;"] {
-    > li {
+    >li {
       list-style-type: inherit;
       text-indent: 0;
       margin-left: 0;
@@ -148,7 +152,7 @@
 .asterisk-list {
   @extend .dot-list;
 
-  > li {
+  >li {
     &:before {
       content: "※";
     }
