@@ -380,7 +380,6 @@ h5 {
     &.icon {
       display: none;
 
-      // background-color: unset;
       // transition: .3s;
       // background-color: #ddd;
       // border-radius: 50%;
@@ -429,7 +428,6 @@ h5 {
       font-size: 14px;
 
       .icon {
-        width: 35px;
 
         &::before {
           font-size: 12px;
