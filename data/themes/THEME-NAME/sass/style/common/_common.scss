@@ -349,34 +349,92 @@ h5 {
 
 // 矢印が必要な場合は.iconを編集してください。
 .pagination {
-  text-align: center;
+  margin-top: 80px;
+  @include flex(row, wrap, center, stretch);
+  gap: 8px;
+
+  @media only screen and (max-width: $screen-tb) {
+    margin-top: 40px;
+    gap: 5px;
+  }
 
   .item {
-    display: inline-block;
+    display: grid;
+    place-content: center;
     height: 50px;
     width: 50px;
+    border-radius: 4px;
 
     font: {
-      size: 20px;
+      size: 16px;
       weight: bold;
     }
 
-    color: $primary;
+    color: $base-font-color;
     line-height: 48px;
     text-align: center;
     text-decoration: none;
-    border: 1px solid $primary;
-    background: #fff;
-    margin: 0 5px 10px;
+    background-color: #ddd;
     transition: all 0.3s;
 
     &.icon {
       display: none;
+
+      // background-color: unset;
+      // transition: .3s;
+      // background-color: #ddd;
+      // border-radius: 50%;
+
+      // &::before {
+      //   content: "";
+      //   transition: .3s;
+
+      //   font: {
+      //     family: $f-fa;
+      //     weight: 900;
+      //     size: 13px;
+      //   }
+
+      //   color: $base-font-color;
+      // }
+
+      // &:first-of-type {
+      //   &::before {
+      //     content: "\f060";
+      //   }
+      // }
+
+      // &:last-of-type {
+      //   &::before {
+      //     content: "\f061";
+      //   }
+      // }
+
+      // &:hover {
+      //   background-color: $primary;
+      //   &::before {
+      //     color: #fff;
+      //   }
+      // }
     }
 
     &[href="#"] {
       cursor: default;
       pointer-events: none;
+    }
+
+    @media only screen and (max-width: $screen-tb) {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+
+      .icon {
+        width: 35px;
+
+        &::before {
+          font-size: 12px;
+        }
+      }
     }
   }
 
