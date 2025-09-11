@@ -7,7 +7,7 @@
 // Container
 // --------------------------------------------------
 .l-container {
-  overflow: hidden; //stickyを使う場合は要注意
+  overflow: clip;
 
   @media only screen and (min-width: $screen-pc-min) {
     min-width: $container-pc;
