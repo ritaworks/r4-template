@@ -1,4 +1,8 @@
 @charset "UTF-8";
+@use "../../global" as *;
+@use "../../base" as *;
+@use "../../core" as *;
+@use "../common/" as *;
 
 // --------------------------------------------------
 // Setting（true or false）
@@ -166,7 +170,7 @@ $calendar-btntop: false;
         position: absolute;
         top: -2px;
         z-index: 1;
-        >a {
+        > a {
           @extend .fade;
           display: inline-block;
           height: 34px;
@@ -194,7 +198,7 @@ $calendar-btntop: false;
             top: 0;
             left: 0;
           }
-          transition: .3s;
+          transition: 0.3s;
           &:hover {
             text-decoration: none;
           }
@@ -202,13 +206,13 @@ $calendar-btntop: false;
       }
       &#blog-calendar-prev {
         left: 0;
-        >a:after {
+        > a:after {
           content: "\f104";
         }
       }
       &#blog-calendar-next {
         right: 0;
-        >a:after {
+        > a:after {
           content: "\f105";
         }
       }
@@ -279,7 +283,7 @@ $calendar-btntop: false;
           text-align: center;
           white-space: nowrap;
           text-overflow: ellipsis;
-          @media only screen and(max-width: $screen-tb) {
+          @media only screen and (max-width: $screen-tb) {
             white-space: inherit;
           }
         }
