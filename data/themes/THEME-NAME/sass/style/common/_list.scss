@@ -12,17 +12,49 @@
 .news-link-event01 {
   // aタグがテキストの場合
   a {
-    &[href$=".pdf"] {
+    &[href$=".pdf"],
+    &[href$=".doc"],
+    &[href$=".docx"],
+    &[href$=".xls"],
+    &[href$=".xlsx"],
+    &[href$=".xlsm"],
+    &[target="_blank"] {
       position: relative;
       padding-left: 20px;
+
       &:after {
-        content: $icon-pdf;
         font: 900 16px $f-fa;
         position: absolute;
         top: 0;
         left: 0;
-        color: $color-pdf;
       }
+    }
+
+    &[href$=".pdf"]:after {
+      content: $icon-pdf;
+      color: $color-pdf;
+    }
+
+    &[href$=".doc"],
+    &[href$=".docx"] {
+      &:after {
+        content: $icon-doc;
+        color: $color-doc;
+      }
+    }
+
+    &[href$=".xls"],
+    &[href$=".xlsx"],
+    &[href$=".xlsm"] {
+      &:after {
+        content: $icon-xls;
+        color: $color-xls;
+      }
+    }
+
+    &[target="_blank"]:after {
+      content: "\f08e";
+      color: $primary;
     }
 
     &[href="#"] {
@@ -45,24 +77,60 @@
       pointer-events: none;
     }
 
-    &[href$=".pdf"] {
-      ~.ttl {
+    &[href$=".pdf"],
+    &[href$=".doc"],
+    &[href$=".docx"],
+    &[href$=".xls"],
+    &[href$=".xlsx"],
+    &[href$=".xlsm"],
+    &[target="_blank"] {
+      ~ .ttl {
         position: relative;
         padding-left: 20px;
+
         &:after {
-          content: $icon-pdf;
           font: 900 16px $f-fa;
           position: absolute;
           top: 0;
           left: 0;
-          color: $color-pdf;
         }
       }
 
       &:hover {
-        ~.ttl {
+        ~ .ttl {
           text-decoration: underline;
         }
+      }
+    }
+
+    &[href$=".pdf"] {
+      ~ .ttl:after {
+        content: $icon-pdf;
+        color: $color-pdf;
+      }
+    }
+
+    &[href$=".doc"],
+    &[href$=".docx"] {
+      ~ .ttl:after {
+        content: $icon-doc;
+        color: $color-doc;
+      }
+    }
+
+    &[href$=".xls"],
+    &[href$=".xlsx"],
+    &[href$=".xlsm"] {
+      ~ .ttl:after {
+        content: $icon-xls;
+        color: $color-xls;
+      }
+    }
+
+    &[target="_blank"] {
+      ~ .ttl:after {
+        content: "\f08e";
+        color: $primary;
       }
     }
   }
@@ -81,7 +149,7 @@
 
 .cms-ullist,
 .dot-list {
-  >li {
+  > li {
     padding-left: 20px;
     position: relative;
 
@@ -96,7 +164,7 @@
 
   &[style="list-style-type: circle;"],
   &[style="list-style-type: square;"] {
-    >li {
+    > li {
       list-style-type: inherit;
       text-indent: 0;
 
@@ -115,7 +183,7 @@
 .num-list {
   counter-reset: section;
 
-  >li {
+  > li {
     padding-left: 20px;
     position: relative;
     counter-increment: section;
@@ -133,7 +201,7 @@
   &[style="list-style-type: lower-roman;"],
   &[style="list-style-type: upper-alpha;"],
   &[style="list-style-type: upper-roman;"] {
-    >li {
+    > li {
       list-style-type: inherit;
       text-indent: 0;
       margin-left: 0;
@@ -152,7 +220,7 @@
 .asterisk-list {
   @extend .dot-list;
 
-  >li {
+  > li {
     &:before {
       content: "※";
     }
