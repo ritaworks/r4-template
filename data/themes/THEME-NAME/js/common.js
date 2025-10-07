@@ -84,7 +84,7 @@ $(function () {
   // スライドメニューの開閉
   let top = 0;
 
-  function slidemenubtnEvent(){
+  function slidemenubtnEvent() {
     if (!menu_open) {
       top = $(window).scrollTop();
     }
@@ -103,9 +103,9 @@ $(function () {
     slidemenubtnEvent();
   });
 
-  $(document).keydown(function(event) {
-    if(event.key == 'Enter'){
-      if($(menu_btn).is(':focus')){
+  $(document).keydown(function (event) {
+    if (event.key == 'Enter') {
+      if ($(menu_btn).is(':focus')) {
         slidemenubtnEvent();
       }
     }
@@ -144,7 +144,7 @@ $(function () {
         $(window).trigger(scrollStopEvent)
       }, delay);
     }
-    $(window).on("scroll", function(){
+    $(window).on("scroll", function () {
       scrollStopEventTrigger();
     });
   };
@@ -162,6 +162,31 @@ $(window).on('load', function () {
       return false;
     }
   }
+});
+
+// 交差オブザーバー
+$(function () {
+
+  // .js-scroll クラスを監視
+  const targets = document.querySelectorAll('.js-scroll');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      //画面内に入ったらクラス追加
+      if (entry.isIntersecting) {
+        $(entry.target).addClass('is-scrolled');
+      }
+      // 画面外に出たらクラス削除
+      else {
+        // $(entry.target).removeClass('is-scrolled');
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0
+  });
+
+  targets.forEach(target => observer.observe(target));
 });
 
 // 2. rollover（_offと末尾についた画像をオンマウスで_onとついた画像に切り替える）
