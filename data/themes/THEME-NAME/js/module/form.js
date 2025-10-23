@@ -17,6 +17,8 @@
     - form/jquery.sum.js
   5. コピペ禁止
     - form.js
+  6. 禁止ワード設定
+    - form.js
 
 ■ 絞り込み機能
   1. form/jquery.resultStay.js
@@ -38,6 +40,7 @@
       address: [],
       tel: [],
       nopaste: [],
+      phrase: {},
     };
     // データ上書き
     var config = $.extend({}, defs, params);
@@ -110,5 +113,105 @@
       }
     }
 
+    ////////////
+    // 特定のキーワードはエラーにする
+    // submitしたタイミングでconfig.phraseの内容に沿って、該当する入力欄に該当する文字が含まれている場合にsubmitさせない
+    ////////////
+    var buildPhraseMap = function (phraseConfig) {
+      var map = {};
+      if (!phraseConfig) return map;
+      // 配列形式は非推奨・サポート外とする
+      if (Array.isArray(phraseConfig)) {
+        try {
+          console && console.warn && console.warn('form.js: phrase 配列形式はサポートされません。マップ形式 { "inq01": [..] } を使用してください。');
+        } catch (e) {}
+        return map;
+      }
+      if (typeof phraseConfig === 'object') {
+        for (var k in phraseConfig) {
+          if (!phraseConfig.hasOwnProperty(k)) continue;
+          map[k] = phraseConfig[k];
+        }
+      }
+      return map;
+    };
+
+    var phraseMap = buildPhraseMap(config.phrase || []);
+
+    // エラーメッセージ表示ユーティリティ
+    var showFieldError = function ($field, message) {
+      // 既存のエラーメッセージ領域があれば使う。なければ小さな <div> を生成して追加する
+      var $err = $field.siblings('.form-error-forbidden');
+      if ($err.length === 0) {
+        $err = $('<div class="form-error-forbidden" style="color:#f00;"></div>');
+        $field.after($err);
+      }
+      $err.text(message).show();
+      $field.addClass('has-error');
+    };
+
+    var clearFieldError = function ($field) {
+      $field.siblings('.form-error-forbidden').hide();
+      $field.removeClass('has-error');
+    };
+
+    // グローバルエラーメッセージ表示領域を取得または作成
+    var getOrCreateGlobalError = function () {
+      var $submit = form.find('input[type="submit"], button[type="submit"]').last();
+      if ($submit.length === 0) {
+        return $('<div class="form-error-global" style="color:#f00;"></div>');
+      }
+      var $err = $submit.siblings('.form-error-global');
+      if ($err.length === 0) {
+        $err = $('<div class="form-error-global" style="color:#f00;"></div>');
+        $submit.after($err);
+      }
+      return $err;
+    };
+
+    // フォーム送信時の検証（各キーごとにチェックし、全体で1つのメッセージを表示）
+    form.on('submit', function (e) {
+      var hasError = false;
+
+      // 各フィールドに対応する禁止句を確認
+      for (var key in phraseMap) {
+        if (!phraseMap.hasOwnProperty(key)) continue;
+        var selector = '[name="form_' + key + '"]';
+        var $field = form.find(selector);
+        if ($field.length === 0) continue;
+
+        var value = String($field.val() || '').toLowerCase();
+        var forbiddenList = phraseMap[key] || [];
+
+        for (var j = 0; j < forbiddenList.length; j++) {
+          var forbidden = String(forbiddenList[j] || '').toLowerCase();
+          if (!forbidden) continue;
+          if (value.indexOf(forbidden) !== -1) {
+            hasError = true;
+            break;
+          }
+        }
+
+        if (hasError) break;
+      }
+
+      var $globalError = getOrCreateGlobalError();
+
+      if (hasError) {
+        e.preventDefault();
+        // エラーを送信ボタン下に表示
+        $globalError.text('入力内容に不適切な表現が含まれている可能性があります。修正して再送信してください。').show();
+        // 表示位置までスクロール
+        // var top = $globalError.offset().top - 20;
+        // $('html, body').animate({ scrollTop: top }, 300);
+      } else {
+        $globalError.hide();
+      }
+    });
+
+    // フォーカス時にエラークリア
+    form.on('input change', 'input, textarea', function () {
+      clearFieldError($(this));
+    });
   };
 })(jQuery);
