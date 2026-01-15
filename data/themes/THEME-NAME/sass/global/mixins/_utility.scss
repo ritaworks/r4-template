@@ -45,6 +45,39 @@ $align: left, right, center;
     }
   }
 }
+// スペーシング設定
+$space-map: (
+  lg: $space-lg,
+  md: $space-md,
+  rg: $space-rg,
+  sm: $space-sm,
+  xs: $space-xs
+);
+$space-map-tb: (
+  lg: $space-lg-tb,
+  md: $space-md-tb,
+  rg: $space-rg-tb,
+  sm: $space-sm-tb,
+  xs: $space-xs-tb
+);
+
+// owl用mixin
+@mixin owl-spacing($space-map, $space-map-tb) {
+  @each $key, $val in $space-map {
+    .owl-#{$key} > * + * {
+      margin-top: $val !important;
+      @media only screen and (max-width: $screen-tb) {
+        margin-top: map-get($space-map-tb, $key) !important;
+      }
+    }
+    // -tbクラス（タブレット以下のみ適用）
+    .owl-#{$key}-tb > * + * {
+      @media only screen and (max-width: $screen-tb) {
+        margin-top: map-get($space-map-tb, $key) !important;
+      }
+    }
+  }
+}
 
 // 行揃え指定クラス作成
 @mixin textalign($sufix: "") {
@@ -141,6 +174,14 @@ $align: left, right, center;
   display: flex;
 }
 
+@mixin inline-flex($f-direction: row, $f-wrap: wrap, $j-content: flex-start, $a-items: stretch) {
+  @include f-direction($f-direction);
+  @include f-wrap($f-wrap);
+  @include j-content($j-content);
+  @include a-items($a-items);
+  display: inline-flex;
+}
+
 // owl
 @mixin owl($sufix: "") {
   $i: 5;
@@ -167,5 +208,35 @@ $align: left, right, center;
     }
 
     $i: $i + 5;
+  }
+}
+
+
+// 画像のフェード用クラス
+@mixin fade {
+  transition: opacity 0.2s;
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: inline-block;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+//全体ホバー
+@mixin hover-all {
+  position: relative;
+
+  > a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    font-size: 0;
   }
 }

@@ -1,13 +1,13 @@
-const PC_FIXED = false;
-const SP_FIXED = false;
-const SP_WIDTH = 769;
+const PC_FIXED = true;
+const SP_FIXED = true;
+const SP_WIDTH = 1200;
 const SPEED = 500;
 
 // 1. スクロール関連
 
 function scrollPosition(position) {
   let offsetFromTop = $('header');
-  position -= PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH ? offsetFromTop.innerHeight() : 0;
+  position -= PC_FIXED && $(window).innerWidth() > SP_WIDTH || SP_FIXED && $(window).innerWidth() <= SP_WIDTH ? offsetFromTop.innerHeight() : 0;
   $('html, body').animate({
     scrollTop: position
   }, SPEED);
@@ -131,29 +131,29 @@ $(function () {
   });
 
   // 1.5秒で表示消す
-  if ($(window).innerWidth() < SP_WIDTH) {
-    var scrollStopEvent = new $.Event("scrollstop");
-    var delay = 1500;
-    var timer;
-    function scrollStopEventTrigger() {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      timer = setTimeout(function () {
-        top_btn.fadeOut();
-        $(window).trigger(scrollStopEvent)
-      }, delay);
-    }
-    $(window).on("scroll", function(){
-      scrollStopEventTrigger();
-    });
-  };
+  // if ($(window).innerWidth() <= SP_WIDTH) {
+  //   var scrollStopEvent = new $.Event("scrollstop");
+  //   var delay = 1500;
+  //   var timer;
+  //   function scrollStopEventTrigger() {
+  //     if (timer) {
+  //       clearTimeout(timer);
+  //     }
+  //     timer = setTimeout(function () {
+  //       top_btn.fadeOut();
+  //       $(window).trigger(scrollStopEvent)
+  //     }, delay);
+  //   }
+  //   $(window).on("scroll", function(){
+  //     scrollStopEventTrigger();
+  //   });
+  // };
 });
 
 // アンカーリンク付きのページ遷移をするとき：ヘッダーが固定分調整するjs
 $(window).on('load', function () {
   if (location.hash != "" && $(location.hash).length > 0) {
-    if (PC_FIXED && $(window).innerWidth() >= SP_WIDTH || SP_FIXED && $(window).innerWidth() < SP_WIDTH) {
+    if (PC_FIXED && $(window).innerWidth() > SP_WIDTH || SP_FIXED && $(window).innerWidth() <= SP_WIDTH) {
       let pos = $(location.hash).offset().top - $('header').innerHeight();
       $("html, body").animate({
         scrollTop: pos

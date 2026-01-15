@@ -1,10 +1,7 @@
 @charset "UTF-8";
 
 @use "../../global" as *;
-@use "common";
-@use "list";
-@use "button";
-@use "table";
+@use "../common";
 
 // --------------------------------------------------
 // 病院指標のスタイル
@@ -24,11 +21,11 @@
   // --------------------------------------------------
 
   h1 {
-    // @extend h2;
+    // @include heading02();
   }
 
   .div-title {
-    @extend h4;
+    @include heading04();
     @include flex(row, nowrap, space-between, center);
     column-gap: 10px;
     row-gap: 20px;
@@ -42,7 +39,7 @@
 
   @for $i from 0 through 30 {
     #cd_top5_nm_#{$i} {
-      @extend h5;
+      @include heading05();
       margin-top: 3rem;
     }
   }
@@ -63,7 +60,7 @@
   }
 
   .comment {
-    // @extend .box01;
+    // @include box01();
   }
 
   // .dpc-table-wrapが必要な場合は、jQueryで作成してください

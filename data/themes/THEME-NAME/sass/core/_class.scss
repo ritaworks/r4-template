@@ -32,6 +32,9 @@ $align-items: (
 // 余白クラスの生成
 @include spaceloop();
 
+// 変数は既存の $space-map, $space-map-tb を利用
+@include owl-spacing($space-map, $space-map-tb);
+
 // 行揃え指定クラス
 @include textalign();
 
@@ -75,17 +78,12 @@ $align-items: (
   width: 100% !important;
 }
 
-// 画像のフェード用クラス
 .fade {
-  transition: opacity 0.2s;
-  opacity: 1;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  display: inline-block;
+  @include fade;
+}
 
-  &:hover {
-    opacity: 0.7;
-  }
+.hover-all {
+  @include hover-all();
 }
 
 // 画像の角丸用クラス
@@ -192,6 +190,12 @@ $align-items: (
     }
   }
 
+  .pctbsp {
+    @media only screen and (max-width: $screen-xs) {
+      display: none !important;
+    }
+  }
+
   .tb {
     @media only screen and (min-width: $screen-pc-min) {
       display: none !important;
@@ -200,6 +204,12 @@ $align-items: (
 
   .sp {
     @media only screen and (min-width: $screen-tb-min) {
+      display: none !important;
+    }
+  }
+
+  .xs {
+    @media only screen and (min-width: $screen-sp-min) {
       display: none !important;
     }
   }
@@ -222,6 +232,14 @@ $align-items: (
       width: 100% !important;
     }
   }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
 }
 
 @each $class, $value in $flex-direction {
