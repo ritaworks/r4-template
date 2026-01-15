@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+@use "../../core" as *;
+@use "../../global" as *;
+
 // --------------------------------------------------
 // Setting（true or false）
 // wiki→http://new-cms-wiki.113110.website/coding-parts/calendar.html
@@ -167,7 +170,7 @@ $calendar-btntop: false;
         top: -2px;
         z-index: 1;
         >a {
-          @extend .fade;
+          @include fade;
           display: inline-block;
           height: 34px;
           width: 34px;
@@ -249,7 +252,7 @@ $calendar-btntop: false;
       }
       .blog {
         &-card {
-          @extend .hover-all;
+          @include hover-all;
           &:hover {
             .blog-title {
               text-decoration: underline;
@@ -279,7 +282,7 @@ $calendar-btntop: false;
           text-align: center;
           white-space: nowrap;
           text-overflow: ellipsis;
-          @media only screen and(max-width: $screen-tb) {
+          @media only screen and (max-width: $screen-tb) {
             white-space: inherit;
           }
         }
@@ -294,8 +297,8 @@ $calendar-btntop: false;
       }
       .blog {
         &-card {
-          @extend .hover-all;
-          @extend .fade;
+          @include hover-all;
+          @include fade;
           @include flex;
         }
         &-list {

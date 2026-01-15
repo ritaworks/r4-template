@@ -75,17 +75,12 @@ $align-items: (
   width: 100% !important;
 }
 
-// 画像のフェード用クラス
 .fade {
-  transition: opacity 0.2s;
-  opacity: 1;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  display: inline-block;
+  @include fade;
+}
 
-  &:hover {
-    opacity: 0.7;
-  }
+.hover-all {
+  @include hover-all();
 }
 
 // 画像の角丸用クラス

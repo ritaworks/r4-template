@@ -197,22 +197,6 @@ h5 {
   }
 }
 
-//全体ホバー
-.hover-all {
-  position: relative;
-
-  > a {
-    display: block;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 9;
-    top: 0;
-    left: 0;
-    font-size: 0;
-  }
-}
-
 //youtubeの自動レスポンシブ対応
 .youtube-wrap {
   height: 0;

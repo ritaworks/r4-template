@@ -177,3 +177,33 @@ $align: left, right, center;
     $i: $i + 5;
   }
 }
+
+
+// 画像のフェード用クラス
+@mixin fade {
+  transition: opacity 0.2s;
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: inline-block;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+//全体ホバー
+@mixin hover-all {
+  position: relative;
+
+  > a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    font-size: 0;
+  }
+}
