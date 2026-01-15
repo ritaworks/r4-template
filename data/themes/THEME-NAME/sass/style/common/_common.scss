@@ -132,49 +132,55 @@
 // --------------------------------------------------
 // Headings
 // --------------------------------------------------
+// トップページ用
 h2 {
   &.top {
-    // トップページ用
-  }
-
-  &:not(.top) {
-    // サブページ用
   }
 }
 
 h3 {
   &.top {
-    // トップページ用
-  }
-
-  &:not(.top) {
-    // サブページ用
   }
 }
 
 h4 {
   &.top {
-    // トップページ用
-  }
-
-  &:not(.top) {
-    // サブページ用
   }
 }
 
 h5 {
   &.top {
-    // トップページ用
-  }
-
-  &:not(.top) {
-    // サブページ用
-    font-weight: bold;
-    color: $primary;
-    margin-bottom: 10px;
   }
 }
 
+// サブページ用
+@mixin heading02 {
+}
+
+@mixin heading03 {
+}
+
+@mixin heading04 {
+}
+
+@mixin heading05 {
+  font-weight: bold;
+  color: $primary;
+  margin-bottom: 10px;
+}
+
+.heading02 {
+  @include heading02();
+}
+.heading03 {
+  @include heading03();
+}
+.heading04 {
+  @include heading04();
+}
+.heading05 {
+  @include heading05();
+}
 // --------------------------------------------------
 // Common
 // --------------------------------------------------
