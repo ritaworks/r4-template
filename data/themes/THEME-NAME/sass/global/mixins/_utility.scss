@@ -141,6 +141,14 @@ $align: left, right, center;
   display: flex;
 }
 
+@mixin inline-flex($f-direction: row, $f-wrap: wrap, $j-content: flex-start, $a-items: stretch) {
+  @include f-direction($f-direction);
+  @include f-wrap($f-wrap);
+  @include j-content($j-content);
+  @include a-items($a-items);
+  display: inline-flex;
+}
+
 // owl
 @mixin owl($sufix: "") {
   $i: 5;

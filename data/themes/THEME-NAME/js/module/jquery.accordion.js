@@ -15,7 +15,7 @@
     //accordionのオプション一覧
     var s = {
       size: 'pc', // accordionが動くサイズを設定します。（tbで設定する場合タブレット以下のみ動く）
-      SP_WIDTH: 768, // タブレット時に動かす横幅のサイズを設定します。
+      SP_WIDTH: 1200, // タブレット時に動かす横幅のサイズを設定します。
       otherClose: false,
       aTagAutoClose: false, // accordionで開いたボックスの中にあるaタグをクリックした場合に自動的に開いたボックスをそのままにするか閉じるかする（otherCloseとは違います）
       textChange: false, // accordionで開いたボックスの中にあるaタグをクリックした時にaccordionのテキストをaタグと同じテキストにするかどうか
@@ -28,8 +28,8 @@
       parentHeight_PC: 100, // parentAccordionがtrueの場合動きます、親要素高さの指定
       parentHeight_SP: 100,
       openIndex: [],
-      PC_FIXED: false, // PCのヘッダー固定
-      SP_FIXED: false, // TB以下のヘッダー固定
+      PC_FIXED: true, // PCのヘッダー固定
+      SP_FIXED: true, // TB以下のヘッダー固定
       PC_FIXED_ELE: 'header', // PCのヘッダー高さ要素
       SP_FIXED_ELE: 'header', // TB以下のヘッダー高さ要素
     }
@@ -40,7 +40,7 @@
 
     if (location.hash != "" && $(location.hash).length > 0) {
       if (s.PC_FIXED && $(window).innerWidth() > s.SP_WIDTH || s.SP_FIXED && $(window).innerWidth() <= s.SP_WIDTH) {
-        console.log('acc:start')
+        // console.log('acc:start')
         $('html, body').css('opacity', 0);
       }
     }

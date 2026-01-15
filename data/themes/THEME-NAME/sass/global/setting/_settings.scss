@@ -8,8 +8,8 @@
 $responsive: true;
 
 // ヘッダー固定かどうかの設定 - true/false
-$header-fixed-pc: false;
-$header-fixed-sp: false;
+$header-fixed-pc: true;
+$header-fixed-sp: true;
 
 // コンテナ幅
 $container-width: 1000px;
@@ -27,11 +27,13 @@ $light-cms: true;
 $light-cms-column-width: $container-width;
 
 // プレークポイント
-$screen-tb: 768px;
-$screen-sp: 480px;
+$screen-tb: 1200px;
+$screen-sp: 768px;
+$screen-xs: 480px;
 
 $screen-pc-min: ($screen-tb + 1) !default;
 $screen-tb-min: ($screen-sp + 1) !default;
+$screen-sp-min: ($screen-xs + 1) !default;
 
 // 基本値の設定（全ページ共通）
 $base-font: "ヒラギノ角ゴシック ProN", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", "游ゴシック体", "Yu Gothic", YuGothic, sans-serif;

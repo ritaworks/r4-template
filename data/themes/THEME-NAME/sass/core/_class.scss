@@ -192,6 +192,12 @@ $align-items: (
     }
   }
 
+  .pctbsp {
+    @media only screen and (max-width: $screen-xs) {
+      display: none !important;
+    }
+  }
+
   .tb {
     @media only screen and (min-width: $screen-pc-min) {
       display: none !important;
@@ -200,6 +206,12 @@ $align-items: (
 
   .sp {
     @media only screen and (min-width: $screen-tb-min) {
+      display: none !important;
+    }
+  }
+
+  .xs {
+    @media only screen and (min-width: $screen-sp-min) {
       display: none !important;
     }
   }
@@ -222,6 +234,14 @@ $align-items: (
       width: 100% !important;
     }
   }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
 }
 
 @each $class, $value in $flex-direction {
