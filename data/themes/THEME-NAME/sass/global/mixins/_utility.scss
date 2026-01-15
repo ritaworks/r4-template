@@ -45,6 +45,39 @@ $align: left, right, center;
     }
   }
 }
+// スペーシング設定
+$space-map: (
+  lg: $space-lg,
+  md: $space-md,
+  rg: $space-rg,
+  sm: $space-sm,
+  xs: $space-xs
+);
+$space-map-tb: (
+  lg: $space-lg-tb,
+  md: $space-md-tb,
+  rg: $space-rg-tb,
+  sm: $space-sm-tb,
+  xs: $space-xs-tb
+);
+
+// owl用mixin
+@mixin owl-spacing($space-map, $space-map-tb) {
+  @each $key, $val in $space-map {
+    .owl-#{$key} > * + * {
+      margin-top: $val !important;
+      @media only screen and (max-width: $screen-tb) {
+        margin-top: map-get($space-map-tb, $key) !important;
+      }
+    }
+    // -tbクラス（タブレット以下のみ適用）
+    .owl-#{$key}-tb > * + * {
+      @media only screen and (max-width: $screen-tb) {
+        margin-top: map-get($space-map-tb, $key) !important;
+      }
+    }
+  }
+}
 
 // 行揃え指定クラス作成
 @mixin textalign($sufix: "") {

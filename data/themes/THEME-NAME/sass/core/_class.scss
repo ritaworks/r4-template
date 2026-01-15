@@ -32,6 +32,9 @@ $align-items: (
 // 余白クラスの生成
 @include spaceloop();
 
+// 変数は既存の $space-map, $space-map-tb を利用
+@include owl-spacing($space-map, $space-map-tb);
+
 // 行揃え指定クラス
 @include textalign();
 

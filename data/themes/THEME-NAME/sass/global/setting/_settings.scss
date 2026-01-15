@@ -49,6 +49,18 @@ $base-font-weight: 400;
 $base-line-height: 2;
 $base-letter-spacing: 0.06em;
 
+// --- Spacing ---
+$space-lg: 100px; // h2など
+$space-md: 80px; // h3など
+$space-rg: 60px;
+$space-sm: 40px; // h4など
+$space-xs: 20px; // h5など
+$space-lg-tb: 60px;
+$space-md-tb: 40px;
+$space-rg-tb: 30px;
+$space-sm-tb: 20px;
+$space-xs-tb: 15px;
+
 // --------------------------------------------------
 // グリッドシステム設定
 // --------------------------------------------------
