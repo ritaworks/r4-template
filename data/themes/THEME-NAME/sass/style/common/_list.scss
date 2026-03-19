@@ -4,8 +4,6 @@
 
 // --------------------------------------------------
 // お知らせ
-// リストタイプ：http://parts-template2.light-cms.com/news/index.html
-// カードタイプ：http://parts-template2.light-cms.com/card/index.html#card1
 // --------------------------------------------------
 // お知らせ一覧にPDFアイコンを表示する
 // @extend で対応してください。
@@ -79,8 +77,8 @@
 // リストの中の擬似要素にまでtext-indentが継承される問題！！！
 // text-indentを使わない OR before,afterにデフォルト(_core)でtext-indent:0;にする
 
-.cms-ullist,
-.dot-list {
+ul.cms-ullist,
+ul.dot-list {
   > li {
     position: relative;
     padding-left: 20px;
@@ -111,8 +109,8 @@
   }
 }
 
-.cms-ollist,
-.num-list {
+ol.cms-ollist,
+ol.num-list {
   counter-reset: section;
 
   > li {
@@ -149,7 +147,7 @@
   }
 }
 
-.asterisk-list {
+ul.asterisk-list {
   @extend .dot-list;
 
   > li {
