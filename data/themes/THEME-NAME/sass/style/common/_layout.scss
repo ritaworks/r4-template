@@ -8,10 +8,6 @@
 // --------------------------------------------------
 .l-container {
   overflow: clip;
-
-  @media only screen and (min-width: $screen-pc-min) {
-    min-width: $container-pc;
-  }
 }
 
 // 幅を指定するパターン
