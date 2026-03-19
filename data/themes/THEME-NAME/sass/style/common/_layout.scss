@@ -8,10 +8,6 @@
 // --------------------------------------------------
 .l-container {
   overflow: clip;
-
-  @media only screen and (min-width: $screen-pc-min) {
-    min-width: $container-pc;
-  }
 }
 
 // 幅を指定するパターン
@@ -48,9 +44,7 @@ body {
     @if $header-fixed-sp {
       position: relative;
       padding-top: $header-height-sp;
-    }
-
-    @else {
+    } @else {
       padding-top: 0;
     }
   }
@@ -67,9 +61,7 @@ header {
 
   @if $header-fixed-pc {
     position: fixed;
-  }
-
-  @else {
+  } @else {
     position: relative;
   }
 
@@ -81,9 +73,7 @@ header {
 
     @if $header-fixed-sp {
       position: fixed;
-    }
-
-    @else {
+    } @else {
       position: relative;
     }
   }
@@ -91,9 +81,9 @@ header {
 
 // --------------------------------------------------
 // Grobal-navigation
-// http://parts-template2.light-cms.com/navigation/index.html
 // --------------------------------------------------
-.g-nav {}
+nav.g-nav {
+}
 
 // --------------------------------------------------
 // Slide-menu
@@ -149,12 +139,13 @@ header {
 // --------------------------------------------------
 // Key-visual
 // --------------------------------------------------
-.key-visual {}
+.key-visual {
+}
 
 // --------------------------------------------------
 // Main
 // --------------------------------------------------
-.l-main {
+main.l-main {
   @include clearfix;
 }
 
@@ -184,9 +175,11 @@ header {
 }
 
 // Sideの中身
-.side-ttl {}
+.side-ttl {
+}
 
 // --------------------------------------------------
 // Footer
 // --------------------------------------------------
-footer {}
+footer {
+}

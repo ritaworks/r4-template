@@ -4,8 +4,6 @@
 
 // --------------------------------------------------
 // お知らせ
-// リストタイプ：http://parts-template2.light-cms.com/news/index.html
-// カードタイプ：http://parts-template2.light-cms.com/card/index.html#card1
 // --------------------------------------------------
 // お知らせ一覧にPDFアイコンを表示する
 // @extend で対応してください。
@@ -18,10 +16,10 @@
       &:after {
         content: $icon-pdf;
         font: 900 16px $f-fa;
+        color: $color-pdf;
         position: absolute;
         top: 0;
         left: 0;
-        color: $color-pdf;
       }
     }
 
@@ -46,21 +44,21 @@
     }
 
     &[href$=".pdf"] {
-      ~.ttl {
+      ~ .ttl {
         position: relative;
         padding-left: 20px;
         &:after {
           content: $icon-pdf;
           font: 900 16px $f-fa;
+          color: $color-pdf;
           position: absolute;
           top: 0;
           left: 0;
-          color: $color-pdf;
         }
       }
 
       &:hover {
-        ~.ttl {
+        ~ .ttl {
           text-decoration: underline;
         }
       }
@@ -79,26 +77,26 @@
 // リストの中の擬似要素にまでtext-indentが継承される問題！！！
 // text-indentを使わない OR before,afterにデフォルト(_core)でtext-indent:0;にする
 
-.cms-ullist,
-.dot-list {
-  >li {
-    padding-left: 20px;
+ul.cms-ullist,
+ul.dot-list {
+  > li {
     position: relative;
+    padding-left: 20px;
 
     &:before {
       content: "●";
       color: $primary;
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
     }
   }
 
   &[style="list-style-type: circle;"],
   &[style="list-style-type: square;"] {
-    >li {
-      list-style-type: inherit;
+    > li {
       text-indent: 0;
+      list-style-type: inherit;
 
       &::before {
         content: none;
@@ -111,21 +109,21 @@
   }
 }
 
-.cms-ollist,
-.num-list {
+ol.cms-ollist,
+ol.num-list {
   counter-reset: section;
 
-  >li {
-    padding-left: 20px;
-    position: relative;
+  > li {
     counter-increment: section;
+    position: relative;
+    padding-left: 20px;
 
     &:before {
       content: counter(section) ".";
       color: $primary;
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
     }
   }
 
@@ -133,9 +131,9 @@
   &[style="list-style-type: lower-roman;"],
   &[style="list-style-type: upper-alpha;"],
   &[style="list-style-type: upper-roman;"] {
-    >li {
-      list-style-type: inherit;
+    > li {
       text-indent: 0;
+      list-style-type: inherit;
       margin-left: 0;
 
       &::before {
@@ -149,10 +147,10 @@
   }
 }
 
-.asterisk-list {
+ul.asterisk-list {
   @extend .dot-list;
 
-  >li {
+  > li {
     &:before {
       content: "※";
     }

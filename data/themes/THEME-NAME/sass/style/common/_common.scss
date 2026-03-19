@@ -6,15 +6,40 @@
 // 追加分ここから
 // --------------------------------------------------
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  z-index: 100;
+  &:focus {
+    top: 0;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .anchor-box {
-  position: relative;
   border: 1px solid #ddd;
   background-color: #fff;
+  position: relative;
   margin-top: 10px;
 
   .anchor-ttl {
-    position: absolute;
     background: #fff;
+    position: absolute;
     top: -15px;
     left: 30px;
     padding: 0 20px;
@@ -28,23 +53,23 @@
     & > li {
       & > a {
         display: block;
-        position: relative;
-        text-decoration: none;
         color: $base-font-color;
+        text-decoration: none;
+        position: relative;
         padding-left: 22px;
         transition: all 0.3s;
 
         &:before {
           content: "\f107";
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
           font: {
             weight: 900;
             family: $f-fa;
           }
           color: $primary;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
         }
 
         &:hover {
@@ -61,8 +86,8 @@
     }
 
     .anchor-link {
-      padding: 20px 20px 15px;
       gap: 5px 0;
+      padding: 20px 20px 15px;
 
       & > li {
         width: 100%;
@@ -98,8 +123,8 @@
   }
   @media only screen and (max-width: $screen-tb) {
     ul.breadcrumb {
-      text-align: left;
       width: 100%;
+      text-align: left;
       > li {
         font-size: 12px;
       }
@@ -108,9 +133,9 @@
 }
 
 .box01 {
-  background: #fff;
   border: 1px solid #d0d0d0;
   border-radius: 30px;
+  background: #fff;
   padding: 45px 50px;
 
   @media only screen and (max-width: $screen-tb) {
@@ -125,35 +150,29 @@
 
 .box03 {
   @extend .box01;
-  background: $primary;
   border: 1px solid $primary;
+  background: $primary;
 }
 
 // --------------------------------------------------
 // Headings
 // --------------------------------------------------
-// トップページ用
-h2 {
-  &.top {
+@mixin heading-reset {
+  font-family: $base-font;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  &:before,
+  &:after {
+    display: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
   }
 }
 
-h3 {
-  &.top {
-  }
-}
-
-h4 {
-  &.top {
-  }
-}
-
-h5 {
-  &.top {
-  }
-}
-
-// サブページ用
 @mixin heading02 {
 }
 
@@ -167,6 +186,86 @@ h5 {
   font-weight: bold;
   color: $primary;
   margin-bottom: 10px;
+}
+
+h2 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading02();
+    &.heading03 {
+      @include heading-reset();
+      @include heading03();
+    }
+    &.heading04 {
+      @include heading-reset();
+      @include heading04();
+    }
+    &.heading05 {
+      @include heading-reset();
+      @include heading05();
+    }
+  }
+}
+
+h3 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading03();
+    &.heading02 {
+      @include heading-reset();
+      @include heading02();
+    }
+    &.heading04 {
+      @include heading-reset();
+      @include heading04();
+    }
+    &.heading05 {
+      @include heading-reset();
+      @include heading05();
+    }
+  }
+}
+
+h4 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading04();
+    &.heading02 {
+      @include heading-reset();
+      @include heading02();
+    }
+    &.heading03 {
+      @include heading-reset();
+      @include heading03();
+    }
+    &.heading05 {
+      @include heading-reset();
+      @include heading05();
+    }
+  }
+}
+
+h5 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading05();
+    &.heading02 {
+      @include heading-reset();
+      @include heading02();
+    }
+    &.heading03 {
+      @include heading-reset();
+      @include heading03();
+    }
+    &.heading04 {
+      @include heading-reset();
+      @include heading04();
+    }
+  }
 }
 
 .heading02 {
@@ -187,20 +286,18 @@ h5 {
 // タグの色指定
 .tag {
   display: inline-block;
-
   font: {
     size: 12px;
     weight: bold;
   }
-
   color: #fff;
   line-height: 1.5;
-  padding: 0 5px;
   background: $primary;
+  padding: 0 5px;
 
-  &.-info {
-    background: $secondary;
-  }
+  // &.-info {
+  //   background: $secondary;
+  // }
 }
 
 //youtubeの自動レスポンシブ対応
@@ -221,6 +318,7 @@ h5 {
 
 // オブジェクトフィット
 .ofi {
+  > picture > img,
   > img {
     height: 100%;
     width: 100%;
@@ -251,6 +349,7 @@ h5 {
     overflow: hidden;
     position: relative;
 
+    > picture > img,
     > img {
       min-height: 100%;
       width: 100%;
@@ -295,13 +394,18 @@ h5 {
 
   .news-detail-image {
     // 画像のスタイル
-    text-align: center;
     margin: 10px auto;
-
-    > img {
-      height: auto;
-      width: auto;
-      max-width: 100%;
+    > figure {
+      text-align: center;
+      > img {
+        height: auto;
+        width: auto;
+        max-width: 100%;
+      }
+      > figcaption {
+        font-size: $base-font-size-tb;
+        padding-top: 5px;
+      }
     }
   }
 
@@ -313,10 +417,10 @@ h5 {
       &:after {
         content: $icon-pdf;
         font: 900 16px $f-fa;
+        color: $color-pdf;
         position: absolute;
         top: 0;
         left: 0;
-        color: $color-pdf;
       }
     }
   }
@@ -339,33 +443,32 @@ h5 {
 
 // 矢印が必要な場合は.iconを編集してください。
 .pagination {
-  margin-top: 80px;
   @include flex(row, wrap, center, stretch);
   gap: 8px;
+  margin-top: 80px;
 
   @media only screen and (max-width: $screen-tb) {
-    margin-top: 40px;
     gap: 5px;
+    margin-top: 40px;
   }
 
   .item {
     display: grid;
-    place-content: center;
     height: 50px;
     width: 50px;
-    border-radius: 4px;
-
     font: {
       size: 16px;
       weight: bold;
     }
-
     color: $base-font-color;
     line-height: 48px;
     text-align: center;
     text-decoration: none;
+    border-radius: 4px;
     background-color: #ddd;
     transition: all 0.3s;
+
+    place-content: center;
 
     &.icon {
       display: none;
@@ -405,6 +508,9 @@ h5 {
       //     color: #fff;
       //   }
       // }
+      // &[href="#"] {
+      //   display: none;
+      // }
     }
 
     &[href="#"] {
@@ -413,12 +519,11 @@ h5 {
     }
 
     @media only screen and (max-width: $screen-tb) {
-      width: 40px;
       height: 40px;
+      width: 40px;
       font-size: 14px;
 
       .icon {
-
         &::before {
           font-size: 12px;
         }

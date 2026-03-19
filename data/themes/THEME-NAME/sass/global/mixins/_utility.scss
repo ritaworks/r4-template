@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @use "../setting" as *;
+@use "sass:map";
 
 $spacer: (
   mt: margin-top,
@@ -18,8 +19,8 @@ $align: left, right, center;
 @mixin clearfix() {
   &:before,
   &:after {
-    content: " ";
     display: table;
+    content: " ";
   }
 
   &:after {
@@ -31,18 +32,33 @@ $align: left, right, center;
 @mixin spaceloop($sufix: "") {
   $i: 0;
 
-  @while $i <=200 {
-    @each $class, $style in $spacer {
-      .#{$class}#{$i}#{$sufix} {
-        #{$style}: #{$i}px !important;
+  @while $i <= 200 {
+
+    // 出力条件
+    $output: false;
+
+    @if $i < 100 {
+      // 5 or 8 の倍数
+      @if ($i % 5 == 0) or ($i % 8 == 0) {
+        $output: true;
+      }
+    } @else {
+      // 100以上は5刻み
+      @if $i % 5 == 0 {
+        $output: true;
       }
     }
 
-    @if $i >=20 {
-      $i: $i + 5;
-    } @else {
-      $i: $i + 1;
+    // 出力処理
+    @if $output {
+      @each $class, $style in $spacer {
+        .#{$class}#{$i}#{$sufix} {
+          #{$style}: #{$i}px !important;
+        }
+      }
     }
+
+    $i: $i + 1;
   }
 }
 // スペーシング設定
@@ -51,14 +67,14 @@ $space-map: (
   md: $space-md,
   rg: $space-rg,
   sm: $space-sm,
-  xs: $space-xs
+  xs: $space-xs,
 );
 $space-map-tb: (
   lg: $space-lg-tb,
   md: $space-md-tb,
   rg: $space-rg-tb,
   sm: $space-sm-tb,
-  xs: $space-xs-tb
+  xs: $space-xs-tb,
 );
 
 // owl用mixin
@@ -67,13 +83,13 @@ $space-map-tb: (
     .owl-#{$key} > * + * {
       margin-top: $val !important;
       @media only screen and (max-width: $screen-tb) {
-        margin-top: map-get($space-map-tb, $key) !important;
+        margin-top: map.get($space-map-tb, $key) !important;
       }
     }
     // -tbクラス（タブレット以下のみ適用）
     .owl-#{$key}-tb > * + * {
       @media only screen and (max-width: $screen-tb) {
-        margin-top: map-get($space-map-tb, $key) !important;
+        margin-top: map.get($space-map-tb, $key) !important;
       }
     }
   }
@@ -128,11 +144,10 @@ $space-map-tb: (
   $i: 10;
 
   @while $i <=30 {
+    $i: $i + 1;
     .lh#{$i}#{$sufix} {
       line-height: #{$i * 0.1} !important;
     }
-
-    $i: $i + 1;
   }
 }
 
@@ -141,11 +156,10 @@ $space-map-tb: (
   $i: 0;
 
   @while $i <=100 {
+    $i: $i + 1;
     .ls#{$i}#{$sufix} {
       letter-spacing: #{$i * 0.001}em !important;
     }
-
-    $i: $i + 1;
   }
 }
 
@@ -166,7 +180,12 @@ $space-map-tb: (
   align-items: $value;
 }
 
-@mixin flex($f-direction: row, $f-wrap: wrap, $j-content: flex-start, $a-items: stretch) {
+@mixin flex(
+  $f-direction: row,
+  $f-wrap: wrap,
+  $j-content: flex-start,
+  $a-items: stretch
+) {
   @include f-direction($f-direction);
   @include f-wrap($f-wrap);
   @include j-content($j-content);
@@ -174,7 +193,12 @@ $space-map-tb: (
   display: flex;
 }
 
-@mixin inline-flex($f-direction: row, $f-wrap: wrap, $j-content: flex-start, $a-items: stretch) {
+@mixin inline-flex(
+  $f-direction: row,
+  $f-wrap: wrap,
+  $j-content: flex-start,
+  $a-items: stretch
+) {
   @include f-direction($f-direction);
   @include f-wrap($f-wrap);
   @include j-content($j-content);
@@ -187,13 +211,12 @@ $space-map-tb: (
   $i: 5;
 
   @while $i <=100 {
+    $i: $i + 5;
     .owl#{$i}#{$sufix} {
       > * + * {
         margin-top: #{$i}px;
       }
     }
-
-    $i: $i + 5;
   }
 }
 
@@ -201,24 +224,23 @@ $space-map-tb: (
   $i: 5;
 
   @while $i <=100 {
+    $i: $i + 5;
     .row-owl#{$i}#{$sufix} {
       > * + * {
         margin-left: #{$i}px;
       }
     }
-
-    $i: $i + 5;
   }
 }
 
-
 // 画像のフェード用クラス
 @mixin fade {
-  transition: opacity 0.2s;
+  display: inline-block;
   opacity: 1;
+  transition: opacity 0.2s;
+
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  display: inline-block;
 
   &:hover {
     opacity: 0.7;
@@ -233,10 +255,10 @@ $space-map-tb: (
     display: block;
     height: 100%;
     width: 100%;
+    font-size: 0;
     position: absolute;
     z-index: 9;
     top: 0;
     left: 0;
-    font-size: 0;
   }
 }

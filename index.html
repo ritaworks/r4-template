@@ -23,11 +23,12 @@
   <!-- ↑OGP↑ -->
   <link rel="stylesheet" href="data/themes/THEME-NAME/css/import.css">
   <!-- <link rel="stylesheet" href="data/themes/THEME-NAME/css/plugin/fontawesome-free/7.0.1/css/all.min.css"> -->
-  <!-- @block('l-head-rear') -->
   <!-- @block('l-head-style') -->
+  <!-- @block('l-head-rear') -->
 </head>
 
 <body class="top">
+  <a href="#main-content" class="skip-link">本文へスキップ</a>
   <!-- @block('l-body-front') -->
   <!-- @block('l-body-script') -->
   <script src="data/themes/THEME-NAME/js/plugin/jquery/3.6.1/jquery.min.js"></script>
@@ -39,20 +40,32 @@
 
     <!-- Header -->
     <header>
+      <div class="h-wrap">
+        <div class="h-left">
+          <div class="h-logo"><a href="#" class="fade"><img src="data/media/THEME-NAME/layout/header/logo.png" alt="サイト名"></a></div>
+        </div>
+        <div class="h-right">
+          <nav class="h-nav pc" aria-label="グローバルナビゲーション">
+            <ul>
+              <li><a href="#">メニュー</a></li>
+            </ul>
+          </nav>
+          <button class="slidemenu-btn" aria-label="メニューを開く" aria-label="メニューを開く" aria-expanded="false" aria-controls="slide-menu"></button>
+        </div>
+      </div>
     </header>
     <!-- /Header -->
 
     <!-- Key-visual -->
-    <div class="key-visual"></div>
+    <div class="key-visual" aria-label="メインビジュアル"></div>
     <!-- /Key-visual -->
 
     <!-- Slide-menu -->
-    <div class="slide-menu"></div>
+    <div class="slide-menu" aria-hidden="true" id="slide-menu" inert></div>
     <!-- /Slide-menu -->
 
     <!-- Main -->
-    <div class="l-main">
-
+    <main class="l-main" id="main-content" tabindex="-1">
 
       <div class="container">
         <!-- Page -->
@@ -66,12 +79,24 @@
         <!-- /Side -->
       </div>
 
-
-    </div>
+    </main>
     <!-- /Main -->
 
     <!-- Footer -->
     <footer>
+      <div class="f-wrap">
+        <div class="f-left">
+          <div class="f-logo"><a href="#" class="fade"><img src="data/media/THEME-NAME/layout/footer/logo.png" alt="サイト名"></a></div>
+        </div>
+        <div class="f-right">
+          <nav class="f-nav pc" aria-label="フッターナビゲーション">
+            <ul>
+              <li><a href="#">メニュー</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <p class="copyright"><small>コピーライト</small></p>
     </footer>
     <!-- /Footer -->
 

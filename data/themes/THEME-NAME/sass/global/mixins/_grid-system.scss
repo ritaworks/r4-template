@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 @use "../setting" as *;
 @use "utility" as *;
 @use "sass:math";
@@ -15,48 +14,50 @@
   }
 
   #{$list} {
-    position: relative;
     // 空div時に崩れるのを防ぐ為
     min-height: 1px;
-    padding-left: ceil(math.div($grid-gutter-width-pc, 2));
-    padding-right: floor(math.div($grid-gutter-width-pc, 2));
+    position: relative;
+    padding-right: math.floor(math.div($grid-gutter-width-pc, 2));
+    padding-left: math.ceil(math.div($grid-gutter-width-pc, 2));
 
     @media only screen and (max-width: $screen-tb) {
-      padding-left: ceil(math.div($grid-gutter-width-tb, 2));
-      padding-right: floor(math.div($grid-gutter-width-tb, 2));
+      padding-right: math.floor(math.div($grid-gutter-width-tb, 2));
+      padding-left: math.ceil(math.div($grid-gutter-width-tb, 2));
     }
 
     @media only screen and (max-width: $screen-sp) {
-      padding-left: ceil(math.div($grid-gutter-width-sp, 2));
-      padding-right: floor(math.div($grid-gutter-width-sp, 2));
+      padding-right: math.floor(math.div($grid-gutter-width-sp, 2));
+      padding-left: math.ceil(math.div($grid-gutter-width-sp, 2));
     }
   }
 }
 
-@mixin make-responsive-grid-columns($i: 1, $list: ".col#{$i}-tb, .col#{$i}-sp") {
+@mixin make-responsive-grid-columns(
+  $i: 1,
+  $list: ".col#{$i}-tb, .col#{$i}-sp"
+) {
   @for $i from (1 + 1) through $grid-columns {
     $list: "#{$list}, .col#{$i}-tb, .col#{$i}-sp";
   }
 
   #{$list} {
-    position: relative;
     // 空div時に崩れるのを防ぐ為
     min-height: 1px;
-    padding-left: ceil(math.div($grid-gutter-width-pc, 2));
-    padding-right: floor(math.div($grid-gutter-width-pc, 2));
+    position: relative;
+    padding-right: math.floor(math.div($grid-gutter-width-pc, 2));
+    padding-left: math.ceil(math.div($grid-gutter-width-pc, 2));
 
     @media only screen and (max-width: $screen-tb) {
-      padding-left: ceil(math.div($grid-gutter-width-tb, 2));
-      padding-right: floor(math.div($grid-gutter-width-tb, 2));
+      padding-right: math.floor(math.div($grid-gutter-width-tb, 2));
+      padding-left: math.ceil(math.div($grid-gutter-width-tb, 2));
     }
 
     @media only screen and (max-width: $screen-sp) {
-      padding-left: ceil(math.div($grid-gutter-width-sp, 2));
-      padding-right: floor(math.div($grid-gutter-width-sp, 2));
+      padding-right: math.floor(math.div($grid-gutter-width-sp, 2));
+      padding-left: math.ceil(math.div($grid-gutter-width-sp, 2));
     }
   }
 }
-
 
 @mixin float-grid-columns($class, $i: 1, $list: ".col#{$i}#{$class}") {
   @for $i from (1 + 1) through $grid-columns {
@@ -68,17 +69,16 @@
   }
 }
 
-
 @mixin calc-grid-column($index, $class, $type) {
   @if ($type ==width) and ($index > 0) {
     .col#{$index}#{$class} {
-      width: percentage(math.div($index, $grid-columns));
+      width: math.percentage(math.div($index, $grid-columns));
     }
   }
 
   @if ($type ==push) and ($index > 0) {
     .col#{$index}-push#{$class} {
-      left: percentage(math.div($index, $grid-columns));
+      left: math.percentage(math.div($index, $grid-columns));
     }
   }
 
@@ -90,7 +90,7 @@
 
   @if ($type ==pull) and ($index > 0) {
     .col#{$index}-pull#{$class} {
-      right: percentage(math.div($index, $grid-columns));
+      right: math.percentage(math.div($index, $grid-columns));
     }
   }
 
@@ -102,7 +102,7 @@
 
   @if ($type ==offset) {
     .col#{$index}-offset#{$class} {
-      margin-left: percentage(math.div($index, $grid-columns));
+      margin-left: math.percentage(math.div($index, $grid-columns));
     }
   }
 }
@@ -112,7 +112,6 @@
     @include calc-grid-column($i, $class, $type);
   }
 }
-
 
 // 特定のクラス用をカラムクラスに変化させるmixin
 @mixin make-grid($class) {
@@ -129,150 +128,150 @@
 
 // 中央揃えのコンテナを生成
 @mixin container-fixed() {
+  @include clearfix;
+  padding-right: math.ceil(math.div($gutter-pc, 2));
+  padding-left: math.floor(math.div($gutter-pc, 2));
   margin-right: auto;
   margin-left: auto;
-  padding-left: floor(math.div($gutter-pc, 2));
-  padding-right: ceil(math.div($gutter-pc, 2));
-  @include clearfix;
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
-    padding-right: ceil(math.div($gutter-tb, 2));
+    padding-right: math.ceil(math.div($gutter-tb, 2));
+    padding-left: math.floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
-    padding-right: ceil(math.div($gutter-sp, 2));
+    padding-right: math.ceil(math.div($gutter-sp, 2));
+    padding-left: math.floor(math.div($gutter-sp, 2));
   }
 }
 
 // カラムのラッパーを生成
 @mixin make-row() {
-  margin-left: ceil(math.div($grid-gutter-width-pc, -2));
-  margin-right: floor(math.div($grid-gutter-width-pc, -2));
   @include clearfix;
+  margin-right: math.floor(math.div($grid-gutter-width-pc, -2));
+  margin-left: math.ceil(math.div($grid-gutter-width-pc, -2));
 
   @media only screen and (max-width: $screen-tb) {
-    margin-left: ceil(math.div($grid-gutter-width-tb, -2));
-    margin-right: floor(math.div($grid-gutter-width-tb, -2));
+    margin-right: math.floor(math.div($grid-gutter-width-tb, -2));
+    margin-left: math.ceil(math.div($grid-gutter-width-tb, -2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    margin-left: ceil(math.div($grid-gutter-width-sp, -2));
-    margin-right: floor(math.div($grid-gutter-width-sp, -2));
+    margin-right: math.floor(math.div($grid-gutter-width-sp, -2));
+    margin-left: math.ceil(math.div($grid-gutter-width-sp, -2));
   }
 }
 
 // PC用カラムの生成
 @mixin make-pc-column($columns) {
-  position: relative;
   float: left;
-  width: percentage(math.div($columns, $grid-columns));
   min-height: 1px;
-  padding-left: math.div($gutter-pc, 2);
+  width: math.percentage(math.div($columns, $grid-columns));
+  position: relative;
   padding-right: math.div($gutter-pc, 2);
+  padding-left: math.div($gutter-pc, 2);
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
-    padding-right: ceil(math.div($gutter-tb, 2));
+    padding-right: math.ceil(math.div($gutter-tb, 2));
+    padding-left: math.floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
-    padding-right: ceil(math.div($gutter-sp, 2));
+    padding-right: math.ceil(math.div($gutter-sp, 2));
+    padding-left: math.floor(math.div($gutter-sp, 2));
   }
 }
 
 @mixin make-pc-column-offset($columns) {
-  margin-left: percentage(math.div($columns, $grid-columns));
+  margin-left: math.percentage(math.div($columns, $grid-columns));
 }
 
 @mixin make-pc-column-push($columns) {
-  left: percentage(math.div($columns, $grid-columns));
+  left: math.percentage(math.div($columns, $grid-columns));
 }
 
 @mixin make-pc-column-pull($columns) {
-  right: percentage(math.div($columns, $grid-columns));
+  right: math.percentage(math.div($columns, $grid-columns));
 }
 
 // タブレット用カラムの生成
 @mixin make-tb-column($columns) {
-  position: relative;
   min-height: 1px;
-  padding-left: math.div($gutter-pc, 2);
+  position: relative;
   padding-right: math.div($gutter-pc, 2);
+  padding-left: math.div($gutter-pc, 2);
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
-    padding-right: ceil(math.div($gutter-tb, 2));
+    padding-right: math.ceil(math.div($gutter-tb, 2));
+    padding-left: math.floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
-    padding-right: ceil(math.div($gutter-sp, 2));
+    padding-right: math.ceil(math.div($gutter-sp, 2));
+    padding-left: math.floor(math.div($gutter-sp, 2));
   }
 
   @media only screen and (min-width: $screen-tb-min) {
     float: left;
-    width: percentage(math.div($columns, $grid-columns));
+    width: math.percentage(math.div($columns, $grid-columns));
   }
 }
 
 @mixin make-tb-column-offset($columns) {
   @media only screen and (min-width: $screen-tb-min) {
-    margin-left: percentage(math.div($columns, $grid-columns));
+    margin-left: math.percentage(math.div($columns, $grid-columns));
   }
 }
 
 @mixin make-tb-column-push($columns) {
   @media only screen and (min-width: $screen-tb-min) {
-    left: percentage(math.div($columns, $grid-columns));
+    left: math.percentage(math.div($columns, $grid-columns));
   }
 }
 
 @mixin make-tb-column-pull($columns) {
   @media only screen and (min-width: $screen-tb-min) {
-    right: percentage(math.div($columns, $grid-columns));
+    right: math.percentage(math.div($columns, $grid-columns));
   }
 }
 
 // スマートフォン用カラムの生成
 @mixin make-sp-column($columns) {
-  position: relative;
   min-height: 1px;
-  padding-left: math.div($gutter-pc, 2);
+  position: relative;
   padding-right: math.div($gutter-pc, 2);
+  padding-left: math.div($gutter-pc, 2);
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
-    padding-right: ceil(math.div($gutter-tb, 2));
+    padding-right: math.ceil(math.div($gutter-tb, 2));
+    padding-left: math.floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
-    padding-right: ceil(math.div($gutter-sp, 2));
+    padding-right: math.ceil(math.div($gutter-sp, 2));
+    padding-left: math.floor(math.div($gutter-sp, 2));
   }
 
   @media only screen and (min-width: $screen-tb-min) {
     float: left;
-    width: percentage(math.div($columns, $grid-columns));
+    width: math.percentage(math.div($columns, $grid-columns));
   }
 }
 
 @mixin make-sp-column-offset($columns) {
   @media only screen and (min-width: $screen-sp-min) {
-    margin-left: percentage(math.div($columns, $grid-columns));
+    margin-left: math.percentage(math.div($columns, $grid-columns));
   }
 }
 
 @mixin make-sp-column-push($columns) {
   @media only screen and (min-width: $screen-sp-min) {
-    left: percentage(math.div($columns, $grid-columns));
+    left: math.percentage(math.div($columns, $grid-columns));
   }
 }
 
 @mixin make-sp-column-pull($columns) {
   @media only screen and (min-width: $screen-sp-min) {
-    right: percentage(math.div($columns, $grid-columns));
+    right: math.percentage(math.div($columns, $grid-columns));
   }
 }
