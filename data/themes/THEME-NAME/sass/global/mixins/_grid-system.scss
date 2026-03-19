@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 @use "../setting" as *;
 @use "utility" as *;
 @use "sass:math";
@@ -15,48 +14,50 @@
   }
 
   #{$list} {
-    position: relative;
     // 空div時に崩れるのを防ぐ為
     min-height: 1px;
-    padding-left: ceil(math.div($grid-gutter-width-pc, 2));
+    position: relative;
     padding-right: floor(math.div($grid-gutter-width-pc, 2));
+    padding-left: ceil(math.div($grid-gutter-width-pc, 2));
 
     @media only screen and (max-width: $screen-tb) {
-      padding-left: ceil(math.div($grid-gutter-width-tb, 2));
       padding-right: floor(math.div($grid-gutter-width-tb, 2));
+      padding-left: ceil(math.div($grid-gutter-width-tb, 2));
     }
 
     @media only screen and (max-width: $screen-sp) {
-      padding-left: ceil(math.div($grid-gutter-width-sp, 2));
       padding-right: floor(math.div($grid-gutter-width-sp, 2));
+      padding-left: ceil(math.div($grid-gutter-width-sp, 2));
     }
   }
 }
 
-@mixin make-responsive-grid-columns($i: 1, $list: ".col#{$i}-tb, .col#{$i}-sp") {
+@mixin make-responsive-grid-columns(
+  $i: 1,
+  $list: ".col#{$i}-tb, .col#{$i}-sp"
+) {
   @for $i from (1 + 1) through $grid-columns {
     $list: "#{$list}, .col#{$i}-tb, .col#{$i}-sp";
   }
 
   #{$list} {
-    position: relative;
     // 空div時に崩れるのを防ぐ為
     min-height: 1px;
-    padding-left: ceil(math.div($grid-gutter-width-pc, 2));
+    position: relative;
     padding-right: floor(math.div($grid-gutter-width-pc, 2));
+    padding-left: ceil(math.div($grid-gutter-width-pc, 2));
 
     @media only screen and (max-width: $screen-tb) {
-      padding-left: ceil(math.div($grid-gutter-width-tb, 2));
       padding-right: floor(math.div($grid-gutter-width-tb, 2));
+      padding-left: ceil(math.div($grid-gutter-width-tb, 2));
     }
 
     @media only screen and (max-width: $screen-sp) {
-      padding-left: ceil(math.div($grid-gutter-width-sp, 2));
       padding-right: floor(math.div($grid-gutter-width-sp, 2));
+      padding-left: ceil(math.div($grid-gutter-width-sp, 2));
     }
   }
 }
-
 
 @mixin float-grid-columns($class, $i: 1, $list: ".col#{$i}#{$class}") {
   @for $i from (1 + 1) through $grid-columns {
@@ -67,7 +68,6 @@
     float: left;
   }
 }
-
 
 @mixin calc-grid-column($index, $class, $type) {
   @if ($type ==width) and ($index > 0) {
@@ -113,7 +113,6 @@
   }
 }
 
-
 // 特定のクラス用をカラムクラスに変化させるmixin
 @mixin make-grid($class) {
   @include float-grid-columns($class);
@@ -129,57 +128,57 @@
 
 // 中央揃えのコンテナを生成
 @mixin container-fixed() {
+  @include clearfix;
+  padding-right: ceil(math.div($gutter-pc, 2));
+  padding-left: floor(math.div($gutter-pc, 2));
   margin-right: auto;
   margin-left: auto;
-  padding-left: floor(math.div($gutter-pc, 2));
-  padding-right: ceil(math.div($gutter-pc, 2));
-  @include clearfix;
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
     padding-right: ceil(math.div($gutter-tb, 2));
+    padding-left: floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
     padding-right: ceil(math.div($gutter-sp, 2));
+    padding-left: floor(math.div($gutter-sp, 2));
   }
 }
 
 // カラムのラッパーを生成
 @mixin make-row() {
-  margin-left: ceil(math.div($grid-gutter-width-pc, -2));
-  margin-right: floor(math.div($grid-gutter-width-pc, -2));
   @include clearfix;
+  margin-right: floor(math.div($grid-gutter-width-pc, -2));
+  margin-left: ceil(math.div($grid-gutter-width-pc, -2));
 
   @media only screen and (max-width: $screen-tb) {
-    margin-left: ceil(math.div($grid-gutter-width-tb, -2));
     margin-right: floor(math.div($grid-gutter-width-tb, -2));
+    margin-left: ceil(math.div($grid-gutter-width-tb, -2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    margin-left: ceil(math.div($grid-gutter-width-sp, -2));
     margin-right: floor(math.div($grid-gutter-width-sp, -2));
+    margin-left: ceil(math.div($grid-gutter-width-sp, -2));
   }
 }
 
 // PC用カラムの生成
 @mixin make-pc-column($columns) {
-  position: relative;
   float: left;
-  width: percentage(math.div($columns, $grid-columns));
   min-height: 1px;
-  padding-left: math.div($gutter-pc, 2);
+  width: percentage(math.div($columns, $grid-columns));
+  position: relative;
   padding-right: math.div($gutter-pc, 2);
+  padding-left: math.div($gutter-pc, 2);
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
     padding-right: ceil(math.div($gutter-tb, 2));
+    padding-left: floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
     padding-right: ceil(math.div($gutter-sp, 2));
+    padding-left: floor(math.div($gutter-sp, 2));
   }
 }
 
@@ -197,19 +196,19 @@
 
 // タブレット用カラムの生成
 @mixin make-tb-column($columns) {
-  position: relative;
   min-height: 1px;
-  padding-left: math.div($gutter-pc, 2);
+  position: relative;
   padding-right: math.div($gutter-pc, 2);
+  padding-left: math.div($gutter-pc, 2);
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
     padding-right: ceil(math.div($gutter-tb, 2));
+    padding-left: floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
     padding-right: ceil(math.div($gutter-sp, 2));
+    padding-left: floor(math.div($gutter-sp, 2));
   }
 
   @media only screen and (min-width: $screen-tb-min) {
@@ -238,19 +237,19 @@
 
 // スマートフォン用カラムの生成
 @mixin make-sp-column($columns) {
-  position: relative;
   min-height: 1px;
-  padding-left: math.div($gutter-pc, 2);
+  position: relative;
   padding-right: math.div($gutter-pc, 2);
+  padding-left: math.div($gutter-pc, 2);
 
   @media only screen and (max-width: $screen-tb) {
-    padding-left: floor(math.div($gutter-tb, 2));
     padding-right: ceil(math.div($gutter-tb, 2));
+    padding-left: floor(math.div($gutter-tb, 2));
   }
 
   @media only screen and (max-width: $screen-sp) {
-    padding-left: floor(math.div($gutter-sp, 2));
     padding-right: ceil(math.div($gutter-sp, 2));
+    padding-left: floor(math.div($gutter-sp, 2));
   }
 
   @media only screen and (min-width: $screen-tb-min) {

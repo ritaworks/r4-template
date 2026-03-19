@@ -167,9 +167,9 @@ $calendar-btntop: false;
       &#blog-calendar-prev,
       &#blog-calendar-next {
         position: absolute;
-        top: -2px;
         z-index: 1;
-        >a {
+        top: -2px;
+        > a {
           @include fade;
           display: inline-block;
           height: 34px;
@@ -181,23 +181,23 @@ $calendar-btntop: false;
           border-radius: 50%;
           background: $primary;
           position: relative;
+          transition: 0.3s;
           &::after {
             content: "";
+            height: 34px;
+            width: 32px;
             font: {
               size: 20px;
               family: $f-fa;
               weight: 900;
             }
-            height: 34px;
-            width: 32px;
+            color: #fff;
             line-height: 34px;
             text-align: center;
-            color: #fff;
             position: absolute;
             top: 0;
             left: 0;
           }
-          transition: .3s;
           &:hover {
             text-decoration: none;
           }
@@ -205,13 +205,13 @@ $calendar-btntop: false;
       }
       &#blog-calendar-prev {
         left: 0;
-        >a:after {
+        > a:after {
           content: "\f104";
         }
       }
       &#blog-calendar-next {
         right: 0;
-        >a:after {
+        > a:after {
           content: "\f105";
         }
       }

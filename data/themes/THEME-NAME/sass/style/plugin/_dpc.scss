@@ -10,7 +10,7 @@
 // #dpc-wrapperで、病院指標のHTMLのコンテンツ全体をラップしてください。
 // 例) <article id="dpc-wrapper"></article>
 #dpc-wrapper {
-  >* {
+  > * {
     &:not(:last-of-type) {
       margin-bottom: 30px;
     }

@@ -9,12 +9,10 @@
   max-width: 300px;
   font-weight: bold;
   color: $primary;
-
   text: {
     align: center;
     decoration: none;
   }
-
   border: 1px solid $primary;
   border-radius: 4px;
   background: #fff;
@@ -40,11 +38,11 @@
 }
 
 .file-icon {
-  position: relative;
   display: inline-block;
-  text-decoration: none;
-  line-height: 1.5;
   color: $base-font-color;
+  line-height: 1.5;
+  text-decoration: none;
+  position: relative;
   padding-left: 20px;
   transition: 0.3s;
 

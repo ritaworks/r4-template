@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 @use "../setting" as *;
-
 $spacer: (
   mt: margin-top,
   mr: margin-right,
@@ -18,8 +17,8 @@ $align: left, right, center;
 @mixin clearfix() {
   &:before,
   &:after {
-    content: " ";
     display: table;
+    content: " ";
   }
 
   &:after {
@@ -51,14 +50,14 @@ $space-map: (
   md: $space-md,
   rg: $space-rg,
   sm: $space-sm,
-  xs: $space-xs
+  xs: $space-xs,
 );
 $space-map-tb: (
   lg: $space-lg-tb,
   md: $space-md-tb,
   rg: $space-rg-tb,
   sm: $space-sm-tb,
-  xs: $space-xs-tb
+  xs: $space-xs-tb,
 );
 
 // owl用mixin
@@ -128,11 +127,10 @@ $space-map-tb: (
   $i: 10;
 
   @while $i <=30 {
+    $i: $i + 1;
     .lh#{$i}#{$sufix} {
       line-height: #{$i * 0.1} !important;
     }
-
-    $i: $i + 1;
   }
 }
 
@@ -141,11 +139,10 @@ $space-map-tb: (
   $i: 0;
 
   @while $i <=100 {
+    $i: $i + 1;
     .ls#{$i}#{$sufix} {
       letter-spacing: #{$i * 0.001}em !important;
     }
-
-    $i: $i + 1;
   }
 }
 
@@ -166,7 +163,12 @@ $space-map-tb: (
   align-items: $value;
 }
 
-@mixin flex($f-direction: row, $f-wrap: wrap, $j-content: flex-start, $a-items: stretch) {
+@mixin flex(
+  $f-direction: row,
+  $f-wrap: wrap,
+  $j-content: flex-start,
+  $a-items: stretch
+) {
   @include f-direction($f-direction);
   @include f-wrap($f-wrap);
   @include j-content($j-content);
@@ -174,7 +176,12 @@ $space-map-tb: (
   display: flex;
 }
 
-@mixin inline-flex($f-direction: row, $f-wrap: wrap, $j-content: flex-start, $a-items: stretch) {
+@mixin inline-flex(
+  $f-direction: row,
+  $f-wrap: wrap,
+  $j-content: flex-start,
+  $a-items: stretch
+) {
   @include f-direction($f-direction);
   @include f-wrap($f-wrap);
   @include j-content($j-content);
@@ -187,13 +194,12 @@ $space-map-tb: (
   $i: 5;
 
   @while $i <=100 {
+    $i: $i + 5;
     .owl#{$i}#{$sufix} {
       > * + * {
         margin-top: #{$i}px;
       }
     }
-
-    $i: $i + 5;
   }
 }
 
@@ -201,24 +207,23 @@ $space-map-tb: (
   $i: 5;
 
   @while $i <=100 {
+    $i: $i + 5;
     .row-owl#{$i}#{$sufix} {
       > * + * {
         margin-left: #{$i}px;
       }
     }
-
-    $i: $i + 5;
   }
 }
 
-
 // 画像のフェード用クラス
 @mixin fade {
-  transition: opacity 0.2s;
+  display: inline-block;
   opacity: 1;
+  transition: opacity 0.2s;
+
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  display: inline-block;
 
   &:hover {
     opacity: 0.7;
@@ -233,10 +238,10 @@ $space-map-tb: (
     display: block;
     height: 100%;
     width: 100%;
+    font-size: 0;
     position: absolute;
     z-index: 9;
     top: 0;
     left: 0;
-    font-size: 0;
   }
 }

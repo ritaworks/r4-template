@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 @use "../global" as *;
-
 $flex-direction: (
   fd--row: row,
   fd--column: column,
@@ -101,6 +100,7 @@ $align-items: (
     $size: $i * 50;
     .img-tb#{$size} {
       max-width: #{$size}px;
+
       margin-inline: auto;
     }
   }
@@ -129,8 +129,8 @@ $align-items: (
 }
 
 .center-box {
-  margin-left: auto !important;
   margin-right: auto !important;
+  margin-left: auto !important;
 }
 
 // フォント太さクラス
@@ -146,16 +146,12 @@ $align-items: (
   @media only screen and (max-width: $screen-tb) {
     // 行揃え指定クラス
     @include textalign(-tb);
-
     // タブレット用余白クラスの生成
     @include spaceloop(-tb);
-
     // タブレット用フォントサイズクラスの生成
     @include fontsize(-tb);
-
     // タブレット用lineheightのクラス
     @include lineheight(-tb);
-
     // タブレット用letterspacingのクラス
     @include letterspacing(-tb);
   }
@@ -163,16 +159,12 @@ $align-items: (
   @media only screen and (max-width: $screen-sp) {
     // 行揃え指定クラス
     @include textalign(-sp);
-
     // スマホ用余白クラスの生成
     @include spaceloop(-sp);
-
     // スマホ用フォントサイズクラスの生成
     @include fontsize(-sp);
-
     // スマホ用lineheightのクラス
     @include lineheight(-sp);
-
     // スマホ用letterspacingのクラス
     @include letterspacing(-sp);
   }
