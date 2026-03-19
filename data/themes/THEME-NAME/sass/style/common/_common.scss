@@ -6,6 +6,31 @@
 // 追加分ここから
 // --------------------------------------------------
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  z-index: 100;
+  &:focus {
+    top: 0;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .anchor-box {
   border: 1px solid #ddd;
   background-color: #fff;
@@ -132,28 +157,22 @@
 // --------------------------------------------------
 // Headings
 // --------------------------------------------------
-// トップページ用
-h2 {
-  &.top {
+@mixin heading-reset {
+  font-family: $base-font;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  &:before,
+  &:after {
+    display: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
   }
 }
 
-h3 {
-  &.top {
-  }
-}
-
-h4 {
-  &.top {
-  }
-}
-
-h5 {
-  &.top {
-  }
-}
-
-// サブページ用
 @mixin heading02 {
 }
 
@@ -167,6 +186,86 @@ h5 {
   font-weight: bold;
   color: $primary;
   margin-bottom: 10px;
+}
+
+h2 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading02();
+    &.heading03 {
+      @include heading-reset();
+      @include heading03();
+    }
+    &.heading04 {
+      @include heading-reset();
+      @include heading04();
+    }
+    &.heading05 {
+      @include heading-reset();
+      @include heading05();
+    }
+  }
+}
+
+h3 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading03();
+    &.heading02 {
+      @include heading-reset();
+      @include heading02();
+    }
+    &.heading04 {
+      @include heading-reset();
+      @include heading04();
+    }
+    &.heading05 {
+      @include heading-reset();
+      @include heading05();
+    }
+  }
+}
+
+h4 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading04();
+    &.heading02 {
+      @include heading-reset();
+      @include heading02();
+    }
+    &.heading03 {
+      @include heading-reset();
+      @include heading03();
+    }
+    &.heading05 {
+      @include heading-reset();
+      @include heading05();
+    }
+  }
+}
+
+h5 {
+  &.top {
+  }
+  &:not(.top) {
+    @include heading05();
+    &.heading02 {
+      @include heading-reset();
+      @include heading02();
+    }
+    &.heading03 {
+      @include heading-reset();
+      @include heading03();
+    }
+    &.heading04 {
+      @include heading-reset();
+      @include heading04();
+    }
+  }
 }
 
 .heading02 {
@@ -196,9 +295,9 @@ h5 {
   background: $primary;
   padding: 0 5px;
 
-  &.-info {
-    background: $secondary;
-  }
+  // &.-info {
+  //   background: $secondary;
+  // }
 }
 
 //youtubeの自動レスポンシブ対応
@@ -219,6 +318,7 @@ h5 {
 
 // オブジェクトフィット
 .ofi {
+  > picture > img,
   > img {
     height: 100%;
     width: 100%;
@@ -249,6 +349,7 @@ h5 {
     overflow: hidden;
     position: relative;
 
+    > picture > img,
     > img {
       min-height: 100%;
       width: 100%;
@@ -293,13 +394,18 @@ h5 {
 
   .news-detail-image {
     // 画像のスタイル
-    text-align: center;
     margin: 10px auto;
-
-    > img {
-      height: auto;
-      width: auto;
-      max-width: 100%;
+    > figure {
+      text-align: center;
+      > img {
+        height: auto;
+        width: auto;
+        max-width: 100%;
+      }
+      > figcaption {
+        font-size: $base-font-size-tb;
+        padding-top: 5px;
+      }
     }
   }
 
