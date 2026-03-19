@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 @use "../setting" as *;
+@use "sass:map";
+
 $spacer: (
   mt: margin-top,
   mr: margin-right,
@@ -81,13 +83,13 @@ $space-map-tb: (
     .owl-#{$key} > * + * {
       margin-top: $val !important;
       @media only screen and (max-width: $screen-tb) {
-        margin-top: map-get($space-map-tb, $key) !important;
+        margin-top: map.get($space-map-tb, $key) !important;
       }
     }
     // -tbクラス（タブレット以下のみ適用）
     .owl-#{$key}-tb > * + * {
       @media only screen and (max-width: $screen-tb) {
-        margin-top: map-get($space-map-tb, $key) !important;
+        margin-top: map.get($space-map-tb, $key) !important;
       }
     }
   }
