@@ -17,12 +17,15 @@ $(function () {
   let body = $(document.body);
   let menu_open = false;
   let menu_btn = $('.slidemenu-btn').attr('tabindex', '0');
+  let contents_area = $('.l-main, footer');
   // let menu_img = $(".slidemenu-btn").find('img'); // 画像のスライドメニューボタン
   // let menu_txt = $(".slidemenu-btn").find('.ttl'); // テキストのスライドメニューボタン
 
   function slidemenuOpen() {
     // $(menu_img).attr("src", $(menu_img).attr("src").replace("menu", "close"));
     // $(menu_txt).text("close");
+    contents_area.attr('inert', "");
+    menu_area.removeAttr('inert');
     menu_btn.addClass('active');
     body.addClass('open');
     body.removeAttr('style');
@@ -32,6 +35,8 @@ $(function () {
   function slidemenuClose() {
     // $(menu_img).attr("src", $(menu_img).attr("src").replace("close", "menu"));
     // $(menu_txt).text("menu");
+    contents_area.removeAttr('inert');
+    menu_area.attr('inert', "");
     menu_btn.removeClass('active');
     body.removeClass('open');
     body.removeAttr('style');
@@ -72,6 +77,8 @@ $(function () {
         // tabjsとの競合回避
         slidemenuClose();
         return false;
+      } else if ($(this).attr('data-remodal-target')) {
+        // 何もしない
       } else {
         e.preventDefault();
         slidemenuClose();
