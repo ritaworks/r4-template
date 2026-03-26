@@ -1,0 +1,62 @@
+{
+  // ===== 基本（コーディング品質） =====
+  "editor.tabSize": 2,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "files.autoSave": "onFocusChange",
+
+  // ===== フォーマッタ =====
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ===== HTML整形 =====
+  "html.format.wrapLineLength": 0,
+  "html.format.maxPreserveNewLines": 1,
+
+  // ===== Sass =====
+  "liveSassCompile.settings.generateMap": true,
+  "liveSassCompile.settings.autoprefix": [
+    "> 1%",
+    "last 2 versions",
+    "Firefox ESR"
+  ],
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".css",
+      "savePath": "~/../css"
+    }
+  ],
+
+  // ===== ファイル関連 =====
+  "files.associations": {
+    "*.tpl": "html"
+  },
+
+  // ===== Git =====
+  "git.autofetch": true,
+  "git.ignoreMissingGitWarning": true,
+
+  // ===== HTMLチェック =====
+  "htmlhint.options": {
+    "alt-require": true,
+    "attr-unsafe-chars": true,
+    "id-unique": true
+  },
+
+  // ===== その他 =====
+  "editor.maxTokenizationLineLength": 40000
+}
