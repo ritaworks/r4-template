@@ -251,29 +251,13 @@
     hash_directories(tabHash, true);
 
     // 3.クリック時の処理
-    // $('a[href*="#"], a[data-href *= "#"]').on("click", function (e) {
-    // hrefを含むと、common.jsと競合してしまい、スクロール後に一時スクロールできなくなる。
-    //更新 slectのchangeを追加
+    // select用
     $(this).on("change", function (e) {
       clickEvent(e, $(this));
     });
-    $($(this).find('a[data-href *= "#"]')).on("click", function (e) {
+    // クリック時
+    $('a[data-href *= "#"]').on("click", function (e) {
       clickEvent(e, $(this));
-    });
-
-    $('a[href *= "#"').on("click", function (e) {
-      var atag = $(this);
-      if (
-        $(this).data("href") &&
-        atag.prop("href").split("#")[0] == location.origin + location.pathname
-      ) {
-        var hrefs = $(this).data("href");
-        $(tab_link).each(function (i, t) {
-          if ($(t).find('a[data-href="' + hrefs + '"]').length != 0) {
-            clickEvent(e, atag);
-          }
-        });
-      }
     });
 
     function clickEvent(e, tag) {
