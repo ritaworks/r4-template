@@ -18,6 +18,7 @@ $(function () {
   let menu_open = false;
   let menu_btn = $('.slidemenu-btn').attr('tabindex', '0');
   let contents_area = $('.l-main, footer');
+  let menu_area = $('.slide-menu');
   // let menu_img = $(".slidemenu-btn").find('img'); // 画像のスライドメニューボタン
   // let menu_txt = $(".slidemenu-btn").find('.ttl'); // テキストのスライドメニューボタン
 
@@ -77,7 +78,7 @@ $(function () {
         // tabjsとの競合回避
         slidemenuClose();
         return false;
-      } else if ($(this).attr('data-remodal-target')) {
+      } else if ($(this).attr('data-reset') || $(this).attr('data-remodal-target')) {
         // 何もしない
       } else {
         e.preventDefault();
