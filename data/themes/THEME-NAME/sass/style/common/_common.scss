@@ -192,17 +192,16 @@ h2 {
   &.top {
   }
   &:not(.top) {
-    @include heading02();
+    &:not([class^="heading"]) {
+      @include heading02();
+    }
     &.heading03 {
-      @include heading-reset();
       @include heading03();
     }
     &.heading04 {
-      @include heading-reset();
       @include heading04();
     }
     &.heading05 {
-      @include heading-reset();
       @include heading05();
     }
   }
@@ -212,17 +211,16 @@ h3 {
   &.top {
   }
   &:not(.top) {
-    @include heading03();
     &.heading02 {
-      @include heading-reset();
       @include heading02();
     }
+    &:not([class^="heading"]) {
+      @include heading03();
+    }
     &.heading04 {
-      @include heading-reset();
       @include heading04();
     }
     &.heading05 {
-      @include heading-reset();
       @include heading05();
     }
   }
@@ -232,17 +230,16 @@ h4 {
   &.top {
   }
   &:not(.top) {
-    @include heading04();
     &.heading02 {
-      @include heading-reset();
       @include heading02();
     }
     &.heading03 {
-      @include heading-reset();
       @include heading03();
     }
+    &:not([class^="heading"]) {
+      @include heading04();
+    }
     &.heading05 {
-      @include heading-reset();
       @include heading05();
     }
   }
@@ -252,18 +249,17 @@ h5 {
   &.top {
   }
   &:not(.top) {
-    @include heading05();
     &.heading02 {
-      @include heading-reset();
       @include heading02();
     }
     &.heading03 {
-      @include heading-reset();
       @include heading03();
     }
     &.heading04 {
-      @include heading-reset();
       @include heading04();
+    }
+    &:not([class^="heading"]) {
+      @include heading05();
     }
   }
 }
