@@ -1,42 +1,75 @@
 @charset "UTF-8";
+
+@use "settings" as *;
 // --------------------------------------------------
-// 変数設定
+// Colors
 // --------------------------------------------------
+
+// --- Palette ---
+$color-red: red;
+// 以下、アクセシビリティfalseの場合も必要に応じて使ってください。
+$color-black: #000;
+$color-white: #fff;
+$color-blue: darkblue;
+$color-yellow: yellow;
+$color-red-rgb: 255, 0, 0;
+$color-gray: #eee;
+$color-gray-lighter: #f6f6f6;
+
+// --- UI Semantic ---
 $primary: #000;
+$primary-rgb: 0, 0, 0;
 $secondary: #000;
 
+$color-text: #333;
+$color-border: #ddd;
+$color-link: $primary;
+$color-focus: $color-red;
+
+// --- Domain Semantic ---
 $color-pdf: #ef0d00;
 $color-doc: #1b50b0;
 $color-xls: #238049;
 
-// アイコンフォント
-$f-fa: 'Font Awesome 7 Free';
-$f-fab: 'Font Awesome 7 Brands';
+// --------------------------------------------------
+// Font
+// --------------------------------------------------
+
+// Iconフォント
+$f-fa: "Font Awesome 7 Free";
+$f-fab: "Font Awesome 7 Brands";
 
 // 文字フォント
-$f-min: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', 'ＭＳ Ｐ明朝', 'MS PMincho',
-  '游明朝体', 'Yu Mincho', YuMincho, serif;
+$f-min: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ＭＳ Ｐ明朝", "MS PMincho",
+  "游明朝体", "Yu Mincho", YuMincho, serif;
 
-// --- Icon Code ---
+// --------------------------------------------------
+// Icons
+// --------------------------------------------------
+
 // ファイル
 $icon-file: "\f15b";
 $icon-pdf: "\f1c1";
 $icon-doc: "\f1c2";
 $icon-xls: "\f1c3";
+
 // 矢印
 $icon-arrow-right: "\f061";
 $icon-angle-right: "\f105";
 $icon-circle-arrow-right: "\f0a9";
 $icon-circle-right: "\f35a";
 $icon-circle-chevron-right: "\f138";
+
 // プラス/マイナス
 $icon-plus: "\2b";
 $icon-minus: "\f068";
 $icon-circle-plus: "\f055";
 $icon-circle-minus: "\f056";
+
 // 電話・FAX
 $icon-tel: "\f095";
 $icon-fax: "\f1ac";
+
 // その他
 $icon-font-height: "\f034";
 $icon-color: "\f53f";

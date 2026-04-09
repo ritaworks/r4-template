@@ -1,5 +1,102 @@
 @use "../global" as *;
 
+@if $accessibility-functions {
+  // :root にはデフォルトテーマ（light）のカスタムプロパティを定義します。
+  :root {
+    // Theme: light (default)
+    --primary: #{$light-site-primary};
+    --primary-rgb: #{$light-site-primary-rgb};
+    --secondary: #{$light-site-secondary};
+    --text: #{$light-site-text};
+    --border: #{$light-site-border};
+    --link: #{$light-site-link-color};
+    --bg: #{$light-site-bg};
+    --bg-gray: #{$light-site-bg-gray};
+    --bg-gray-lighter: #{$light-site-bg-gray-lighter};
+    --bg-red: #{$light-site-bg-red};
+    --bg-red-rgb: #{$light-site-bg-red-rgb};
+    --border-white: #{$light-site-bg};
+    --red: #{$light-site-red};
+    // Component-specific variables
+    --box-bg: #{$light-site-white};
+    --box-text: #{$light-site-text};
+    --box-border: #{$light-site-border};
+    // ファイルタイプごとのカラーも同様に定義します（固定）
+    --file-pdf: #{color-pdf};
+    --file-doc: #{color-doc};
+    --file-xls: #{color-xls};
+  }
+  body[data-theme='dark'] {
+    // Theme: dark
+    --primary: #{$dark-site-primary};
+    --primary-rgb: #{$dark-site-primary-rgb};
+    --secondary: #{$dark-site-secondary};
+    --text: #{$dark-site-text};
+    --border: #{$dark-site-border};
+    --link: #{$dark-site-link-color};
+    --bg: #{$dark-site-bg};
+    --bg-gray: #{$dark-site-bg-gray};
+    --bg-gray-lighter: #{$dark-site-bg-gray-lighter};
+    --bg-red: #{$dark-site-bg-red};
+    --bg-red-rgb: #{$dark-site-bg-red-rgb};
+    --border-white: #{$dark-site-text};
+    --red: #{$dark-site-red};
+    // Component-specific variables
+    --box-bg: #{$dark-site-bg-gray};
+    --box-text: #{$dark-site-text};
+    --box-border: #{$dark-site-border};
+  }
+
+  body[data-theme='blue'] {
+    // Theme: blue
+    --primary: #{$blue-site-primary};
+    --primary-rgb: #{$blue-site-primary-rgb};
+    --secondary: #{$blue-site-secondary};
+    --text: #{$blue-site-text};
+    --border: #{$blue-site-border};
+    --link: #{$blue-site-link-color};
+    --bg: #{$blue-site-bg};
+    --bg-gray: #{$blue-site-bg-gray};
+    --bg-gray-lighter: #{$blue-site-bg-gray-lighter};
+    --bg-red: #{$blue-site-bg-red};
+    --bg-red-rgb: #{$blue-site-bg-red-rgb};
+    --border-white: #{$blue-site-text};
+    --red: #{$blue-site-red};
+    // Component-specific variables
+    --box-bg: #{$blue-site-bg-gray};
+    --box-text: #{$blue-site-text};
+    --box-border: #{$blue-site-border};
+  }
+
+  body[data-theme='yellow'] {
+    // Theme: yellow
+    --primary: #{$yellow-site-primary};
+    --primary-rgb: #{$yellow-site-primary-rgb};
+    --secondary: #{$yellow-site-secondary};
+    --text: #{$yellow-site-text};
+    --border: #{$yellow-site-border};
+    --link: #{$yellow-site-link-color};
+    --bg: #{$yellow-site-bg};
+    --bg-gray: #{$yellow-site-bg-gray};
+    --bg-gray-lighter: #{$yellow-site-bg-gray-lighter};
+    --bg-red: #{$yellow-site-bg-red};
+    --bg-red-rgb: #{$yellow-site-bg-red-rgb};
+    --border-white: #{$yellow-site-text};
+    --red: #{$yellow-site-red};
+    // Component-specific variables
+    --box-bg: #{$yellow-site-bg-gray};
+    --box-text: #{$yellow-site-text};
+    --box-border: #{$yellow-site-border};
+  }
+}
+
+// OSのダークモード設定に追従させたい場合は、以下のメディアクエリを有効にします。
+// @media (prefers-color-scheme: dark) {
+//   body:not([data-theme="light"]) {
+//     // ここに body[data-theme="dark"] と同じ定義を記述
+//   }
+// }
+
 *,
 ::before,
 ::after {
@@ -112,7 +209,7 @@ hr {
 }
 
 *:focus-visible {
-  outline: $focus-color !important;
+  outline: $color-focus !important;
   outline-width: 2px !important;
   outline-style: solid !important;
 }

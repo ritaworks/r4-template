@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+@use "settings" as *;
+@use "variable" as *;
+@use "sass:color";
+
+// @function em($px) {
+//   @return ($px / 17) * 1em;
+// }
+
+@function rem($px) {
+  @return ($px / 16) * 1rem;
+}
+
+// ==================================================
+// # Theme Settings
+// ==================================================
+
+// --- Dark Colors ---
+$dark-color-text: $color-white;
+$dark-color-bg: #121212;
+$dark-color-border: #444;
+
+// --- Theme: Light (Default) ---
+$light-site-primary: $primary;
+$light-site-primary-rgb: $primary-rgb;
+$light-site-secondary: $secondary;
+$light-site-text: $color-text;
+$light-site-border: $color-border;
+$light-site-link-color: $color-link;
+$light-site-bg: $color-white;
+$light-site-bg-gray: $color-gray;
+$light-site-bg-gray-lighter: $color-gray-lighter;
+$light-site-bg-red: $color-red;
+$light-site-bg-red-rgb: $color-red-rgb;
+$light-site-bg-primary: $primary;
+$light-site-bg-secondary: $secondary;
+$light-site-white: $color-white;
+$light-site-red: $color-red;
+
+// --- Theme: Dark ---
+$dark-site-primary: #52b461;
+$dark-site-primary-rgb: 61, 170, 77;
+$dark-site-secondary: #bbb;
+$dark-site-text: $dark-color-text;
+$dark-site-border: $dark-color-border;
+$dark-site-link-color: $dark-site-primary;
+$dark-site-bg: $dark-color-bg;
+$dark-site-bg-gray: color.adjust($dark-site-bg, $lightness: -5%);
+$dark-site-bg-gray-lighter: $dark-site-bg-gray;
+$dark-site-bg-red: $color-red; //共通
+$dark-site-bg-red-rgb: $color-red-rgb; //共通
+$dark-site-bg-primary: $dark-site-bg;
+$dark-site-bg-secondary: #bbb;
+$dark-site-red: #f66;
+
+// --- Theme: Blue ---
+$blue-site-primary: #52b461;
+$blue-site-primary-rgb: 61, 170, 77;
+$blue-site-secondary: #eee;
+$blue-site-text: $color-white;
+$blue-site-border: color.adjust($color-blue, $lightness: -10%);
+$blue-site-link-color: $blue-site-primary;
+$blue-site-bg: $color-blue;
+$blue-site-bg-gray: color.adjust($blue-site-bg, $lightness: 5%);
+$blue-site-bg-gray-lighter: $blue-site-bg-gray;
+$blue-site-bg-red: $color-red; //共通
+$blue-site-bg-red-rgb: $color-red-rgb; //共通
+$blue-site-bg-primary: $blue-site-bg;
+$blue-site-bg-secondary: #eee;
+$blue-site-red: #ff9999;
+
+// --- Theme: Yellow ---
+$yellow-site-primary: #1976d2;
+$yellow-site-primary-rgb: 25, 118, 210;
+$yellow-site-secondary: #555;
+$yellow-site-text: $light-site-text;
+$yellow-site-border: color.adjust($color-yellow,  $lightness: -10%);
+$yellow-site-link-color: $yellow-site-primary;
+$yellow-site-bg: $color-yellow;
+$yellow-site-bg-gray: $color-gray;
+$yellow-site-bg-gray-lighter: $yellow-site-bg-gray;
+$yellow-site-bg-red: $color-red; //共通
+$yellow-site-bg-red-rgb: $color-red-rgb; //共通
+$yellow-site-bg-primary: $yellow-site-bg;
+$yellow-site-bg-secondary: #eee;
+$yellow-site-red: #c62828;

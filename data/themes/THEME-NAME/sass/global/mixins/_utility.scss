@@ -164,20 +164,36 @@ $space-map-tb: (
 }
 
 //flex関係
-@mixin f-direction($value: row) {
-  flex-direction: $value;
+@mixin f-direction($value: row, $important: false) {
+  @if $important {
+    flex-direction: $value !important;
+  } @else {
+    flex-direction: $value;
+  }
 }
 
-@mixin f-wrap($value: wrap) {
-  flex-wrap: $value;
+@mixin f-wrap($value: wrap, $important: false) {
+  @if $important {
+    flex-wrap: $value !important;
+  } @else {
+    flex-wrap: $value;
+  }
 }
 
-@mixin j-content($value: flex-start) {
-  justify-content: $value;
+@mixin j-content($value: flex-start, $important: false) {
+  @if $important {
+    justify-content: $value !important;
+  } @else {
+    justify-content: $value;
+  }
 }
 
-@mixin a-items($value: stretch) {
-  align-items: $value;
+@mixin a-items($value: stretch, $important: false) {
+  @if $important {
+    align-items: $value !important;
+  } @else {
+    align-items: $value;
+  }
 }
 
 @mixin flex(

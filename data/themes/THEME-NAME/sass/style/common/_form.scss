@@ -50,6 +50,10 @@ $form_active_checkbox_mark: #fff;
       }
     }
 
+    .error {
+      color: $color-red;
+    }
+
     // 選択チェック：checkbox, radio
     .icheck-material-blue {
       > input:first-child {
@@ -109,16 +113,16 @@ $form_active_checkbox_mark: #fff;
     }
 
     a {
-      color: $base-link-color;
+      color: $color-link;
       text-decoration: underline;
 
       &:hover {
         text-decoration: none;
-        color: $base-link-color;
+        color: $color-link;
       }
 
       &[href^="tel:"] {
-        color: $base-font-color;
+        color: $color-text;
         text-decoration: none;
       }
     }

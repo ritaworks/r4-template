@@ -109,13 +109,13 @@ $align-items: (
 // flex時gap設定クラス
 @for $i from 1 through 50 {
   .gap#{$i} {
-    gap: #{$i}px;
+    gap: #{$i}px !important;
   }
 }
 @media only screen and (max-width: $screen-tb) {
   @for $i from 1 through 50 {
     .gap#{$i}-tb {
-      gap: #{$i}px;
+      gap: #{$i}px !important;
     }
   }
 }
@@ -209,21 +209,16 @@ $align-items: (
 
 //フレックス
 .flex {
-  @include flex(row, wrap, space-between, flex-start);
-
-  &.-center {
-    align-items: center;
-  }
-
-  &.-reverse {
-    flex-direction: row-reverse;
-  }
-
+  @include flex(row, wrap, space-between, stretch);
   @media only screen and (max-width: $screen-tb) {
     .flex-item {
       width: 100% !important;
     }
   }
+}
+
+.inline-flex {
+  @include flex(row, wrap, space-between, stretch);
 }
 
 .flex-1 {
@@ -236,25 +231,25 @@ $align-items: (
 
 @each $class, $value in $flex-direction {
   .#{$class} {
-    @include f-direction($value);
+    @include f-direction($value, true);
   }
 }
 
 @each $class, $value in $flex-wrap {
   .#{$class} {
-    @include f-wrap($value);
+    @include f-wrap($value, true);
   }
 }
 
 @each $class, $value in $justify-content {
   .#{$class} {
-    @include j-content($value);
+    @include j-content($value, true);
   }
 }
 
 @each $class, $value in $align-items {
   .#{$class} {
-    @include a-items($value);
+    @include a-items($value, true);
   }
 }
 
@@ -262,25 +257,25 @@ $align-items: (
   @media only screen and (max-width: $screen-tb) {
     @each $class, $value in $flex-direction {
       .#{$class}-tb {
-        @include f-direction($value);
+        @include f-direction($value, true);
       }
     }
 
     @each $class, $value in $flex-wrap {
       .#{$class}-tb {
-        @include f-wrap($value);
+        @include f-wrap($value, true);
       }
     }
 
     @each $class, $value in $justify-content {
       .#{$class}-tb {
-        @include j-content($value);
+        @include j-content($value, true);
       }
     }
 
     @each $class, $value in $align-items {
       .#{$class}-tb {
-        @include a-items($value);
+        @include a-items($value, true);
       }
     }
   }
@@ -288,25 +283,51 @@ $align-items: (
   @media only screen and (max-width: $screen-sp) {
     @each $class, $value in $flex-direction {
       .#{$class}-sp {
-        @include f-direction($value);
+        @include f-direction($value, true);
       }
     }
 
     @each $class, $value in $flex-wrap {
       .#{$class}-sp {
-        @include f-wrap($value);
+        @include f-wrap($value, true);
       }
     }
 
     @each $class, $value in $justify-content {
       .#{$class}-sp {
-        @include j-content($value);
+        @include j-content($value, true);
       }
     }
 
     @each $class, $value in $align-items {
       .#{$class}-sp {
-        @include a-items($value);
+        @include a-items($value, true);
+      }
+    }
+  }
+
+  @media only screen and (max-width: $screen-xs) {
+    @each $class, $value in $flex-direction {
+      .#{$class}-xs {
+        @include f-direction($value, true);
+      }
+    }
+
+    @each $class, $value in $flex-wrap {
+      .#{$class}-xs {
+        @include f-wrap($value, true);
+      }
+    }
+
+    @each $class, $value in $justify-content {
+      .#{$class}-xs {
+        @include j-content($value, true);
+      }
+    }
+
+    @each $class, $value in $align-items {
+      .#{$class}-xs {
+        @include a-items($value, true);
       }
     }
   }
