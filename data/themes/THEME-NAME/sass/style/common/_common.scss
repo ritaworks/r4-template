@@ -160,22 +160,6 @@
 // --------------------------------------------------
 // Headings
 // --------------------------------------------------
-@mixin heading-reset {
-  font-family: $base-font;
-  border: none;
-  background: none;
-  padding: 0;
-  margin: 0;
-  &:before,
-  &:after {
-    display: none;
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-  }
-}
-
 @mixin heading02 {
 }
 
@@ -198,15 +182,6 @@ h2 {
     &:not([class^="heading"]) {
       @include heading02();
     }
-    &.heading03 {
-      @include heading03();
-    }
-    &.heading04 {
-      @include heading04();
-    }
-    &.heading05 {
-      @include heading05();
-    }
   }
 }
 
@@ -214,17 +189,8 @@ h3 {
   &.top {
   }
   &:not(.top) {
-    &.heading02 {
-      @include heading02();
-    }
     &:not([class^="heading"]) {
       @include heading03();
-    }
-    &.heading04 {
-      @include heading04();
-    }
-    &.heading05 {
-      @include heading05();
     }
   }
 }
@@ -233,17 +199,8 @@ h4 {
   &.top {
   }
   &:not(.top) {
-    &.heading02 {
-      @include heading02();
-    }
-    &.heading03 {
-      @include heading03();
-    }
     &:not([class^="heading"]) {
       @include heading04();
-    }
-    &.heading05 {
-      @include heading05();
     }
   }
 }
@@ -252,15 +209,6 @@ h5 {
   &.top {
   }
   &:not(.top) {
-    &.heading02 {
-      @include heading02();
-    }
-    &.heading03 {
-      @include heading03();
-    }
-    &.heading04 {
-      @include heading04();
-    }
     &:not([class^="heading"]) {
       @include heading05();
     }
