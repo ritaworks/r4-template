@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+@use "../setting" as *;
+@use "sass:map";
+
+@if $accessibility-functions {
+  // アクセシビリティサポート（テーマ別スタイル）
+  @mixin accessibility-box($hover: false, $active: false) {
+
+    body[data-theme="dark"] &,
+    body[data-theme="blue"] &,
+    body[data-theme="yellow"] & {
+      color: var(--site-text) !important;
+      border: 1px solid var(--site-text) !important;
+      background: var(--site-bg) !important;
+
+      @if ($hover==true) {
+        &:hover {
+          text-decoration: underline;
+
+          * {
+            color: var(--site-text) !important;
+          }
+        }
+      }
+
+      @if ($active==true) {
+
+        &.active,
+        &.current {
+          color: var(--site-bg) !important;
+          background: var(--site-text) !important;
+        }
+      }
+    }
+  }
+
+  @mixin accessibility-color($color, $hover: false) {
+
+    body[data-theme="dark"] &,
+    body[data-theme="blue"] &,
+    body[data-theme="yellow"] & {
+      color: $color !important;
+
+      @if ($hover==true) {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @mixin accessibility-background($color) {
+
+    body[data-theme="dark"] &,
+    body[data-theme="blue"] &,
+    body[data-theme="yellow"] & {
+      background-color: $color !important;
+    }
+  }
+}

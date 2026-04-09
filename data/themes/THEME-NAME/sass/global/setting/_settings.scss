@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@use "variable" as *;
 // --------------------------------------------------
 // 設定
 // --------------------------------------------------
@@ -21,10 +20,13 @@ $header-height-pc: 100px;
 $header-height-sp: 60px;
 
 // CMS導入サイトかどうかの設定 - true/false
-$light-cms: true;
+$cms: true;
 
 // CMS使用時に設定 - CMSエディタ内幅指定
-$light-cms-column-width: $container-width;
+$cms-column-width: $container-width;
+
+// 文字/背景色変更
+$accessibility-functions: false;
 
 // プレークポイント
 $screen-tb: 1200px;
@@ -36,9 +38,6 @@ $screen-sp-min: ($screen-xs + 1) !default;
 
 // 基本値の設定（全ページ共通）
 $base-font: "ヒラギノ角ゴシック ProN", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", "游ゴシック体", "Yu Gothic", YuGothic, sans-serif;
-$base-font-color: #333;
-$base-link-color: $primary;
-$focus-color: $primary;
 $link-underline: true !default;
 
 // 基本値の設定（全ページ共通）
@@ -66,7 +65,7 @@ $space-xs-tb: 15px;
 
 // コンテナ両サイドの余白
 $gutter-pc: 20px !default;
-$gutter-tb: 30px !default;
+$gutter-tb: 40px !default;
 $gutter-sp: $gutter-tb !default;
 
 // グリッドシステムカラムのそれぞれの間の余白
@@ -81,10 +80,3 @@ $container-sp: auto !default;
 
 // 一列のカラム数
 $grid-columns: 12 !default;
-
-// --------------------------------------------------
-// 色設定
-// --------------------------------------------------
-
-// エラー、警告色
-$warn-color: #f00;

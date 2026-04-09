@@ -3,10 +3,16 @@
 @use "../global" as *;
 
 body {
-  color: $base-font-color;
+  color: $color-text;
   font-size: $base-font-size;
   font-family: $base-font;
   font-weight: $base-font-weight;
+
+  @if $responsive {
+    @media only screen and (max-width: $screen-tb) {
+      font-size: $base-font-size-tb;
+    }
+  }
 }
 
 p,
@@ -20,29 +26,18 @@ td {
 
 a {
   @include link;
-
-  color: $base-link-color;
-
+  color: $color-link;
   &:hover {
-    color: $base-link-color;
+    color: $color-link;
   }
 
   //電話番号
   &[href^="tel:"] {
-    color: $base-font-color;
+    color: $color-text;
     text-decoration: underline;
-
     @media only screen and (min-width: $screen-pc-min) {
       text-decoration: none;
       pointer-events: none;
-    }
-  }
-}
-
-@if $responsive {
-  @media only screen and (max-width: $screen-tb) {
-    body {
-      font-size: $base-font-size-tb;
     }
   }
 }

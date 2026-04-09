@@ -5,6 +5,9 @@
 // --------------------------------------------------
 // 追加分ここから
 // --------------------------------------------------
+.f-min {
+  font-family: $f-min !important;
+}
 
 .skip-link {
   position: absolute;
@@ -53,7 +56,7 @@
     & > li {
       & > a {
         display: block;
-        color: $base-font-color;
+        color: $color-text;
         text-decoration: none;
         position: relative;
         padding-left: 22px;
@@ -282,10 +285,8 @@ h5 {
 // タグの色指定
 .tag {
   display: inline-block;
-  font: {
-    size: 12px;
-    weight: bold;
-  }
+  font-size: 12px;
+  font-weight: bold;
   color: #fff;
   line-height: 1.5;
   background: $primary;
@@ -452,11 +453,9 @@ h5 {
     display: grid;
     height: 50px;
     width: 50px;
-    font: {
-      size: 16px;
-      weight: bold;
-    }
-    color: $base-font-color;
+    font-size: 16px;
+    font-weight: bold;
+    color: $color-text;
     line-height: 48px;
     text-align: center;
     text-decoration: none;
@@ -468,36 +467,27 @@ h5 {
 
     &.icon {
       display: none;
-
-      // transition: .3s;
+      // transition: 0.3s;
       // background-color: #ddd;
       // border-radius: 50%;
-
       // &::before {
       //   content: "";
-      //   transition: .3s;
-
-      //   font: {
-      //     family: $f-fa;
-      //     weight: 900;
-      //     size: 13px;
-      //   }
-
-      //   color: $base-font-color;
+      //   font-size: 13px;
+      //   font-family: $f-fa;
+      //   font-weight: 900;
+      //   color: $color-text;
+      //   transition: 0.3s;
       // }
-
       // &:first-of-type {
       //   &::before {
       //     content: "\f060";
       //   }
       // }
-
       // &:last-of-type {
       //   &::before {
       //     content: "\f061";
       //   }
       // }
-
       // &:hover {
       //   background-color: $primary;
       //   &::before {

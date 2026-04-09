@@ -24,7 +24,7 @@ $calendar-btntop: false;
 // --------------------------------------------------
 .blog-calendar {
   width: 100%;
-  color: $base-font-color;
+  color: $color-text;
   text-align: center;
   table-layout: fixed;
   position: relative;
@@ -40,10 +40,8 @@ $calendar-btntop: false;
   // ◯年◯月  //
   ////////////
   caption {
-    font: {
-      size: 18px;
-      weight: bold;
-    }
+    font-size: 18px;
+    font-weight: bold;
     padding: 5px 0 15px 0;
   }
 
@@ -51,10 +49,8 @@ $calendar-btntop: false;
   // 曜日  //
   //////////
   thead th {
-    font: {
-      size: 14px;
-      weight: bold;
-    }
+    font-size: 14px;
+    font-weight: bold;
     border: {
       top: 1px solid $primary;
       bottom: 1px solid $primary;
@@ -90,14 +86,14 @@ $calendar-btntop: false;
       > a {
         display: inline-block;
         font-size: $base-font-size;
-        color: $base-font-color;
+        color: $color-text;
         text-decoration: underline;
         &:hover {
           color: $primary;
           text-decoration: none;
         }
         &[href="#"] {
-          color: $base-font-color;
+          color: $color-text;
           text-decoration: none;
           pointer-events: none;
         }
@@ -112,7 +108,7 @@ $calendar-btntop: false;
           border-radius: 50%;
           background: $primary;
           &[href="#"] {
-            color: $base-font-color;
+            color: $color-text;
             background: #f5f5f5;
           }
           &:hover {
@@ -185,11 +181,9 @@ $calendar-btntop: false;
             content: "";
             height: 34px;
             width: 32px;
-            font: {
-              size: 20px;
-              family: $f-fa;
-              weight: 900;
-            }
+            font-size: 20px;
+            font-family: $f-fa;
+            font-weight: 900;
             color: #fff;
             line-height: 34px;
             text-align: center;
@@ -224,7 +218,7 @@ $calendar-btntop: false;
       }
       a {
         font-size: 14px;
-        color: $base-font-color;
+        color: $color-text;
         letter-spacing: 0;
         text-decoration: none;
         &:hover {
@@ -272,11 +266,9 @@ $calendar-btntop: false;
         }
         &-title {
           overflow: hidden;
-          font: {
-            size: 14px;
-            weight: bold;
-          }
-          color: $base-font-color;
+          font-size: 14px;
+          font-weight: bold;
+          color: $color-text;
           line-height: 1.5;
           text-align: center;
           white-space: nowrap;
@@ -334,10 +326,8 @@ $calendar-btntop: false;
           background: #f2f2f2;
           margin-right: 20px;
           .date {
-            font: {
-              size: 20px;
-              weight: bold;
-            }
+            font-size: 20px;
+            font-weight: bold;
             line-height: 1;
             letter-spacing: 0;
           }
@@ -365,11 +355,9 @@ $calendar-btntop: false;
           padding-top: 10px;
         }
         &-title {
-          font: {
-            size: 16px;
-            weight: bold;
-          }
-          color: $base-font-color;
+          font-size: 16px;
+          font-weight: bold;
+          color: $color-text;
           line-height: 1.5;
         }
       }
