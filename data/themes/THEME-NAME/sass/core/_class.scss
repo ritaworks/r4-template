@@ -210,6 +210,15 @@ $align-items: (
 //フレックス
 .flex {
   @include flex(row, wrap, space-between, stretch);
+  @media only screen and (max-width: $screen-sp) {
+    .flex-item {
+      width: 100% !important;
+    }
+  }
+}
+
+.flex-tb {
+  @include flex(row, wrap, space-between, stretch);
   @media only screen and (max-width: $screen-tb) {
     .flex-item {
       width: 100% !important;
