@@ -6,8 +6,7 @@
 // お知らせ
 // --------------------------------------------------
 // お知らせ一覧にPDFアイコンを表示する
-// @extend で対応してください。
-.news-link-event01 {
+@mixin news-link-event01($line-height: 2) {
   // aタグがテキストの場合
   a {
     &[href$=".pdf"] {
@@ -15,7 +14,7 @@
       padding-left: 20px;
       &:after {
         content: $icon-pdf;
-        font: 900 16px $f-fa;
+        font: 900 16px /#{$line-height} $f-fa;
         color: $color-pdf;
         position: absolute;
         top: 0;
@@ -31,7 +30,7 @@
   }
 }
 
-.news-link-event02 {
+@mixin news-link-event02($txt-wrap: ".txt-wrap", $ttl: ".ttl") {
   // カードタイプ（.hover-all）の場合
   // デザインによって.txt-wrap/.ttlのクラス名変更必要
   pointer-events: none;
@@ -44,24 +43,25 @@
     }
 
     &[href$=".pdf"] {
-      ~ .ttl {
-        position: relative;
-        padding-left: 20px;
-        &:after {
-          content: $icon-pdf;
-          font: 900 16px $f-fa;
-          color: $color-pdf;
-          position: absolute;
-          top: 0;
-          left: 0;
+      ~ #{$txt-wrap} {
+        #{$ttl} {
+          position: relative;
+          padding-left: 20px;
+          &:after {
+            content: $icon-pdf;
+            font: 900 16px $f-fa;
+            color: $color-pdf;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
         }
       }
-
-      &:hover {
-        ~ .ttl {
-          text-decoration: underline;
-        }
-      }
+      // &:hover {
+      //   ~ .ttl {
+      //     text-decoration: underline;
+      //   }
+      // }
     }
   }
 }
