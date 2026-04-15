@@ -91,19 +91,19 @@
   }
 
   // サブクラス
-  &.-dept {
-    @include nodrop-table;
-    table-layout: fixed;
-    th,
-    td {
-      text-align: center;
-      vertical-align: middle;
-      padding-inline: 10px;
-    }
-    @media only screen and (max-width: $screen-sp) {
-      min-width: 500px;
-    }
-  }
+  // &.-dept {
+  //   @include nodrop-table;
+  //   table-layout: fixed;
+  //   th,
+  //   td {
+  //     text-align: center;
+  //     vertical-align: middle;
+  //     padding-inline: 10px;
+  //   }
+  //   @media only screen and (max-width: $screen-sp) {
+  //     min-width: 500px;
+  //   }
+  // }
 }
 
 .table02 {
