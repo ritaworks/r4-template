@@ -1,9 +1,62 @@
 @charset "UTF-8";
-// CMS内エディタ用クラス
 
 @use "../../global" as *;
 
+@mixin nodrop-table {
+  @media only screen and (max-width: $screen-sp) {
+    tbody,
+    thead {
+      tr {
+        th,
+        td {
+          display: table-cell;
+          width: auto;
+        }
+        th {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+.nodrop-table {
+  @include nodrop-table;
+}
+
+@mixin table-subclass {
+  &.-sticky-tb {
+    @media only screen and (max-width: $screen-sp) {
+      th:first-child {
+        position: sticky;
+        left: 0;
+      }
+    }
+  }
+  &.-middle {
+    th,
+    td {
+      vertical-align: middle;
+    }
+  }
+
+  &.-center {
+    th,
+    td {
+      text-align: center;
+    }
+  }
+
+  &.-fixed {
+    table-layout: fixed;
+  }
+}
+
+// --------------------------------------------------
+// Table
+// --------------------------------------------------
 .table01 {
+  @include table-subclass();
   width: 100%;
 
   th,
@@ -27,7 +80,7 @@
     }
   }
 
-  @media only screen and (max-width: $screen-tb) {
+  @media only screen and (max-width: $screen-sp) {
     &:not(.nodrop-table) {
       th,
       td {
@@ -37,15 +90,24 @@
     }
   }
 
-  &.-middle {
-    th,
-    td {
-      vertical-align: middle;
-    }
-  }
+  // サブクラス
+  // &.-dept {
+  //   @include nodrop-table;
+  //   table-layout: fixed;
+  //   th,
+  //   td {
+  //     text-align: center;
+  //     vertical-align: middle;
+  //     padding-inline: 10px;
+  //   }
+  //   @media only screen and (max-width: $screen-sp) {
+  //     min-width: 500px;
+  //   }
+  // }
 }
 
 .table02 {
+  @include table-subclass();
   width: 100%;
 
   tr {
@@ -58,7 +120,7 @@
     padding: 20px;
   }
 
-  @media only screen and (max-width: $screen-tb) {
+  @media only screen and (max-width: $screen-sp) {
     &:not(.nodrop-table) {
       th,
       td {
@@ -89,27 +151,7 @@
 // --------------------------------------------------
 // その他
 // --------------------------------------------------
-.overflow-table {
-  overflow-x: auto;
-}
-
-.nodrop-table {
-  tbody,
-  thead {
-    tr {
-      th,
-      td {
-        @media only screen and (max-width: $screen-tb) {
-          display: table-cell;
-          width: auto !important;
-        }
-      }
-
-      th {
-        @media only screen and (max-width: $screen-tb) {
-          white-space: nowrap;
-        }
-      }
-    }
-  }
-}
+// js-scrollable使用のため
+// .overflow-table {
+//   overflow-x: auto;
+// }
