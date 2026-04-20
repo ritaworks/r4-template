@@ -77,6 +77,24 @@ $space-map-tb: (
   xs: $space-xs-tb,
 );
 
+// spacing用mixin
+@mixin spacing-class($property, $prefix) {
+  @each $key, $val in $space-map {
+    .#{$prefix}-#{$key} {
+      #{$property}: $val !important;
+      @media only screen and (max-width: $screen-tb) {
+        #{$property}: map.get($space-map-tb, $key) !important;
+      }
+    }
+    // -tbクラス（タブレット以下のみ適用）
+    .#{$prefix}-#{$key}-tb {
+      @media only screen and (max-width: $screen-tb) {
+        #{$property}: map.get($space-map-tb, $key) !important;
+      }
+    }
+  }
+}
+
 // owl用mixin
 @mixin owl-spacing($space-map, $space-map-tb) {
   @each $key, $val in $space-map {
