@@ -27,7 +27,7 @@
 //
 // 横幅100%のコンテナを生成
 .container-fluid {
-  @include container-fixed;
+  @include container-fixed-fluid;
 }
 
 // Rowクラス

@@ -60,12 +60,12 @@
     }
   }
 
-  @mixin accessibility-color($color, $hover: false) {
+  @mixin accessibility-color($fontColor, $hover: false) {
 
     body[data-theme="dark"] &,
     body[data-theme="blue"] &,
     body[data-theme="yellow"] & {
-      color: $color !important;
+      color: $fontColor !important;
 
       @if ($hover==true) {
         &:hover {
@@ -75,12 +75,12 @@
     }
   }
 
-  @mixin accessibility-background($color) {
+  @mixin accessibility-background($bgColor) {
 
     body[data-theme="dark"] &,
     body[data-theme="blue"] &,
     body[data-theme="yellow"] & {
-      background-color: $color !important;
+      background-color: $bgColor !important;
     }
   }
 }

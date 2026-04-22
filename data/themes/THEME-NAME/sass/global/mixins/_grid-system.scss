@@ -145,6 +145,24 @@
   }
 }
 
+@mixin container-fixed-fluid() {
+  @include clearfix;
+  padding-right: $gutter-pc;
+  padding-left: $gutter-pc;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media only screen and (max-width: $screen-tb) {
+    padding-right: math.ceil(math.div($gutter-tb, 2));
+    padding-left: math.floor(math.div($gutter-tb, 2));
+  }
+
+  @media only screen and (max-width: $screen-sp) {
+    padding-right: math.ceil(math.div($gutter-sp, 2));
+    padding-left: math.floor(math.div($gutter-sp, 2));
+  }
+}
+
 // カラムのラッパーを生成
 @mixin make-row() {
   @include clearfix;

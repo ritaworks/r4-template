@@ -150,32 +150,151 @@ main.l-main {
 }
 
 // --------------------------------------------------
-// Page
+// ColumnPage
 // --------------------------------------------------
-.l-page {
-  float: left;
-  width: 700px;
-
+// 全画面表示
+.column-container {
+  @include flex($f-wrap: nowrap);
+  gap: 40px;
+  .l-page {
+    max-width: $container-pc;
+    margin: 0 auto;
+  }
+  .l-side {
+    width: 260px;
+    flex-shrink: 0;
+  }
   @media only screen and (max-width: $screen-tb) {
-    float: none;
-    width: 100%;
+    gap: 20px;
+    .l-side {
+      width: 220px;
+    }
+  }
+  @media only screen and (max-width: 1023px) {
+    .l-side {
+      display: none;
+    }
   }
 }
+
+// コンテナ幅内で設置
+// .l-page {
+//   float: left;
+//   width: 700px;
+
+//   @media only screen and (max-width: $screen-tb) {
+//     float: none;
+//     width: 100%;
+//   }
+// }
+// .l-side {
+//   float: right;
+//   width: 260px;
+
+//   @media only screen and (max-width: $screen-tb) {
+//     display: none;
+//   }
+// }
 
 // --------------------------------------------------
 // Side
 // --------------------------------------------------
-.l-side {
-  float: right;
-  width: 260px;
-
+// Sideの中身
+.side-ttl {
+  font-size: 20px;
+  font-weight: bold;
+  color: $color-white;
+  line-height: 1.5;
+  border-radius: 10px;
+  background: $primary;
+  padding: 20px 20px;
+  &.side-accordion {
+    position: relative;
+    &:after {
+      content: $icon-plus;
+      height: 25px;
+      width: 25px;
+      font: 900 12px/25px $f-fa;
+      color: $color-text;
+      text-align: center;
+      border-radius: 50%;
+      background: $color-white;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      transition: 0.3s;
+    }
+    &.active:after {
+      content: $icon-minus;
+    }
+  }
   @media only screen and (max-width: $screen-tb) {
-    display: none;
+    font-size: 16px;
+    padding: 10px;
+    &.side-accordion {
+      &:after {
+        height: 20px;
+        width: 20px;
+        line-height: 20px;
+        right: 10px;
+      }
+    }
   }
 }
 
-// Sideの中身
-.side-ttl {
+.side-nav {
+  > li {
+    border-bottom: 1px solid $color-gray;
+    > a {
+      display: block;
+      font-size: 17px;
+      font-weight: 500;
+      color: $color-text;
+      line-height: 1.5;
+      text-decoration: none;
+      position: relative;
+      padding: 25px 45px 25px 10px;
+      transition: 0.3s;
+      &:after {
+        content: $icon-angle-right;
+        height: 21px;
+        width: 21px;
+        font: 900 12px $f-fa;
+        color: $color-white;
+        line-height: 1;
+        line-height: 21px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 50%;
+        background: $primary;
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        transition: 0.3s;
+      }
+      &:hover {
+        &:after {
+          transform: translate(5px, -50%);
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    > li {
+      > a {
+        font-size: 14px;
+        padding: 15px 30px 15px 10px;
+        &:after {
+          height: 18px;
+          width: 18px;
+          line-height: 18px;
+          right: 10px;
+        }
+      }
+    }
+  }
 }
 
 // --------------------------------------------------

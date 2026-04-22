@@ -242,7 +242,7 @@ $space-map-tb: (
 
 // owl
 @mixin owl($sufix: "") {
-  $i: 5;
+  $i: 0;
 
   @while $i <=100 {
     $i: $i + 5;

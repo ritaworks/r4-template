@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
+  <!-- @block('l-head-front') -->
+  <meta charset="UTF-8">
+  <title>@page_meta_full_title</title>
+  <meta name="description" content="@page_meta_description">
+  <meta name="keywords" content="@page_meta_keywords">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <!-- @site_favicon -->
+  <link rel="canonical" href="@page_url">
+  <!-- ↓OGP↓-->
+  <!-- <meta property="og:title" content="@page_meta_full_title" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="@page_meta_description" />
+  <meta property="og:url" content="@page_url" />
+  <meta property="og:site_name" content="@site_name" />
+  <meta property="og:image" content="@page_ogp_thumb_url" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="@page_ogp_thumb_url"> -->
+  <!-- ↑OGP↑ -->
+  <link rel="stylesheet" href="data/themes/THEME-NAME/css/import.css">
+  <!-- <link rel="stylesheet" href="data/themes/THEME-NAME/css/plugin/fontawesome-free/7.0.1/css/all.min.css"> -->
+  <!-- @block('l-head-style') -->
+  <!-- @block('l-head-rear') -->
+</head>
+
+<body>
+  <!-- @block('l-body-front') -->
+  <!-- @block('l-body-script') -->
+  <script src="data/themes/THEME-NAME/js/plugin/jquery/3.6.1/jquery.min.js"></script>
+  <script src="data/themes/THEME-NAME/js/plugin/viewport-extra/2.1.4/viewport-extra.min.js"></script>
+  <script src="data/themes/THEME-NAME/js/common.js"></script>
+
+  <!-- Container -->
+  <div class="l-container">
+
+    <!-- Header -->
+    <header class="flex ai--center jc--center" style="height: 100px;background: #ddd; position: absolute;">
+      ヘッダー
+    </header>
+    <!-- /Header -->
+
+    <!-- Main -->
+    <main style="padding: 100px 0;">
+
+      <div class="container mb-lg">
+        <div class="anchor-wrap" id="anchor-menu">
+          <div class="anchor-box">
+            <p class="anchor-ttl">ページ内リンク</p>
+            <ul class="anchor-link">
+              <li><a href="#link01">カラムなし（共通）</a></li>
+              <li><a href="#link02">カラムなし（単一ページ用デザイン）</a></li>
+              <li><a href="#link03">カラムあり</a></li>
+              <li><a href="#" data-href="#tab02_target">tab02の中の#target</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container -wide mb-lg">
+        <div class="owl60 mb-lg" id="link01">
+          <section>
+            <h2>見出し1（h2）</h2>
+            <div class="flex gap-xs">
+              <div class="flex-item flex-1">
+                <p>テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。<a href="#">テキストが入ります。</a></p>
+              </div>
+              <div class="flex-item" style="width: 360px;">
+                <div class="img-tb500 bdrs10"><img src="https://placehold.jp/720x400.png" alt="" /></div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>見出し2（h3）</h3>
+            <p>テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
+          </section>
+          <section>
+            <h4>見出し3（h4）</h4>
+            <p>テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
+          </section>
+          <section>
+            <h5>見出し4（h5）</h5>
+            <p>テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
+          </section>
+          <div class="owl35">
+            <div><a href="#" class="button01">button01</a></div>
+            <div><a href="#" class="button01">複数行のなった場合<br />複数行</a></div>
+            <div><a href="#" class="button02">button02</a></div>
+            <div><a href="#" class="button03">button03</a></div>
+            <div class="center-text"><a href="#" class="button01 -back">一覧へ戻る</a></div>
+            <div class="center-text"><a href="#" class="button03 -back">一覧へ戻る</a></div>
+          </div>
+          <div>
+            <ul class="tab-list -scrollable mb-rg js-tab">
+              <li><a data-href="#tab01">タブ01</a></li>
+              <li><a data-href="#tab02">タブ02</a></li>
+              <li><a data-href="#tab03">タブ03</a></li>
+              <li><a data-href="#tab04">タブ04タブ04タブ04タブ04<br />複数行</a></li>
+              <li><a data-href="#tab05">タブ05</a></li>
+            </ul>
+            <ul class="tab-list mb-rg js-tab">
+              <li><a data-href="#tab01">タブ01</a></li>
+              <li><a data-href="#tab02">タブ02</a></li>
+              <li><a data-href="#tab03">タブ03</a></li>
+              <li><a data-href="#tab04">タブ04タブ04タブ04タブ04<br />複数行</a></li>
+              <li><a data-href="#tab05">タブ05</a></li>
+            </ul>
+            <div>
+              <div id="tab01">
+                <p class="md-rg">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
+                <div class="pagination"><a class="item icon" href="#?page_p=4"></a> <a class="active item" href="#">1</a> <a class="item" href="#?page_p=2">2</a> <a class="item" href="#?page_p=3">3</a> <a class="item icon" href="#?page_p=6"></a></div>
+              </div>
+              <div id="tab02">
+                <p>テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
+                <div id="target">
+                  <h3>見出し</h3>
+                  <p>タブの中のコンテンツへのリンクは「href="#tab01_target"」のようにアンダーバーで繋げます。同じページ内の場合は「data-href」で指定します</p>
+                </div>
+              </div>
+              <div id="tab03">tab03</div>
+              <div id="tab04">tab04</div>
+              <div id="tab05">tab05</div>
+            </div>
+          </div>
+          <div class="owl30">
+            <ul class="dot-list">
+              <li>リストが入ります。</li>
+              <li>リストが入ります。</li>
+              <li>リストが入ります。</li>
+              <li>リストが入ります。</li>
+            </ul>
+            <ul class="asterisk-list">
+              <li>リストが入ります。</li>
+              <li>リストが入ります。</li>
+            </ul>
+            <ol class="num-list">
+              <li>リストが入ります。</li>
+              <li>リストが入ります。</li>
+              <li>リストが入ります。</li>
+              <li>リストが入ります。</li>
+            </ol>
+            <ul class="owl5">
+              <li><a href="file.pdf" class="file-icon">pdfのリンクが入ります。</a></li>
+              <li><a href="file.xls" class="file-icon">Excelのリンクが入ります。</a></li>
+              <li><a href="file.doc" class="file-icon">Wordのリンクが入ります。</a></li>
+            </ul>
+            <ul class="owl5">
+              <li><a href="#.pdf" class="file-btn01">.file-btn01</a></li>
+              <li><a href="#.pdf" class="file-btn02">.file-btn02</a></li>
+            </ul>
+          </div>
+          <div class="owl30 mb-md">
+            <div class="js-scrollable">
+              <table class="table01 nodrop-table">
+                <colgroup>
+                  <col style="width: 200px;" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">table01</th>
+                    <th scope="col">テキストが入ります。line-height:1.7</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">table01</th>
+                    <td>テキストが入ります。line-height:1.7</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">table01</th>
+                    <td>テキストが入ります。line-height:1.7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <table class="table01">
+              <colgroup>
+                <col style="width: 200px;" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th scope="row">table01</th>
+                  <td>テキストが入ります。line-height:1.7</td>
+                </tr>
+                <tr>
+                  <th scope="row">table01</th>
+                  <td>テキストが入ります。line-height:1.7</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table02">
+              <colgroup>
+                <col style="width: 200px;" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th scope="row">table02</th>
+                  <td>テキストが入ります。line-height:1.7</td>
+                </tr>
+                <tr>
+                  <th scope="row">table02</th>
+                  <td>テキストが入ります。line-height:1.7</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="owl20">
+            <div class="box01">
+              <p>BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。BOX01の文章が入ります。</p>
+            </div>
+            <div class="box02">
+              <p>BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。BOX02の文章が入ります。</p>
+            </div>
+            <div class="box03">
+              <p class="heading05">注意事項</p>
+              <!-- コンテンツ次第でHタグを使用する -->
+              <p>BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。BOX03の文章が入ります。</p>
+            </div>
+          </div>
+          <div class="news-detail">
+            <div class="news-detail-image">
+              <figure><img src="https://placehold.jp/400x300.png" alt="400x300.png" title="タイトル" />
+                <figcaption>キャプションを表示する</figcaption>
+              </figure>
+            </div>
+          </div>
+          <ul class="card-list">
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク画像リンク画像リンク画像リンク</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="card-list">
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク画像リンク画像リンク画像リンク</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="card-list cols-2">
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card-item01 hover-all"><a href="#"></a>
+                <div class="img-wrap ofi -ratio"><img src="https://placehold.jp/400x300.png" alt="" role="presentation" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">画像リンク</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="btn-list">
+            <li><a href="#" class="button01">複数行のなった場合<br />複数行のなった場合<br />複数行のなった場合</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+          </ul>
+          <ul class="btn-list cols-2">
+            <li><a href="#" class="button01">複数行のなった場合<br />複数行のなった場合<br />複数行のなった場合</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+            <li><a href="#" class="button01">button01</a></li>
+          </ul>
+          <div class="section-head">
+            <h3>見出し</h3>
+            <div class="link-wrap"><a href="#" class="button03">一覧を見る</a></div>
+          </div>
+          <div class="box01">
+            <p class="heading03">関連ページ</p>
+            <ul class="btn-list">
+              <li><a href="#" class="button01">交通アクセス</a></li>
+              <li><a href="#" class="button01">フロアマップ</a></li>
+              <li><a href="#" class="button01">診療科・部門・センター</a></li>
+              <li><a href="#" class="button01">お支払いについて</a></li>
+              <li><a href="#" class="button01">当院の特長</a></li>
+              <li><a href="#" class="button01">よくある質問</a></li>
+            </ul>
+          </div>
+          <ul class="interview-list">
+            <li class="interview-card hover-all"><a href="#"></a>
+              <div class="interview-thumb ofi"><img src="https://placehold.jp/400x300.png" alt="" />
+                <div class="info-labels">
+                  <p class="info-name">M.A</p>
+                  <p class="info-type">診療科名</p>
+                  <!-- <p class="info-type">診療科名</p> -->
+                </div>
+              </div>
+              <div class="txt-wrap">
+                <p class="ttl">メッセージが入ります。メッセージが入ります。メッセージが入ります。メッセージが入ります&hellip;</p>
+              </div>
+            </li>
+            <li class="interview-card hover-all"><a href="#"></a>
+              <div class="interview-thumb ofi"><img src="https://placehold.jp/400x300.png" alt="" />
+                <div class="info-labels">
+                  <p class="info-name">M.A</p>
+                  <p class="info-type">診療科名</p>
+                </div>
+              </div>
+              <div class="txt-wrap">
+                <p class="ttl">メッセージが入ります。メッセージが入ります。メッセージが入ります。メッセージが入ります&hellip;</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="link02">
+          <h2>単一ページ用デザイン</h2>
+          <div class="owl-md">
+            <div>
+              <h3>支払い情報</h3>
+              <div class="box02">
+                <p class="heading05 black-txt center-text mb-xs">決済方法</p>
+                <div class="payment-methods center-text">
+                  <div class="item">
+                    <p class="ttl">クレジットカード</p>
+                    <div><img src="data/media/THEME-NAME/common/payment01.jpg" alt="" style="width: 440px;" /></div>
+                  </div>
+                  <div class="item">
+                    <p class="ttl">電子マネー</p>
+                    <div><img src="data/media/THEME-NAME/common/payment02.jpg" alt="" style="width: 159px;" /></div>
+                  </div>
+                  <div class="item">
+                    <p class="ttl">QR決済</p>
+                    <div><img src="data/media/THEME-NAME/common/payment03.jpg" alt="" style="width: 595px;" /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>当院の特長</h3>
+              <div class="feature-box">
+                <div class="img-wrap ofi"><img src="https://placehold.jp/1000x400.png" alt="" /></div>
+                <div class="txt-wrap">
+                  <p class="ttl">急性期病院</p>
+                  <p class="txt">患者様の状態が重篤で、迅速かつ集中的な治療が必要な場合に対応する病院として、地域医療の中心的な役割を担っています。</p>
+                  <div><a href="#" class="button01">急性期病院について</a></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>現在地からの経路</h3>
+              <ul class="route-links">
+                <li class="item"><a href="https://www.google.com/maps/dir/?api=1&amp;destination=34.688888660368555, 135.4940357822833&amp;travelmode=driving" target="_blank" class="driving" rel="noopener">車の場合</a></li>
+                <li class="item"><a href="https://www.google.com/maps/dir/?api=1&amp;destination=34.688888660368555, 135.4940357822833&amp;travelmode=transit" target="_blank" class="transit" rel="noopener">電車の場合</a></li>
+                <li class="item"><a href="https://www.google.com/maps/dir/?api=1&amp;destination=34.688888660368555, 135.4940357822833&amp;travelmode=walking" target="_blank" class="walking" rel="noopener">徒歩の場合</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>広報誌</h3>
+              <div class="magazine-thumb"><img src="https://placehold.jp/300x400.png" alt="" />
+                <p class="magazine-tag"><span class="en" lang="en">NEW</span>最新号</p>
+              </div>
+            </div>
+            <div>
+              <h3>寄付用口座</h3>
+              <div class="donation-box">
+                <div class="ttl-wrap">
+                  <p class="ttl">お振り込み口座</p>
+                </div>
+                <div class="txt-wrap">
+                  <p>口座番号：01234-5-6789<br />口座名義：〇〇病院</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid" id="link03">
+        <div class="column-container">
+          <!-- l-page -->
+          <div class="l-page">
+            <div class="owl-md">
+              <div class="box01">
+                <p class="heading03">関連ページ</p>
+                <ul class="btn-list cols-2">
+                  <li><a href="#" class="button01">交通アクセス</a></li>
+                  <li><a href="#" class="button01">フロアマップ</a></li>
+                  <li><a href="#" class="button01">診療科・部門・センター</a></li>
+                  <li><a href="#" class="button01">お支払いについて</a></li>
+                  <li><a href="#" class="button01">当院の特長</a></li>
+                  <li><a href="#" class="button01">よくある質問</a></li>
+                </ul>
+              </div>
+              <div class="accordion-box01">
+                <div class="ttl-wrap">
+                  <p class="ttl">特定療養費について</p>
+                </div>
+                <div class="contents-wrap owl15">
+                  <p>高度な医療機関である当院では、一定の診療を受ける際に「選定療養費」が発生する場合がございます。これは、医療資源を有効に活用し、皆さまへ質の高い医療を提供するための制度です。以下に該当する場合、選定療養費が必要となることがございます。</p>
+                  <ul class="dot-list">
+                    <li>他の医療機関からの紹介状がない場合</li>
+                    <li>再診時に紹介先の医療機関に戻らず、当院で診療を継続する場合</li>
+                  </ul>
+                  <p>詳細につきましては、受診前に当院の窓口までお気軽にお問合せください。安心して治療を受けていただけるよう、丁寧なご案内を心がけております。</p>
+                  <p>皆さまのご理解とご協力をよろしくお願いいたします。</p>
+                </div>
+              </div>
+              <div class="accordion-box02">
+                <div class="ttl-wrap">
+                  <p class="ttl">初診のときは紹介状が必要ですか？</p>
+                </div>
+                <div class="contents-wrap owl15">
+                  <p>平日は午前8:30〜11:00（診療開始は9:00）となっております。<br />診療科によって異なる場合がありますので、詳細は「外来のご案内」ページをご覧ください。</p>
+                </div>
+              </div>
+              <div>
+                <h3>受診の流れ</h3>
+                <ol class="flow-list">
+                  <li>
+                    <p class="ttl">来院・受付</p>
+                    <div class="flow-contents">
+                      <div class="txt-wrap">
+                        <p>まず、受付で健康保険証や紹介状などの必要な書類をお渡しください。初診の方は、問診票のご記入をお願いすることがあります。</p>
+                      </div>
+                      <div class="img-wrap"><img src="https://placehold.jp/480x320.png" alt="" /></div>
+                    </div>
+                  </li>
+                  <li>
+                    <p class="ttl">問診・確認</p>
+                    <div class="flow-contents">
+                      <div class="txt-wrap">
+                        <p>看護師または医師が、現在の症状や体調、服薬状況などを確認します。また、アレルギーの有無や過去の治療歴についてもお伺いする場合があります。</p>
+                      </div>
+                      <div class="img-wrap"><img src="https://placehold.jp/480x320.png" alt="" /></div>
+                    </div>
+                  </li>
+                  <li>
+                    <p class="ttl">来院・受付</p>
+                    <div class="flow-contents">
+                      <div class="txt-wrap">
+                        <p>テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。<a href="#">テキストが入ります。</a></p>
+                      </div>
+                      <!-- <div class="img-wrap"><img src="https://placehold.jp/480x320.png" alt=""></div> -->
+                    </div>
+                  </li>
+                </ol>
+              </div>
+              <div class="contact-box">
+                <p class="contact-ttl">連絡先</p>
+                <div class="contents-wrap">
+                  <p class="ttl">ご連絡先</p>
+                  <p class="txt">受診を希望される患者さんは<br class="tb" />事前にご連絡をお願いいたします。</p>
+                  <div class="tel-box">
+                    <p class="tel"><a href="tel:0000000000">000-0000-0000</a><span>（代表）</span></p>
+                    <!-- <p class="fax">000-0000-0000</p> -->
+                  </div>
+                  <p class="sub">お電話受付時間：平日9:00～17:00、土曜9:00～12:00<br />（日祝日・12/30～1/3を除く）</p>
+                </div>
+              </div>
+              <div>
+                <h2>外来担当医表</h2>
+                <div class="flex gap20">
+                  <div class="flex-item flex-1 dropdown-box">
+                    <p class="ttl">診療科を選択</p>
+                    <div class="select-box"><select name="dept" id="dept">
+                        <option value="">診療科を選択</option>
+                        <option value="@_page_id">@_page_title</option>
+                        <option value="@_page_id">@_page_title</option>
+                        <option value="@_page_id">@_page_title</option>
+                      </select></div>
+                  </div>
+                  <div class="flex-item" style="width: 210px;"><a href="#.pdf" class="file-btn01 w100" style="height: 100%;">外来担当医表一覧</a></div>
+                </div>
+              </div>
+              <div class="js-scrollable">
+                <table class="table01 -dept">
+                  <thead>
+                    <tr>
+                      <th>月</th>
+                      <th>火</th>
+                      <th>水</th>
+                      <th>木</th>
+                      <th>金</th>
+                      <th>土</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                    </tr>
+                    <tr>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                    </tr>
+                    <tr>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名</td>
+                      <td>医師名<br />医師名<br />医師名</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <h2>対象となる方</h2>
+                <div class="flex gap20">
+                  <div class="flex-item flex-1 box01">
+                    <p class="heading05 primary-txt center-text">患者さんご本人</p>
+                    <p>患者さんご本人が受診される場合には、患者さんご本人であることを確認できる書類（健康保険証等）が必要です。</p>
+                  </div>
+                  <div class="flex-item flex-1 box01">
+                    <p class="heading05 primary-txt center-text">患者さんのご家族</p>
+                    <p>ご家族のみで受診される場合には、患者さんご本人の「セカンドオピニオン外来相談同意書」及び患者さんとの続柄を確認できる書類（健康保険証等）が必要です。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /l-page -->
+          <!-- l-side -->
+          <aside class="l-side">
+            <div class="owl40">
+              <div>
+                <p class="side-ttl">カテゴリ名</p>
+                <ul class="side-nav">
+                  <li class="item"><a href="#">ページ名</a></li>
+                  <li class="item"><a href="#">ページ名</a></li>
+                </ul>
+              </div>
+              <div>
+                <p class="side-ttl side-accordion">カテゴリ名</p>
+                <ul class="side-nav">
+                  <li class="item"><a href="#">ページ名</a></li>
+                  <li class="item"><a href="#">ページ名</a></li>
+                  <li class="item"><a href="#">ページ名</a></li>
+                  <li class="item"><a href="#">ページ名</a></li>
+                  <li class="item"><a href="#">ページ名</a></li>
+                  <li class="item"><a href="#">ページ名ページ名ページ名ページ名ページ名ページ名ページ名ページ名ページ名ページ名</a></li>
+                  <li class="item"><a href="#">ページ名</a></li>
+                  <li class="item"><a href="#">ページ名</a></li>
+                </ul>
+              </div>
+              <div>
+                <ul class="interview-list -side">
+                  <li class="interview-card hover-all"><a href="#"></a>
+                    <div class="interview-thumb ofi"><img src="https://placehold.jp/400x300.png" alt="" />
+                      <div class="info-labels">
+                        <p class="info-name">M.A</p>
+                        <p class="info-type">診療科名</p>
+                      </div>
+                    </div>
+                    <div class="txt-wrap">
+                      <p class="ttl">メッセージが入ります。メッセージが入ります。メッセージが入&hellip;</p>
+                    </div>
+                  </li>
+                  <li class="interview-card hover-all"><a href="#"></a>
+                    <div class="interview-thumb ofi"><img src="https://placehold.jp/400x300.png" alt="" />
+                      <div class="info-labels">
+                        <p class="info-name">M.A</p>
+                        <p class="info-type">診療科名</p>
+                      </div>
+                    </div>
+                    <div class="txt-wrap">
+                      <p class="ttl">メッセージが入ります。メッセージが入ります。メッセージが入&hellip;</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /l-side -->
+          </aside>
+          <!-- /l-side -->
+        </div>
+      </div>
+
+    </main>
+    <!-- /Main -->
+
+    <!-- Footer -->
+    <footer class="flex ai--center jc--center" style="height: 200px;background: #ddd;">
+      フッター
+    </footer>
+    <!-- /Footer -->
+
+  </div>
+  <!-- /Container -->
+
+  <link rel="stylesheet" href="data/themes/THEME-NAME/css/plugin/scroll-hint/1.2.5/scroll-hint.css">
+  <script src="data/themes/THEME-NAME/js/plugin/scroll-hint/1.2.5/scroll-hint.min.js"></script>
+  <script src="data/themes/THEME-NAME/js/module/dragscroll.js"></script>
+  <script>
+    // scroll-hint
+    window.addEventListener('DOMContentLoaded', function () {
+      new ScrollHint('.js-scrollable', {
+        scrollHintIconAppendClass: 'scroll-hint-icon-white',
+        suggestiveShadow: false,
+        i18n: {
+          scrollable: "スクロールできます"
+        }
+      });
+    });
+  </script>
+
+  <script src="data/themes/THEME-NAME/js/module/tab.js"></script>
+  <script>
+    // tab
+    $(function () {
+      $('.js-tab.-scrollable').tab({
+        scrollGap: 3, //cssのgap
+
+        // その他のオプション
+        // position: 0, // タブよりposition分上にスクロールする
+        // scroll_target: "", // 読み込み時毎度特定の場所へスクロールする（※ページャーなど）
+        // reload_actie: [], // パラメータ付与でリロードを行う場合の親クラス
+        isScrollable: true, //見切れる場合はscrollする
+        // history: false, // 履歴
+      });
+      $('.js-tab:not(.-scrollable)').tab();
+    })
+  </script>
+
+  <script src="data/themes/THEME-NAME/js/module/jquery.accordion.js"></script>
+  <script>
+    $(function () {
+      $('.accordion-box01 .ttl-wrap, .accordion-box02 .ttl-wrap').accordion({
+        openIndex: [0], //デフォルトで開いておく番号（複数選択可）
+      });
+      $('.side-accordion').accordion();
+    })
+  </script>
+  <!-- @block('l-body-rear') -->
+</body>
+
+</html>

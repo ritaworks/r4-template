@@ -2,56 +2,6 @@
 
 @use "../../global" as *;
 
-@mixin nodrop-table {
-  @media only screen and (max-width: $screen-sp) {
-    tbody,
-    thead {
-      tr {
-        th,
-        td {
-          display: table-cell;
-          width: auto;
-        }
-        th {
-          white-space: nowrap;
-        }
-      }
-    }
-  }
-}
-
-.nodrop-table {
-  @include nodrop-table;
-}
-
-@mixin table-subclass {
-  &.-sticky-tb {
-    @media only screen and (max-width: $screen-sp) {
-      th:first-child {
-        position: sticky;
-        left: 0;
-      }
-    }
-  }
-  &.-middle {
-    th,
-    td {
-      vertical-align: middle;
-    }
-  }
-
-  &.-center {
-    th,
-    td {
-      text-align: center;
-    }
-  }
-
-  &.-fixed {
-    table-layout: fixed;
-  }
-}
-
 // --------------------------------------------------
 // Table
 // --------------------------------------------------
@@ -61,22 +11,22 @@
 
   th,
   td {
-    font-size: 16px;
     line-height: 1.5;
     padding: 30px;
+    border: 1px solid $color-gray;
   }
 
   thead {
     th {
-      font-weight: bold;
-      color: #fff;
+      color: $color-white;
       background: $primary;
     }
   }
 
   tbody {
     th {
-      font-weight: bold;
+      color: $color-white;
+      background: $primary;
     }
   }
 
@@ -90,7 +40,7 @@
     }
   }
 
-  // サブクラス
+  // 病院用サブクラス
   // &.-dept {
   //   @include nodrop-table;
   //   table-layout: fixed;
@@ -111,8 +61,8 @@
   width: 100%;
 
   tr {
-    border-top: 1px solid #d0d0d0;
-    border-bottom: 1px solid #d0d0d0;
+    border-top: 1px solid $color-gray;
+    border-bottom: 1px solid $color-gray;
   }
 
   th,
@@ -151,7 +101,6 @@
 // --------------------------------------------------
 // その他
 // --------------------------------------------------
-// js-scrollable使用のため
-// .overflow-table {
-//   overflow-x: auto;
-// }
+.nodrop-table {
+  @include nodrop-table;
+}
