@@ -28,59 +28,52 @@
   border: 0;
 }
 
-@if $accessibility-functions {
-  // アクセシビリティサポート（テーマ別スタイル）
-  @mixin accessibility-box($hover: false, $active: false) {
+// アクセシビリティサポート（テーマ別スタイル）
+@mixin accessibility-box($hover: false, $active: false) {
+  body[data-theme="dark"] &,
+  body[data-theme="blue"] &,
+  body[data-theme="yellow"] & {
+    color: var(--text) !important;
+    border: 1px solid var(--text) !important;
+    background: var(--bg) !important;
 
-    body[data-theme="dark"] &,
-    body[data-theme="blue"] &,
-    body[data-theme="yellow"] & {
-      color: var(--site-text) !important;
-      border: 1px solid var(--site-text) !important;
-      background: var(--site-bg) !important;
-
-      @if ($hover==true) {
-        &:hover {
-          text-decoration: underline;
-
-          * {
-            color: var(--site-text) !important;
-          }
+    @if ($hover==true) {
+      &:hover {
+        text-decoration: underline;
+        * {
+          color: var(--text) !important;
         }
       }
+    }
 
-      @if ($active==true) {
-
-        &.active,
-        &.current {
-          color: var(--site-bg) !important;
-          background: var(--site-text) !important;
-        }
+    @if ($active==true) {
+      &.active,
+      &.current {
+        color: var(--bg) !important;
+        background: var(--text) !important;
       }
     }
   }
+}
 
-  @mixin accessibility-color($fontColor, $hover: false) {
+@mixin accessibility-color($fontColor, $hover: false) {
+  body[data-theme="dark"] &,
+  body[data-theme="blue"] &,
+  body[data-theme="yellow"] & {
+    color: $fontColor !important;
 
-    body[data-theme="dark"] &,
-    body[data-theme="blue"] &,
-    body[data-theme="yellow"] & {
-      color: $fontColor !important;
-
-      @if ($hover==true) {
-        &:hover {
-          text-decoration: underline;
-        }
+    @if ($hover==true) {
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
+}
 
-  @mixin accessibility-background($bgColor) {
-
-    body[data-theme="dark"] &,
-    body[data-theme="blue"] &,
-    body[data-theme="yellow"] & {
-      background-color: $bgColor !important;
-    }
+@mixin accessibility-background($bgColor) {
+  body[data-theme="dark"] &,
+  body[data-theme="blue"] &,
+  body[data-theme="yellow"] & {
+    background-color: $bgColor !important;
   }
 }

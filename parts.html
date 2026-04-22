@@ -33,12 +33,13 @@
   <script src="data/themes/THEME-NAME/js/plugin/jquery/3.6.1/jquery.min.js"></script>
   <script src="data/themes/THEME-NAME/js/plugin/viewport-extra/2.1.4/viewport-extra.min.js"></script>
   <script src="data/themes/THEME-NAME/js/common.js"></script>
+  <!-- <script src="data/themes/THEME-NAME/js/module/switcher.js"></script> -->
 
   <!-- Container -->
   <div class="l-container">
 
     <!-- Header -->
-    <header class="flex ai--center jc--center" style="height: 100px;background: #ddd; position: absolute;">
+    <header class="flex ai--center jc--center" style="height: 100px;background: #ddd;">
       ヘッダー
     </header>
     <!-- /Header -->
@@ -47,6 +48,25 @@
     <main style="padding: 100px 0;">
 
       <div class="container mb-lg">
+        <!-- <ul class="change-menu mb-rg">
+          <li class="font-change">
+            <p class="ttl">サイトカラー変更</p>
+            <div class="change-btns">
+              <button type="button" data-set-theme="light" title="ライトテーマ">白</button>
+              <button type="button" data-set-theme="dark" title="ダークテーマ">黒</button>
+              <button type="button" data-set-theme="blue" title="ブルーテーマ">青</button>
+              <button type="button" data-set-theme="yellow" title="イエローテーマ">黄</button>
+            </div>
+          </li>
+          <li class="color-change">
+            <p class="ttl">文字サイズ</p>
+            <div class="change-btns">
+              <button type="button" data-set-font-size="small" title="文字サイズを小に">小</button>
+              <button type="button" data-set-font-size="medium" title="文字サイズを中に">中</button>
+              <button type="button" data-set-font-size="large" title="文字サイズを大に">大</button>
+            </div>
+          </li>
+        </ul> -->
         <div class="anchor-wrap" id="anchor-menu">
           <div class="anchor-box">
             <p class="anchor-ttl">ページ内リンク</p>
@@ -564,6 +584,14 @@
                   </div>
                 </div>
               </div>
+              <div class="center-box" style="max-width: 600px;">
+                <div class="photo-slider">
+                  <div><img src="https://placehold.jp/600x300.png" alt="" /></div>
+                  <div><img src="https://placehold.jp/600x300.png" alt="" /></div>
+                  <div><img src="https://placehold.jp/600x300.png" alt="" /></div>
+                  <div><img src="https://placehold.jp/600x300.png" alt="" /></div>
+                </div>
+              </div>
             </div>
           </div>
           <!-- /l-page -->
@@ -676,6 +704,28 @@
         openIndex: [0], //デフォルトで開いておく番号（複数選択可）
       });
       $('.side-accordion').accordion();
+    })
+  </script>
+
+  <link rel="stylesheet" href="data/themes/THEME-NAME/css/plugin/slick/1.8.1/slick.css">
+  <link rel="stylesheet" href="data/themes/THEME-NAME/css/plugin/slick/1.8.1/slick-theme.css">
+  <script src="data/themes/THEME-NAME/js/plugin/slick/1.8.1/slick.min.js"></script>
+  <script>
+    $(function () {
+      $('.photo-slider').slick({
+        arrows: false,
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: true,
+        speed: 5000,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        pauseOnDotsHover: false,
+      })
     })
   </script>
   <!-- @block('l-body-rear') -->

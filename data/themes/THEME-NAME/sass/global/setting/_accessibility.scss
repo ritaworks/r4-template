@@ -3,13 +3,14 @@
 @use "settings" as *;
 @use "variable" as *;
 @use "sass:color";
+@use "sass:math";
 
 // @function em($px) {
-//   @return ($px / 17) * 1em;
+//   @return math.div($px / 16) * 1em;
 // }
 
 @function rem($px) {
-  @return ($px / 16) * 1rem;
+  @return math.div($px, 16) * 1rem;
 }
 
 // ==================================================
@@ -19,7 +20,6 @@
 // --- Dark Colors ---
 $dark-color-text: $color-white;
 $dark-color-bg: #121212;
-$dark-color-border: #444;
 
 // --- Theme: Light (Default) ---
 $light-site-primary: $primary;
@@ -43,7 +43,7 @@ $dark-site-primary: #52b461;
 $dark-site-primary-rgb: 61, 170, 77;
 $dark-site-secondary: #bbb;
 $dark-site-text: $dark-color-text;
-$dark-site-border: $dark-color-border;
+$dark-site-border: $dark-site-text;
 $dark-site-link-color: $dark-site-primary;
 $dark-site-bg: $dark-color-bg;
 $dark-site-bg-gray: color.adjust($dark-site-bg, $lightness: -5%);
@@ -59,7 +59,7 @@ $blue-site-primary: #52b461;
 $blue-site-primary-rgb: 61, 170, 77;
 $blue-site-secondary: #eee;
 $blue-site-text: $color-white;
-$blue-site-border: color.adjust($color-blue, $lightness: -10%);
+$blue-site-border: $blue-site-text;
 $blue-site-link-color: $blue-site-primary;
 $blue-site-bg: $color-blue;
 $blue-site-bg-gray: color.adjust($blue-site-bg, $lightness: 5%);
@@ -75,7 +75,7 @@ $yellow-site-primary: #1976d2;
 $yellow-site-primary-rgb: 25, 118, 210;
 $yellow-site-secondary: #555;
 $yellow-site-text: $light-site-text;
-$yellow-site-border: color.adjust($color-yellow,  $lightness: -10%);
+$yellow-site-border: $yellow-site-text;
 $yellow-site-link-color: $yellow-site-primary;
 $yellow-site-bg: $color-yellow;
 $yellow-site-bg-gray: $color-gray;
@@ -85,3 +85,27 @@ $yellow-site-bg-red-rgb: $color-red-rgb; //共通
 $yellow-site-bg-primary: $yellow-site-bg;
 $yellow-site-bg-secondary: #eee;
 $yellow-site-red: #c62828;
+
+.change-btns {
+  button {
+    &[data-set-theme="light"] {
+      color: $color-black;
+      background-color: $color-white;
+    }
+
+    &[data-set-theme="dark"] {
+      color: $color-white;
+      background-color: $color-black;
+    }
+
+    &[data-set-theme="blue"] {
+      color: $color-white;
+      background-color: $color-blue;
+    }
+
+    &[data-set-theme="yellow"] {
+      color: $color-black;
+      background-color: $color-yellow;
+    }
+  }
+}

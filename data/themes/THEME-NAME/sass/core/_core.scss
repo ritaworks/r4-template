@@ -15,16 +15,16 @@
     --bg-gray-lighter: #{$light-site-bg-gray-lighter};
     --bg-red: #{$light-site-bg-red};
     --bg-red-rgb: #{$light-site-bg-red-rgb};
-    --border-white: #{$light-site-bg};
     --red: #{$light-site-red};
+    --white: #{$light-site-white};
     // Component-specific variables
     --box-bg: #{$light-site-white};
     --box-text: #{$light-site-text};
     --box-border: #{$light-site-border};
     // ファイルタイプごとのカラーも同様に定義します（固定）
-    --file-pdf: #{color-pdf};
-    --file-doc: #{color-doc};
-    --file-xls: #{color-xls};
+    --file-pdf: #{$color-pdf};
+    --file-doc: #{$color-doc};
+    --file-xls: #{$color-xls};
   }
   body[data-theme='dark'] {
     // Theme: dark
@@ -39,8 +39,8 @@
     --bg-gray-lighter: #{$dark-site-bg-gray-lighter};
     --bg-red: #{$dark-site-bg-red};
     --bg-red-rgb: #{$dark-site-bg-red-rgb};
-    --border-white: #{$dark-site-text};
     --red: #{$dark-site-red};
+    --white: #{$dark-site-bg};
     // Component-specific variables
     --box-bg: #{$dark-site-bg-gray};
     --box-text: #{$dark-site-text};
@@ -60,8 +60,8 @@
     --bg-gray-lighter: #{$blue-site-bg-gray-lighter};
     --bg-red: #{$blue-site-bg-red};
     --bg-red-rgb: #{$blue-site-bg-red-rgb};
-    --border-white: #{$blue-site-text};
     --red: #{$blue-site-red};
+    --white: #{$blue-site-bg};
     // Component-specific variables
     --box-bg: #{$blue-site-bg-gray};
     --box-text: #{$blue-site-text};
@@ -81,8 +81,8 @@
     --bg-gray-lighter: #{$yellow-site-bg-gray-lighter};
     --bg-red: #{$yellow-site-bg-red};
     --bg-red-rgb: #{$yellow-site-bg-red-rgb};
-    --border-white: #{$yellow-site-text};
     --red: #{$yellow-site-red};
+    --white: #{$yellow-site-bg};
     // Component-specific variables
     --box-bg: #{$yellow-site-bg-gray};
     --box-text: #{$yellow-site-text};
@@ -124,12 +124,28 @@ html {
 }
 
 body {
-  background: #fff;
   padding: 0;
   margin: 0;
 
   -webkit-font-smoothing: antialiased;
   // text-align: left;
+
+  @if $accessibility-functions {
+    // --- Font Size Switcher ---
+    &[data-font-size='small'] {
+      font-size: $base-font-size * 0.85;
+      @media only screen and (max-width: $screen-tb) {
+        font-size: $base-font-size-tb * 0.85;
+      }
+    }
+    // mediumはデフォルトのbody設定と同じなので不要
+    &[data-font-size='large'] {
+      font-size: $base-font-size * 1.15;
+      @media only screen and (max-width: $screen-tb) {
+        font-size: $base-font-size-tb * 1.15;
+      }
+    }
+  }
 }
 
 main,
