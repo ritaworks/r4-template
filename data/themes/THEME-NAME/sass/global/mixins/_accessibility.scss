@@ -3,6 +3,31 @@
 @use "../setting" as *;
 @use "sass:map";
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  z-index: 100;
+  &:focus {
+    top: 0;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @if $accessibility-functions {
   // アクセシビリティサポート（テーマ別スタイル）
   @mixin accessibility-box($hover: false, $active: false) {
@@ -35,12 +60,12 @@
     }
   }
 
-  @mixin accessibility-color($color, $hover: false) {
+  @mixin accessibility-color($fontColor, $hover: false) {
 
     body[data-theme="dark"] &,
     body[data-theme="blue"] &,
     body[data-theme="yellow"] & {
-      color: $color !important;
+      color: $fontColor !important;
 
       @if ($hover==true) {
         &:hover {
@@ -50,12 +75,12 @@
     }
   }
 
-  @mixin accessibility-background($color) {
+  @mixin accessibility-background($bgColor) {
 
     body[data-theme="dark"] &,
     body[data-theme="blue"] &,
     body[data-theme="yellow"] & {
-      background-color: $color !important;
+      background-color: $bgColor !important;
     }
   }
 }

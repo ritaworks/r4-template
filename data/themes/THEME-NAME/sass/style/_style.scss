@@ -5,3 +5,224 @@
 // --------------------------------------------------
 @use "../global" as *;
 @use "common" as *;
+
+// デフォルト（ここから）--------------------------------
+.payment-methods {
+  display: grid;
+  gap: 10px;
+
+  grid-template-columns: 1fr 1fr; /* 1行目は2列 */
+  grid-template-rows: auto auto; /* 2行 */
+  .item {
+    border-radius: 10px;
+    background: $color-white;
+    padding: 20px;
+    &:last-child {
+      grid-column: 1 / 3; /* 1行目2列ぶち抜き */
+      grid-row: 2;
+    }
+    .ttl {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    grid-template-columns: 1fr;
+    .item {
+      padding: 10px;
+      &:last-child {
+        grid-column: 1; /* 1行目2列ぶち抜き */
+        grid-row: 3;
+      }
+      .ttl {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.feature-box {
+  &.-side {
+    .img-wrap {
+      height: 200px;
+      >img {
+        transition: .3s;
+      }
+    }
+    .txt-wrap {
+      padding: 10px 0 0;
+      .ttl {
+        font-size: 20px;
+        padding: 5px 10px 5px;
+      }
+      .txt {
+        margin-bottom: 0;
+      }
+    }
+    &:hover {
+      .img-wrap >img {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .img-wrap {
+    height: 440px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .txt-wrap {
+    position: relative;
+    padding: 15px 20px 0;
+    .ttl {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.5;
+      border-radius: 0 10px 0 10px;
+      background: $color-white;
+      position: absolute;
+      left: 0;
+      bottom: 100%;
+      padding: 15px 20px 5px;
+    }
+    .txt {
+      margin-bottom: $space-xs;
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+    .img-wrap {
+      height: 200px;
+    }
+    .txt-wrap {
+      padding: 15px 10px 0;
+      .ttl {
+        font-size: 20px;
+        padding: 15px 10px 5px;
+      }
+      .txt {
+        margin-bottom: $space-xs-tb;
+      }
+    }
+  }
+}
+
+.route-links {
+  @include flex;
+  gap: 25px;
+  > .item {
+    flex: 1;
+    > a {
+      @include flex($a-items: center);
+      height: 100%;
+      width: 100%;
+      gap: 20px;
+      font-weight: bold;
+      color: $color-text;
+      text-decoration: none;
+      border: 1px solid $primary;
+      border-radius: 10px;
+      padding: 20px 25px;
+      transition: 0.3s;
+      &:before {
+        content: "";
+        height: 32px;
+        width: 32px;
+        text-decoration: none;
+        background-position: center;
+        background-size: contain;
+      }
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      &.driving:before {
+        background-image: url(../img/icon_access01.png);
+      }
+      &.transit:before {
+        background-image: url(../img/icon_access02.png);
+      }
+      &.walking:before {
+        background-image: url(../img/icon_access03.png);
+      }
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    flex-direction: column;
+    gap: 15px;
+    > .item {
+      > a {
+        padding: 15px;
+      }
+    }
+  }
+}
+
+.magazine-thumb {
+  position: relative;
+  padding-top: 10px;
+  > img {
+    border-radius: 10px;
+  }
+  > .magazine-tag {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    background: url(../img/bg_tag.png) no-repeat left/contain;
+    // border: 1px solid $primary;
+    // background: $color-white;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 13px 22px 13px 10px;
+    > .en {
+      display: block;
+      font-size: 12px;
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+.donation-box {
+  @include flex();
+  border-radius: 10px;
+  background: $color-gray;
+  padding: 30px 0;
+  .ttl-wrap {
+    @include flex($f-direction: column, $j-content:center);
+    border-right: 1px solid $color-white;
+    padding: 0 50px;
+    margin-right: 50px;
+    .ttl {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+  .txt-wrap {
+    @include flex($f-direction: column, $j-content:center);
+  }
+  @media only screen and (max-width: $screen-tb) {
+    flex-direction: column;
+    padding: 10px 20px;
+    .ttl-wrap {
+      align-items: center;
+      border-right: none;
+      border-bottom: 1px solid $color-white;
+      padding: 0 0 5px;
+      margin: 0 0 5px;
+      .ttl {
+        font-size: 16px;
+      }
+    }
+    .txt-wrap {
+      align-items: center;
+    }
+  }
+}
+
+// デフォルト（ここまで）--------------------------------

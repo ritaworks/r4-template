@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+@use "../setting" as *;
+
+@mixin nodrop-table {
+  @media only screen and (max-width: $screen-sp) {
+    tbody,
+    thead {
+      tr {
+        th,
+        td {
+          display: table-cell;
+          width: auto;
+        }
+        th {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+@mixin table-subclass {
+  &.-sticky-tb {
+    @media only screen and (max-width: $screen-sp) {
+      th:first-child {
+        position: sticky;
+        left: 0;
+      }
+    }
+  }
+  &.-middle {
+    th,
+    td {
+      vertical-align: middle;
+    }
+  }
+
+  &.-center {
+    th,
+    td {
+      text-align: center;
+    }
+  }
+
+  &.-fixed {
+    table-layout: fixed;
+  }
+}

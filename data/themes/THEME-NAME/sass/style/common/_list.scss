@@ -71,6 +71,163 @@
 // --------------------------------------------------
 
 // --------------------------------------------------
+// 単純なリスト
+// --------------------------------------------------
+
+// カードタイプ
+.card-list {
+  display: grid;
+  gap: 45px 40px;
+
+  grid-template-columns: repeat(3, 1fr);
+  &.cols-2 {
+    gap: 40px 60px;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media only screen and (max-width: $screen-tb) {
+    gap: 30px;
+
+    grid-template-columns: repeat(2, 1fr);
+    &.cols-2 {
+      gap: 30px;
+    }
+  }
+  @media only screen and (max-width: $screen-sp) {
+    gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    &.cols-2 {
+      gap: 20px;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+// ボタンタイプ
+.btn-list {
+  display: grid;
+  gap: 20px 40px;
+
+  grid-template-columns: repeat(3, 1fr);
+  &.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  a.button01 {
+    height: 100%;
+    max-width: 100%;
+  }
+  @media only screen and (max-width: $screen-tb) {
+    gap: 20px 20px;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media only screen and (max-width: $screen-sp) {
+    grid-template-columns: repeat(1, 1fr);
+    &.cols-2 {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+.interview-list {
+  display: grid;
+  gap: 50px 40px;
+
+  grid-template-columns: repeat(2, 1fr);
+  &.-side {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media only screen and (max-width: $screen-tb) {
+    gap: 40px 20px;
+  }
+  @media only screen and (max-width: $screen-sp) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+ol.flow-list {
+  counter-reset: flow-counter;
+
+  > li + li {
+    position: relative;
+    margin-top: 50px;
+    &:before {
+      content: "";
+      height: 20px;
+      width: 50px;
+      background-color: $primary;
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 15px);
+      transform: translateX(-50%);
+
+      mask: url("../img/icon_arrow.svg") no-repeat center;
+      mask-size: contain;
+    }
+  }
+  > li {
+    counter-increment: flow-counter;
+    border: 1px solid $color-gray;
+    border-radius: 10px;
+    background: $color-white;
+    position: relative;
+    padding: 30px 40px;
+  }
+
+  .ttl {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 15px;
+
+    &::before {
+      content: counter(flow-counter, decimal-leading-zero) ". ";
+      margin-right: 10px;
+    }
+  }
+
+  .flow-contents {
+    @include flex($f-wrap: nowrap);
+    gap: 30px;
+
+    .txt-wrap {
+      flex: 1;
+    }
+
+    .img-wrap {
+      max-width: 240px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border-radius: 10px;
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    > li + li {
+      margin-top: 40px;
+      &:before {
+        bottom: calc(100% + 10px);
+      }
+    }
+    > li {
+      padding: 15px 20px;
+    }
+
+    .ttl {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .flow-contents {
+      flex-direction: column;
+      gap: 15px;
+      .img-wrap {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+// --------------------------------------------------
 // デフォルト（CMS内エディタ用クラス）
 // --------------------------------------------------
 

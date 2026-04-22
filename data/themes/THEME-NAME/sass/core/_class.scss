@@ -34,6 +34,15 @@ $align-items: (
 // 変数は既存の $space-map, $space-map-tb を利用
 @include owl-spacing($space-map, $space-map-tb);
 
+// gap
+@include spacing-class(gap, "gap");
+
+// margin-top
+@include spacing-class(margin-top, "mt");
+
+// margin-bottom
+@include spacing-class(margin-bottom, "mb");
+
 // 行揃え指定クラス
 @include textalign();
 
