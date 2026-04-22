@@ -11,16 +11,15 @@ $color-red: red;
 $color-red-rgb: 255, 0, 0;
 $color-black: #000;
 $color-white: #fff;
-$color-blue: darkblue;
-$color-yellow: yellow;
+$color-blue: #005bac;
+$color-yellow: #fff176;
 $color-gray: #eee;
 $color-gray-lighter: #f6f6f6;
 
 // --- UI Semantic ---
-$primary: #FFA500;
+$primary: #ffa500;
 $primary-rgb: 255, 165, 0;
 $secondary: #000;
-
 $color-text: #333;
 $color-border: #ddd;
 $color-link: $primary;
@@ -40,7 +39,8 @@ $f-fa: "Font Awesome 7 Free";
 $f-fab: "Font Awesome 7 Brands";
 
 // 文字フォント
-$f-min: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ＭＳ Ｐ明朝", "MS PMincho",
+$f-min:
+  "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ＭＳ Ｐ明朝", "MS PMincho",
   "游明朝体", "Yu Mincho", YuMincho, serif;
 
 // --------------------------------------------------
