@@ -72,10 +72,13 @@ r4-template/
 │               ├── global/
 │               │   ├── _index.scss [no-edit]
 │               │   ├── mixins/
+│               │   │   ├── _accessibility.scss [no-edit]
 │               │   │   ├── _grid-system.scss [no-edit]
 │               │   │   ├── _index.scss [no-edit]
+│               │   │   ├── _table.scss [no-edit]
 │               │   │   └── _utility.scss [no-edit]
 │               │   └── setting/
+│               │       ├── _accessibility.scss [no-edit]
 │               │       ├── _index.scss [no-edit]
 │               │       ├── _settings.scss
 │               │       └── _variable.scss
@@ -238,23 +241,23 @@ r4-template/
 
 ### moduleディレクトリについて
 毎回ではないが、よく使うjsやscssを格納しているファイル（必要に応じて使ってください）
+
+**js/module/**<br>
+再利用可能なJavaScriptモジュールを格納。必要に応じてcommon.jsからインポートして使用。
 ```html
-<!--js-->
 r4-template/
 └── data/
     └── themes/
         └── THEME-NAME/
             └── js/
                 └── module/
-```
-```html
-<!--scss-->
-r4-template/
-└── data/
-    └── themes/
-        └── THEME-NAME/
-            └── sass/
-                └── module/
+                    ├── dragscroll.js （ドラッグスクロール機能）
+                    ├── form.js （フォーム関連の機能）
+                    ├── jquery.accordion.js （アコーディオン機能）
+                    ├── jquery.latestClass.js （最新クラス付与機能）
+                    ├── switcher.js （アクセシビリティ用スイッチャー機能）
+                    ├── tab.js （タブ機能）
+                    └── form/ （フォーム関連のサブモジュール）
 ```
 
 
@@ -282,22 +285,85 @@ r4-template/
             └── sass/
                 └── core/
                     └── _class.scss　（使い回し用のクラスを記載している場所）
-                    └── _core.scss （cssのリセットやノーマライズの設定を記載している場所）
-                    └── _float.scss （フロートシステムの設定を記載している場所）
+                    └── _core.scss （CSSリセット・ノーマライズ、アクセシビリティ有効時のCSSカスタムプロパティ定義）
                     └── _grid.scss （グリッドシステムの設定を記載している場所）
                     └── _print.scss （プリント時の設定を記載している場所）
 ```
 
-## コーディングルール
-- [命名ルール](https://github.com/natrin/r4-template/wiki/%E5%91%BD%E5%90%8D%E3%83%AB%E3%83%BC%E3%83%AB "命名ルール")
-- [書式ルール](https://github.com/ritaworks/r4-template/wiki/%E6%9B%B8%E5%BC%8F%E3%83%AB%E3%83%BC%E3%83%AB "書式ルール")
-- [グリッドシステム、floatクラス](https://github.com/natrin/r4-template/wiki/%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%80%81float%E3%82%AF%E3%83%A9%E3%82%B9 "グリッドシステム、floatクラス")
-- [テンプレートに組み込まれているクラス](https://github.com/natrin/r4-template/wiki/%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%AB%E7%B5%84%E3%81%BF%E8%BE%BC%E3%81%BE%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%82%AF%E3%83%A9%E3%82%B9 "テンプレートに組み込まれているクラス")
-- [画像形式・画像の書き出しルール](https://github.com/natrin/r4-template/wiki/%E7%94%BB%E5%83%8F%E5%BD%A2%E5%BC%8F%E3%83%BB%E7%94%BB%E5%83%8F%E3%81%AE%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E3%83%AB%E3%83%BC%E3%83%AB "画像形式・画像の書き出しルール")
-- [マウスオーバー時の処理](https://github.com/natrin/r4-template/wiki/%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E6%99%82%E3%81%AE%E5%87%A6%E7%90%86 "マウスオーバー時の処理")
-- [Sass環境を整える](https://github.com/ritaworks/r4-template/wiki/Sass%E7%92%B0%E5%A2%83%E3%82%92%E6%95%B4%E3%81%88%E3%82%8B "Sass環境を整える")
-- [Sassの書き方・使い方](https://github.com/ritaworks/r4-template/wiki/Sass%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9%E3%83%BB%E4%BD%BF%E3%81%84%E6%96%B9 "Sassの書き方・使い方")
-- [Sass運用ルール](https://github.com/natrin/r4-template/wiki/sass%E9%81%8B%E7%94%A8%E3%83%AB%E3%83%BC%E3%83%AB)
-- [CMSを前提としたコーディングの仕方](https://github.com/natrin/r4-template/wiki/CMSを前提としたコーディングの仕方 "CMSを前提としたコーディングの仕方")
-- [CMS内エディタ用クラスの記述ルール](https://github.com/natrin/r4-template/wiki/CMS%E5%86%85%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E7%94%A8%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E8%A8%98%E8%BF%B0%E3%83%AB%E3%83%BC%E3%83%AB "CMS内エディタ用クラスの記述ルール")
-- [リンク設定](https://github.com/ritaworks/r4-template/wiki/%E3%83%AA%E3%83%B3%E3%82%AF%E8%A8%AD%E5%AE%9A "リンク設定")
+### globalディレクトリについて（アクセシビリティ関連）
+
+**global/setting/_accessibility.scss**<br>
+ダーク・ブルー・イエローの各テーマ用SCSS変数と `rem()` 関数を定義します。
+
+**global/mixins/_accessibility.scss**<br>
+`$accessibility-functions: true` の場合のみ有効になる、テーマ別スタイル上書き用のmixinを定義します。
+- `accessibility-box()` … `data-theme` 属性に応じてボックスのcolor/border/backgroundを上書き
+- `accessibility-color()` … 文字色を上書き
+- `accessibility-background()` … 背景色を上書き
+
+**global/mixins/_table.scss**<br>
+`table-subclass()` / `nodrop-table()` mixin を定義します（`_table.scss` から参照）。
+
+
+### アクセシビリティ機能（色変更・フォントサイズ変更）
+
+`_settings.scss` の `$accessibility-functions: true` に設定すると、`_core.scss` の `:root` にCSSカスタムプロパティが出力され、`data-theme` 属性でテーマを切り替えられるようになります。
+
+**CSSカスタムプロパティ一覧（`_core.scss` / `:root` 定義）**
+
+| カスタムプロパティ | light（デフォルト） | テーマ別に変化 |
+|---|---|---|
+| `--primary` | `$primary` | |
+| `--primary-rgb` | `$primary-rgb` | |
+| `--secondary` | `$secondary` | |
+| `--text` | `$color-text` | |
+| `--border` | `$color-border` | |
+| `--link` | `$color-link` | |
+| `--bg` | `$color-white`（背景） | dark/blue/yellowで変化 |
+| `--bg-gray` | `$color-gray` | |
+| `--bg-gray-lighter` | `$color-gray-lighter` | |
+| `--bg-red` | `$color-red` | 固定 |
+| `--bg-red-rgb` | `$color-red-rgb` | 固定 |
+| `--white` | `$color-white` | 固定 |
+| `--red` | `$color-red` | |
+| `--file-pdf` | `$color-pdf` | 固定 |
+| `--file-doc` | `$color-doc` | 固定 |
+| `--file-xls` | `$color-xls` | 固定 |
+
+**mac_init での自動置換（色変更機能を有効にした場合）**
+
+`style/` ・ `base/` 配下の `.scss` ファイルに対して、以下のSCSS変数をCSSカスタムプロパティへ一括置換します。`$color-white` はwhite固定（`--white`）として扱い、テーマ背景色（`--bg`）には置換しません。
+
+| 置換前（SCSS変数） | 置換後（CSS var） |
+|---|---|
+| `$color-gray-lighter` | `var(--bg-gray-lighter)` |
+| `$color-gray` | `var(--bg-gray)` |
+| `$color-text` | `var(--text)` |
+| `$color-border` | `var(--border)` |
+| `$color-link` | `var(--link)` |
+| `$color-white` | `var(--white)` |
+| `$color-red` | `var(--red)` |
+| `$color-pdf` | `var(--file-pdf)` |
+| `$color-doc` | `var(--file-doc)` |
+| `$color-xls` | `var(--file-xls)` |
+| `$primary` | `var(--primary)` |
+| `$secondary` | `var(--secondary)` |
+
+**mac_init でのフォントサイズ変更（フォントサイズ変更機能を有効にした場合）**
+
+`style/` ・ `base/` 配下の `.scss` ファイルに対して、`font-size` プロパティのリテラルpx値を `rem()` 関数へ一括置換します。`rem()` 関数は `global/setting/_accessibility.scss` に定義済みです（base=16px）。
+
+```
+font-size: 16px  →  font-size: rem(16)
+```
+
+`font:` ショートハンド（アイコンフォント指定など）・SCSS変数参照（`$base-font-size` 等）は対象外です。
+
+
+### mac_initについて
+プロジェクト初期設定を行うシェルスクリプト。ターミナルで実行すると対話形式で以下の処理を行います。
+
+1. 案件名・テーマ名・日付を入力し、`.php` / `.html` / `.css` / `.scss` 内の `THEME-NAME` を一括置換
+2. `data/media/THEME-NAME` と `data/themes/THEME-NAME` ディレクトリを入力したテーマ名にリネーム
+3. **色変更機能を有効にするか選択**（`y` の場合：`$accessibility-functions: true` に変更 ＋ SCSS変数をCSS `var()` へ一括置換）
+4. **フォントサイズ変更機能を有効にするか選択**（`y` の場合：`font-size: Xpx` を `font-size: rem(X)` へ一括置換）

@@ -12,8 +12,8 @@
   th,
   td {
     line-height: 1.5;
+    border: 1px solid $color-border;
     padding: 30px;
-    border: 1px solid $color-gray;
   }
 
   thead {
@@ -32,8 +32,10 @@
 
   @media only screen and (max-width: $screen-sp) {
     &:not(.nodrop-table) {
+      border-bottom: 1px solid $color-border;
       th,
       td {
+        border-bottom: none;
         display: block;
         width: 100% !important;
       }
@@ -41,19 +43,19 @@
   }
 
   // 病院用サブクラス
-  // &.-dept {
-  //   @include nodrop-table;
-  //   table-layout: fixed;
-  //   th,
-  //   td {
-  //     text-align: center;
-  //     vertical-align: middle;
-  //     padding-inline: 10px;
-  //   }
-  //   @media only screen and (max-width: $screen-sp) {
-  //     min-width: 500px;
-  //   }
-  // }
+  &.-dept {
+    @include nodrop-table;
+    table-layout: fixed;
+    th,
+    td {
+      text-align: center;
+      vertical-align: middle;
+      padding-inline: 10px;
+    }
+    @media only screen and (max-width: $screen-sp) {
+      min-width: 500px;
+    }
+  }
 }
 
 .table02 {
@@ -61,8 +63,8 @@
   width: 100%;
 
   tr {
-    border-top: 1px solid $color-gray;
-    border-bottom: 1px solid $color-gray;
+    border-top: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
   }
 
   th,

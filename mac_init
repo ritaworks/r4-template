@@ -4,7 +4,7 @@ function main(){
   echo "案件名とテーマ名を設定します。"
 
   # ローカル変数として宣言
-  local basedir name theme targets=()
+  local basedir name theme accessibility fontsize targets=()
 
   basedir="${0%/*}" targets=("media" "themes")
 
@@ -23,6 +23,16 @@ function main(){
   move "$theme" "${targets[@]}"
 
   find . -name "*.keep" | xargs rm
+
+  read -p "色変更機能（アクセシビリティ）を有効にしますか？ [y/N]: " accessibility
+  if [[ "$accessibility" =~ ^[Yy]$ ]]; then
+    setup_accessibility "$theme"
+  fi
+
+  read -p "フォントサイズ変更機能（アクセシビリティ）を有効にしますか？ [y/N]: " fontsize
+  if [[ "$fontsize" =~ ^[Yy]$ ]]; then
+    setup_fontsize "$theme"
+  fi
 
   read -p "完了しました。スクリプトを終了するには[RETURN]キーを押して下さい。"
 }
@@ -89,6 +99,59 @@ function move() {
     [[ -d "$base/$theme" ]] || mkdir -p "$base/$theme"
     find "$base/$origin" -mindepth "1" -prune -exec mv '{}' "$base/$theme" \; && rmdir "$base/$origin"
   done
+}
+
+function setup_accessibility() {
+  local theme=$1
+  local base="data/themes/$theme/sass"
+
+  # _settings.scss の $accessibility-functions を true に変更
+  find "$base/global/setting" -name "_settings.scss" -exec \
+    sed -i "" "s/\(\$accessibility-functions: \)false/\1true/" '{}' \;
+
+  # style・base ディレクトリの .scss ファイルを対象に SCSS 変数を CSS カスタムプロパティへ一括置換
+  # ※ $color-gray-lighter は $color-gray より先に処理する
+  while IFS= read -r -d $'\0' file; do
+    sed -i "" \
+      -e "s/255[ ,　]*0[ ,　]*0[ ,　]*0/var(--bg-red-rgb),0/g" \
+      -e "s/0[ ,　]*0[ ,　]*0[ ,　]*0/var(--primary-rgb),0/g" \
+      -e "s/\$light-site-bg/var(--bg)/g" \
+      -e "s/\$color-black/var(--white)/g" \
+      -e "s/\$color-gray-lighter/var(--bg-gray-lighter)/g" \
+      -e "s/\$color-gray/var(--bg-gray)/g" \
+      -e "s/\$color-text/var(--text)/g" \
+      -e "s/\$color-border/var(--border)/g" \
+      -e "s/\$color-link/var(--link)/g" \
+      -e "s/\$color-white/var(--white)/g" \
+      -e "s/\$color-red/var(--red)/g" \
+      -e "s/\$color-pdf/var(--file-pdf)/g" \
+      -e "s/\$color-doc/var(--file-doc)/g" \
+      -e "s/\$color-xls/var(--file-xls)/g" \
+      -e "s/\$primary/var(--primary)/g" \
+      -e "s/\$secondary/var(--secondary)/g" \
+      "$file"
+  done < <(find "$base/style" "$base/base" -name "*.scss" -type f -print0)
+
+  # parts.html の switcher.js と change-menu ブロックのコメントを解除
+  if [[ -f "parts.html" ]]; then
+    sed -i "" "s|<!-- <script src=\"data/themes/$theme/js/module/switcher.js\"></script> -->|<script src=\"data/themes/$theme/js/module/switcher.js\"></script>|" "parts.html"
+    sed -i "" 's|<!-- <ul class="change-menu|<ul class="change-menu|' "parts.html"
+    sed -i "" 's|</ul> -->|</ul>|' "parts.html"
+  fi
+
+  echo "色変更機能を有効化しました。"
+}
+
+function setup_fontsize() {
+  local theme=$1
+  local base="data/themes/$theme/sass"
+
+  # style・base ディレクトリの .scss ファイルを対象に font-size の px 値を rem() へ一括置換
+  while IFS= read -r -d $'\0' file; do
+    sed -i "" "s/font-size: \([0-9]*\)px/font-size: rem(\1)/g" "$file"
+  done < <(find "$base/style" "$base/base" -name "*.scss" -type f -print0)
+
+  echo "フォントサイズ変更機能を有効化しました。"
 }
 
 # mainが正常に走らなければexit status 1で終了
