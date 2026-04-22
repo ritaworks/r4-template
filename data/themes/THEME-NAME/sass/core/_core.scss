@@ -7,6 +7,8 @@
     --primary: #{$light-site-primary};
     --primary-rgb: #{$light-site-primary-rgb};
     --secondary: #{$light-site-secondary};
+    --red: #{$light-site-red};
+    --white: #{$light-site-white};
     --text: #{$light-site-text};
     --border: #{$light-site-border};
     --link: #{$light-site-link-color};
@@ -15,8 +17,6 @@
     --bg-gray-lighter: #{$light-site-bg-gray-lighter};
     --bg-red: #{$light-site-bg-red};
     --bg-red-rgb: #{$light-site-bg-red-rgb};
-    --red: #{$light-site-red};
-    --white: #{$light-site-white};
     // Component-specific variables
     --box-bg: #{$light-site-white};
     --box-text: #{$light-site-text};
@@ -31,6 +31,8 @@
     --primary: #{$dark-site-primary};
     --primary-rgb: #{$dark-site-primary-rgb};
     --secondary: #{$dark-site-secondary};
+    --red: #{$dark-site-red};
+    --white: #{$dark-site-white};
     --text: #{$dark-site-text};
     --border: #{$dark-site-border};
     --link: #{$dark-site-link-color};
@@ -39,8 +41,6 @@
     --bg-gray-lighter: #{$dark-site-bg-gray-lighter};
     --bg-red: #{$dark-site-bg-red};
     --bg-red-rgb: #{$dark-site-bg-red-rgb};
-    --red: #{$dark-site-red};
-    --white: #{$dark-site-bg};
     // Component-specific variables
     --box-bg: #{$dark-site-bg-gray};
     --box-text: #{$dark-site-text};
@@ -52,6 +52,8 @@
     --primary: #{$blue-site-primary};
     --primary-rgb: #{$blue-site-primary-rgb};
     --secondary: #{$blue-site-secondary};
+    --red: #{$blue-site-red};
+    --white: #{$blue-site-white};
     --text: #{$blue-site-text};
     --border: #{$blue-site-border};
     --link: #{$blue-site-link-color};
@@ -60,8 +62,6 @@
     --bg-gray-lighter: #{$blue-site-bg-gray-lighter};
     --bg-red: #{$blue-site-bg-red};
     --bg-red-rgb: #{$blue-site-bg-red-rgb};
-    --red: #{$blue-site-red};
-    --white: #{$blue-site-bg};
     // Component-specific variables
     --box-bg: #{$blue-site-bg-gray};
     --box-text: #{$blue-site-text};
@@ -73,6 +73,8 @@
     --primary: #{$yellow-site-primary};
     --primary-rgb: #{$yellow-site-primary-rgb};
     --secondary: #{$yellow-site-secondary};
+    --red: #{$yellow-site-red};
+    --white: #{$yellow-site-white};
     --text: #{$yellow-site-text};
     --border: #{$yellow-site-border};
     --link: #{$yellow-site-link-color};
@@ -81,8 +83,6 @@
     --bg-gray-lighter: #{$yellow-site-bg-gray-lighter};
     --bg-red: #{$yellow-site-bg-red};
     --bg-red-rgb: #{$yellow-site-bg-red-rgb};
-    --red: #{$yellow-site-red};
-    --white: #{$yellow-site-bg};
     // Component-specific variables
     --box-bg: #{$yellow-site-bg-gray};
     --box-text: #{$yellow-site-text};

@@ -41,4 +41,14 @@ a {
       pointer-events: none;
     }
   }
+  @if $accessibility-functions {
+    body[data-theme='dark'] &,
+    body[data-theme='blue'] &,
+    body[data-theme='yellow'] & {
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }
