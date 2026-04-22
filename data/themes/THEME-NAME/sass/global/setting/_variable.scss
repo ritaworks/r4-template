@@ -8,17 +8,17 @@
 // --- Palette ---
 $color-red: red;
 // 以下、アクセシビリティfalseの場合も必要に応じて使ってください。
+$color-red-rgb: 255, 0, 0;
 $color-black: #000;
 $color-white: #fff;
 $color-blue: darkblue;
 $color-yellow: yellow;
-$color-red-rgb: 255, 0, 0;
 $color-gray: #eee;
 $color-gray-lighter: #f6f6f6;
 
 // --- UI Semantic ---
-$primary: #000;
-$primary-rgb: 0, 0, 0;
+$primary: #FFA500;
+$primary-rgb: 255, 165, 0;
 $secondary: #000;
 
 $color-text: #333;

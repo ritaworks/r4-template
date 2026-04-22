@@ -519,7 +519,7 @@
     background: linear-gradient(
       to bottom,
       rgba(221, 221, 221, 0),
-      rgba(1, 0, 0, 0.15)
+      rgba(0, 0, 0, 0.15)
     );
     position: absolute;
     left: 0;
@@ -641,7 +641,7 @@
 
 .accordion-box02 {
   border-radius: 6px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 165, 0, 0.1);
   padding-bottom: 10px;
   .ttl-wrap {
     position: relative;
@@ -694,7 +694,7 @@
 
 .contact-box {
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 165, 0, 0.1);
   padding: 35px 15px 15px;
   .contact-ttl {
     font-size: 28px;
