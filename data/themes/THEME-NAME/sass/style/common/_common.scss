@@ -1134,7 +1134,7 @@ h5 {
     text-align: center;
     text-decoration: none;
     border-radius: 4px;
-    background-color: $color-border;
+    background-color: $color-gray;
     transition: all 0.3s;
 
     place-content: center;
@@ -1142,7 +1142,7 @@ h5 {
     &.icon {
       display: none;
       // transition: 0.3s;
-      // background-color: $color-border;
+      // background-color: $color-gray;
       // border-radius: 50%;
       // &::before {
       //   content: "";
