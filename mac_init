@@ -114,7 +114,7 @@ function setup_accessibility() {
   while IFS= read -r -d $'\0' file; do
     sed -i "" \
       -e "s/255[ ,　]*0[ ,　]*0[ ,　]*0/var(--bg-red-rgb),0/g" \
-      -e "s/0[ ,　]*0[ ,　]*0[ ,　]*0/var(--primary-rgb),0/g" \
+      -e "s/255[ ,　]*165[ ,　]*0[ ,　]*0/var(--primary-rgb),0/g" \
       -e "s/\$light-site-bg/var(--bg)/g" \
       -e "s/\$color-black/var(--white)/g" \
       -e "s/\$color-gray-lighter/var(--bg-gray-lighter)/g" \
