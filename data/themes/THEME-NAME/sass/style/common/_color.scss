@@ -9,10 +9,12 @@
 .primary-txt {
   color: $primary !important;
 }
-
-// .red-txt {
-//   color: #f00 !important;
-// }
+.black-txt {
+  color: $color-text !important;
+}
+.red-txt {
+  color: $color-red !important;
+}
 // .pink-txt {
 //   color: #f0f !important;
 // }

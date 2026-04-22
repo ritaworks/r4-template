@@ -5,35 +5,25 @@
 // --------------------------------------------------
 // 追加分ここから
 // --------------------------------------------------
+// Font
 .f-min {
   font-family: $f-min !important;
 }
 
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #000;
-  color: #fff;
-  padding: 8px;
-  z-index: 100;
-  &:focus {
-    top: 0;
+// CMS関連ページ用
+.rel-no-link {
+  .page_rels {
+    > li > a {
+      cursor: default;
+      color: var(--site-text);
+      line-height: 1.7;
+      text-decoration: none;
+      pointer-events: none;
+    }
   }
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
+// ページ内リンク
 .anchor-box {
   border: 1px solid #ddd;
   background-color: #fff;
@@ -99,6 +89,7 @@
   }
 }
 
+// パンくず
 .breadcrumb-wrap {
   ul.breadcrumb {
     font-size: 0;
@@ -135,6 +126,7 @@
   }
 }
 
+// BOX
 .box01 {
   border: 1px solid #d0d0d0;
   border-radius: 30px;
@@ -318,27 +310,26 @@ h5 {
 // h1:キービジュアル
 // h2:ページタイトル
 .news-detail {
+  // 見出しのスタイル
   & > * + h3 {
-    // 見出しのスタイル
     margin-top: 60px;
   }
 
+  // 見出し(小)のスタイル
   & > * + h4 {
-    // 見出し(小)のスタイル
     margin-top: 30px;
   }
 
+  // 自由文のスタイル
   .news-detail-free {
-    // 自由文のスタイル
     margin: 0 0 40px;
-
     p {
       margin-bottom: 20px;
     }
   }
 
+  // 画像のスタイル
   .news-detail-image {
-    // 画像のスタイル
     margin: 10px auto;
     > figure {
       text-align: center;
@@ -391,7 +382,6 @@ h5 {
   @include flex(row, wrap, center, stretch);
   gap: 8px;
   margin-top: 80px;
-
   @media only screen and (max-width: $screen-tb) {
     gap: 5px;
     margin-top: 40px;

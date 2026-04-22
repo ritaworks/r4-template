@@ -2,34 +2,89 @@
 
 @use "../../global" as *;
 
-@mixin button01 {
-  display: inline-block;
+// 共通化のための基本mixin
+@mixin button_base(
+  $color: $color-white,
+  $bg: $primary,
+  $border: $primary,
+  $arrow: false
+) {
+  @include inline-flex($j-content: center, $a-items: center);
+  min-height: 64px;
   width: 100%;
   max-width: 300px;
   font-weight: bold;
-  color: $primary;
-  text: {
-    align: center;
-    decoration: none;
-  }
-  border: 1px solid $primary;
-  border-radius: 4px;
-  background: #fff;
+  color: $color;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  word-break: break-all;
+  border: 2px solid $border;
+  border-radius: 40px;
+  background: $bg;
   padding: 5px 20px;
   transition: all 0.3s;
 
   &:hover {
-    color: #fff;
-    background: $primary;
+    color: $bg;
+    background: $color;
   }
+
+  &.-short {
+    max-width: 226px;
+  }
+
+  @if $arrow {
+    position: relative;
+    &:after {
+      content: $icon-angle-right;
+      font: {
+        family: $f-fa;
+        weight: 900;
+      }
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
+    &.-back {
+      &:after {
+        right: auto;
+        left: 20px;
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    min-height: 60px;
+    font-size: 16px;
+  }
+}
+
+// 個別mixin（再includeで整然）
+@mixin button01 {
+  @include button_base();
+}
+
+@mixin button02 {
+  // 色：反転
+  @include button_base(
+    $color: $primary,
+    $bg: $color-white,
+    $border: $primary,
+    $arrow: false
+  );
+  // 色：secondary
+  // @include button_base(
+  //   $color: $color-white,
+  //   $bg: $secondary,
+  //   $border: $secondary,
+  //   $arrow: false
+  // );
 }
 
 .button01 {
   @include button01;
-}
-
-@mixin button02 {
-  // @include button01; //色違いの場合のみ
 }
 
 .button02 {
@@ -88,6 +143,109 @@
 
     &:hover {
       color: $color-doc;
+    }
+  }
+}
+
+.file-btn01 {
+  @include flex($a-items: center, $f-wrap: nowrap, $j-content: space-between);
+  gap: 15px;
+  font-weight: bold;
+  color: $color-text;
+  line-height: 1.5;
+  text-decoration: none;
+  border: 1px solid $color-gray;
+  border-radius: 6px;
+  padding: 15px 15px;
+  transition: 0.3s;
+  &:after {
+    font: {
+      weight: 900;
+      family: $f-fa;
+    }
+  }
+
+  &[href$=".pdf"] {
+    &:after {
+      content: $icon-pdf;
+      color: $color-pdf;
+    }
+    &:hover {
+      border-color: $color-pdf;
+    }
+  }
+
+  &[href$=".xls"],
+  &[href$=".xlsx"],
+  &[href$=".xlsm"] {
+    &:after {
+      content: $icon-xls;
+      color: $color-xls;
+    }
+    &:hover {
+      border-color: $color-xls;
+    }
+  }
+
+  &[href$=".doc"],
+  &[href$=".docx"] {
+    &:after {
+      content: $icon-doc;
+      color: $color-doc;
+    }
+    &:hover {
+      border-color: $color-doc;
+    }
+  }
+}
+
+.file-btn02 {
+  @include flex($j-content: center, $a-items: center, $f-wrap: nowrap);
+  gap: 10px;
+  color: $color-text;
+  line-height: 1.5;
+  text-decoration: none;
+  border: 1px solid $color-link;
+  border-radius: 35px;
+  padding: 17px 25px;
+  transition: 0.3s;
+  &:before {
+    font: {
+      weight: 900;
+      family: $f-fa;
+    }
+  }
+
+  &[href$=".pdf"] {
+    &:before {
+      content: $icon-pdf;
+      color: $color-pdf;
+    }
+    &:hover {
+      border-color: $color-pdf;
+    }
+  }
+
+  &[href$=".xls"],
+  &[href$=".xlsx"],
+  &[href$=".xlsm"] {
+    &:before {
+      content: $icon-xls;
+      color: $color-xls;
+    }
+    &:hover {
+      border-color: $color-xls;
+    }
+  }
+
+  &[href$=".doc"],
+  &[href$=".docx"] {
+    &:before {
+      content: $icon-doc;
+      color: $color-doc;
+    }
+    &:hover {
+      border-color: $color-doc;
     }
   }
 }
