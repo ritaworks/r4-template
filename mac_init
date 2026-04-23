@@ -151,6 +151,9 @@ function setup_fontsize() {
     sed -i "" "s/font-size: \([0-9]*\)px/font-size: rem(\1)/g" "$file"
   done < <(find "$base/style" "$base/base" -name "*.scss" -type f -print0)
 
+  # _utility.scss の fontsize ミックスイン内 #{$i}px を rem($i) へ置換
+  sed -i "" 's/font-size: #{$i}px/font-size: rem($i)/g' "$base/global/mixins/_utility.scss"
+
   echo "フォントサイズ変更機能を有効化しました。"
 }
 
