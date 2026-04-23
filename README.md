@@ -359,6 +359,12 @@ font-size: 16px  →  font-size: rem(16)
 
 `font:` ショートハンド（アイコンフォント指定など）・SCSS変数参照（`$base-font-size` 等）は対象外です。
 
+また、`global/mixins/_utility.scss` 内の `fontsize` ミックスインも合わせて置換します。
+
+```
+font-size: #{$i}px !important  →  font-size: rem($i) !important
+```
+
 
 ### mac_initについて
 プロジェクト初期設定を行うシェルスクリプト。ターミナルで実行すると対話形式で以下の処理を行います。
@@ -366,4 +372,4 @@ font-size: 16px  →  font-size: rem(16)
 1. 案件名・テーマ名・日付を入力し、`.php` / `.html` / `.css` / `.scss` 内の `THEME-NAME` を一括置換
 2. `data/media/THEME-NAME` と `data/themes/THEME-NAME` ディレクトリを入力したテーマ名にリネーム
 3. **色変更機能を有効にするか選択**（`y` の場合：`$accessibility-functions: true` に変更 ＋ SCSS変数をCSS `var()` へ一括置換）
-4. **フォントサイズ変更機能を有効にするか選択**（`y` の場合：`font-size: Xpx` を `font-size: rem(X)` へ一括置換）
+4. **フォントサイズ変更機能を有効にするか選択**（`y` の場合：`font-size: Xpx` を `font-size: rem(X)` へ一括置換 ＋ `_utility.scss` の `fontsize` ミックスインも同様に置換）
