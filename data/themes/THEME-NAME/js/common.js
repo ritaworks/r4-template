@@ -27,7 +27,9 @@ $(function () {
     // $(menu_txt).text("close");
     contents_area.attr('inert', "");
     menu_area.removeAttr('inert');
+    menu_area.attr('aria-hidden', 'false');
     menu_btn.addClass('active');
+    menu_btn.attr('aria-expanded', 'true');
     body.addClass('open');
     body.removeAttr('style');
     menu_open = true;
@@ -38,7 +40,9 @@ $(function () {
     // $(menu_txt).text("menu");
     contents_area.removeAttr('inert');
     menu_area.attr('inert', "");
+    menu_area.attr('aria-hidden', 'true');
     menu_btn.removeClass('active');
+    menu_btn.attr('aria-expanded', 'false');
     body.removeClass('open');
     body.removeAttr('style');
     if (top != 0) {
