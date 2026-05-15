@@ -74,7 +74,46 @@
 // --------------------------------------------------
 // お知らせリスト（ここから）
 // --------------------------------------------------
-
+.news-list {
+  @include news-link-event01();
+  border-top: 1px solid $color-border;
+  > li article {
+    @include flex($a-items:center, $f-wrap:nowrap);
+    gap: 20px;
+    border-bottom: 1px solid $color-border;
+    padding: 15px 0;
+    .news-info {
+      @include flex($a-items:center);
+      gap: 10px;
+      flex-shrink: 0;
+      .tag {
+        text-align: center;
+        min-width: 110px;
+      }
+    }
+    .heading-news > a{
+      display: inline-block;
+      &:after {
+        top: -4px;
+      }
+    }
+  }
+  &.-side {
+    > li article {
+      flex-direction: column;
+      align-items: start;
+      gap: 5px;
+    }
+  }
+  @media only screen and (max-width: $screen-tb) {
+    > li article {
+      flex-direction: column;
+      align-items: start;
+      gap: 10px;
+      padding: 10px 0;
+    }
+  }
+}
 // --------------------------------------------------
 // 単純なリスト
 // --------------------------------------------------
@@ -185,7 +224,6 @@ ol.flow-list {
     font-size: 24px;
     font-weight: bold;
     line-height: 1.5;
-    margin-bottom: 15px;
 
     &::before {
       content: counter(flow-counter, decimal-leading-zero) ". ";
@@ -196,6 +234,7 @@ ol.flow-list {
   .flow-contents {
     @include flex($f-wrap: nowrap);
     gap: 30px;
+    margin-top: 15px;
 
     .txt-wrap {
       flex: 1;
@@ -221,12 +260,12 @@ ol.flow-list {
 
     .ttl {
       font-size: 18px;
-      margin-bottom: 10px;
     }
 
     .flow-contents {
       flex-direction: column;
       gap: 15px;
+      margin-top: 10px;
       .img-wrap {
         max-width: 480px;
         margin: 0 auto;

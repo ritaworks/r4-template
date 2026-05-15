@@ -33,8 +33,8 @@
       font-size: 14px;
       font-family: $f-fa;
       font-weight: 900;
-      line-height: 30px;
       color: $color-white;
+      line-height: 30px;
     }
     &.slick-prev {
       &:before {
@@ -198,11 +198,25 @@
   &.-small {
     padding: 25px 30px;
   }
+  .box-ttl {
+    font-size: 24px;
+    font-weight: bold;
+    color: $secondary;
+    line-height: 1.5;
+    border-bottom: 1px solid #ddd; //今後変数作るか検討
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
   @if $accessibility-functions {
     @include accessibility-box();
   }
   @media only screen and (max-width: $screen-tb) {
     padding: 15px 20px;
+    .box-ttl {
+      font-size: 18px;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
   }
 }
 
@@ -584,16 +598,88 @@
   }
 }
 
+details.faq-item {
+  border: 1px solid $primary;
+  border-radius: 10px;
+  background: $color-white;
+  summary.faq-question {
+    cursor: pointer;
+    color: $color-white;
+    list-style: none;
+    border-radius: 10px;
+    background: $primary;
+    position: relative;
+    padding: 15px 65px 15px 40px;
+    transition: 0.3s;
+    &::marker,
+    &::-webkit-details-marker {
+      display: none;
+    }
+    .ttl {
+      @include flex($f-wrap: nowrap);
+      gap: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.7;
+      .faq-mark {
+        flex-shrink: 0;
+      }
+    }
+    &:after {
+      content: $icon-plus;
+      height: 25px;
+      width: 25px;
+      font-size: 12px;
+      font-family: $f-fa;
+      font-weight: 900;
+      color: $primary;
+      line-height: 25px;
+      text-align: center;
+      border-radius: 50%;
+      background: $color-white;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
+  }
+  &[open] summary.faq-question {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    &:after {
+      content: $icon-minus;
+    }
+  }
+  .faq-content {
+    padding: 25px 30px;
+  }
+  @media only screen and (max-width: $screen-tb) {
+    summary.faq-question {
+      padding: 10px 50px 10px 20px;
+      .ttl {
+        font-size: 18px;
+      }
+      &:after {
+        right: 15px;
+      }
+    }
+    .faq-content {
+      padding: 15px 20px;
+    }
+  }
+}
+
 .accordion-box01 {
-  overflow: hidden;
   border: 1px solid $primary;
   border-radius: 10px;
   background: $color-white;
   .ttl-wrap {
     color: $color-white;
+    border-radius: 10px;
     background: $primary;
     position: relative;
     padding: 15px 65px 15px 40px;
+    transition: 0.3s;
     .ttl {
       font-size: 20px;
       font-weight: bold;
@@ -616,8 +702,12 @@
       right: 20px;
       transform: translateY(-50%);
     }
-    &.active:after {
-      content: $icon-minus;
+    &.active {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      &:after {
+        content: $icon-minus;
+      }
     }
   }
   .contents-wrap {
@@ -674,6 +764,11 @@
   }
   .contents-wrap {
     padding: 0 30px 12px;
+    .inner-wrap {
+      border-radius: 10px;
+      background: $color-white;
+      padding: 20px;
+    }
   }
   @media only screen and (max-width: $screen-tb) {
     .ttl-wrap {
@@ -692,7 +787,31 @@
   }
 }
 
-.contact-box {
+.contact-box01 {
+  border-radius: 10px;
+  background: rgba(255, 165, 0, 0.1);
+  padding: 35px 40px 15px;
+  .contact-ttl {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $primary;
+    margin-bottom: 25px;
+  }
+  // .contents-wrap {}
+  @media only screen and (max-width: $screen-tb) {
+    padding: 20px 20px;
+    .contact-ttl {
+      font-size: 20px;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    // .contents-wrap {}
+  }
+}
+
+.contact-box02 {
   border-radius: 10px;
   background: rgba(255, 165, 0, 0.1);
   padding: 35px 15px 15px;
@@ -743,6 +862,37 @@
         font-size: 15px;
       }
     }
+  }
+}
+
+.contact-btn {
+  @include flex($a-items: center);
+  gap: 15px;
+  .contact-tag {
+    width: 55px;
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-white;
+    line-height: 23px;
+    text-align: center;
+    border: 1px solid $primary;
+    border-radius: 4px;
+    background: $primary;
+  }
+  &.-fax {
+    .contact-tag {
+      color: $primary;
+      background: $color-white;
+    }
+  }
+  .num,
+  .mail {
+    font-size: 26px;
+    font-weight: 500;
+    color: $color-text;
+    line-height: 1;
+    letter-spacing: 0;
+    text-decoration: none;
   }
 }
 
@@ -887,17 +1037,69 @@
 // Headings
 // --------------------------------------------------
 @mixin heading02 {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.55;
+  letter-spacing: 0.1em;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  &:after {
+    content: "";
+    height: 2px;
+    width: 100px;
+    background: $primary;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+  @media only screen and (max-width: $screen-tb) {
+    font-size: 22px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  &.-left {
+    text-align: left;
+    &:after {
+      left: 0;
+      transform: none;
+    }
+  }
 }
 
 @mixin heading03 {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  border-left: 2px solid $primary;
+  padding-left: 20px;
+  margin-bottom: 25px;
+
+  @media only screen and (max-width: $screen-tb) {
+    font-size: 18px;
+    margin-bottom: 17px;
+  }
 }
 
 @mixin heading04 {
+  font-size: 20px;
+  font-weight: bold;
+  color: $primary;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+
+  @media only screen and (max-width: $screen-tb) {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
 }
 
 @mixin heading05 {
   font-weight: bold;
-  color: $primary;
   margin-bottom: 10px;
 }
 
@@ -953,6 +1155,55 @@ h5 {
 .heading05 {
   @include heading05();
 }
+
+.lead-txt {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.7;
+  @media only screen and (max-width: $screen-tb) {
+    font-size: 16px;
+  }
+}
+
+// owl内 見出しの間隔調整
+[class*="owl-"] {
+  > * + h2 {
+    margin-top: $space-lg !important;
+    @media only screen and (max-width: $screen-tb) {
+      margin-top: $space-lg-tb !important;
+    }
+  }
+  > * + h3 {
+    margin-top: $space-md !important;
+    @media only screen and (max-width: $screen-tb) {
+      margin-top: $space-md-tb !important;
+    }
+  }
+  > * + h4 {
+    margin-top: $space-rg !important;
+    @media only screen and (max-width: $screen-tb) {
+      margin-top: $space-rg-tb !important;
+    }
+  }
+  > * + h5 {
+    margin-top: $space-sm !important;
+    @media only screen and (max-width: $screen-tb) {
+      margin-top: $space-sm-tb !important;
+    }
+  }
+  > * + p {
+    margin-top: $space-xs !important;
+    @media only screen and (max-width: $screen-tb) {
+      margin-top: $space-xs-tb !important;
+    }
+  }
+  > h2 + *,
+  > h3 + *,
+  > h4 + *,
+  > h5 + * {
+    margin-top: 0 !important;
+  }
+}
 // --------------------------------------------------
 // Common
 // --------------------------------------------------
@@ -963,8 +1214,9 @@ h5 {
   font-weight: bold;
   color: #fff;
   line-height: 1.5;
+  border-radius: 4px;
   background: $primary;
-  padding: 0 5px;
+  padding: 5px 5px;
 
   // &.-info {
   //   background: $secondary;
@@ -1044,15 +1296,15 @@ h5 {
 // h1:キービジュアル
 // h2:ページタイトル
 .news-detail {
-  // 見出しのスタイル
-  & > * + h3 {
-    margin-top: 60px;
-  }
+  // // 見出しのスタイル
+  // & > * + h3 {
+  //   margin-top: 60px;
+  // }
 
-  // 見出し(小)のスタイル
-  & > * + h4 {
-    margin-top: 30px;
-  }
+  // // 見出し(小)のスタイル
+  // & > * + h4 {
+  //   margin-top: 30px;
+  // }
 
   // 自由文のスタイル
   .news-detail-free {
@@ -1066,7 +1318,7 @@ h5 {
   .news-detail-image {
     margin: 10px auto;
     > figure {
-      text-align: center;
+      // text-align: center;
       > img {
         height: auto;
         width: auto;
@@ -1074,7 +1326,7 @@ h5 {
       }
       > figcaption {
         font-size: $base-font-size-tb;
-        padding-top: 5px;
+        // padding-top: 5px;
       }
     }
   }
