@@ -457,4 +457,8 @@ h6 {
 
 figure {
   margin: 0;
+  text-align: center;
+  >figcaption {
+    padding-top: 5px;
+  }
 }
