@@ -38,6 +38,27 @@
     var targetTag = $(this);
     s = $.extend({}, s, option);
 
+    function getNextAccordionId() {
+      if (typeof $.fn.accordion.counter === 'undefined') {
+        $.fn.accordion.counter = 1;
+      }
+      while ($('#accordion' + ('0' + $.fn.accordion.counter).slice(-2)).length) {
+        $.fn.accordion.counter++;
+      }
+      var idNumber = ('0' + $.fn.accordion.counter).slice(-2);
+      $.fn.accordion.counter++;
+      return 'accordion' + idNumber;
+    }
+
+    targetTag.each(function () {
+      var $trigger = $(this);
+      var $panel = $trigger.next();
+      if (!$panel.attr('id')) {
+        $panel.attr('id', getNextAccordionId());
+      }
+      $trigger.attr('aria-controls', $panel.attr('id'));
+    });
+
     if (location.hash != "" && $(location.hash).length > 0) {
       if (s.PC_FIXED && $(window).innerWidth() > s.SP_WIDTH || s.SP_FIXED && $(window).innerWidth() <= s.SP_WIDTH) {
         // console.log('acc:start')
@@ -49,28 +70,39 @@
     function accordionEvent(e) {
       if (e.hasClass('active')) {
         e.removeClass('active');
-        e.next().slideToggle();
+        e.attr('aria-expanded', 'false');
+        e.next().slideToggle(function () {
+          $(this).attr('hidden', 'hidden');
+        });
         e.next().removeClass('check');
       } else {
         if (s['otherClose']) {
           $(targetTag).each(function (i, t) {
             if ($(t).hasClass('active')) {
               $(t).removeClass('active');
-              $(t).next().slideToggle();
+              $(t).attr('aria-expanded', 'false');
+              $(t).next().slideToggle(function () {
+                $(this).attr('hidden', 'hidden');
+              });
             }
           })
         }
 
         e.addClass('active');
-        e.next().slideToggle();
+        e.attr('aria-expanded', 'true');
+        e.next().removeAttr('hidden').slideToggle();
         e.next().addClass('check');
       }
     }
 
     // accordionボタンにマウスポイントのCSSを追加
     function pointEvent(e) {
-      e.css('cursor', 'pointer').attr('tabindex', '0').attr('role', 'tab');
-      e.next().css('display', 'none').attr('role', 'tabpanel');
+      e.css('cursor', 'pointer').attr('tabindex', '0').attr('aria-expanded', 'false').attr('role', 'button');
+      if (!e.next().attr('id')) {
+        e.next().attr('id', getNextAccordionId());
+      }
+      e.attr('aria-controls', e.next().attr('id'));
+      e.next().css('display', 'none').attr('hidden', 'hidden');
     }
 
     // accordionで開かれるボックスのposition設定
@@ -100,91 +132,77 @@
       }
     }
 
-    if (s['parentAccordion']) {
-      if (s['size'] == 'pc') {
-        $(this).parent().css('overflow', 'hidden');
-        $(this).parent().css('position', 'relative');
-        $(this).css('cursor', 'pointer');
-        $(this).parent().css('transition', '0.3s');
-        if ($(window).width() <= s['SP_WIDTH']) {
-          $(this).parent().height(s['parentHeight_SP']);
-        } else {
-          $(this).parent().height(s['parentHeight_PC']);
-        }
-      } else if (s['size'] == 'tb') {
-        if ($(window).width() <= s['SP_WIDTH']) {
-          $(this).parent().height(s['parentHeight_SP']);
-          $(this).parent().css('overflow', 'hidden');
-          $(this).css('cursor', 'pointer');
-          $(this).parent().css('transition', '0.3s');
-        } else {
-          $(this).css('display', 'none');
-          $(this).parent().css('height', '');
-          $(this).parent().css('overflow', '');
-          $(this).css('cursor', '');
-          $(this).parent().css('transition', '');
-        }
-      }
-    } else {
-      // pcかtbかを判別してマウスポイントのcssを出すかどうかの判別
-      if (s['size'] == 'pc') {
-        pointEvent($(this));
-        if (s['position'] == 'absolute') {
-          positionEvent($(this));
-        }
-      } else if (s['size'] == 'tb') {
-        if ($(window).width() <= s['SP_WIDTH']) {
-          pointEvent($(this));
+    targetTag.each(function () {
+      var $trigger = $(this);
+      var $panel = $trigger.next();
+      var classChange = '';
 
-          if (s['position'] == 'absolute') {
-            positionEvent($(this));
-          }
-        }
-      }
-    }
-
-    $(this).on('click', function () {
       if (s['parentAccordion']) {
         if (s['size'] == 'pc') {
-          parentAccordionEvent($(this));
+          $trigger.parent().css('overflow', 'hidden');
+          $trigger.parent().css('position', 'relative');
+          $trigger.css('cursor', 'pointer');
+          $trigger.parent().css('transition', '0.3s');
+          if ($(window).width() <= s['SP_WIDTH']) {
+            $trigger.parent().height(s['parentHeight_SP']);
+          } else {
+            $trigger.parent().height(s['parentHeight_PC']);
+          }
         } else if (s['size'] == 'tb') {
           if ($(window).width() <= s['SP_WIDTH']) {
-            parentAccordionEvent($(this));
+            $trigger.parent().height(s['parentHeight_SP']);
+            $trigger.parent().css('overflow', 'hidden');
+            $trigger.css('cursor', 'pointer');
+            $trigger.parent().css('transition', '0.3s');
+          } else {
+            $trigger.css('display', 'none');
+            $trigger.parent().css('height', '');
+            $trigger.parent().css('overflow', '');
+            $trigger.css('cursor', '');
+            $trigger.parent().css('transition', '');
           }
         }
       } else {
-        // accordionを動かすかどうか（pc、tb）
+        // pcかtbかを判別してマウスポイントのcssを出すかどうかの判別
         if (s['size'] == 'pc') {
-          accordionEvent($(this));
+          pointEvent($trigger);
+          if (s['position'] == 'absolute') {
+            positionEvent($trigger);
+          }
         } else if (s['size'] == 'tb') {
           if ($(window).width() <= s['SP_WIDTH']) {
-            accordionEvent($(this));
+            pointEvent($trigger);
+
+            if (s['position'] == 'absolute') {
+              positionEvent($trigger);
+            }
           }
         }
       }
-    });
 
-    // accordionで開いたボックスの中にあるaタグをクリックした場合、aタグのclassをaccodionのタグにもclassを追加する（親要素のタブによって色などが変わる場合、使います。、addClassとは違います。）
-    var classChange = '';
-    $(this).next().find('a').on('click', function () {
-      if (s['size'] == 'pc') {
-        if (s['textChange']) {
-          $(this).parents('.check').prev().text($(this).text());
-        }
-        if (s['aTagClassAdd']) {
-          if (classChange) {
-            $(this).parents('.check').prev().removeClass(classChange);
+      $trigger.on('click', function () {
+        if (s['parentAccordion']) {
+          if (s['size'] == 'pc') {
+            parentAccordionEvent($trigger);
+          } else if (s['size'] == 'tb') {
+            if ($(window).width() <= s['SP_WIDTH']) {
+              parentAccordionEvent($trigger);
+            }
           }
-          classChange = this.classList[0];
-          $(this).parents('.check').prev().addClass(this.classList[0]);
+        } else {
+          // accordionを動かすかどうか（pc、tb）
+          if (s['size'] == 'pc') {
+            accordionEvent($trigger);
+          } else if (s['size'] == 'tb') {
+            if ($(window).width() <= s['SP_WIDTH']) {
+              accordionEvent($trigger);
+            }
+          }
         }
-        if (s['aTagAutoClose']) {
-          $(this).parents('.check').prev().removeClass('active');
-          $(this).parents('.check').slideToggle();
-          $(this).parents('.check').removeClass('check');
-        }
-      } else if (s['size'] == 'tb') {
-        if ($(window).width() <= s['SP_WIDTH']) {
+      });
+
+      $panel.find('a').on('click', function () {
+        if (s['size'] == 'pc') {
           if (s['textChange']) {
             $(this).parents('.check').prev().text($(this).text());
           }
@@ -200,8 +218,28 @@
             $(this).parents('.check').slideToggle();
             $(this).parents('.check').removeClass('check');
           }
+        } else if (s['size'] == 'tb') {
+          if ($(window).width() <= s['SP_WIDTH']) {
+            if (s['textChange']) {
+              $(this).parents('.check').prev().text($(this).text());
+            }
+            if (s['aTagClassAdd']) {
+              if (classChange) {
+                $(this).parents('.check').prev().removeClass(classChange);
+              }
+              classChange = this.classList[0];
+              $(this).parents('.check').prev().addClass(this.classList[0]);
+            }
+            if (s['aTagAutoClose']) {
+              $(this).parents('.check').prev().removeClass('active');
+              $(this).parents('.check').slideToggle();
+              $(this).parents('.check').removeClass('check');
+            }
+          }
         }
-      }
+      });
+
+      pcHideEvent($trigger);
     });
 
     function pcHideEvent(e) {
@@ -220,7 +258,8 @@
         var item = $(targetTag[s.openIndex[i]]);
         if (!item.hasClass('active')) {
           item.addClass('active');
-          item.next().css('display', 'block');
+          item.attr('aria-expanded', 'true');
+          item.next().removeAttr('hidden').css('display', 'block');
         }
       }
     }
@@ -232,7 +271,8 @@
     $(targetTag).each(function () {
       if ($(this).data('autoopen')) {
         $(this).addClass('active');
-        $(this).next().css('display', 'block');
+        $(this).attr('aria-expanded', 'true');
+        $(this).next().removeAttr('hidden').css('display', 'block');
       }
     });
 
@@ -244,7 +284,8 @@
         // console.log($(targetTag)[i]);
         if (firstCheck) {
           if ($($(targetTag)[i]).is(':focus')) {
-            if (event.key == 'Enter') {
+            if (event.key == 'Enter' || event.key === ' ') {
+              event.preventDefault();
               accordionEvent($($(targetTag)[i]));
             } else if (event.key == 'ArrowRight' || event.key == 'ArrowDown') {
               firstCheck = false;
