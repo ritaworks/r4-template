@@ -117,10 +117,27 @@
 }
 
 html {
+  font-size: $base-font-size;
   font-family: sans-serif;
 
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+
+  @if $responsive {
+    @media only screen and (max-width: $screen-tb) {
+      font-size: $base-font-size-tb;
+    }
+  }
+  @if $accessibility-functions {
+    // --- Font Size Switcher ---
+    &[data-font-size='small'] {
+      font-size: 85%;
+    }
+    // mediumはデフォルトのhtml設定と同じなので不要
+    &[data-font-size='large'] {
+      font-size: 115%;
+    }
+  }
 }
 
 body {
@@ -129,23 +146,6 @@ body {
 
   -webkit-font-smoothing: antialiased;
   // text-align: left;
-
-  @if $accessibility-functions {
-    // --- Font Size Switcher ---
-    &[data-font-size='small'] {
-      font-size: $base-font-size * 0.85;
-      @media only screen and (max-width: $screen-tb) {
-        font-size: $base-font-size-tb * 0.85;
-      }
-    }
-    // mediumはデフォルトのbody設定と同じなので不要
-    &[data-font-size='large'] {
-      font-size: $base-font-size * 1.15;
-      @media only screen and (max-width: $screen-tb) {
-        font-size: $base-font-size-tb * 1.15;
-      }
-    }
-  }
 }
 
 main,
