@@ -55,7 +55,7 @@ const initializeThemeSwitcher = () => {
  */
 const initializeFontSizeSwitcher = () => {
 	const sizeButtons = document.querySelectorAll('[data-set-font-size]');
-	const body = document.body;
+	const html = document.documentElement;
 	const storageKey = 'site-font-size';
 	const defaultSize = 'medium';
 
@@ -75,7 +75,7 @@ const initializeFontSizeSwitcher = () => {
 
 	// 1. ページ読み込み時に保存されたサイズを適用
 	const savedSize = localStorage.getItem(storageKey) || defaultSize;
-	body.dataset.fontSize = savedSize;
+	html.dataset.fontSize = savedSize;
 	setActiveButton(savedSize);
 
 	// 2. 各ボタンにクリックイベントを設定
@@ -83,7 +83,7 @@ const initializeFontSizeSwitcher = () => {
 		button.addEventListener('click', (event) => {
 			const sizeName = event.currentTarget.dataset.setFontSize;
 			if (sizeName) {
-				body.dataset.fontSize = sizeName;
+				html.dataset.fontSize = sizeName;
 				localStorage.setItem(storageKey, sizeName);
 				setActiveButton(sizeName);
 			}
