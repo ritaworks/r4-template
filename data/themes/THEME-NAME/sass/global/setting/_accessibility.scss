@@ -9,8 +9,13 @@
 //   @return math.div($px / 16) * 1em;
 // }
 
+// rem対応:rem(24px),rem-tb(20px)
 @function rem($px) {
-  @return math.div($px, 16) * 1rem;
+  @return math.div($px, $base-font-size) * 1rem;
+}
+
+@function rem-tb($px) {
+  @return math.div($px, $base-font-size-tb) * 1rem;
 }
 
 // ==================================================

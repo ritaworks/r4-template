@@ -5,15 +5,17 @@
   1.1 2022.10.12 UPDATED checkboxParent追加
   1.2 2022.10.19 UPDATED モーダルへの対応: checkboxOutput追加, text追加
   1.3 2022.10.20 UPDATED タグ複数軸へ対応
+  1.4 2023.10.04 UPDATED autoSubmit追加
+  1.5 2026.08.22 UPDATED button[type="reset"]処理追加
 */
 (function ($) {
   $.fn.resultStay = function (params) {
     var defs = {
-      type: ['radio', 'checkbox', 'text', 'select'], //ボタン(['radio','checkbox','text','selectbox'])
-      checkboxValue: 'value', //value,name,id
-      checkboxParent: [], //checkboxの親要素
-      checkboxOutput: [], //checkした項目を一括表示する欄※parentと並べること
-      checkboxTag: [], //タグ使用時の複数軸対応 ※全てcheckboxであること
+      type: ['radio', 'checkbox', 'text', 'select'], // ボタン(['radio','checkbox','text','selectbox'])
+      checkboxValue: 'value', // value,name,id
+      checkboxParent: [], // checkboxの親要素
+      checkboxOutput: [], // checkした項目を一括表示する欄※parentと並べること
+      checkboxTag: [], // タグ使用時の複数軸対応 ※全てcheckboxであること
       autoSubmit: false
     };
     // データ上書き
@@ -29,10 +31,10 @@
       submit: config.autoSubmit,
     };
 
-    //パラメータ取得
+    // パラメータ取得
     let arg = new Object;
-    let jp_search = decodeURI(location.search); //urlを日本語のまま取得
-    let pair = jp_search.substring(1).split('&'); //パラメータをそれぞれ取得
+    let jp_search = decodeURI(location.search); // urlを日本語のまま取得
+    let pair = jp_search.substring(1).split('&'); // パラメータをそれぞれ取得
     for (let i = 0; pair[i]; i++) {
       let kv = pair[i].split('=');
       // ASCII文字変換（必要であれば追加する）
@@ -47,7 +49,7 @@
       selecter.each(function () {
         let target_name = $(this).prop('name');
         let s_name = '[name="' + target_name + '"]';
-        //nameが照合できた場合（検索対象の場合）
+        // nameが照合できた場合（検索対象の場合）
         if (arg[target_name]) {
           switch (type) {
             case 'radio':
@@ -87,8 +89,8 @@
         case 'text':
           target_selector = form.find('input[type="' + type_setting[i] + '"]');
           loadingCheck(type_setting[i], target_selector);
-          target_selector.keypress(function(e) {
-            if(e.keyCode === 13) {
+          target_selector.keypress(function (e) {
+            if (e.keyCode === 13) {
               form.submit();
             }
           });
@@ -168,7 +170,7 @@
               checkbox_value[input_name] = [];
             }
             if ($('input[name="' + input_name + '"]').length == 0) {
-              form.append('<input id="" name="' + input_name + '" type="hidden" value="" checked>')
+              form.append('<input id="" name="' + input_name + '" type="hidden" value="">')
             }
             if (arg[input_name]) {
               // val設置
@@ -199,7 +201,7 @@
               let newVal = '';
               $('input[name = "' + input_name + '"]').val('');
               for (let num02 = 0; checkbox_value[input_name].length > num02; num02++) {
-                if (checkbox_value[input_name][num02]) { //emptyを除く
+                if (checkbox_value[input_name][num02]) { // emptyを除く
                   if (double) {
                     newVal += ',';
                   } else {
@@ -219,5 +221,27 @@
     }
     // checkbox（ここまで）
 
+    // --- 全件表示ボタン（絞り込み解除）---
+    form.find('button[type="reset"]').on('click', function (e) {
+      e.preventDefault();
+
+      // 全ての入力項目をリセット
+      form.find('input[type="checkbox"], input[type="radio"]').prop('checked', false);
+      form.find('input[type="text"]').val('');
+      form.find('select').prop('selectedIndex', 0);
+      form.find('input[type="hidden"]').val('');
+
+      // 出力欄（checkboxOutput）がある場合は初期テキストに戻す
+      if (checkbox_setting.output.length > 0) {
+        for (let i = 0; i < checkbox_setting.output.length; i++) {
+          if (checkbox_setting.output[i]) {
+            $(checkbox_setting.output[i]).text(checkbox_setting.text[i] || '');
+          }
+        }
+      }
+
+      // --- 絞り込み解除後にフォーム送信 ---
+      form.trigger('submit');
+    });
   };
 })(jQuery);

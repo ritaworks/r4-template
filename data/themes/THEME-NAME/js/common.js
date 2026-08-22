@@ -25,6 +25,7 @@ $(function () {
   function slidemenuOpen() {
     // $(menu_img).attr("src", $(menu_img).attr("src").replace("menu", "close"));
     // $(menu_txt).text("close");
+    menu_area.attr('inert', "");
     contents_area.attr('inert', "");
     menu_area.removeAttr('inert');
     menu_area.attr('aria-hidden', 'false');

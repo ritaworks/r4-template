@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@use "../../global" as *;
+@use "../../global"as *;
 //@use "common" as *;
 
 // --------------------------------------------------
@@ -28,7 +28,14 @@
 // --------------------------------------------------
 body {
   width: 100%;
-  text-align: justify;
+
+  [lang="ja"] & {
+    text-align: justify;
+
+    [lang="en"] {
+      text-align: left;
+    }
+  }
 
   &.open {
     height: 100%;
@@ -44,7 +51,9 @@ body {
     @if $header-fixed-sp {
       position: relative;
       padding-top: $header-height-sp;
-    } @else {
+    }
+
+    @else {
       padding-top: 0;
     }
   }
@@ -61,7 +70,9 @@ header {
 
   @if $header-fixed-pc {
     position: fixed;
-  } @else {
+  }
+
+  @else {
     position: relative;
   }
 
@@ -73,7 +84,9 @@ header {
 
     @if $header-fixed-sp {
       position: fixed;
-    } @else {
+    }
+
+    @else {
       position: relative;
     }
   }
@@ -82,8 +95,7 @@ header {
 // --------------------------------------------------
 // Grobal-navigation
 // --------------------------------------------------
-nav.g-nav {
-}
+nav.g-nav {}
 
 // --------------------------------------------------
 // Slide-menu
@@ -139,8 +151,7 @@ nav.g-nav {
 // --------------------------------------------------
 // Key-visual
 // --------------------------------------------------
-.key-visual {
-}
+.key-visual {}
 
 // --------------------------------------------------
 // Main
@@ -156,21 +167,26 @@ main.l-main {
 .column-container {
   @include flex($f-wrap: nowrap);
   gap: 40px;
+
   .l-page {
     width: 100%;
     max-width: $container-pc;
     margin: 0 auto;
   }
+
   .l-side {
     width: 260px;
     flex-shrink: 0;
   }
+
   @media only screen and (max-width: $screen-tb) {
     gap: 20px;
+
     .l-side {
       width: 220px;
     }
   }
+
   @media only screen and (max-width: 1023px) {
     .l-side {
       display: none;
@@ -209,8 +225,10 @@ main.l-main {
   border-radius: 10px;
   background: $primary;
   padding: 20px 20px;
+
   &.side-accordion {
     position: relative;
+
     &:after {
       content: $icon-plus;
       height: 25px;
@@ -229,13 +247,16 @@ main.l-main {
       transform: translateY(-50%);
       transition: 0.3s;
     }
+
     &.active:after {
       content: $icon-minus;
     }
   }
+
   @media only screen and (max-width: $screen-tb) {
     font-size: 16px;
     padding: 10px;
+
     &.side-accordion {
       &:after {
         height: 20px;
@@ -248,9 +269,10 @@ main.l-main {
 }
 
 .side-nav {
-  > li {
+  >li {
     border-bottom: 1px solid $color-border;
-    > a {
+
+    >a {
       display: block;
       font-size: 17px;
       font-weight: 500;
@@ -260,6 +282,7 @@ main.l-main {
       position: relative;
       padding: 25px 45px 25px 10px;
       transition: 0.3s;
+
       &:after {
         content: $icon-angle-right;
         height: 21px;
@@ -280,6 +303,7 @@ main.l-main {
         transform: translateY(-50%);
         transition: 0.3s;
       }
+
       &:hover {
         &:after {
           transform: translate(5px, -50%);
@@ -287,11 +311,13 @@ main.l-main {
       }
     }
   }
+
   @media only screen and (max-width: $screen-tb) {
-    > li {
-      > a {
+    >li {
+      >a {
         font-size: 14px;
         padding: 15px 30px 15px 10px;
+
         &:after {
           height: 18px;
           width: 18px;
@@ -306,5 +332,4 @@ main.l-main {
 // --------------------------------------------------
 // Footer
 // --------------------------------------------------
-footer {
-}
+footer {}
