@@ -19,6 +19,10 @@
     - form.js
   6. 禁止ワード設定
     - form.js
+  7. スクロール処理
+    - form.js
+  8. 任意・必須切り替え
+    - form.js
 
 ■ 絞り込み機能
   1. form/jquery.resultStay.js
@@ -41,6 +45,8 @@
       tel: [],
       nopaste: [],
       phrase: {},
+      scroll: false,
+      toggleDisplay: []
     };
     // データ上書き
     var config = $.extend({}, defs, params);
@@ -213,5 +219,179 @@
     form.on('input change', 'input, textarea', function () {
       clearFieldError($(this));
     });
+
+    ////////////
+    // エラー/確認/完了画面でフォームまでスクロールさせる
+    ////////////
+    if (config.scroll) {
+      if (location.pathname.search("check.html") > 0 || location.pathname.search("comp.html") > 0 || location.search || $('.form_error').filter(':visible').length > 0) {
+        let position = $('#form').offset().top;
+        scrollPosition(position);
+      };
+    }
+
+    ////////////
+    // 特定の選択肢で自由入力欄の表示を切り替える
+    // 対象の値のときに表示し、条件に合わなければ非表示にする
+    ////////////
+    var requiredRules = [];
+
+    var updateSubmitButtonState = function() {
+      var $submit = form.find('input[type="submit"], button[type="submit"]').last();
+      if ($submit.length === 0) return;
+
+      var $message = $submit.siblings('.form-required-message');
+      if ($message.length === 0) {
+        $message = $('<p class="red-txt center-text mt5 form-required-message" style="display:none;"></p>');
+        $submit.after($message);
+      }
+
+      var missingLabel = '';
+      for (var ri = 0; ri < requiredRules.length; ri++) {
+        var rule = requiredRules[ri];
+        var $field = form.find('[name="form_' + rule.target + '"]');
+        if ($field.length === 0 || !$field.is(':visible')) continue;
+
+        // 現在そのフィールドが必須になっているか確認（toggleDisplay の動的 required を尊重）
+        if (!$field.prop('required')) continue;
+
+        var value = String($field.val() || '');
+        if ($.trim(value) === '') {
+          var labelText = $field.closest('.input_preview').find('.input_label').first().text();
+          missingLabel = $.trim(labelText) || '入力項目';
+          break;
+        }
+      }
+
+      if (missingLabel) {
+        $submit.prop('disabled', true);
+        $message.text(missingLabel + 'を入力してください').show();
+      } else {
+        $submit.prop('disabled', false);
+        $message.hide().text('');
+      }
+    };
+
+    if (config.toggleDisplay && config.toggleDisplay.length > 0) {
+      for (let i = 0; i < config.toggleDisplay.length; i++) {
+        (function(item) {
+          // target は配列またはカンマ区切りの文字列を許容する
+          var targets = Array.isArray(item.target) ? item.target : String(item.target).split(/\s*,\s*/);
+
+          for (let ti = 0; ti < targets.length; ti++) {
+            let tgt = targets[ti];
+            let rule = {
+              target: tgt,
+              parent: item.parent,
+              triggerValue: item.when,
+              required: !!item.required,
+              always: !!item.always
+            };
+
+            if (rule.required) {
+              requiredRules.push(rule);
+            }
+
+            let $keyField = form.find('[name="form_' + rule.target + '"]');
+            if ($keyField.length === 0) {
+              // 代替セレクタで再試行: 配列形式、name^=、あるいはフィールドクラス内を検索
+              let altSelector = '[name="form_' + rule.target + '"]' + ', [name^="form_' + rule.target + '["]' + ', .field_form_' + rule.target + ' [name]';
+              $keyField = form.find(altSelector).first();
+              if ($keyField.length === 0) {
+                continue;
+              }
+            }
+
+            let $keyContainer = $keyField.closest('.fields');
+            if ($keyContainer.length === 0) {
+              $keyContainer = $keyField;
+            }
+
+            let parentName = rule.parent;
+            let selector = '[name="form_' + parentName + '"]' + ', [name^="form_' + parentName + '["]';
+
+            let toggle = function() {
+              var $parents = form.find(selector);
+
+              // トリガー値が一致しているか（required/必須判定の基準）
+              var matchedTrigger = false;
+              var triggerValues = Array.isArray(rule.triggerValue) ? rule.triggerValue : [rule.triggerValue];
+              var valueMatches = function (value) {
+                for (var vi = 0; vi < triggerValues.length; vi++) {
+                  if (String(triggerValues[vi]) === String(value)) {
+                    return true;
+                  }
+                }
+                return false;
+              };
+
+              var $checked = $parents.filter(':checked');
+              if ($checked.length > 0) {
+                var vals = $checked.map(function() { return $(this).val(); }).get();
+                for (var vi = 0; vi < vals.length; vi++) {
+                  if (valueMatches(vals[vi])) {
+                    matchedTrigger = true;
+                    break;
+                  }
+                }
+              } else if ($parents.length > 0) {
+                var hasChoiceInputs = $parents.filter('input[type="radio"], input[type="checkbox"]').length > 0;
+                if (!hasChoiceInputs) {
+                  var val = $parents.first().val();
+                  if (Array.isArray(val)) {
+                    for (var ai = 0; ai < val.length; ai++) {
+                      if (valueMatches(val[ai])) {
+                        matchedTrigger = true;
+                        break;
+                      }
+                    }
+                  } else if (typeof val !== 'undefined') {
+                    matchedTrigger = valueMatches(val);
+                  }
+                }
+              }
+
+              // 表示は rule.always またはトリガー一致のどちらかで行う
+              var shouldShow = !!rule.always || matchedTrigger;
+
+              if (shouldShow) {
+                $keyContainer.addClass('form-other-open').show();
+                // 必須はトリガー一致時のみ有効にする（always は表示のみ）
+                var isRequiredNow = !!rule.required && matchedTrigger;
+                $keyField.prop('required', isRequiredNow);
+
+                var $labelWrap = $keyField.closest('.input_preview').find('.input_labels');
+                if ($labelWrap.length > 0) {
+                  if (isRequiredNow) {
+                    if ($labelWrap.find('.input_required').length === 0) {
+                      $labelWrap.find('.input_label').first().after('<span class="input_required">必須</span>');
+                    }
+                  } else {
+                    $labelWrap.find('.input_required').remove();
+                  }
+                }
+              } else {
+                $keyContainer.removeClass('form-other-open').hide();
+                $keyField.val('');
+                $keyField.prop('required', false);
+                var $labelWrap = $keyField.closest('.input_preview').find('.input_labels');
+                if ($labelWrap.length > 0) {
+                  $labelWrap.find('.input_required').remove();
+                }
+              }
+
+              updateSubmitButtonState();
+            };
+
+            $keyField.prop('required', false);
+            $keyContainer.hide();
+            toggle();
+
+            form.on('change', selector, toggle);
+            form.on('input', '[name="form_' + rule.target + '"]', updateSubmitButtonState);
+          }
+        })(config.toggleDisplay[i]);
+      }
+    }
   };
 })(jQuery);
