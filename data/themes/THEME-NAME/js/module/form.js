@@ -256,9 +256,9 @@
         if (!$field.prop('required')) continue;
 
         var value = String($field.val() || '');
-        if ($.trim(value) === '') {
+        if (value.trim() === '') {
           var labelText = $field.closest('.input_preview').find('.input_label').first().text();
-          missingLabel = $.trim(labelText) || '入力項目';
+          missingLabel = labelText.trim() || '入力項目';
           break;
         }
       }
